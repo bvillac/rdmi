@@ -7,9 +7,8 @@ use yii\captcha\Captcha;
 $this->title = Yii::t('register', 'User Register');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="col-md-6 logintext">
-    <h1 class="font-bold"><?= Yii::t("login", "Apply for License for use of the brand Country") ?></h1><br />
-    <p><?= Yii::t("login","The country brand Ecuador loves life can be requested by individuals or corporations, national or foreign, public and private sector. It is free and lasts for 2 years with option to be renewed.") ?></p>
+<div class="col-md-6">
+    
 </div>
 <div class="login-box-body col-md-6">
     <div class="login-logo">

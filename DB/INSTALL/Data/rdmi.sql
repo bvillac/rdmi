@@ -1,0 +1,130 @@
+﻿USE `rdmi` ;
+
+--
+-- Volcar la base de datos para la tabla `accion`
+--
+
+INSERT INTO `accion` (`acc_id`, `acc_nombre`, `acc_url_accion`, `acc_tipo`, `acc_descripcion`, `acc_lang_file`, `acc_dir_imagen`, `acc_estado_activo`, `acc_fecha_creacion`, `acc_fecha_modificacion`, `acc_estado_logico`) VALUES
+(1, 'Create', 'Create', 'General', 'Create', 'accion', 'glyphicon glyphicon-file', '1', '2012-09-19 21:21:35', NULL, '1'),
+(2, 'Update', 'Update', 'General', 'Update', 'accion', 'glyphicon glyphicon-edit', '1', '2012-09-19 21:21:35', NULL, '1'),
+(3, 'Delete', 'Delete', 'General', 'Delete', 'accion', 'glyphicon glyphicon-trash', '1', '2012-09-19 21:21:35', NULL, '1'),
+(4, 'Save', 'Save', 'General', 'Save', 'accion', 'glyphicon glyphicon-floppy-disk', '1', '2012-09-19 21:21:35', NULL, '1'),
+(5, 'Search', 'Search', 'General', 'Search', 'accion', 'glyphicon glyphicon-search', '1', '2012-09-19 21:21:35', NULL, '1'),
+(6, 'Print', 'Print', 'General', 'Print', 'accion', 'glyphicon glyphicon-print', '1', '2012-09-19 21:21:35', NULL, '1'),
+(7, 'Import', 'Import', 'General', 'Import', 'accion', 'glyphicon glyphicon-import', '1', '2012-09-19 21:21:35', NULL, '1'),
+(8, 'Export', 'Export', 'General', 'Export', 'accion', 'glyphicon glyphicon-export', '1', '2012-09-19 21:21:35', NULL, '1'),
+(9, 'Back', 'Back', 'General', 'Back', 'accion', 'glyphicon glyphicon-triangle-right', '1', '2012-09-19 21:21:35', NULL, '1'),
+(10, 'Next', 'Next', 'General', 'Next', 'accion', 'glyphicon glyphicon-triangle-left', '1', '2012-09-19 21:21:35', NULL, '1'),
+(11, 'Clear', 'Clear', 'General', 'Clear', 'accion', 'glyphicon glyphicon-leaf', '1', '2012-09-19 21:21:35', NULL, '1');
+
+
+
+--
+-- Volcado de datos para la tabla `empresa`
+--
+
+INSERT INTO `empresa` (`emp_id`, `emp_nombre`, `emp_ruc`, `emp_descripcion`, `emp_direccion`, `emp_telefono`, `emp_est_log`, `emp_fec_cre`, `emp_fec_mod`) VALUES
+(1, 'Medical', '1310328405001', 'Imagenes Digitales', NULL, 'Colon', '1', '2016-03-03 02:47:47', NULL);
+
+--
+-- Volcar la base de datos para la tabla `tipo_password`
+--
+
+INSERT INTO `tipo_password` (`tpas_id`, `tpas_tipo`, `tpas_validacion`, `tpas_descripcion`, `tpas_estado_activo`, `tpas_fecha_creacion`, `tpas_fecha_modificacion`, `tpas_estado_logico`) VALUES
+(1, 'Simples', '/^(?=.*[a-z])(?=.*[A-Z]).{VAR,}$/', 'Las claves simples deben cumplir con lo mínimo: Caracteres alfabéticos (Mayúsculas y minúsculas).', '1', '2012-08-28 15:00:00', '2012-08-28 15:00:00', '1'),
+(2, 'Semicomplejas', '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{VAR,}$/', 'Las claves semicomplejas deben cumplir con lo mínimo: Caracteres alfabéticos (Mayúsculas y minúsculas). ', '1', '2012-08-29 02:57:58', '2012-08-29 02:57:58', '1'),
+(3, 'Complejas', '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@\\,\\;#¿\\?\\}\\{\\]\\[\\-_¡!\\=&\\^:<>\\.\\+\\*\\/\\$\\(\\)]).{VAR,}$/', 'Las claves complejas deben cumplir con lo mínimo: Caracteres alfabéticos (Mayúsculas y minúsculas).\nSímbolos: @ ,  ; # ¿ ? }  {  ]  [ - _ ¡  ! = & ^ : < > . + * / ( )', '1', '2012-08-29 02:57:58', '2012-08-29 02:57:58', '1');
+
+
+--
+-- Volcar la base de datos para la tabla `usuario`
+--
+INSERT INTO `persona` (`per_id`, `per_ced_ruc`, `per_nombre`, `per_apellido`, `per_genero`, `per_fecha_nacimiento`, `per_estado_civil`, `per_factor_rh`, `per_tipo_sangre`, `per_est_log`, `per_fec_cre`, `per_fec_mod`) VALUES
+(1, '1310328404', 'BYRON', 'VILLACRESES', 'M', '1981-07-19', 'S', 'RH', 'O+', '1', CURRENT_TIMESTAMP, NULL);
+
+--
+-- Volcar la base de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario`(`usu_id`, `per_id`, `usu_username`, `usu_password`, `usu_sha`, `usu_session`, `usu_last_login`, `usu_estado_activo`, `usu_fec_cre`, `usu_fec_mod`, `usu_est_log`) VALUES
+(1, 1, 'admin', 'Oe0XnfQV1rITyhra1D9NSTk2NzMyY2VhZDE2ZGY2NTM4NmM1ZGNkZmU2MTBjYjEyZjZkN2Q0ZWY0NjYxMmM5MGIwNDZjNjI1MzUxMzY5MWIXYpkgqqqFS/QKaxVARLLmArjJ7iD39CoAVhUhD69so1Aa/WoTy6Qvmatc2VKvXWc2b2npklLgwwBil3xKV8l1', 'gJzWo7FQ-zmMcuy4cpWrTrVDmTRCFJcs', NULL, NULL, '1', '2016-03-10 13:00:00', NULL, '1');
+
+--
+-- Volcar la base de datos para la tabla `rol`
+--
+
+INSERT INTO `rol` (`rol_id`, `rol_nombre`, `rol_descripcion`, `rol_estado_activo`, `rol_fecha_creacion`, `rol_fecha_modificacion`, `rol_estado_logico`) VALUES
+(1, 'Administrador', 'Descripción', '1', '2012-09-03 15:00:00', NULL, '1'),
+(2, 'Otros', 'Descripción', '1', '2012-09-03 15:00:00', NULL, '1');
+
+--
+-- Volcado de datos para la tabla `usuario_empresa`
+--
+
+INSERT INTO `usuario_empresa` (`uemp_id`, `usu_id`, `rol_id`, `emp_id`, `uemp_est_log`, `uemp_fec_cre`, `uemp_fec_mod`) VALUES
+(1, 1, 1, 1, '1', '2016-03-03 02:50:58', NULL);
+
+--
+-- Volcado de datos para la tabla `aplicacion`
+--
+
+INSERT INTO `aplicacion` (`apl_id`, `apl_nombre`, `apl_tipo`, `apl_lang_file`, `apl_est_log`, `apl_fec_cre`, `apl_fec_mod`) VALUES
+(1, 'Repositorio Digital', '1', NULL, '1', '2016-03-02 19:19:43', NULL);
+
+--
+-- Volcar la base de datos para la tabla `modulo`
+--
+
+INSERT INTO `modulo` (`mod_id`,`apl_id`, `mod_nombre`, `mod_dir_imagen`, `mod_url`, `mod_orden`, `mod_lang_file`, `mod_estado_activo`, `mod_fecha_creacion`, `mod_fecha_modificacion`, `mod_estado_logico`) VALUES
+(1, 1,'Applications', 'glyphicon glyphicon-th-large', 'site/index', 1, 'application', '1', '2012-08-26 01:47:23', NULL, '1'),
+(2, 1,'Tracing', 'glyphicon glyphicon-sort', 'mceformulariotemp/index', 2, 'application', '1', '2012-08-26 01:47:23', NULL, '0'),
+(3, 1,'My Forms', 'glyphicon glyphicon-list-alt', 'mceformulariotemp/index', 1, 'application', '1', '2012-08-26 01:47:23', NULL, '1'),
+(4, 1,'My Account', 'glyphicon glyphicon-user', 'perfil/index', 3, 'menu', '1', '2012-08-26 01:47:23', NULL, '1');
+
+--
+-- Volcar la base de datos para la tabla `objeto_modulo`
+--
+
+INSERT INTO `objeto_modulo` (`omod_id`, `mod_id`, `omod_padre_id`, `omod_nombre`, `omod_tipo`, `omod_tipo_boton`, `omod_accion`, `omod_function`, `omod_dir_imagen`, `omod_entidad`, `omod_orden`, `omod_estado_visible`, `omod_lang_file`, `omod_estado_activo`, `omod_fecha_creacion`, `omod_fecha_modificacion`, `omod_estado_logico`) VALUES
+(1, 1, 1, 'Applications', 'P', '0', 'Applications', '', '', 'site/index', 1, '0', 'application', '1', '2014-01-08 13:43:51', NULL, '1'),
+(2, 1, 1, 'To Refuse', 'A', '0', 'Applications', '', '', 'mceformulario/rechazar', 1, '0', 'application', '1', '2014-01-08 13:43:51', NULL, '1'),
+(3, 1, 1, 'To Approve', 'A', '0', 'Applications', '', '', 'mceformulario/autorizar', 1, '0', 'application', '1', '2014-01-08 13:43:51', NULL, '1'),
+(4, 1, 1, 'To Correct', 'A', '0', 'Applications', '', '', 'mceformulario/view', 1, '0', 'application', '1', '2014-01-08 13:43:51', NULL, '1'),
+(5, 1, 1, 'Get Message', 'A', '0', 'Applications', '', '', 'mceformulario/message', 1, '0', 'application', '1', '2014-01-08 13:43:51', NULL, '1'),
+(6, 1, 1, 'Delete Message', 'A', '0', 'Applications', '', '', 'mceformulario/deletemessage', 1, '0', 'application', '1', '2014-01-08 13:43:51', NULL, '1'),
+(7, 1, 1, 'Export to Excel', 'A', '0', 'Applications', '', '', 'mceformulario/expexcel', 1, '0', 'application', '1', '2014-01-08 13:43:51', NULL, '1'),
+(8, 2, 1, 'Tracing', 'P', '0', 'Applications', '', '', 'mceseguimiento/index', 1, '0', 'application', '1', '2014-01-08 13:43:51', NULL, '1'),
+(9, 2, 1, 'View Tracing', 'S', '0', 'Applications', '', '', 'mceseguimiento/view', 1, '0', 'application', '1', '2014-01-08 13:43:51', NULL, '1'),
+(10, 2, 1, 'Create Tracing', 'S', '0', 'Applications', '', '', 'mceseguimiento/create', 1, '0', 'application', '1', '2014-01-08 13:43:51', NULL, '1'),
+(11, 2, 1, 'Update Tracing', 'S', '0', 'Applications', '', '', 'mceseguimiento/update', 1, '0', 'application', '1', '2014-01-08 13:43:51', NULL, '1'),
+(12, 2, 1, 'Delete Tracing', 'S', '0', 'Applications', '', '', 'mceseguimiento/delete', 1, '0', 'application', '1', '2014-01-08 13:43:51', NULL, '1'),
+(13, 2, 1, 'Save Tracing', 'S', '0', 'Applications', '', '', 'mceseguimiento/save', 1, '0', 'application', '1', '2014-01-08 13:43:51', NULL, '1'),
+(14, 3, 14, 'My Forms', 'P', '0', 'My Forms', '', '', 'mceformulariotemp/index', 1, '0', 'application', '1', '2014-01-08 13:43:51', NULL, '1'),
+(15, 3, 14, 'View Form', 'A', '0', 'My Forms', '', '', 'mceformulariotemp/view', 1, '0', 'application', '1', '2014-01-08 13:43:51', NULL, '1'),
+(16, 3, 14, 'Create Form', 'A', '0', 'My Forms', '', '', 'mceformulariotemp/create', 1, '0', 'application', '1', '2014-01-08 13:43:51', NULL, '1'),
+(17, 3, 14, 'Update Form', 'A', '0', 'My Forms', '', '', 'mceformulariotemp/update', 1, '0', 'application', '1', '2014-01-08 13:43:51', NULL, '1'),
+(18, 3, 14, 'Save Form', 'A', '0', 'My Forms', '', '', 'mceformulariotemp/save', 1, '0', 'application', '1', '2014-01-08 13:43:51', NULL, '1'),
+(19, 3, 14, 'Brand Use', 'A', '0', 'My Forms', '', '', 'mceformulariotemp/usomarca', 1, '0', 'application', '1', '2014-01-08 13:43:51', NULL, '1'),
+(20, 3, 14, 'Upload File', 'A', '0', 'My Forms', '', '', 'mceformulariotemp/uploadfile', 1, '0', 'application', '1', '2014-01-08 13:43:51', NULL, '1'),
+(21, 3, 14, 'Download File', 'A', '0', 'My Forms', '', '', 'mceformulariotemp/download', 1, '0', 'application', '1', '2014-01-08 13:43:51', NULL, '1'),
+(22, 3, 14, 'View Message', 'A', '0', 'My Forms', '', '', 'mceformulariotemp/viewmessage', 1, '0', 'application', '1', '2014-01-08 13:43:51', NULL, '1'),
+(23, 3, 14, 'Pdf Application', 'A', '0', 'My Forms', '', '', 'mceformulariotemp/solicitudpdf', 1, '0', 'application', '1', '2014-01-08 13:43:51', NULL, '1'),
+(24, 1, 1, 'Search Application', 'A', '0', 'Applications', '', '', 'mceformulario/buscarpersonas', 1, '0', 'application', '1', '2014-01-08 13:43:51', NULL, '1'),
+(25, 1, 1, 'Pdf Application Sol', 'A', '0', 'Applications', '', '', 'mceformulario/solicitudpdf', 1, '0', 'application', '1', '2014-01-08 13:43:51', NULL, '1'),
+(26, 4, 26, 'Profile', 'P', '0', 'My Account', '', '', 'perfil/index', 1, '0', 'perfil', '1', '2014-01-08 13:43:51', NULL, '1'),
+(27, 4, 26, 'Save Profile', 'A', '0', 'My Account', '', '', 'perfil/save', 1, '0', 'perfil', '1', '2014-01-08 13:43:51', NULL, '1');
+
+
+--
+-- Volcado de datos para la tabla `omodulo_rol`
+--
+
+INSERT INTO `omodulo_rol` (`omrol_id`, `omod_id`, `rol_id`, `omrol_est_log`, `omrol_fec_cre`, `omrol_fec_mod`) VALUES
+(1, 1, 1, '1', '2016-03-03 05:37:33', NULL);
+
+--
+-- Volcar la base de datos para la tabla `obmo_acci`
+--
+
+INSERT INTO `obmo_acci` (`oacc_id`, `omod_id`, `acc_id`, `oacc_tipo_boton`, `oacc_cont_accion`, `oacc_function`, `oacc_estado_activo`, `oacc_fecha_creacion`, `oacc_fecha_modificacion`, `oacc_estado_logico`) VALUES
+(1, 1, 1, '5', NULL, 'alert()', '1', '2014-06-12 07:43:33', NULL, '1');

@@ -26,7 +26,7 @@ class Usuario extends ActiveRecord implements IdentityInterface {
             [['usu_username', 'usu_password', 'per_id'], 'required'],
             [['usu_username', 'usu_password'], 'string', 'max' => 200],
             [['usu_link_activo'], 'string'],
-            [['per_id', 'usu_estado_logico', 'usu_estado_activo'], 'integer', 'max' => 20]
+            [['per_id', 'usu_est_log', 'usu_estado_activo'], 'integer', 'max' => 20]
         ];
     }
 
@@ -84,7 +84,7 @@ class Usuario extends ActiveRecord implements IdentityInterface {
      * @return static|null
      */
     public static function findByUsername($username) {
-        $user = static::findOne(['usu_username' => $username, 'usu_estado_activo' => 1, 'usu_estado_logico' => 1]);
+        $user = static::findOne(['usu_username' => $username, 'usu_estado_activo' => 1, 'usu_est_log' => 1]);
         if(isset($user->usu_id))
             return $user;
         else
@@ -127,30 +127,33 @@ class Usuario extends ActiveRecord implements IdentityInterface {
         $this->usu_sha = $security->generateRandomString();
         return $this->usu_sha;
     }
-
+     /*
+     * CREAR LA SESION DEL USUARIO  Y SUS VARIBLES
+     */
     public function createSession() {
         $session = Yii::$app->session;
         if ($session->isActive){
             $session->open();
             //$session->close();
             $model_persona  = Persona::findIdentity($this->per_id);
-            $arr_nombres    = Utilities::getNombresApellidos($model_persona->per_nombres);
-            $arr_apellidos  = Utilities::getNombresApellidos($model_persona->per_apellidos);
+            $arr_nombres    = Utilities::getNombresApellidos($model_persona->per_nombre);
+            $arr_apellidos  = Utilities::getNombresApellidos($model_persona->per_apellido);
             $nombre_persona = $arr_nombres[1]." ".$arr_apellidos[1];
             // se busca si el usuario es un licenciatario
-            $mce_reg = MceRegistro::findOne(['usu_id' => $this->usu_id, 'reg_estado' => '1', 'reg_estado_logico' => '1']);
-            
+            //$mce_reg = MceRegistro::findOne(['usu_id' => $this->usu_id, 'reg_estado' => '1', 'reg_estado_logico' => '1']);
+            $tipoUser=  Rol::buscarTipoUser($this->usu_id);
             $session->set('PB_isuser', true);
             $session->set('PB_username', $this->usu_username);
             $session->set('PB_nombres', $nombre_persona);
             $session->set('PB_perid', $this->per_id);
             $session->set('PB_iduser', $this->usu_id);
-            $session->set('PB_idregister', ($mce_reg->reg_id)?($mce_reg->reg_id):0);
+            //$session->set('PB_idregister', ($mce_reg->reg_id)?($mce_reg->reg_id):0);
             $session->set('PB_yii_lang', Yii::$app->language);
             $session->set('PB_yii_theme', Yii::$app->view->theme->themeName);
             $session->set('PB_client_ip', Utilities::getClientRealIP());
             $session->set('PB_module_id', "");
             $session->set('PB_objmodule_id', "");
+            $session->set('RolId',$tipoUser['RolId']);
         }else{
             $session->destroy();
         }

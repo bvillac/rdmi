@@ -89,5 +89,17 @@ class Rol extends \yii\db\ActiveRecord
         $comando->bindParam(":usu_id", $id_user, \PDO::PARAM_INT);
         return $comando->queryAll();
     }
+    
+    public static function buscarTipoUser($ids){
+        $con = \Yii::$app->db;
+        $sql="select a.rol_id rolid
+                from  " . $con->dbname . ".usuario_empresa a
+                  inner join " . $con->dbname . ".usuario b on a.usu_id=b.usu_id
+                  inner join " . $con->dbname . ".rol c on a.rol_id=c.rol_id
+              where b.usu_id=:ids and b.usu_est_log=1 ";
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":Ids", $ids, \PDO::PARAM_INT);
+        return $comando->queryOne();
+    }
 
 }
