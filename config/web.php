@@ -7,8 +7,8 @@ Yii::setAlias('@assets', dirname(__DIR__) . '/assets');
 $params = require(__DIR__ . '/params.php');
 
 $config = [
-    'id' => 'mce',
-    'name' => 'Ministerio del Comercio Exterior',
+    'id' => 'rdmi',
+    'name' => 'Repositorio Digital de Imagenes Médicas',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'language' => 'es',
@@ -38,7 +38,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'enableStrictParsing' => false,
-            'baseUrl' => '/mce',
+            'baseUrl' => '/rdmi',
             'rules' => [
                 // REST patterns
                 'GET api/list/<modelo:\w+>/format' => 'api/list',
@@ -54,8 +54,8 @@ $config = [
             ],
         ],
         'request' => [
-            'baseUrl' => '/mce',
-            'cookieValidationKey' => 'mce2703401',
+            'baseUrl' => '/rdmi',
+            'cookieValidationKey' => 'rdmi2703401',
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
             ],
