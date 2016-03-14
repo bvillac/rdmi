@@ -57,9 +57,9 @@ return [
     ],*/
     'transport' => [
         'class' => 'Swift_SmtpTransport',
-        'host' => 'mail.penblu.com',  // e.g. smtp.mandrillapp.com or smtp.gmail.com
-        'username' => 'test@penblu.com',
-        'password' => 'Test2oo15PB',
+        'host' => 'mail.utimpor.com',  // e.g. smtp.mandrillapp.com or smtp.gmail.com
+        'username' => 'no-responder@utimpor.com',
+        'password' => 'F0E4CwUyWy?h',
         'port' => '26', // Port 25 is a very common port too
         //'encryption' => 'ssl', // tls, It is often used, check your provider or mail server specs
     ],
