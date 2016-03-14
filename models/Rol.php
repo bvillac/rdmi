@@ -98,7 +98,7 @@ class Rol extends \yii\db\ActiveRecord
                   inner join " . $con->dbname . ".rol c on a.rol_id=c.rol_id
               where b.usu_id=:ids and b.usu_est_log=1 ";
         $comando = $con->createCommand($sql);
-        $comando->bindParam(":Ids", $ids, \PDO::PARAM_INT);
+        $comando->bindParam(":ids", $ids, \PDO::PARAM_INT);
         return $comando->queryOne();
     }
 

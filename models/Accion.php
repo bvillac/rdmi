@@ -102,57 +102,18 @@ class Accion extends \yii\db\ActiveRecord
      * @return mixed                  Devuelve un array para construccion de Menus
      */
     public function getAccionesXObjModulo($omod_id){
-        $usu_id    = Yii::$app->session->get('PB_iduser', FALSE);
-        $idempresa = Yii::$app->session->get('PB_idempresa', FALSE);
-        $sql = "SELECT 
-                    om.omod_id,
-                    om.omod_padre_id,
-                    om.omod_nombre,
-                    om.omod_entidad,
-                    om.omod_lang_file,
-                    om.omod_tipo,
-                    om.omod_tipo_boton,
-                    om.omod_accion,
-                    om.omod_function,
-                    om.omod_dir_imagen,
-                    om.omod_orden,
-                    ac.acc_id,
-                    ac.acc_nombre,
-                    ac.acc_url_accion,
-                    ac.acc_tipo,
-                    ac.acc_lang_file,
-                    ac.acc_dir_imagen
-                FROM 
-                    objeto_modulo AS om 
-                    INNER JOIN grup_obmo AS go ON om.omod_id = go.omod_id 
-                    INNER JOIN grup_obmo_grup_rol AS gg ON go.gmod_id = gg.gmod_id
-                    INNER JOIN grupo_rol AS gr ON gg.grol_id = gr.grol_id
-                    INNER JOIN usuario AS us ON gr.usu_id = us.usu_id
-                    INNER JOIN obmo_acci AS oa ON om.omod_id = oa.omod_id 
-                    INNER JOIN accion AS ac ON oa.acc_id = ac.acc_id 
-                WHERE 
-                    om.omod_padre_id=:omod_id AND 
-                    om.omod_tipo='A' AND 
-                    us.usu_id=:usu_id AND 
-                    go.gmod_estado_logico=1 AND 
-                    go.gmod_estado_activo=1 AND 
-                    gg.gogr_estado_logico=1 AND 
-                    gg.gogr_estado_activo=1 AND 
-                    gr.grol_estado_logico=1 AND 
-                    gr.grol_estado_activo=1 AND 
-                    us.usu_estado_logico=1 AND 
-                    us.usu_estado_activo=1 AND 
-                    om.omod_estado_logico=1 AND 
-                    om.omod_estado_activo=1 AND 
-                    om.omod_estado_visible=1 AND
-                    oa.oacc_estado_activo=1 AND 
-                    oa.oacc_estado_logico=1 AND 
-                    ac.acc_estado_activo=1 AND 
-                    ac.acc_estado_logico=1 
-                ORDER BY om.omod_nombre;";
-        $comando = Yii::$app->db->createCommand($sql);
+        $con = \Yii::$app->db;
+        $sql = "select a.omod_id, a.omod_padre_id, a.omod_nombre,a.omod_entidad,
+                        a.omod_lang_file,a.omod_tipo,a.omod_tipo_boton,a.omod_accion,
+                        a.omod_function,a.omod_dir_imagen,a.omod_orden,c.acc_id,c.acc_nombre,
+                        c.acc_url_accion, c.acc_tipo, c.acc_lang_file, c.acc_dir_imagen
+                   from " . $con->dbname . ".objeto_modulo a
+                     inner join (" . $con->dbname . ".obmo_acci b
+                         inner join " . $con->dbname . ".accion c on b.acc_id=c.acc_id)
+                       on a.omod_id=b.omod_id
+                 where a.omod_estado_logico=1 and a.omod_id=:omod_id ";
+        $comando = $con->createCommand($sql);
         $comando->bindParam(":omod_id", $omod_id, \PDO::PARAM_INT);
-        $comando->bindParam(":usu_id", $usu_id, \PDO::PARAM_INT);
         return $comando->queryAll();
     }
     

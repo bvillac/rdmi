@@ -92,11 +92,11 @@ class SiteController extends CController
             return $this->redirect(Url::base(true).'/site/login');
         }
         // setting default url
-        $mod = new Modulo();
-        $link =  $mod->getFirstModuleLink();
-        $url = Url::base(true) . "/" . $link["url"];
-        return $this->goBack($url);
-        //return $this->render('index');
+        //$mod = new Modulo();
+        //$link =  $mod->getFirstModuleLink();
+        //$url = Url::base(true) . "/" . $link["url"];
+        //return $this->goBack($url);
+        return $this->render('index');
     }
 
     public function actionLogin()

@@ -182,8 +182,6 @@ class ObjetoModulo extends \yii\db\ActiveRecord
     
     /**
      * Función para obtener arreglo de objetos modulos por id de objeto modulo padre
-     *
-     * @author Eduardo Cueva <ecueva@penblu.com>
      * @access public
      * @param string $id_module        Id del Modulo
      * @param string $id_omod          Id del Objeto Modulo
@@ -192,87 +190,41 @@ class ObjetoModulo extends \yii\db\ActiveRecord
      *                      
      * */
     public function getObjModHijosXObjModPadre($id_module, $id_omod, $id_omodpadre) {
-        $usu_id = Yii::$app->session->get('PB_iduser', FALSE);
-        $sql = "SELECT 
-                    om.* 
-                FROM 
-                    objeto_modulo AS om 
-                    INNER JOIN modulo AS mo ON om.mod_id = mo.mod_id 
-                    INNER JOIN grup_obmo AS go ON om.omod_id = go.omod_id 
-                    INNER JOIN grup_obmo_grup_rol AS gg ON go.gmod_id = gg.gmod_id
-                    INNER JOIN grupo_rol AS gr ON gg.grol_id = gr.grol_id
-                    INNER JOIN usuario AS us ON gr.usu_id = us.usu_id
-                WHERE 
-                    om.mod_id=:mod_id AND 
-                    us.usu_id=:usu_id AND 
-                    om.omod_padre_id=:omod_padre AND 
-                    om.omod_id <> :omod_id AND 
-                    mo.mod_estado_activo=1 AND 
-                    mo.mod_estado_logico=1 AND 
-                    go.gmod_estado_logico=1 AND 
-                    go.gmod_estado_activo=1 AND 
-                    gg.gogr_estado_logico=1 AND 
-                    gg.gogr_estado_activo=1 AND 
-                    gr.grol_estado_logico=1 AND 
-                    gr.grol_estado_activo=1 AND 
-                    us.usu_estado_logico=1 AND 
-                    us.usu_estado_activo=1 AND 
-                    om.omod_tipo='S' AND 
-                    om.omod_estado_logico=1 AND 
-                    om.omod_estado_activo=1 AND 
-                    om.omod_estado_visible=1  
-                ORDER BY om.omod_orden;";
-
-        $comando = Yii::$app->db->createCommand($sql);
+        $RolId= Yii::$app->session->get('RolId', FALSE);
+        $con = \Yii::$app->db;
+        $sql = "select b.* from rdmi.objeto_modulo b
+                          inner join (rdmi.omodulo_rol c
+                              inner join rdmi.rol d on c.rol_id=d.rol_id)
+                          on b.omod_id=c.omod_id
+                  where b.omod_estado_logico=1 and d.rol_id=:rol_id and b.omod_id=:omod_id and b.mod_id=:mod_id 
+                  and b.omod_padre_id=:omod_padre order by b.omod_orden; ";
+        $comando = $con->createCommand($sql);
         $comando->bindParam(":mod_id", $id_module, \PDO::PARAM_INT);
-        $comando->bindParam(":usu_id", $usu_id, \PDO::PARAM_INT);
+        $comando->bindParam(":rol_id", $RolId, \PDO::PARAM_INT);
         $comando->bindParam(":omod_padre", $id_omodpadre, \PDO::PARAM_INT);
         $comando->bindParam(":omod_id", $id_omod, \PDO::PARAM_INT);
-        $arrayObjMod = $comando->queryAll();
-        return $arrayObjMod;
+        return $comando->queryAll();
     }
     
     /**
      * Función para obtener un modulo dado el id del objeto modulo
-     *
-     * @author Eduardo Cueva <ecueva@penblu.com>
      * @param  $omod_id          Id del objeto modulo 
      * @return mixed             Objeto con los datos de un modulo
      */
     public function getModuleByObjModule($omod_id){
-        $usu_id = Yii::$app->session->get('PB_iduser', FALSE);
-        $sql = "SELECT 
-                    mo.* 
-                FROM 
-                    objeto_modulo AS om 
-                    INNER JOIN modulo AS mo ON om.mod_id = mo.mod_id 
-                    INNER JOIN grup_obmo AS go ON om.omod_id = go.omod_id 
-                    INNER JOIN grup_obmo_grup_rol AS gg ON go.gmod_id = gg.gmod_id
-                    INNER JOIN grupo_rol AS gr ON gg.grol_id = gr.grol_id
-                    INNER JOIN usuario AS us ON gr.usu_id = us.usu_id
-                WHERE 
-                    us.usu_id=:usu_id AND 
-                    om.omod_id=:omod_id AND 
-                    mo.mod_estado_activo=1 AND 
-                    mo.mod_estado_logico=1 AND 
-                    go.gmod_estado_logico=1 AND 
-                    go.gmod_estado_activo=1 AND 
-                    gg.gogr_estado_logico=1 AND 
-                    gg.gogr_estado_activo=1 AND 
-                    gr.grol_estado_logico=1 AND 
-                    gr.grol_estado_activo=1 AND 
-                    us.usu_estado_logico=1 AND 
-                    us.usu_estado_activo=1 AND 
-                    om.omod_estado_logico=1 AND 
-                    om.omod_estado_activo=1 AND 
-                    om.omod_estado_visible=1  
-                ORDER BY om.omod_orden;";
-
-        $comando = Yii::$app->db->createCommand($sql);
-        $comando->bindParam(":usu_id", $usu_id, \PDO::PARAM_INT);
-        $comando->bindParam(":omod_id", $omod_id, \PDO::PARAM_INT);
-        $arrMod = $comando->queryOne();
-        return $arrMod;
+        $RolId= Yii::$app->session->get('RolId', FALSE);
+        $con = \Yii::$app->db;
+        $sql = "select distinct(a.mod_id),a.*
+                    from " . $con->dbname . ".modulo a
+                      inner join (" . $con->dbname . ".objeto_modulo b
+                          inner join (" . $con->dbname . ".omodulo_rol c
+                              inner join " . $con->dbname . ".rol d on c.rol_id=d.rol_id)
+                          on b.omod_id=c.omod_id)
+                      on b.mod_id=a.mod_id
+                  where a.mod_estado_logico=1 and d.rol_id=:rol_id order by b.omod_orden ";  
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":rol_id", $RolId, \PDO::PARAM_INT);
+        return $comando->queryOne();
     }
 
     /**

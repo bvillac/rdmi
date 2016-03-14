@@ -233,15 +233,15 @@ class Usuario extends ActiveRecord implements IdentityInterface {
             'timestamp' => [
                 'class' => TimestampBehavior::className(),
                 'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => ['usu_fecha_creacion'],
-                    ActiveRecord::EVENT_BEFORE_UPDATE => ['usu_fecha_modificacion'],
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['usu_fec_cre'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['usu_fec_mod'],
                 ],
                 'value' => new Expression('NOW()'),
             ],
             'integer' => [
                 'class' => AttributeBehavior::className(),
                 'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => ['usu_estado_logico','usu_estado_activo'],
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['usu_est_log','usu_estado_activo'],
                 ],
                 'value' => '1',
             ],
@@ -254,8 +254,8 @@ class Usuario extends ActiveRecord implements IdentityInterface {
             FROM " . $con->dbname . ".mce_registro A
               INNER JOIN (" . $con->dbname . ".usuario B
                    INNER JOIN " . $con->dbname . ".persona C ON B.per_id=C.per_id)
-                ON A.usu_id=B.usu_id AND B.usu_estado_logico=1
-          WHERE A.reg_estado_logico=1 AND A.reg_id=:reg_id";
+                ON A.usu_id=B.usu_id AND B.usu_est_log=1
+          WHERE A.reg_est_log=1 AND A.reg_id=:reg_id";
         $comando = $con->createCommand($sql);
         $comando->bindParam(":reg_id", $ids, \PDO::PARAM_INT);
         return $comando->queryAll();

@@ -85,75 +85,44 @@ class Modulo extends \yii\db\ActiveRecord
      * Funcion que retorna los modulos que puede visualizar un usuario
      *
      * @access public
-     * @author Eduardo Cueva <ecueva@penblu.com>
      * @return mixed $menu      Arreglos de Modulos
      */
     public function getModulos() {
-        $iduser    = Yii::$app->session->get('PB_iduser', FALSE);
-        
-        $sql = "SELECT 
-                    DISTINCT(modu.mod_id),modu.*
-                FROM 
-                    grupo_rol as grol 
-                    JOIN usuario as usu on grol.usu_id=usu.usu_id 
-                    JOIN grup_obmo_grup_rol as gogr on grol.grol_id=gogr.grol_id 
-                    JOIN grup_obmo as gob on gogr.gmod_id=gob.gmod_id 
-                    JOIN objeto_modulo as omod on gob.omod_id=omod.omod_id 
-                    JOIN modulo as modu on omod.mod_id=modu.mod_id 
-                WHERE 
-                    usu.usu_id=$iduser AND 
-                    usu.usu_estado_logico=1 AND 
-                    usu.usu_estado_activo=1 AND 
-                    grol.grol_estado_logico=1 AND 
-                    grol.grol_estado_activo=1 AND 
-                    gogr.gogr_estado_logico=1 AND 
-                    gogr.gogr_estado_activo=1 AND 
-                    gob.gmod_estado_logico=1 AND 
-                    gob.gmod_estado_activo=1 AND 
-                    omod.omod_estado_logico=1 AND 
-                    omod.omod_estado_activo=1 AND 
-                    modu.mod_estado_logico=1 AND 
-                    modu.mod_estado_activo=1 
-                ORDER BY modu.mod_orden;";
-        $res = Yii::$app->db->createCommand($sql)->queryAll();
-        return $res;
+        $RolId= Yii::$app->session->get('RolId', FALSE);
+        $con = \Yii::$app->db;
+        $sql = "select distinct(a.mod_id),a.*
+                    from " . $con->dbname . ".modulo a
+                      inner join (" . $con->dbname . ".objeto_modulo b
+                          inner join (" . $con->dbname . ".omodulo_rol c
+                              inner join " . $con->dbname . ".rol d on c.rol_id=d.rol_id)
+                          on b.omod_id=c.omod_id)
+                      on b.mod_id=a.mod_id
+                  where a.mod_estado_logico=1 and d.rol_id=:rol_id ";      
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":rol_id", $RolId, \PDO::PARAM_INT);
+        return $comando->queryAll();
     }
     
     /**
      * Funcion que retorna el link del primer modulo
      *
      * @access public
-     * @author Eduardo Cueva <ecueva@penblu.com>
      * @return mixed $menu      Arreglos de Modulos
      */
     function getFirstModuleLink(){
-        $iduser    = Yii::$app->session->get('PB_iduser', FALSE);
-        
-        $sql = "SELECT 
-                    mod_url AS url
-                FROM 
-                    grupo_rol as grol 
-                    JOIN usuario as usu on grol.usu_id=usu.usu_id 
-                    JOIN grup_obmo_grup_rol as gogr on grol.grol_id=gogr.grol_id 
-                    JOIN grup_obmo as gob on gogr.gmod_id=gob.gmod_id 
-                    JOIN objeto_modulo as omod on gob.omod_id=omod.omod_id 
-                    JOIN modulo as modu on omod.mod_id=modu.mod_id 
-                WHERE 
-                    usu.usu_id=$iduser AND 
-                    usu.usu_estado_logico=1 AND 
-                    usu.usu_estado_activo=1 AND 
-                    grol.grol_estado_logico=1 AND 
-                    grol.grol_estado_activo=1 AND 
-                    gogr.gogr_estado_logico=1 AND 
-                    gogr.gogr_estado_activo=1 AND 
-                    gob.gmod_estado_logico=1 AND 
-                    gob.gmod_estado_activo=1 AND 
-                    omod.omod_estado_logico=1 AND 
-                    omod.omod_estado_activo=1 AND 
-                    modu.mod_estado_logico=1 AND 
-                    modu.mod_estado_activo=1  
-                ORDER BY modu.mod_orden;";
-        $res = Yii::$app->db->createCommand($sql)->queryOne();
-        return $res;
+        //$iduser    = Yii::$app->session->get('PB_iduser', FALSE);
+        $RolId= Yii::$app->session->get('RolId', FALSE);
+        $con = \Yii::$app->db;
+        $sql = "select a.mod_url url
+                    from " . $con->dbname . ".modulo a
+                      inner join (" . $con->dbname . ".objeto_modulo b
+                          inner join (" . $con->dbname . ".omodulo_rol c
+                              inner join " . $con->dbname . ".rol d on c.rol_id=d.rol_id)
+                          on b.omod_id=c.omod_id)
+                      on b.mod_id=a.mod_id
+                  where a.mod_estado_logico=1 and d.rol_id=:rol_id ";      
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":rol_id", $RolId, \PDO::PARAM_INT);
+        return $comando->queryOne();
     }
 }
