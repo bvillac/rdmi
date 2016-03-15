@@ -99,6 +99,7 @@ class Modulo extends \yii\db\ActiveRecord
                       on b.mod_id=a.mod_id
                   where a.mod_estado_logico=1 and d.rol_id=:rol_id ";      
         $comando = $con->createCommand($sql);
+        Utilities::putMessageLogFile($RolId);
         $comando->bindParam(":rol_id", $RolId, \PDO::PARAM_INT);
         return $comando->queryAll();
     }

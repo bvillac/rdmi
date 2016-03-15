@@ -129,54 +129,26 @@ class ObjetoModulo extends \yii\db\ActiveRecord
     
     
     /**
-     * Funcion que devuelve los objetos modulos dado un modulo
-     *
+     * Funcion que devuelve los formularios Secuandrios de Cada Modulo
      * @access public
-     * @author Eduardo Cueva <ecueva@penblu.com>
      * @return mixed $menu      Arreglos de Objetos Modulos
      */
-    public function getObjetoModulosXModulo($moduloid) {
-        $usu_id = Yii::$app->session->get('PB_iduser', FALSE);
-        $sql = "SELECT 
-                    om.omod_id,
-                    om.omod_padre_id,
-                    om.omod_nombre,
-                    om.omod_entidad,
-                    om.omod_lang_file,
-                    om.omod_tipo,
-                    om.omod_tipo_boton,
-                    om.omod_accion,
-                    om.omod_function,
-                    om.omod_dir_imagen,
-                    om.omod_orden
-                FROM 
-                    objeto_modulo AS om 
-                    INNER JOIN modulo AS mo ON om.mod_id = mo.mod_id 
-                    INNER JOIN grup_obmo AS go ON om.omod_id = go.omod_id 
-                    INNER JOIN grup_obmo_grup_rol AS gg ON go.gmod_id = gg.gmod_id
-                    INNER JOIN grupo_rol AS gr ON gg.grol_id = gr.grol_id
-                    INNER JOIN usuario AS us ON gr.usu_id = us.usu_id
-                WHERE 
-                    om.mod_id=:mod_id AND 
-                    us.usu_id=:usu_id AND 
-                    mo.mod_estado_activo=1 AND 
-                    mo.mod_estado_logico=1 AND 
-                    go.gmod_estado_logico=1 AND 
-                    go.gmod_estado_activo=1 AND 
-                    gg.gogr_estado_logico=1 AND 
-                    gg.gogr_estado_activo=1 AND 
-                    gr.grol_estado_logico=1 AND 
-                    gr.grol_estado_activo=1 AND 
-                    us.usu_estado_logico=1 AND 
-                    us.usu_estado_activo=1 AND 
-                    om.omod_id=om.omod_padre_id AND 
-                    om.omod_estado_logico=1 AND 
-                    om.omod_estado_activo=1 AND 
-                    om.omod_estado_visible=1  
-                ORDER BY om.omod_nombre;";
-        $comando = Yii::$app->db->createCommand($sql);
+    public function getObjetoModulosFormulario($moduloid) {
+        $RolId= Yii::$app->session->get('RolId', FALSE);
+        $con = \Yii::$app->db;
+        $sql = "select b.omod_id,b.omod_padre_id,b.omod_nombre,b.omod_entidad,b.omod_lang_file,b.omod_tipo, 
+                    b.omod_tipo_boton,b.omod_accion, b.omod_function, b.omod_dir_imagen, b.omod_orden
+                    from " . $con->dbname . ".modulo a
+                      inner join (" . $con->dbname . ".objeto_modulo b
+                          inner join (" . $con->dbname . ".omodulo_rol c
+                              inner join " . $con->dbname . ".rol d on c.rol_id=d.rol_id)
+                          on b.omod_id=c.omod_id)
+                      on b.mod_id=a.mod_id
+                  where a.mod_estado_logico=1 and b.mod_id=:mod_id and b.omod_tipo='S' 
+                  and d.rol_id=:rol_id order by b.omod_nombre ";      
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":rol_id", $RolId, \PDO::PARAM_INT);
         $comando->bindParam(":mod_id", $moduloid, \PDO::PARAM_INT);
-        $comando->bindParam(":usu_id", $usu_id, \PDO::PARAM_INT);
         return $comando->queryAll();
     }
     

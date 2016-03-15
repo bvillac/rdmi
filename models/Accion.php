@@ -101,7 +101,7 @@ class Accion extends \yii\db\ActiveRecord
      * @param  int        $omod_id    Id del Objeto Modulo
      * @return mixed                  Devuelve un array para construccion de Menus
      */
-    public function getAccionesXObjModulo($omod_id){
+    public function getAccionesObjModulo($omod_id){
         $con = \Yii::$app->db;
         $sql = "select a.omod_id, a.omod_padre_id, a.omod_nombre,a.omod_entidad,
                         a.omod_lang_file,a.omod_tipo,a.omod_tipo_boton,a.omod_accion,

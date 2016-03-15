@@ -16,23 +16,11 @@ use app\models\Accion;
     ?>
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>
+<!--        <h1>
             <?= $this->params["Module_name"] ?>
             <small><?= $this->params["ObjModPadre_name"] ?></small>
-        </h1>
-        <!--
-        <ol class="breadcrumb">
-            <li><a href="<?= Yii::$app->urlManager->createUrl([$breadcrumb[$posMod][1]]) ?>"><i class="<?= $mod->mod_dir_imagen ?>"></i> <?= $breadcrumb[$posMod][0] ?></a></li>
-            <?php 
-                for ($i=$posMod-1; $i>=0; $i--){
-                    if($i==0)
-                        echo '<li class="active"><a href="'.Yii::$app->urlManager->createUrl([$breadcrumb[$i][1]]).'">'.$breadcrumb[$i][0].'</a></li>';
-                    else 
-                        echo '<li><a href="'.Yii::$app->urlManager->createUrl([$breadcrumb[$i][1]]).'">'.$breadcrumb[$i][0].'</a></li>';
-                }
-            ?>
-        </ol>
-        -->
+        </h1>-->
+        
     </section>
     <!-- Main content -->
     <section class="content">
@@ -49,7 +37,8 @@ use app\models\Accion;
                 $id_module    = $this->params["mod_id"];
                 $id_omod      = $this->params["omod_id"];
                 $id_omodpadre = $this->params["omod_padre_id"];
-                $arrMod = $objModule->getObjModHijosXObjModPadre($id_module, $id_omod, $id_omodpadre);
+                //RETORNA LOS FORMULARIO DE los MODULOS
+                //$arrMod = $objModule->getObjModHijosXObjModPadre($id_module, $id_omod, $id_omodpadre);
                 if(count($arrMod) > 0):
                 ?>
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><?= $this->title ?> <span class="fa fa-caret-down"></span></button>
@@ -71,8 +60,9 @@ use app\models\Accion;
                 </div>
                 <div class="pull-right"><!-- Carga de Acciones -->
                 <?php
+                    //Retorna las Acciones de un Formulario
                     $acciones = new Accion();
-                    $arrAcc = $acciones->getAccionesXObjModulo($id_omod);
+                    $arrAcc = $acciones->getAccionesObjModulo($id_omod);
                     if(count($arrAcc) > 0):
                 ?>
                     <div class="btn-group"> 

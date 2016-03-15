@@ -91,9 +91,6 @@ class Menu {
      *   Example:
      *       $array = obtainFiles('/var/www/html/modules/calendar/themes/default/js/','js');
      *
-     * @author  Eduardo Cueva
-     * @email   ecueva@penblu.com
-     *
      * @param   string   $dir   Directory of scripts
      * @param   string   $type  Type of file to search
      * @return  array    $names List of scripts
@@ -108,7 +105,6 @@ class Menu {
 
      /**
      * This function print a var in javascript with a language file in PHP
-     * @author  Eduardo Cueva <ecueva@penblu.com>
      *
      * @param   string   $dir_lang_files    Path of Lang File
      * @param   string   $lang              Language prefix
@@ -184,7 +180,7 @@ EOF;
      */
     public static function getObjetoModulo($mod_id){
         $model = new ObjetoModulo();
-        $res = $model->getObjetoModulosXModulo($mod_id);
+        $res = $model->getObjetoModulosFormulario($mod_id);
         return $res;
     }
 

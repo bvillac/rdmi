@@ -153,7 +153,7 @@ class Usuario extends ActiveRecord implements IdentityInterface {
             $session->set('PB_client_ip', Utilities::getClientRealIP());
             $session->set('PB_module_id', "");
             $session->set('PB_objmodule_id', "");
-            $session->set('RolId',$tipoUser['RolId']);
+            $session->set('RolId',$tipoUser['rolid']);
         }else{
             $session->destroy();
         }
