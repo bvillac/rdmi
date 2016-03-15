@@ -68,7 +68,8 @@ class RegisterForm extends Model
     {
         if ($this->validate()) { // no hay problemas de validacion
             $usuario = Usuario::findByUsername($this->email);
-            if(isset($usuario) && $usuario->usu_estado_logico == "1" && $usuario->usu_estado_activo == "1"){
+            if(isset($usuario) && $usuario->usu_est_log == "1" && $usuario->usu_estado_activo == "1"){
+                //Si el Correo ya existe
                 $this->setErrorSession(true);
                 $this->addError("error", Yii::t("register","<h4>Error</h4>Email already exists. Please choose another."));
                 Yii::$app->session->setFlash('error',Yii::t("register","<h4>Error</h4>Email already exists. Please choose another."));
@@ -82,8 +83,8 @@ class RegisterForm extends Model
                 }
                 // primero se crea a la persona
                 $persona = new Persona();
-                $persona->per_nombres   = Html::encode($this->firstName);
-                $persona->per_apellidos = Html::encode($this->lastName);
+                $persona->per_nombre   = Html::encode($this->firstName);
+                $persona->per_apellido = Html::encode($this->lastName);
                 $persona->per_correo    = Html::encode($this->email);
                 if(!$persona->save()){
                     $this->setErrorSession(true);

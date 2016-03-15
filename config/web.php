@@ -94,6 +94,6 @@ if (YII_ENV_DEV) {
     //$config['bootstrap'][] = 'debug';
     //$config['modules']['debug'] = 'yii\debug\Module';
     $config['bootstrap'][] = 'gii';
-    $config['modules']['gii'] = 'yii\gii\Module'; // http://hostname/index.php?r=gii
+    $config['modules']['gii'] = 'yii\gii\Module'; // http://hostname/index.php?r=gii  ->http://localhost/rdmi/gii
 }
 return $config;
