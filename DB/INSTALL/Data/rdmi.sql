@@ -37,16 +37,11 @@ INSERT INTO `tipo_password` (`tpas_id`, `tpas_tipo`, `tpas_validacion`, `tpas_de
 
 
 --
--- Volcar la base de datos para la tabla `usuario`
+-- Volcar la base de datos para la tabla `persona`
 --
 INSERT INTO `persona` (`per_id`, `per_ced_ruc`, `per_nombre`, `per_apellido`, `per_genero`, `per_fecha_nacimiento`, `per_estado_civil`, `per_correo`, `per_factor_rh`, `per_tipo_sangre`, `per_foto`, `per_estado_activo`, `per_est_log`, `per_fec_cre`, `per_fec_mod`) VALUES
 (1, '1310328404', 'BYRON', 'VILLACRESES', 'M', '1981-07-19', 'S', NULL, 'RH', 'O+', NULL, '', '1', '2016-03-16 01:57:06', NULL),
 (2, NULL, 'Byron', 'Villacreses', NULL, NULL, NULL, 'byron_villacresesf@hotmail.com', NULL, NULL, NULL, '1', '1', '2016-03-16 03:54:51', NULL);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
 
 --
 -- Volcar la base de datos para la tabla `usuario`

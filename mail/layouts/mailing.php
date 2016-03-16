@@ -3,7 +3,7 @@ use yii\helpers\Html;
 
 ?>
 <div style="width: 600px; margin-left: auto; margin-right: auto;">
-    <div style="background-color: #222d32;">
+<!--    <div style="background-color: #222d32;">
         <table border="0" cellpadding="10" cellspacing="0" width="100%">
             <tr>
                 <td valign="top">
@@ -22,9 +22,9 @@ use yii\helpers\Html;
                 </td>
             </tr>
         </table>
-    </div>
-    <div style="text-align: center;"><img alt="banner" src="<?= $message->embed($pathImg."/".$bannerImg); ?>" width="600" height="266"></div>
-    <br /><br />
+    </div>-->
+    <div style="text-align: center;"><img alt="banner" src="<?= $message->embed($pathImg."/".$bannerImg); ?>" width="600" height="400"></div>
+    <br />
     <div style="text-align: center; font-family: Arial; padding: 10px 50px 0px;">
         <span style="color:#9a4d9d; font-size:35px;">
             <?= $titleMessage ?>

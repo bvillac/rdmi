@@ -113,6 +113,7 @@ class Rol extends \yii\db\ActiveRecord
             $command->bindParam(":usu_id",$usu_id, \PDO::PARAM_INT);
             $command->bindParam(":rol_id",$rol_id, \PDO::PARAM_INT);
             $command->bindParam(":emp_id",$emp_id, \PDO::PARAM_INT);
+            $command->execute();
             $trans->commit();
             $con->close();
             return true;
