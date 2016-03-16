@@ -24,6 +24,53 @@ GRANT ALL PRIVILEGES ON `rdmi`.* TO 'rdmiuser' IDENTIFIED BY 'rdmiuser2016';
 GRANT ALL PRIVILEGES ON `rdmi`.* TO 'rdmiuser'@'localhost' IDENTIFIED BY 'rdmiuser2016';
 USE `rdmi` ;
 
+-- --------------------------------------------------------
+--
+-- Estructura de tabla para la tabla `pais`
+--
+
+CREATE TABLE IF NOT EXISTS `pais` (
+  `pai_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `pai_nombre` varchar(50) DEFAULT NULL,
+  `pai_descripcion` varchar(50) DEFAULT NULL,
+  `pai_estado_activo` varchar(1) NOT NULL,
+  `pai_fecha_creacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `pai_fecha_modificacion` timestamp NULL DEFAULT NULL,
+  `pai_estado_logico` varchar(1) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Estructura de tabla para la tabla `provincia`
+--
+
+CREATE TABLE IF NOT EXISTS `provincia` (
+  `prov_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `pai_id` bigint(20) NOT NULL,
+  `prov_nombre` varchar(100) DEFAULT NULL,
+  `prov_descripcion` varchar(100) DEFAULT NULL,
+  `prov_estado_activo` varchar(1) NOT NULL,
+  `prov_fecha_creacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `prov_fecha_modificacion` timestamp NULL DEFAULT NULL,
+  `prov_estado_logico` varchar(1) NOT NULL,
+  FOREIGN KEY (pai_id) REFERENCES `pais`(pai_id)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Estructura de tabla para la tabla `canton`
+--
+
+CREATE TABLE IF NOT EXISTS `canton` (
+  `can_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `prov_id` bigint(20) NOT NULL,
+  `can_nombre` varchar(150) DEFAULT NULL,
+  `can_descripcion` varchar(150) DEFAULT NULL,
+  `can_estado_activo` varchar(1) NOT NULL,
+  `can_fecha_creacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `can_fecha_modificacion` timestamp NULL DEFAULT NULL,
+  `can_estado_logico` varchar(1) NOT NULL,
+  FOREIGN KEY (prov_id) REFERENCES `provincia`(prov_id)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
 -- -----------------------------------------------------
 -- table `rdmi`.`persona`
 -- -----------------------------------------------------
