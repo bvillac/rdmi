@@ -117,70 +117,28 @@ class Accion extends \yii\db\ActiveRecord
         return $comando->queryAll();
     }
     
-    public static function generateBehaviorByActions($objmod_id = NULL){
+    public static function generateActions($objmod_id = NULL){
         if(!isset($objmod_id)){
             $session = Yii::$app->session;
             $objmod_id = $session->get('PB_objmodule_id');
         }
         $usu_id    = Yii::$app->session->get('PB_iduser', FALSE);
-        $idempresa = Yii::$app->session->get('PB_idempresa', FALSE);
+        $RolId= Yii::$app->session->get('RolId', FALSE);
+        $con = \Yii::$app->db;
+        $sql = "select b.omod_entidad route
+                    from " . $con->dbname . ".omodulo_rol a
+                         inner join (" . $con->dbname . ".objeto_modulo b
+                           inner join " . $con->dbname . ".modulo c
+                             on c.mod_id=b.mod_id and c.mod_estado_logico=1)
+                                on a.omod_id=b.omod_id and b.omod_estado_logico=1
+                  where a.rol_id=:rolID and a.omrol_est_log=1 and b.omod_padre_id=:objmod_id
+                   order by route ";//and b.omod_tipo='A'
         
-        $sql = "SELECT 
-                    om.omod_entidad AS route
-                FROM 
-                    objeto_modulo AS om 
-                    INNER JOIN grup_obmo AS go ON om.omod_id = go.omod_id 
-                    INNER JOIN grup_obmo_grup_rol AS gg ON go.gmod_id = gg.gmod_id
-                    INNER JOIN grupo_rol AS gr ON gg.grol_id = gr.grol_id
-                    INNER JOIN usuario AS us ON gr.usu_id = us.usu_id
-                    -- INNER JOIN obmo_acci AS oa ON om.omod_id = oa.omod_id 
-                    -- INNER JOIN accion AS ac ON oa.acc_id = ac.acc_id 
-                WHERE 
-                    om.omod_id=:omod_id AND 
-                    -- om.omod_padre_id=:omod_id AND 
-                    om.omod_tipo='A' AND 
-                    us.usu_id=:usu_id AND 
-                    go.gmod_estado_logico=1 AND 
-                    go.gmod_estado_activo=1 AND 
-                    gg.gogr_estado_logico=1 AND 
-                    gg.gogr_estado_activo=1 AND 
-                    gr.grol_estado_logico=1 AND 
-                    gr.grol_estado_activo=1 AND 
-                    us.usu_estado_logico=1 AND 
-                    us.usu_estado_activo=1 AND 
-                    om.omod_estado_logico=1 AND 
-                    om.omod_estado_activo=1 AND 
-                    om.omod_estado_visible=0 
-                    -- oa.oacc_estado_activo=1 AND 
-                    -- oa.oacc_estado_logico=1 AND 
-                    -- ac.acc_estado_activo=1 AND 
-                    -- ac.acc_estado_logico=1 
-                UNION
-                SELECT 
-                    om.omod_entidad AS route
-                FROM 
-                    objeto_modulo AS om 
-                    INNER JOIN grup_obmo AS go ON om.omod_id = go.omod_id 
-                    INNER JOIN grup_obmo_grup_rol AS gg ON go.gmod_id = gg.gmod_id
-                    INNER JOIN grupo_rol AS gr ON gg.grol_id = gr.grol_id
-                    INNER JOIN usuario AS us ON gr.usu_id = us.usu_id
-                WHERE 
-                    om.omod_padre_id=:omod_id AND 
-                    om.omod_tipo='P' AND 
-                    us.usu_id=:usu_id AND 
-                    go.gmod_estado_logico=1 AND 
-                    go.gmod_estado_activo=1 AND 
-                    gg.gogr_estado_logico=1 AND 
-                    gg.gogr_estado_activo=1 AND 
-                    gr.grol_estado_logico=1 AND 
-                    gr.grol_estado_activo=1 AND 
-                    us.usu_estado_logico=1 AND 
-                    us.usu_estado_activo=1 
-                ORDER BY route;";
-        $comando = Yii::$app->db->createCommand($sql);
-        $comando->bindParam(":omod_id", $objmod_id, \PDO::PARAM_INT);
-        $comando->bindParam(":usu_id", $usu_id, \PDO::PARAM_INT);
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":objmod_id", $objmod_id, \PDO::PARAM_INT);
+        $comando->bindParam(":rolID", $RolId, \PDO::PARAM_INT);
         $result = $comando->queryAll();
+        //Utilities::putMessageLogFile($result);
         $actions = array();
         $actionsArr = "";
         

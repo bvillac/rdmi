@@ -23,7 +23,7 @@ class CController extends \yii\web\Controller
     
     public function behaviors()
     {
-        $behaviors = \app\models\Accion::generateBehaviorByActions();
+        $behaviors = \app\models\Accion::generateActions();
         return $behaviors;
     }
     
