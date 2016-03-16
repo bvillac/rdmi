@@ -86,7 +86,7 @@ class RegisterForm extends Model
                 $persona->per_nombre   = Html::encode($this->firstName);
                 $persona->per_apellido = Html::encode($this->lastName);
                 $persona->per_correo    = Html::encode($this->email);
-                if(!$persona->save()){
+                if(!$persona->guardarPersonaRegistro($persona)){
                     $this->setErrorSession(true);
                     $this->addError("error", Yii::t("exception","<h4>Error</h4>The above error occurred while the Web server was processing your request."));
                     Yii::$app->session->setFlash('error',Yii::t("exception","<h4>Error</h4>The above error occurred while the Web server was processing your request."));
@@ -114,13 +114,11 @@ class RegisterForm extends Model
                     return false;
                 }
                 $usu_id = $usuario->usu_id;
-                // tercero se crea los permisos del usuario creado grupo3 rol3
-                $grupo_rol = new GrupoRol();
-                $grupo_rol->gru_id = 2; // Grupo Licenciatario
-                $grupo_rol->rol_id = 2; // Rol Licenciatario
-                $grupo_rol->usu_id = $usu_id;
-                
-                if(!$grupo_rol->save()){
+                // tercero se crea los permisos del usuario con la empresa
+                $emp_rol = new Rol();
+                $emp_id=1;
+                $rol_id=1;
+                if(!$emp_rol->guardarEmpresaRol($usu_id,$emp_id,$rol_id)){
                     $this->addError("error", Yii::t("exception","The above error occurred while the Web server was processing your request."));
                     Yii::$app->session->setFlash('error',Yii::t("exception","The above error occurred while the Web server was processing your request."));
                     Utilities::putMessageLogFile("Error al asignar el grupo al usuario: ".$this->firstName." - ".$this->lastName." - ".$this->email);
@@ -128,17 +126,7 @@ class RegisterForm extends Model
                     $persona->delete();
                     return false;
                 }
-                $grup_id = $grupo_rol->grol_id;
-                // crear grup_obmo_grup_rol
-                $datagmod = array(14,15,16,17,18,19,20,21,22,23,24,25); 
-                for($i=0; $i<count($datagmod); $i++){
-                    $grup_obmo = new GrupObmoGrupRol();
-                    $grup_obmo->grol_id = $grup_id;
-                    $grup_obmo->gmod_id = $datagmod[$i];
-                    if(!$grup_obmo->save())
-                        Utilities::putMessageLogFile($grup_obmo->errors);
-                    
-                }
+                
                 
                 // generar link de verificacion
                 $link = $usuario->generarLinkActivacion();

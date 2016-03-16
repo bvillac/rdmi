@@ -141,4 +141,33 @@ class Persona extends ActiveRecord
         ];
     }
     
+    public function guardarPersonaRegistro(&$data) {
+        $con = \Yii::$app->db;
+        $trans = $con->beginTransaction();
+        try {
+            $this->insertarPersonaRegistro($con, $data);
+            $per_id = $con->getLastInsertID(); //IDS Formulario 
+            $data->per_id=$per_id;
+            $trans->commit();
+            $con->close();
+            return true;
+        } catch (\Exception $e) {
+            $trans->rollBack();
+            $con->close();
+            //throw $e;
+            return false;
+        }
+    }
+    
+    private function insertarPersonaRegistro($con,$data) {
+        $sql = "INSERT INTO " . $con->dbname . ".persona
+            (per_nombre,per_apellido,per_correo,per_estado_activo,per_est_log)VALUES
+            (:per_nombre,:per_apellido,:per_correo,1,1) ";
+        $command = $con->createCommand($sql);
+        $command->bindParam(":per_nombre",$data->per_nombre, \PDO::PARAM_STR);
+        $command->bindParam(":per_apellido",$data->per_apellido, \PDO::PARAM_STR);
+        $command->bindParam(":per_correo",$data->per_correo, \PDO::PARAM_STR);        
+        $command->execute();
+    }
+    
 }

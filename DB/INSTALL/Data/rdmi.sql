@@ -39,15 +39,22 @@ INSERT INTO `tipo_password` (`tpas_id`, `tpas_tipo`, `tpas_validacion`, `tpas_de
 --
 -- Volcar la base de datos para la tabla `usuario`
 --
-INSERT INTO `persona` (`per_id`, `per_ced_ruc`, `per_nombre`, `per_apellido`, `per_genero`, `per_fecha_nacimiento`, `per_estado_civil`, `per_factor_rh`, `per_tipo_sangre`, `per_est_log`, `per_fec_cre`, `per_fec_mod`) VALUES
-(1, '1310328404', 'BYRON', 'VILLACRESES', 'M', '1981-07-19', 'S', 'RH', 'O+', '1', CURRENT_TIMESTAMP, NULL);
+INSERT INTO `persona` (`per_id`, `per_ced_ruc`, `per_nombre`, `per_apellido`, `per_genero`, `per_fecha_nacimiento`, `per_estado_civil`, `per_correo`, `per_factor_rh`, `per_tipo_sangre`, `per_foto`, `per_estado_activo`, `per_est_log`, `per_fec_cre`, `per_fec_mod`) VALUES
+(1, '1310328404', 'BYRON', 'VILLACRESES', 'M', '1981-07-19', 'S', NULL, 'RH', 'O+', NULL, '', '1', '2016-03-16 01:57:06', NULL),
+(2, NULL, 'Byron', 'Villacreses', NULL, NULL, NULL, 'byron_villacresesf@hotmail.com', NULL, NULL, NULL, '1', '1', '2016-03-16 03:54:51', NULL);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
 
 --
 -- Volcar la base de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario`(`usu_id`, `per_id`, `usu_username`, `usu_password`, `usu_sha`, `usu_session`, `usu_last_login`, `usu_estado_activo`, `usu_fec_cre`, `usu_fec_mod`, `usu_est_log`) VALUES
-(1, 1, 'admin', 'Oe0XnfQV1rITyhra1D9NSTk2NzMyY2VhZDE2ZGY2NTM4NmM1ZGNkZmU2MTBjYjEyZjZkN2Q0ZWY0NjYxMmM5MGIwNDZjNjI1MzUxMzY5MWIXYpkgqqqFS/QKaxVARLLmArjJ7iD39CoAVhUhD69so1Aa/WoTy6Qvmatc2VKvXWc2b2npklLgwwBil3xKV8l1', 'gJzWo7FQ-zmMcuy4cpWrTrVDmTRCFJcs', NULL, NULL, '1', '2016-03-10 13:00:00', NULL, '1');
+INSERT INTO `usuario` (`usu_id`, `per_id`, `usu_username`, `usu_password`, `usu_sha`, `usu_session`, `usu_last_login`, `usu_link_activo`, `usu_estado_activo`, `usu_alias`, `usu_est_log`, `usu_fec_cre`, `usu_fec_mod`) VALUES
+(1, 1, 'admin', 'nohr0F0OmOEkE4IeKV48szJkYmIzYmQ0ODcyYzA4YmNkZjI0MDA0MjkyYzUwNzUzNzYwNjI1YjEwOGQ0YTE0ZDc3ZjIwOWZkMTNhMTZlMjKTyTGdwC22RmZAyIBI8FHsbMpZ6WnqV1+kuuOTkujEWeN3cet3WJKFxBF/x/bte5sJNwLGJTcIK69llvULNtOL', 'f2gLBc7wsBasMjYYnzp5hAMmXOwQNkFx', NULL, '2016-03-16 09:58:37', NULL, '1', NULL, '1', '2016-03-10 18:00:00', NULL),
+(2, 2, 'byron_villacresesf@hotmail.com', 'nohr0F0OmOEkE4IeKV48szJkYmIzYmQ0ODcyYzA4YmNkZjI0MDA0MjkyYzUwNzUzNzYwNjI1YjEwOGQ0YTE0ZDc3ZjIwOWZkMTNhMTZlMjKTyTGdwC22RmZAyIBI8FHsbMpZ6WnqV1+kuuOTkujEWeN3cet3WJKFxBF/x/bte5sJNwLGJTcIK69llvULNtOL', 'f2gLBc7wsBasMjYYnzp5hAMmXOwQNkFx', NULL, '2016-03-16 09:56:04', '', '1', NULL, '1', '2016-03-16 03:54:51', '2016-03-16 03:54:51');
 
 --
 -- Volcar la base de datos para la tabla `rol`

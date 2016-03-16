@@ -219,9 +219,7 @@ class Usuario extends ActiveRecord implements IdentityInterface {
                 $user->usu_estado_activo = 1;
                 $id = $user->usu_id;
                 $user->update(true, array("usu_link_activo","usu_estado_activo"));
-                $registroMce = new MceRegistro();
-                $registroMce->usu_id = $id;
-                $registroMce->save();
+                //EN CASO DE AGREGAR MAS DATOS EN LA ACTIVACION AKI
                 return true;
             }
         }

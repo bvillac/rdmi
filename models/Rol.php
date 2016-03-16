@@ -101,5 +101,27 @@ class Rol extends \yii\db\ActiveRecord
         $comando->bindParam(":ids", $ids, \PDO::PARAM_INT);
         return $comando->queryOne();
     }
+    
+    public function guardarEmpresaRol($usu_id,$emp_id,$rol_id) {
+        $con = \Yii::$app->db;
+        $trans = $con->beginTransaction();
+        try {       
+            $sql = "INSERT INTO " . $con->dbname . ".usuario_empresa
+                (usu_id,rol_id,emp_id,uemp_est_log)VALUES
+                (:usu_id,:rol_id,:emp_id,1) ";
+            $command = $con->createCommand($sql);
+            $command->bindParam(":usu_id",$usu_id, \PDO::PARAM_INT);
+            $command->bindParam(":rol_id",$rol_id, \PDO::PARAM_INT);
+            $command->bindParam(":emp_id",$emp_id, \PDO::PARAM_INT);
+            $trans->commit();
+            $con->close();
+            return true;
+        } catch (\Exception $e) {
+            $trans->rollBack();
+            $con->close();
+            //throw $e;
+            return false;
+        }
+    }
 
 }
