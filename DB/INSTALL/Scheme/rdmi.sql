@@ -112,6 +112,9 @@ engine=innodb  default charset=utf8 auto_increment=1;
 create  table if not exists  `data_persona` (
   `dper_id` bigint(20) not null auto_increment ,
   `per_id` bigint(20) not null ,
+  `pai_id` bigint(20) null ,
+  `prov_id` bigint(20) null ,
+  `can_id` bigint(20) null ,
   `dper_descripcion` varchar(100) null ,
   `dper_direccion` varchar(100) null ,
   `dper_telefono` varchar(20) null ,

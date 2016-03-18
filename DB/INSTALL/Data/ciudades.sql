@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 3.3.10
 -- http://www.phpmyadmin.net
 --
@@ -18,7 +18,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Base de datos: `DB_BASE`
 --
-USE `mce_base`;
+USE `rdmi`;
 
 
 

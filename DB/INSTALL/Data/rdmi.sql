@@ -98,7 +98,7 @@ INSERT INTO `objeto_modulo` (`omod_id`, `mod_id`, `omod_padre_id`, `omod_nombre`
 (6, 6, 1, 'Maintenance', 'P', '0', 'Applications', '', '', 'mceformulario/deletemessage', 1, 0, 'application', '1', '2014-01-08 23:43:51', NULL, '1'),
 (7, 2, 2, 'Profile', 'S', '0', 'My Account', '', '', 'perfil/index', 1, 0, 'perfil', '1', '2014-01-08 23:43:51', NULL, '1'),
 (8, 2, 2, 'Save Profile', 'A', '0', 'My Account', '', '', 'perfil/save', 1, 0, 'perfil', '1', '2014-01-08 23:43:51', NULL, '1'),
-(9, 2, 2, 'Change Password', 'S', '0', 'Applications', '', '', 'perfil/index', 2, 0, 'perfil', '1', '2014-01-08 23:43:51', NULL, '1'),
+(9, 2, 2, 'Change Password', 'S', '0', 'Applications', '', '', 'perfil/password', 2, 0, 'perfil', '1', '2014-01-08 23:43:51', NULL, '1'),
 (10, 4, 4, 'Book Appointment', 'S', '0', 'Applications', '', '', 'mceseguimiento/create', 1, 0, 'application', '1', '2014-01-08 23:43:51', NULL, '1'),
 (11, 4, 4, 'Quote address', 'S', '0', 'Applications', '', '', 'mceseguimiento/update', 1, 0, 'application', '1', '2014-01-08 23:43:51', NULL, '1'),
 (12, 6, 6, 'Patient', 'S', '0', 'Applications', '', '', 'mceseguimiento/delete', 1, 0, 'perfil', '1', '2014-01-08 23:43:51', NULL, '1'),

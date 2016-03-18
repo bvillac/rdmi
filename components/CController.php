@@ -87,7 +87,7 @@ class CController extends \yii\web\Controller
         $session->set('PB_module_id', $objModule->mod_id);
         $session->set('PB_objmodule_id', $objModule->omod_id);
         
-        $this->getView()->title = Yii::t($objModule->omod_lang_file,$objModule->omod_nombre);
+        $this->getView()->title = Yii::t($objModule->omod_lang_file,$objModule->omod_nombre);//Titulo Formulario
         $this->getView()->params["Module_name"]    = Yii::t($module->mod_lang_file,$module->mod_nombre);
         $this->getView()->params["ObjModPadre_name"] = Yii::t($objModPadre->omod_lang_file,$objModPadre->omod_nombre);
         $this->getView()->params["ObjModule_name"] = Yii::t($objModule->omod_lang_file,$objModule->omod_nombre);

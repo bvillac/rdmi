@@ -41,7 +41,7 @@ use app\models\Accion;
                 //$arrMod = $objModule->getObjModHijosXObjModPadre($id_module, $id_omod, $id_omodpadre);
                 if(count($arrMod) > 0):
                 ?>
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><?= $this->title ?> <span class="fa fa-caret-down"></span></button>
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><?= $this->title ?><span class="fa fa-caret-down"></span></button>
                 <?php if(count($arrMod) > 0):?>
                     <ul class="dropdown-menu">
                 <?php 

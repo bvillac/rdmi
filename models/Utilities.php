@@ -635,4 +635,33 @@ class Utilities {
         unlink($filename);
     }
     
+    public static function genero() {
+        return [
+            //'0' => Yii::t("formulario", "-Select-"),
+            '1' => Yii::t("perfil", "Male"),
+            '2' => Yii::t("perfil", "Female"),
+            '3' => Yii::t("perfil", "GLBT"),
+        ];
+    }
+    public static function estadoCivil() {
+        return [
+            //'0' => Yii::t("formulario", "-Select-"),
+            '1' => Yii::t("perfil", "Single"),
+            '2' => Yii::t("perfil", "Married"),
+            '3' => Yii::t("perfil", "Divorced"),
+            '4' => Yii::t("perfil", "Widower"),
+            '5' => Yii::t("perfil", "Free Union"),
+        ];
+    }
+    public static function definicionEtnica() {
+        return [
+            //'0' => Yii::t("formulario", "-Select-"),
+            '1' => Yii::t("formulario", "half Blood"),
+            '2' => Yii::t("formulario", "Montubio"),
+            '3' => Yii::t("formulario", "White"),
+            '4' => Yii::t("formulario", "Indigenous"),
+            '5' => Yii::t("formulario", "Afro-American"),
+        ];
+    }
+    
 }
