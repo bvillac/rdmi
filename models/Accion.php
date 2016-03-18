@@ -111,7 +111,7 @@ class Accion extends \yii\db\ActiveRecord
                      inner join (" . $con->dbname . ".obmo_acci b
                          inner join " . $con->dbname . ".accion c on b.acc_id=c.acc_id)
                        on a.omod_id=b.omod_id
-                 where a.omod_estado_logico=1 and a.omod_id=:omod_id ";
+                 where a.omod_estado_logico=1 and a.omod_id=:omod_id order by a.omod_orden ";
         $comando = $con->createCommand($sql);
         $comando->bindParam(":omod_id", $omod_id, \PDO::PARAM_INT);
         return $comando->queryAll();
@@ -131,14 +131,15 @@ class Accion extends \yii\db\ActiveRecord
                            inner join " . $con->dbname . ".modulo c
                              on c.mod_id=b.mod_id and c.mod_estado_logico=1)
                                 on a.omod_id=b.omod_id and b.omod_estado_logico=1
-                  where a.rol_id=:rolID and a.omrol_est_log=1 and b.omod_padre_id=:objmod_id
-                   order by route ";//and b.omod_tipo='A'
+                  where a.rol_id=:rolID and a.omrol_est_log=1 
+                  and b.omod_padre_id=:objmod_id order by route ";//and b.omod_tipo='A'
         
         $comando = $con->createCommand($sql);
         $comando->bindParam(":objmod_id", $objmod_id, \PDO::PARAM_INT);
         $comando->bindParam(":rolID", $RolId, \PDO::PARAM_INT);
         $result = $comando->queryAll();
-        //Utilities::putMessageLogFile($result);
+        Utilities::putMessageLogFile($sql);
+        Utilities::putMessageLogFile($objmod_id.' '.$RolId.' '.$result);
         $actions = array();
         $actionsArr = "";
         

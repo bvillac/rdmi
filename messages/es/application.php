@@ -40,7 +40,11 @@
  */
 
 return [
-    "Applications" => "Solicitudes",
+    "Dashboard" => "Inicio",
+    "Processes" => "Procesos",
+    "Images" => "Imágenes",
+    "Applications" => "Aplicaciones",
+    "Maintenance" => "Mantenimiento",
     "Application" => "Solicitud",
     "View application" => "Ver solicitud",
     "Create application" => "Crear solicitud",
