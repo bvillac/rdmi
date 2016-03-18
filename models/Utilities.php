@@ -664,4 +664,20 @@ class Utilities {
         ];
     }
     
+    public static function grupoSanguineo() {
+        return [
+            //'0' => Yii::t("formulario", "-Select-"),
+            'A+' => Yii::t("perfil", "Grupo A +"),
+            'A-' => Yii::t("perfil", "Grupo A -"),
+            'B+' => Yii::t("perfil", "Grupo B +"),
+            'B-' => Yii::t("perfil", "Grupo B -"),
+            'AB+' => Yii::t("perfil", "Grupo AB +"),
+            'AB-' => Yii::t("perfil", "Grupo AB -"),
+            'O+' => Yii::t("perfil", "Grupo O +"),
+            'O-' => Yii::t("perfil", "Grupo O -"),
+            
+        ];
+    }
+    
+    
 }

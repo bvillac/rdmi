@@ -3,6 +3,7 @@ use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use kartik\file\FileInput;
 use yii\helpers\Url;
+use kartik\date\DatePicker;
 
 ?>
 <div class="col-md-12">
@@ -61,11 +62,45 @@ use yii\helpers\Url;
         </div>
     </div>
 </div>
+<div class="col-md-6">
+    <div class="form-group">
+        <label for="dtp_per_fecha_nacimiento" class="col-sm-3 control-label"><?= Yii::t("perfil", "Birth Date") ?></label>
+        <div class="col-sm-9">
+            <?=
+                DatePicker::widget([
+                    'id' => 'dtp_per_fecha_nacimiento',
+                    'name' => 'dtp_per_fecha_nacimiento',
+                    'type' => DatePicker::TYPE_COMPONENT_APPEND,
+                    //'value' => '23-Feb-1982',
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => Yii::$app->params["datePickerDefault"]
+                    ],
+                    'options' => [
+                        'class' => 'form-control',
+                        //'Onchange' => 'actualizarGrid()',
+                        'readonly' => 'readonly',
+                        'placeholder' => Yii::t("perfil", "Birth Date")//'Enter birth date ...'
+                    ]
+                ]);
+                ?>
+            
+        </div>
+    </div>
+</div>
+<div class="col-md-6">
+    <div class="form-group">
+        <label for="cmb_per_tipo_sangre" class="col-sm-3 control-label"><?= Yii::t("perfil", "Blood type") ?></label>
+        <div class="col-sm-9">
+            <?= Html::dropDownList("cmb_per_tipo_sangre", 0, app\models\Utilities::grupoSanguineo(), ["class" => "form-control", "id" => "cmb_per_tipo_sangre"]) ?>
+        </div>
+    </div>
+</div>
 
 
 
 <div class="col-md-12">
-    <h3><span id="lbl_Personeria"><?= Yii::t("formulario", "Information Company") ?></span></h3>
+    <h3><span><?= Yii::t("perfil", "Place and Residence") ?></span></h3>
 </div>
 
 <div class="col-md-6">
@@ -104,17 +139,33 @@ use yii\helpers\Url;
 </div>
 <div class="col-md-6">
     <div class="form-group">
-        <label for="txt_dper_direccion" class="col-sm-3 control-label"><?= Yii::t("formulario", "Address") ?></label>
+        <label for="txt_dper_direccion" class="col-sm-3 control-label"><?= Yii::t("perfil", "Address") ?></label>
         <div class="col-sm-9">
-            <textarea class="form-control PBvalidation keyupmce" rows="2" id="txt_dper_direccion" data-type="all" data-keydown="true" placeholder="<?= Yii::t("formulario", "Office address") ?>"></textarea>
+            <input type="text" class="form-control PBvalidation keyupmce" id="txt_dper_direccion" data-type="all" data-keydown="true" placeholder="<?= Yii::t("perfil", "Address") ?>">
         </div>
     </div>
 </div>
 <div class="col-md-6">
     <div class="form-group">
-        <label for="txt_dper_telefono" class="col-sm-3 control-label"><?= Yii::t("formulario", "Phone") ?></label>
+        <label for="txt_dper_telefono" class="col-sm-3 control-label"><?= Yii::t("perfil", "Phone") ?></label>
         <div class="col-sm-9">
-            <textarea maxlength="13" class="form-control PBvalidation keyupmce" rows="2" id="txt_dper_telefono" data-type="celular" data-keydown="true" placeholder="<?= Yii::t("formulario", "Phone") ?>"></textarea>
+            <input type="text" maxlength="13" class="form-control PBvalidation keyupmce"  id="txt_dper_telefono" data-type="celular" data-keydown="true" placeholder="<?= Yii::t("perfil", "Phone") ?>">
+        </div>
+    </div>
+</div>
+<div class="col-md-6">
+    <div class="form-group">
+        <label for="txt_dper_contacto" class="col-sm-3 control-label"><?= Yii::t("perfil", "Contact") ?></label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control PBvalidation keyupmce" id="txt_dper_contacto" data-type="alfanumerico" data-keydown="true" placeholder="<?= Yii::t("perfil", "Contact") ?>">
+        </div>
+    </div>
+</div>
+<div class="col-md-6">
+    <div class="form-group">
+        <label for="txt_dper_celular" class="col-sm-3 control-label"><?= Yii::t("perfil", "CellPhone") ?></label>
+        <div class="col-sm-9">
+            <input type="text" maxlength="13" class="form-control PBvalidation keyupmce"  id="txt_dper_celular" data-type="celular" data-keydown="true" placeholder="<?= Yii::t("perfil", "CellPhone") ?>">
         </div>
     </div>
 </div>

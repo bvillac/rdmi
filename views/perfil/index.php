@@ -14,8 +14,8 @@ use yii\helpers\Html;
                     <?= Yii::t("Perfil", "Personal data") ?>
                 </a>
             </li>
-            <li class=""><a href="#paso2" data-toggle="tab" aria-expanded="false"><?= Yii::t("Perfil", "Objetivo") ?></a></li>
-            <li class=""><a href="#paso3" data-toggle="tab" aria-expanded="false"><?= Yii::t("Perfil", "Uso") ?></a></li>
+<!--            <li class=""><a href="#paso2" data-toggle="tab" aria-expanded="false"><?= Yii::t("Perfil", "Objetivo") ?></a></li>
+            <li class=""><a href="#paso3" data-toggle="tab" aria-expanded="false"><?= Yii::t("Perfil", "Uso") ?></a></li>-->
         </ul>
              <div class="tab-content">
             <div class="tab-pane active" id="paso1">
