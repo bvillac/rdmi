@@ -71,6 +71,19 @@ CREATE TABLE IF NOT EXISTS `canton` (
   FOREIGN KEY (prov_id) REFERENCES `provincia`(prov_id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
+--
+-- Estructura de tabla para la tabla `tipo consulta`
+--
+
+CREATE TABLE IF NOT EXISTS `tipo_consulta` (
+  `tcon_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `tcon_nombre` varchar(50) DEFAULT NULL,
+  `tcon_fec_cre` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `tcon_fec_mod` timestamp NULL DEFAULT NULL,
+  `tcon_est_log` varchar(1) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
 -- -----------------------------------------------------
 -- table `rdmi`.`persona`
 -- -----------------------------------------------------
@@ -489,6 +502,7 @@ create  table if not exists  `cita_medica` (
   `acit_id` bigint(20) not null ,
   `pac_id` bigint(20) not null ,
   `cprog_id` bigint(20) not null ,
+  `tcon_id` bigint(20) not null ,
   `hora_id` time not null ,
   `fecha_id` date not null ,
   `cons_id` bigint(20) not null ,
@@ -517,6 +531,10 @@ create  table if not exists  `cita_medica` (
     on delete no action
     on update no action)
 engine=innodb  default charset=utf8 auto_increment=1;
+
+alter table `cita_medica`
+add constraint `fk_cita_medica_001` foreign key (`tcon_id`) references `tipo_consulta`(`tcon_id`);
+
 
 -- -----------------------------------------------------
 -- table  `signos_vitales`

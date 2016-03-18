@@ -138,8 +138,6 @@ class Accion extends \yii\db\ActiveRecord
         $comando->bindParam(":objmod_id", $objmod_id, \PDO::PARAM_INT);
         $comando->bindParam(":rolID", $RolId, \PDO::PARAM_INT);
         $result = $comando->queryAll();
-        Utilities::putMessageLogFile($sql);
-        Utilities::putMessageLogFile($objmod_id.' '.$RolId.' '.$result);
         $actions = array();
         $actionsArr = "";
         

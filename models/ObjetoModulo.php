@@ -145,7 +145,7 @@ class ObjetoModulo extends \yii\db\ActiveRecord
                           on b.omod_id=c.omod_id)
                       on b.mod_id=a.mod_id
                   where a.mod_estado_logico=1 and b.mod_id=:mod_id and b.omod_tipo='S' 
-                  and d.rol_id=:rol_id order by b.omod_nombre ";      
+                  and d.rol_id=:rol_id order by b.omod_orden ";      
         $comando = $con->createCommand($sql);
         $comando->bindParam(":rol_id", $RolId, \PDO::PARAM_INT);
         $comando->bindParam(":mod_id", $moduloid, \PDO::PARAM_INT);

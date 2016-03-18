@@ -90,33 +90,33 @@ INSERT INTO `modulo` (`mod_id`, `apl_id`, `mod_nombre`, `mod_dir_imagen`, `mod_u
 --
 
 INSERT INTO `objeto_modulo` (`omod_id`, `mod_id`, `omod_padre_id`, `omod_nombre`, `omod_tipo`, `omod_tipo_boton`, `omod_accion`, `omod_function`, `omod_dir_imagen`, `omod_entidad`, `omod_orden`, `omod_estado_visible`, `omod_lang_file`, `omod_estado_activo`, `omod_fecha_creacion`, `omod_fecha_modificacion`, `omod_estado_logico`) VALUES
-(1, 1, 1, 'Dashboard', 'P', '0', 'Applications', '', '', 'site/index', 1, 0, 'application', '1', '2014-01-08 18:43:51', NULL, '1'),
-(2, 2, 1, 'My Account', 'P', '0', 'Applications', '', '', 'mceformulario/rechazar', 1, 0, 'application', '1', '2014-01-08 18:43:51', NULL, '1'),
-(3, 3, 1, 'My Forms', 'P', '0', 'Applications', '', '', 'mceformulario/autorizar', 1, 0, 'application', '1', '2014-01-08 18:43:51', NULL, '1'),
-(4, 4, 1, 'Processes', 'P', '0', 'Applications', '', '', 'mceformulario/view', 1, 0, 'application', '1', '2014-01-08 18:43:51', NULL, '1'),
-(5, 5, 1, 'Images', 'P', '0', 'Applications', '', '', 'mceformulario/message', 1, 0, 'application', '1', '2014-01-08 18:43:51', NULL, '1'),
-(6, 6, 1, 'Maintenance', 'P', '0', 'Applications', '', '', 'mceformulario/deletemessage', 1, 0, 'application', '1', '2014-01-08 18:43:51', NULL, '1'),
-(7, 2, 2, 'Profile', 'S', '0', 'My Account', '', '', 'perfil/index', 1, 0, 'perfil', '1', '2014-01-08 18:43:51', NULL, '1'),
-(8, 2, 2, 'Save Profile', 'A', '0', 'My Account', '', '', 'perfil/save', 1, 0, 'perfil', '1', '2014-01-08 18:43:51', NULL, '1'),
-(9, 2, 1, 'View Tracing', 'S', '0', 'Applications', '', '', 'mceseguimiento/view', 1, 0, 'application', '1', '2014-01-08 18:43:51', NULL, '1'),
-(10, 2, 1, 'Create Tracing', 'S', '0', 'Applications', '', '', 'mceseguimiento/create', 1, 0, 'application', '1', '2014-01-08 18:43:51', NULL, '1'),
-(11, 2, 1, 'Update Tracing', 'S', '0', 'Applications', '', '', 'mceseguimiento/update', 1, 0, 'application', '1', '2014-01-08 18:43:51', NULL, '1'),
-(12, 2, 1, 'Delete Tracing', 'S', '0', 'Applications', '', '', 'mceseguimiento/delete', 1, 0, 'application', '1', '2014-01-08 18:43:51', NULL, '1'),
-(13, 2, 1, 'Save Tracing', 'S', '0', 'Applications', '', '', 'mceseguimiento/save', 1, 0, 'application', '1', '2014-01-08 18:43:51', NULL, '1'),
-(14, 3, 14, 'My Forms', 'S', '0', 'My Forms', '', '', 'mceformulariotemp/index', 1, 0, 'application', '1', '2014-01-08 18:43:51', NULL, '1'),
-(15, 3, 14, 'View Form', 'A', '0', 'My Forms', '', '', 'mceformulariotemp/view', 1, 0, 'application', '1', '2014-01-08 18:43:51', NULL, '1'),
-(16, 3, 14, 'Create Form', 'A', '0', 'My Forms', '', '', 'mceformulariotemp/create', 1, 0, 'application', '1', '2014-01-08 18:43:51', NULL, '1'),
-(17, 3, 14, 'Update Form', 'A', '0', 'My Forms', '', '', 'mceformulariotemp/update', 1, 0, 'application', '1', '2014-01-08 18:43:51', NULL, '1'),
-(18, 3, 14, 'Save Form', 'A', '0', 'My Forms', '', '', 'mceformulariotemp/save', 1, 0, 'application', '1', '2014-01-08 18:43:51', NULL, '1'),
-(19, 3, 14, 'Brand Use', 'A', '0', 'My Forms', '', '', 'mceformulariotemp/usomarca', 1, 0, 'application', '1', '2014-01-08 18:43:51', NULL, '1'),
-(20, 3, 14, 'Upload File', 'A', '0', 'My Forms', '', '', 'mceformulariotemp/uploadfile', 1, 0, 'application', '1', '2014-01-08 18:43:51', NULL, '1'),
-(21, 3, 14, 'Download File', 'A', '0', 'My Forms', '', '', 'mceformulariotemp/download', 1, 0, 'application', '1', '2014-01-08 18:43:51', NULL, '1'),
-(22, 3, 14, 'View Message', 'A', '0', 'My Forms', '', '', 'mceformulariotemp/viewmessage', 1, 0, 'application', '1', '2014-01-08 18:43:51', NULL, '1'),
-(23, 3, 14, 'Pdf Application', 'A', '0', 'My Forms', '', '', 'mceformulariotemp/solicitudpdf', 1, 0, 'application', '1', '2014-01-08 18:43:51', NULL, '1'),
-(24, 1, 1, 'Search Application', 'A', '0', 'Applications', '', '', 'mceformulario/buscarpersonas', 1, 0, 'application', '1', '2014-01-08 18:43:51', NULL, '1'),
-(25, 1, 1, 'Pdf Application Sol', 'A', '0', 'Applications', '', '', 'mceformulario/solicitudpdf', 1, 0, 'application', '1', '2014-01-08 18:43:51', NULL, '1'),
-(26, 4, 26, 'Profile', 'S', '0', 'My Account', '', '', 'perfil/index', 1, 0, 'perfil', '1', '2014-01-08 18:43:51', NULL, '1'),
-(27, 4, 26, 'Save Profile', 'A', '0', 'My Account', '', '', 'perfil/save', 1, 0, 'perfil', '1', '2014-01-08 18:43:51', NULL, '1');
+(1, 1, 1, 'Dashboard', 'P', '0', 'Applications', '', '', 'site/index', 1, 0, 'application', '1', '2014-01-08 23:43:51', NULL, '1'),
+(2, 2, 1, 'My Account', 'P', '0', 'Applications', '', '', 'perfil/index', 1, 0, 'application', '1', '2014-01-08 23:43:51', NULL, '1'),
+(3, 3, 1, 'My Forms', 'P', '0', 'Applications', '', '', 'mceformulario/autorizar', 1, 0, 'application', '1', '2014-01-08 23:43:51', NULL, '1'),
+(4, 4, 1, 'Processes', 'P', '0', 'Applications', '', '', 'mceformulario/view', 1, 0, 'application', '1', '2014-01-08 23:43:51', NULL, '1'),
+(5, 5, 1, 'Images', 'P', '0', 'Applications', '', '', 'mceformulario/message', 1, 0, 'application', '1', '2014-01-08 23:43:51', NULL, '1'),
+(6, 6, 1, 'Maintenance', 'P', '0', 'Applications', '', '', 'mceformulario/deletemessage', 1, 0, 'application', '1', '2014-01-08 23:43:51', NULL, '1'),
+(7, 2, 2, 'Profile', 'S', '0', 'My Account', '', '', 'perfil/index', 1, 0, 'perfil', '1', '2014-01-08 23:43:51', NULL, '1'),
+(8, 2, 2, 'Save Profile', 'A', '0', 'My Account', '', '', 'perfil/save', 1, 0, 'perfil', '1', '2014-01-08 23:43:51', NULL, '1'),
+(9, 2, 2, 'Change Password', 'S', '0', 'Applications', '', '', 'perfil/index', 2, 0, 'perfil', '1', '2014-01-08 23:43:51', NULL, '1'),
+(10, 4, 4, 'Book Appointment', 'S', '0', 'Applications', '', '', 'mceseguimiento/create', 1, 0, 'application', '1', '2014-01-08 23:43:51', NULL, '1'),
+(11, 4, 4, 'Quote address', 'S', '0', 'Applications', '', '', 'mceseguimiento/update', 1, 0, 'application', '1', '2014-01-08 23:43:51', NULL, '1'),
+(12, 6, 6, 'Patient', 'S', '0', 'Applications', '', '', 'mceseguimiento/delete', 1, 0, 'perfil', '1', '2014-01-08 23:43:51', NULL, '1'),
+(13, 2, 1, 'Save Tracing', 'S', '0', 'Applications', '', '', 'mceseguimiento/save', 1, 0, 'application', '1', '2014-01-08 23:43:51', NULL, '1'),
+(14, 3, 14, 'My Forms', 'S', '0', 'My Forms', '', '', 'mceformulariotemp/index', 1, 0, 'application', '1', '2014-01-08 23:43:51', NULL, '1'),
+(15, 3, 14, 'View Form', 'A', '0', 'My Forms', '', '', 'mceformulariotemp/view', 1, 0, 'application', '1', '2014-01-08 23:43:51', NULL, '1'),
+(16, 3, 14, 'Create Form', 'A', '0', 'My Forms', '', '', 'mceformulariotemp/create', 1, 0, 'application', '1', '2014-01-08 23:43:51', NULL, '1'),
+(17, 3, 14, 'Update Form', 'A', '0', 'My Forms', '', '', 'mceformulariotemp/update', 1, 0, 'application', '1', '2014-01-08 23:43:51', NULL, '1'),
+(18, 3, 14, 'Save Form', 'A', '0', 'My Forms', '', '', 'mceformulariotemp/save', 1, 0, 'application', '1', '2014-01-08 23:43:51', NULL, '1'),
+(19, 3, 14, 'Brand Use', 'A', '0', 'My Forms', '', '', 'mceformulariotemp/usomarca', 1, 0, 'application', '1', '2014-01-08 23:43:51', NULL, '1'),
+(20, 3, 14, 'Upload File', 'A', '0', 'My Forms', '', '', 'mceformulariotemp/uploadfile', 1, 0, 'application', '1', '2014-01-08 23:43:51', NULL, '1'),
+(21, 3, 14, 'Download File', 'A', '0', 'My Forms', '', '', 'mceformulariotemp/download', 1, 0, 'application', '1', '2014-01-08 23:43:51', NULL, '1'),
+(22, 3, 14, 'View Message', 'A', '0', 'My Forms', '', '', 'mceformulariotemp/viewmessage', 1, 0, 'application', '1', '2014-01-08 23:43:51', NULL, '1'),
+(23, 3, 14, 'Pdf Application', 'A', '0', 'My Forms', '', '', 'mceformulariotemp/solicitudpdf', 1, 0, 'application', '1', '2014-01-08 23:43:51', NULL, '1'),
+(24, 1, 1, 'Search Application', 'A', '0', 'Applications', '', '', 'mceformulario/buscarpersonas', 1, 0, 'application', '1', '2014-01-08 23:43:51', NULL, '1'),
+(25, 1, 1, 'Pdf Application Sol', 'A', '0', 'Applications', '', '', 'mceformulario/solicitudpdf', 1, 0, 'application', '1', '2014-01-08 23:43:51', NULL, '1'),
+(26, 4, 26, 'Profile', 'S', '0', 'My Account', '', '', 'perfil/index', 1, 0, 'perfil', '1', '2014-01-08 23:43:51', NULL, '1'),
+(27, 4, 26, 'Save Profile', 'A', '0', 'My Account', '', '', 'perfil/save', 1, 0, 'perfil', '1', '2014-01-08 23:43:51', NULL, '1');
 
 --
 -- Volcado de datos para la tabla `omodulo_rol`
@@ -130,7 +130,11 @@ INSERT INTO `omodulo_rol` (`omrol_id`, `omod_id`, `rol_id`, `omrol_est_log`, `om
 (5, 5, 1, '1', '2016-03-18 05:37:00', NULL),
 (6, 6, 1, '1', '2016-03-18 05:37:00', NULL),
 (7, 7, 1, '1', '2016-03-18 05:47:02', NULL),
-(8, 8, 1, '1', '2016-03-18 05:47:02', NULL);
+(8, 8, 1, '1', '2016-03-18 05:47:02', NULL),
+(9, 9, 1, '1', '2016-03-18 05:47:02', NULL),
+(10, 10, 1, '1', '2016-03-18 05:47:02', NULL),
+(11, 11, 1, '1', '2016-03-18 05:47:02', NULL),
+(12, 12, 1, '1', '2016-03-18 05:47:02', NULL);
 
 
 --
@@ -139,3 +143,12 @@ INSERT INTO `omodulo_rol` (`omrol_id`, `omod_id`, `rol_id`, `omrol_est_log`, `om
 
 INSERT INTO `obmo_acci` (`oacc_id`, `omod_id`, `acc_id`, `oacc_tipo_boton`, `oacc_cont_accion`, `oacc_function`, `oacc_estado_activo`, `oacc_fecha_creacion`, `oacc_fecha_modificacion`, `oacc_estado_logico`) VALUES
 (1, 1, 1, '5', NULL, 'alert()', '1', '2014-06-12 07:43:33', NULL, '1');
+
+
+--
+-- Volcar la base de datos para la tabla `tipo_consulta`
+--
+
+INSERT INTO `tipo_consulta` (`tcon_id`, `tcon_nombre`, `tcon_fec_cre`, `tcon_fec_mod`, `tcon_est_log`) VALUES
+(1, 'Consulta', '2016-03-18 16:29:45', NULL, '1'),
+(2, 'Imagenes', '2016-03-18 16:29:45', NULL, '1');

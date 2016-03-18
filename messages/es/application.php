@@ -74,4 +74,6 @@ return [
     "Create Form" => "Crear Formulario",
     "Update Form" => "Actualizar Formulario",
     "Save Form" => "Guardar Formulario",
+    "Book Appointment" => "Reservar Cita",
+    "Quote address" => "Atender Cita",
 ];

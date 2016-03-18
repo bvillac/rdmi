@@ -74,4 +74,6 @@ return [
     'Sex' => 'Genero',
     'Update Picture' => 'Actualizar Imagen',
     'View Profile' => 'Ver Perfil',
+    'Change Password' => 'Cambiar Contraseña',
+    'Patient' => 'Paciente',
 ];
