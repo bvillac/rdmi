@@ -1,45 +1,3 @@
-/* 
- * The PenBlu framework is free software. It is released under the terms of
- * the following BSD License.
- *
- * Copyright (C) 2015 by PenBlu Software (http://www.penblu.com)
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *
- *  - Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *  - Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
- *  - Neither the name of PenBlu Software nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
- * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
- * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
- * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
- * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
- * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- *
- * PenBlu is based on code by
- * Yii Software LLC (http://www.yiisoft.com) Copyright Â© 2008
- *
- * Authors:
- *
- * Eduardo Cueva <edu19432@gmail.com>
- * Byron Villacreses <byronvillacreses@gmail.com>
- */
 
 function sentPassword(){
     var link = $('#txth_base').val() + "/perfil/save";
@@ -56,3 +14,66 @@ function sentPassword(){
         }, true);
     }
 }
+
+function obtenerCanton() {
+    var link = $('#txth_base').val() + "/perfil/index";
+    var arrParams = new Object();
+    arrParams.prov_id = $('#cmb_provincia').val();
+    arrParams.getcantones = true;
+    requestHttpAjax(link, arrParams, function (response) {
+        if (response.status == "OK") {
+            data = response.message;
+            setComboData(data.cantones, "cmb_ciudad");
+        }
+    }, true);
+}
+
+
+/* 
+ * CONSULTA DATOS DE PERFIL
+ * Retorna sus datos
+ */
+
+function loadDataUpdate() {
+    mostrarDatos(varPerData);
+}
+
+function mostrarDatos(varPer) {
+    //$('#txth_ftem_id').val(varPer[0]['Ids']);
+    $('#txt_per_nombre').val(varPer[0]['Nombre']);
+    $('#txt_per_apellido').val(varPer[0]['Apellido']);
+    $('#txt_per_ced_ruc').val((varPer[0]['Cedula']!=null)?varPer[0]['Cedula']:'');
+    $('#txt_per_correo').val((varPer[0]['Correo']!=null)?varPer[0]['Correo']:'');
+    $('#cmb_per_genero').val((varPer[0]['Genero']!=null)?varPer[0]['Genero']:'M');//Masculino por defecto
+    $('#cmb_per_estado_civil').val((varPer[0]['Est_Civ']!=null)?varPer[0]['Est_Civ']:'S');//Soltero Por Defecto
+    $('#cmb_per_tipo_sangre').val((varPer[0]['Gru_San']!=null)?varPer[0]['Gru_San']:'A+');
+    $('#dtp_per_fecha_nacimiento').val((varPer[0]['Fec_Nac']!=null)?varPer[0]['Fec_Nac']:'');
+    
+    $('#cmb_provincia').val((varPer[0]['Provincia']!=null)?varPer[0]['Provincia']:'1');
+    $('#cmb_ciudad').val((varPer[0]['Ciudad']!=null)?varPer[0]['Ciudad']:'1');
+    
+    $('#txt_dper_direccion').val((varPer[0]['Direccion']!=null)?varPer[0]['Direccion']:'');
+    $('#txt_dper_telefono').val((varPer[0]['Telefono']!=null)?varPer[0]['Telefono']:'');
+    $('#txt_dper_contacto').val((varPer[0]['Telefono']!=null)?varPer[0]['Celular']:'');
+    $('#txt_dper_celular').val((varPer[0]['Telefono']!=null)?varPer[0]['Contacto']:'');
+    
+    
+}
+
+function InicioFormulario() {
+    loadDataUpdate();
+    /*if (AccionTipo == "Update") {
+        loadDataUpdate();
+    } else if (AccionTipo == "Create") {
+        loadDataCreate();
+    }*/
+}
+
+$(document).ready(function () {
+    InicioFormulario();//Inicia Datos de Formulario
+    
+    $('#cmb_provincia').change(function () {
+        obtenerCanton();
+    });
+    
+});

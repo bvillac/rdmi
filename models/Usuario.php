@@ -146,6 +146,7 @@ class Usuario extends ActiveRecord implements IdentityInterface {
             $session->set('PB_username', $this->usu_username);
             $session->set('PB_nombres', $nombre_persona);
             $session->set('PB_perid', $this->per_id);
+            $session->set('PerId', $this->per_id);
             $session->set('PB_iduser', $this->usu_id);
             //$session->set('PB_idregister', ($mce_reg->reg_id)?($mce_reg->reg_id):0);
             $session->set('PB_yii_lang', Yii::$app->language);

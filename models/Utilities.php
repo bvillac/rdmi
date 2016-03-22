@@ -638,19 +638,19 @@ class Utilities {
     public static function genero() {
         return [
             //'0' => Yii::t("formulario", "-Select-"),
-            '1' => Yii::t("perfil", "Male"),
-            '2' => Yii::t("perfil", "Female"),
-            '3' => Yii::t("perfil", "GLBT"),
+            'M' => Yii::t("perfil", "Male"),
+            'F' => Yii::t("perfil", "Female"),
+            'G' => Yii::t("perfil", "GLBT"),
         ];
     }
     public static function estadoCivil() {
         return [
             //'0' => Yii::t("formulario", "-Select-"),
-            '1' => Yii::t("perfil", "Single"),
-            '2' => Yii::t("perfil", "Married"),
-            '3' => Yii::t("perfil", "Divorced"),
-            '4' => Yii::t("perfil", "Widower"),
-            '5' => Yii::t("perfil", "Free Union"),
+            'S' => Yii::t("perfil", "Single"),
+            'M' => Yii::t("perfil", "Married"),
+            'D' => Yii::t("perfil", "Divorced"),
+            'W' => Yii::t("perfil", "Widower"),
+            'F' => Yii::t("perfil", "Free Union"),
         ];
     }
     public static function definicionEtnica() {
