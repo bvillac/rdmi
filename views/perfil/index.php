@@ -57,14 +57,8 @@ use yii\helpers\Html;
 </div>
 <script>
     //Datos de Solicitud
-    //var varSolicitud=base64_decode('<?= $solicitud ?>');
+    //var varPerData=base64_decode('<?= $persona ?>');
     //var AccionTipo='Update';
     var varPerData=<?= $persona ?>;
-    //var varnivelInt=<?= $nivelInt ?>;
-    //var varnivelNac=<?= $nivelNac ?>;
-    //var vareventos=<?= $eventos ?>;
-    //var varotrousos=<?= $otrosUsos ?>;
-    //var varproducto=<?= $producto ?>;
     //alert(varPerData[0].Nombre);
-    
 </script>
