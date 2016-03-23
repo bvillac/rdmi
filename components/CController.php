@@ -21,11 +21,11 @@ class CController extends \yii\web\Controller
         return parent::init();
     }
     
-    public function behaviors()
-    {
-        $behaviors = \app\models\Accion::generateActions();
-        return $behaviors;
-    }
+//    public function behaviors()
+//    {
+//        $behaviors = \app\models\Accion::generateActions();
+//        return $behaviors;
+//    }
     
     public function runAction($id, $params = []){
         $session = Yii::$app->session;

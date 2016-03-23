@@ -4,7 +4,7 @@ use yii\helpers\Url;
 use app\models\Rol;
 use yii\helpers\Html;
 ?>
-<?= Html::hiddenInput('txth_ftem_id','',['id' =>'txth_ftem_id']); ?>
+<?= Html::hiddenInput('txth_per_id','',['id' =>'txth_per_id']); ?>
 <div class="col-md-12">
     <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
@@ -53,7 +53,7 @@ use yii\helpers\Html;
 </div><!-- /.col -->
 
 <div class="col-md-2">
-    <p><?= Html::a('<span class="glyphicon glyphicon-floppy-disk"></span>' . Yii::t("accion", "Save"), 'javascript:sentPassword()', ['class' => 'btn btn-primary btn-block']); ?> </p>
+    <p><?= Html::a('<span class="glyphicon glyphicon-floppy-disk"></span> ' . Yii::t("accion", "Save"), 'javascript:', ['id' => 'btn_save','class' => 'btn btn-primary btn-block']); ?> </p>
 </div>
 <script>
     //Datos de Solicitud

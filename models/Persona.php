@@ -184,4 +184,58 @@ class Persona extends ActiveRecord
         return $comando->queryAll();
     }
     
+    /* ACTUALIZAR DATOS */
+    public function actualizarPerfilPersona($data) {
+        $arroout = array();
+        $con = \Yii::$app->db;
+        $trans = $con->beginTransaction();
+        try {
+            $data = isset($data['DATA']) ? $data['DATA'] : array();    
+            //$reg_id= Yii::$app->session->get('PB_idregister', FALSE);
+            $this->actualizarDataPerfil($con,$data); 
+            //$ftem_id=$data_1[0]['ftem_id'];//$con->getLastInsertID();//IDS Formulario Temp
+            $trans->commit();
+            $con->close();
+            //RETORNA DATOS 
+            //$arroout["ids"]= $ftem_id;
+            $arroout["status"]= true;
+            //$arroout["secuencial"]= $doc_numero;
+            return $arroout;
+        } catch (\Exception $e) {
+            $trans->rollBack();
+            $con->close();
+            //throw $e;
+            $arroout["status"]= false;
+            return $arroout;
+        }
+    }
+    
+    private function actualizarDataPerfil($con,$data) {
+        Utilities::putMessageLogFile($data);
+        $sql = "UPDATE " . $con->dbname . ".persona
+            SET per_ced_ruc = :per_ced_ruc,per_nombre = :per_nombre,per_apellido = :per_apellido,
+            per_genero = :per_genero,per_fecha_nacimiento = :per_fecha_nacimiento,per_estado_civil = :per_estado_civil,
+            per_correo = :per_correo,per_tipo_sangre = :per_tipo_sangre,per_foto = :per_foto,per_fec_mod = CURRENT_TIMESTAMP()
+            WHERE per_id=:per_id ";
+
+        //PASO 1
+        $command = $con->createCommand($sql);
+        $command->bindParam(":per_id", $data[0]['per_id'], PDO::PARAM_INT);//Id Comparacion
+        $command->bindParam(":per_nombre", $data[0]['per_nombre'], PDO::PARAM_STR);
+        $command->bindParam(":per_apellido", $data[0]['per_apellido'], PDO::PARAM_STR);
+        $command->bindParam(":per_ced_ruc", $data[0]['per_ced_ruc'], PDO::PARAM_STR);        
+        $command->bindParam(":per_genero", $data[0]['per_genero'], PDO::PARAM_STR);
+        $command->bindParam(":per_fecha_nacimiento", $data[0]['per_fecha_nacimiento'], PDO::PARAM_STR);
+        $command->bindParam(":per_estado_civil", $data[0]['per_estado_civil'], PDO::PARAM_STR);
+        $command->bindParam(":per_correo", $data[0]['per_correo'], PDO::PARAM_STR);
+        $command->bindParam(":per_tipo_sangre", $data[0]['per_tipo_sangre'], PDO::PARAM_STR);
+        $command->bindParam(":per_foto", $data[0]['per_foto'], PDO::PARAM_STR);
+        
+        //$command->bindParam(":can_id", $data_1[0]['can_id'], PDO::PARAM_INT);
+        //$command->bindParam(":ftem_direccion", $data_1[0]['ftem_direccion'], PDO::PARAM_STR);
+        //$command->bindParam(":ftem_contacto", $data_1[0]['ftem_contacto'], PDO::PARAM_STR);
+        //$command->bindParam(":ftem_telefono", $data_1[0]['ftem_telefono'], PDO::PARAM_STR);
+        $command->execute();
+    }
+    
 }
