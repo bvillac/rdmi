@@ -38,31 +38,21 @@ function guardarPerfil(accion) {
     var arrParams = new Object();
     arrParams.DATA = dataPersona(ID);
     arrParams.ACCION = accion;
-    //Subir Imagenes
-
     var validation = validateForm();
-    //if (!validation) {
+    if (!validation) {
         requestHttpAjax(link, arrParams, function (response) {
             var message = response.message;
             if (response.status == "OK") {
-                //var data =response.data;
-                //$('#txth_ftem_id').val(data.ids); 
-                //AccionTipo=data.accion;
-                //menssajeModal(response.status, response.type, message.info, response.label, "", "", "1");
                 showAlert(response.status, response.type, {"wtmessage": message.info, "title":response.label});
                 //limpiarDatos();
                 //var renderurl = $('#txth_base').val() + "/mceformulariotemp/index";
                 //window.location = renderurl;
             } else {
-                //menssajeModal(response.status, response.type, message.info, response.label, "", "", "1");
                 showAlert(response.status, response.type, {"wtmessage": message.info, "title":response.label});
             }
         }, true);
-    //}
-
-    //alert('Debe Aceptar los términos de la Declaración Jurada');
+    }
     //showAlert('NO_OK', 'error', {"wtmessage": 'Debe Aceptar los términos de la Declaración Jurada', "title":'Información'});
-
 }
 
 function dataPersona(ID) {
@@ -113,10 +103,8 @@ function mostrarDatos(varPer) {
     $('#cmb_per_estado_civil').val((varPer[0]['Est_Civ']!=null)?varPer[0]['Est_Civ']:'S');//Soltero Por Defecto
     $('#cmb_per_tipo_sangre').val((varPer[0]['Gru_San']!=null)?varPer[0]['Gru_San']:'A+');
     $('#dtp_per_fecha_nacimiento').val((varPer[0]['Fec_Nac']!=null)?varPer[0]['Fec_Nac']:'');
-    
     $('#cmb_provincia').val((varPer[0]['Provincia']!=null)?varPer[0]['Provincia']:'1');
     $('#cmb_ciudad').val((varPer[0]['Ciudad']!=null)?varPer[0]['Ciudad']:'1');
-    
     $('#txt_dper_direccion').val((varPer[0]['Direccion']!=null)?varPer[0]['Direccion']:'');
     $('#txt_dper_telefono').val((varPer[0]['Telefono']!=null)?varPer[0]['Telefono']:'');
     $('#txt_dper_contacto').val((varPer[0]['Telefono']!=null)?varPer[0]['Celular']:'');
@@ -140,7 +128,6 @@ function InicioFormulario() {
 
 $(document).ready(function () {
     InicioFormulario();//Inicia Datos de Formulario
-    
     $('#cmb_provincia').change(function () {
         obtenerCanton();
     });
