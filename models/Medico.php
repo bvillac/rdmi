@@ -18,6 +18,7 @@ use Yii;
  * @property EspecialidadMedico[] $especialidadMedicos
  * @property Persona $per
  * @property MedicoEmpresa[] $medicoEmpresas
+ * @property Resultados[] $resultados
  */
 class Medico extends \yii\db\ActiveRecord
 {
@@ -82,5 +83,13 @@ class Medico extends \yii\db\ActiveRecord
     public function getMedicoEmpresas()
     {
         return $this->hasMany(MedicoEmpresa::className(), ['med_id' => 'med_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getResultados()
+    {
+        return $this->hasMany(Resultados::className(), ['med_id' => 'med_id']);
     }
 }
