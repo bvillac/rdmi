@@ -89,8 +89,9 @@ Byron Villacreses <byronvillacreses@gmail.com>
     background: rgba(255, 255, 255, 0.8) none repeat scroll 0 0 !important;
 }
 
+//Fondo Transparente
 .skin-black .wrapper, .skin-black .main-sidebar, .skin-black .left-side{
-    background: rgba(34, 45, 50, 0) !important;
+    //background: rgba(34, 45, 50, 0) !important;
 }
 
 .skin-black .sidebar-menu > li > .treeview-menu{

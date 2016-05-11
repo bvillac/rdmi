@@ -857,3 +857,60 @@ CREATE TABLE IF NOT EXISTS `obmo_acci` (
   FOREIGN KEY (omod_id) REFERENCES `objeto_modulo`(omod_id),
   FOREIGN KEY (acc_id) REFERENCES `accion`(acc_id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Estructura de tabla para la tabla `eventos`
+--
+
+CREATE TABLE IF NOT EXISTS `eventos` (
+  `eve_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `cmde_id` bigint(20) NOT NULL,
+  `eve_usu_id` bigint(20) NOT NULL,
+  `eve_nombre` varchar(50) DEFAULT NULL,
+  `eve_observacion` text,
+  `eve_fec_cre` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `eve_fec_mod` timestamp NULL DEFAULT NULL,
+  `eve_est_log` varchar(1) NOT NULL,
+  PRIMARY KEY (`eve_id`),
+  KEY `fk_eventos_cita_medica1` (`cmde_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Estructura de tabla para la tabla `imagenes`
+--
+
+CREATE TABLE IF NOT EXISTS `imagenes` (
+  `ima_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `eve_id` bigint(20) NOT NULL,
+  `ima_titulo` varchar(60) DEFAULT NULL,
+  `ima_nombre_archivo` varchar(60) DEFAULT NULL,
+  `ima_extension_archivo` varchar(5) DEFAULT NULL,
+  `ima_ruta_archivo` varchar(10) DEFAULT NULL,
+  `ima_tamano` varchar(10) DEFAULT NULL,
+  `ima_folio` varchar(20) DEFAULT NULL,
+  `ima_observacion` text,
+  `ima_fecha_publica` timestamp NULL DEFAULT NULL,
+  `ima_fec_cre` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ima_fec_mod` timestamp NULL DEFAULT NULL,
+  `ima_est_log` varchar(1) NOT NULL,
+  PRIMARY KEY (`ima_id`),
+  KEY `fk_imagenes_eventos1` (`eve_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Estructura de tabla para la tabla `resultados`
+--
+
+CREATE TABLE IF NOT EXISTS `resultados` (
+  `resul_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `eve_id` bigint(20) NOT NULL,
+  `med_id` bigint(20) NOT NULL,
+  `usu_id` bigint(20) DEFAULT NULL,
+  `resul_observacion` text,
+  `resul_fec_cre` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `resul_fec_mod` timestamp NULL DEFAULT NULL,
+  `resul_est_log` varchar(1) NOT NULL,
+  PRIMARY KEY (`resul_id`),
+  KEY `fk_resultados_eventos1` (`eve_id`),
+  KEY `fk_resultados_medico1` (`med_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
