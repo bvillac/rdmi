@@ -96,4 +96,13 @@ class Empresa extends \yii\db\ActiveRecord
     {
         return $this->hasMany(UsuarioEmpresa::className(), ['emp_id' => 'emp_id']);
     }
+    
+    public static function getEmpresas() {
+        $con = \Yii::$app->db;
+        $sql="SELECT emp_id,emp_nombre FROM " . $con->dbname . ".empresa WHERE emp_est_log=1 ;";
+        $comando = $con->createCommand($sql);
+        return $comando->queryAll();
+    }
+    
+    
 }

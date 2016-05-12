@@ -16,25 +16,46 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Medico', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Nuevo Medico', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'med_id',
-            'per_id',
-            'med_colegiado',
-            'med_registro',
-            'med_est_log',
-            // 'med_fec_cre',
-            // 'med_fec_mod',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-
 </div>
+
+<div>
+    <?=
+    GridView::widget([
+        'id' => 'TbG_MEDICO',
+        //'showExport' => true,
+        //'fnExportEXCEL' => "exportExcel",
+        //'fnExportPDF' => "exportPdf",
+        'dataProvider' => $dataProvider,
+        //'pajax' => false,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn', 'options' => ['width' => '10']],
+            [
+                'attribute' => 'Nombres',
+                'header' => Yii::t("formulario", "Name"),
+                //'options' => ['width' => '200'],
+                'value' => 'Nombres',
+            ],
+            [
+                'header' => Yii::t("formulario", "Registro"),
+                //'options' => ['width' => '200'],
+                'value' => 'Registro',
+            ],
+            [
+                'header' => Yii::t("formulario", "Empresa"),
+                //'options' => ['width' => '200'],
+                'value' => 'Empresa',
+            ],
+            [
+                'header' => Yii::t("formulario", "Estado"),
+                'value' => function ($model) {
+                    return ($model['Estado'] == 1) ? 'Activo' : 'Inactivo';
+                },
+            ],
+        ],
+    ])
+    ?>
+</div>
+
