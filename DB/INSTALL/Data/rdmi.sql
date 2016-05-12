@@ -152,3 +152,33 @@ INSERT INTO `obmo_acci` (`oacc_id`, `omod_id`, `acc_id`, `oacc_tipo_boton`, `oac
 INSERT INTO `tipo_consulta` (`tcon_id`, `tcon_nombre`, `tcon_fec_cre`, `tcon_fec_mod`, `tcon_est_log`) VALUES
 (1, 'Consulta', '2016-03-18 16:29:45', NULL, '1'),
 (2, 'Imagenes', '2016-03-18 16:29:45', NULL, '1');
+
+--
+-- Volcado de datos para la tabla `especialidad`
+--
+
+INSERT INTO `especialidad` (`esp_id`, `esp_nombre`, `esp_nivel`, `esp_est_log`, `esp_fec_cre`, `esp_fec_mod`) VALUES
+(1, 'ANATOMÍA PATOLÓGICA', NULL, '1', '2016-05-12 06:58:48', NULL),
+(2, 'ANESTESIOLOGÍA', NULL, '1', '2016-05-12 06:58:48', NULL),
+(3, 'ALERGOLOGIA', NULL, '1', '2016-05-12 06:58:48', NULL),
+(4, 'CARDIOLOGÍA', NULL, '1', '2016-05-12 06:58:48', NULL),
+(5, 'CARDIOLOGO/ ECOGRAFISTA', NULL, '1', '2016-05-12 06:58:48', NULL),
+(6, 'CARDIOLOGÍA  HEMODINÁMICA', NULL, '1', '2016-05-12 06:58:48', NULL),
+(7, 'CARDIOLOGÍA INFANTIL', NULL, '1', '2016-05-12 06:58:48', NULL),
+(8, 'CIRUGÍA GENERAL LAPAROSCÓPICA', NULL, '1', '2016-05-12 06:58:48', NULL),
+(9, 'CIRUGIA GENERAL', NULL, '1', '2016-05-12 06:58:48', NULL),
+(10, 'CIRUGÍA ONCOLÓGICA', NULL, '1', '2016-05-12 06:58:48', NULL),
+(11, 'DERMATOLOGIA', NULL, '1', '2016-05-12 06:58:48', NULL),
+(12, 'ELECTROMIOGRAFÍA', NULL, '1', '2016-05-12 06:58:48', NULL),
+(13, 'ENDOSCOPÍA DIGESTIVA', NULL, '1', '2016-05-12 06:58:48', NULL),
+(14, 'GASTROENTEROLOGÍA', NULL, '1', '2016-05-12 06:58:48', NULL),
+(15, 'GINECOLOGIA', NULL, '1', '2016-05-12 06:58:48', NULL),
+(16, 'LABORATORIO CLÍNICO ', NULL, '1', '2016-05-12 06:58:48', NULL),
+(17, 'MAMOGRAFÍAS', NULL, '1', '2016-05-12 06:58:48', NULL),
+(18, 'ODONTOLOGÍA', NULL, '1', '2016-05-12 06:58:49', NULL),
+(19, 'OFTALMOLOGÍA', NULL, '1', '2016-05-12 06:58:49', NULL),
+(20, 'OTORRINOLARINGOLOGÍA', NULL, '1', '2016-05-12 06:58:49', NULL),
+(21, 'PEDIATRIA', NULL, '1', '2016-05-12 06:58:49', NULL),
+(22, 'REUMATOLOGÍA', NULL, '1', '2016-05-12 06:58:49', NULL),
+(23, 'UROLOGÍA', NULL, '1', '2016-05-12 06:58:49', NULL);
+
