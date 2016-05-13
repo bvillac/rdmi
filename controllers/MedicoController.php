@@ -43,7 +43,7 @@ class MedicoController extends Controller {
         $Model = new Medico();
         $dataProvider = $Model->consultarMedicos($data);
         return $this->render('index', [
-                    'dataProvider' => $dataProvider,
+                    'model' => $dataProvider,
         ]);
     }
 
@@ -106,16 +106,53 @@ class MedicoController extends Controller {
      * @param string $id
      * @return mixed
      */
-    public function actionUpdate($id) {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->med_id]);
-        } else {
-            return $this->render('update', [
-                        'model' => $model,
-            ]);
+//    public function actionUpdate($id) {
+//        $model = $this->findModel($id);
+//
+//        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+//            return $this->redirect(['view', 'id' => $model->med_id]);
+//        } else {
+//            return $this->render('update', [
+//                        'model' => $model,
+//            ]);
+//        }
+//    }
+    
+    public function actionUpdate($ids) {
+        $perADO = new Persona();
+        $paises = Pais::getPaises();
+        $provincias = array();
+        $cantones = array();
+        
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
+            if (isset($data["getcantones"])) {
+                $cantones = Canton::getCantonesByProvinciaID($data['prov_id']);
+                $message = [
+                    "cantones" => $cantones,
+                ];
+                echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message);
+                return;
+            }
         }
+        $ids = isset($_GET['ids']) ? base64_decode($_GET['ids']) : NULL;
+        Utilities::putMessageLogFile($perData);
+        $perData = $perADO->buscarPersonaID($ids);
+        
+        if (count($paises) > 0) {
+            $provincias = Provincia::getProvinciasByPais($this->id_pais);
+        }
+        if (count($provincias) > 0) {
+            $cantones = Canton::getCantonesByProvincia($provincias[0]["prov_id"]);
+        }
+
+        return $this->render('update', [
+                    "persona" => json_encode($perData),
+                    "provincias" => $provincias,
+                    "pais" => $paises,
+                    "estCivil" => Utilities::estadoCivil(),
+                    "genero" => Utilities::genero(),
+                    "cantones" => $cantones]);
     }
 
     /**
@@ -142,35 +179,6 @@ class MedicoController extends Controller {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
-        }
-    }
-
-    public function actionSavexxx() {
-        if (Yii::$app->request->isAjax) {
-            $model = new MceFormularioTemp;
-            $data = Yii::$app->request->post();
-            $accion = isset($data['ACCION']) ? $data['ACCION'] : "";
-            if ($accion == "Create") {
-                //Nuevo Registro
-                $resul = $model->insertarSolicitud($data);
-            } else if ($accion == "Update") {
-                //Modificar Registro
-                $resul = $model->actualizarSolicitud($data);
-            }
-            if ($resul['status']) {
-                if ($accion == "Create") {
-                    $source = $_SERVER['DOCUMENT_ROOT'] . Url::base() . Yii::$app->params["documentFolder"] . $resul['cedula'];
-                    $target = $_SERVER['DOCUMENT_ROOT'] . Url::base() . Yii::$app->params["documentFolder"] . $resul['cedula'] . '_' . $resul['ids'];
-                    rename($source, $target); //Renombrar el Directorio                    
-                }
-
-                $message = ["info" => Yii::t('exception', '<strong>Well done!</strong> your information was successfully saved.')];
-                echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message, $resul);
-            } else {
-                $message = ["info" => Yii::t('exception', 'The above error occurred while the Web server was processing your request.')];
-                echo Utilities::ajaxResponse('NO_OK', 'alert', Yii::t('jslang', 'Error'), 'false', $message);
-            }
-            return;
         }
     }
     

@@ -26,18 +26,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <?=
     GridView::widget([
         'id' => 'TbG_MEDICO',
-        //'showExport' => true,
-        //'fnExportEXCEL' => "exportExcel",
-        //'fnExportPDF' => "exportPdf",
-        'dataProvider' => $dataProvider,
-        //'pajax' => false,
+        'dataProvider' => $model,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn', 'options' => ['width' => '10']],
-            [
-                'attribute' => 'Ids',
-                'header' => Yii::t("formulario", "ID"),
-                'value' => 'Ids',
-            ],
+//            [
+//                'attribute' => 'Ids',
+//                'header' => Yii::t("formulario", "ID"),
+//                'value' => 'Ids',
+//            ],
             [
                 'attribute' => 'Nombres',
                 'header' => Yii::t("formulario", "Name"),
@@ -67,16 +63,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'headerOptions' => ['width' => '30'],
                 'template' => '{view} {update} {delete} ', //
                 'buttons' => [
-                    'view' => function ($url, $dataProvider) {//glyphicon-download-alt
-                        return Html::a('<span class="glyphicon glyphicon-list-alt"></span>', Url::to(['mceformulario/solicitudpdf', 'ids' => base64_encode($dataProvider['Ids']), 'pdf' => 1]), [ "data-toggle" => "tooltip", "title" => "Ver Ficha"]);
+                    'view' => function ($url, $model) {//glyphicon-download-alt
+                        return Html::a('<span class="glyphicon glyphicon-list-alt"></span>', Url::to(['mceformulario/solicitudpdf', 'ids' => base64_encode($model['Ids']), 'pdf' => 1]), [ "data-toggle" => "tooltip", "title" => "Ver Ficha"]);
                     },
-                    'update' => function ($url, $dataProvider) {
-                        if ($model['Estado'] < '3') {
-                            return Html::a('<span class="glyphicon glyphicon-pencil"></span>', Url::to(['mceformulario/view', 'ids' => base64_encode($dataProvider['Ids'])]), ["data-toggle" => "tooltip", "title" => "Editar"]);
-                        }
+                    'update' => function ($url, $model) {
+                            return Html::a('<span class="glyphicon glyphicon-pencil"></span>', Url::to(['medico/update', 'ids' => base64_encode($model['Ids'])]), ["data-toggle" => "tooltip", "title" => "Editar"]);
                     },
-                    'delete' => function ($url, $dataProvider) {
-                        return Html::a('<span class="glyphicon glyphicon-remove"></span>', null, ['href' => 'javascript:eliminarDatos(\'' . base64_encode($dataProvider['Ids']) . '\');', "data-toggle" => "tooltip", "title" => "Eliminar"]);
+                    'delete' => function ($url, $model) {
+                        return Html::a('<span class="glyphicon glyphicon-remove"></span>', null, ['href' => 'javascript:eliminarDatos(\'' . base64_encode($model['Ids']) . '\');', "data-toggle" => "tooltip", "title" => "Eliminar"]);
                     },
                         ],
                     ],
