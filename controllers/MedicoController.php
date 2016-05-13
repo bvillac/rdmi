@@ -184,7 +184,7 @@ class MedicoController extends Controller {
                 $resul = $model->insertarMedicos($data);
             }else if($accion == "Update"){
                 //Modificar Registro
-                $resul = $model->actualizarMedicos($data);                
+                //$resul = $model->actualizarMedicos($data);                
             }
             if ($resul['status']) {
                 $message = ["info" => Yii::t('exception', '<strong>Well done!</strong> your information was successfully saved.')];

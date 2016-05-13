@@ -39,6 +39,8 @@ function dataPersona(ID) {
     //DATOS TAB ESPECIALIDAD
     objDat.especialidades = setEspecialidades('cmb_especialidad');
     objDat.emp_id = $('#cmb_empresa option:selected').val();
+    objDat.med_colegiado='224';
+    objDat.med_registro='22';
     
     datArray[0] = objDat;
     sessionStorage.dataPersona = JSON.stringify(datArray);

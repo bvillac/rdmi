@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\data\ArrayDataProvider;
+use app\models\Persona;
 
 /**
  * This is the model class for table "medico".
@@ -139,10 +140,16 @@ class Medico extends \yii\db\ActiveRecord
         $con = \Yii::$app->db;
         $trans = $con->beginTransaction();
         try {
-            $data = isset($data['DATA']) ? $data['DATA'] : array();    
-            //$reg_id= Yii::$app->session->get('PB_idregister', FALSE);
-            $this->actualizarDataPerfil($con,$data); 
-            //$ftem_id=$data_1[0]['ftem_id'];//$con->getLastInsertID();//IDS Formulario Temp
+            $data = isset($data['DATA']) ? $data['DATA'] : array();
+            Utilities::putMessageLogFile($data);
+            Persona::insertarDataPerfil($con, $data);
+            $per_id=$con->getLastInsertID();//IDS de la Persona
+            Persona::insertarDataPerfilDatoAdicional($con, $data, $per_id);
+            $this->insertarDataMedico($con, $data, $per_id);
+            $med_id=$con->getLastInsertID();
+            $this->insertarDataEspecialidad($con, $data[0]['especialidades'], $med_id);
+            $this->insertarDataEmpresa($con, $data[0]['emp_id'], $med_id);     
+            Utilities::insertarLogs($con, $med_id, 'medico', 'Insert -> Med_id');
             $trans->commit();
             $con->close();
             //RETORNA DATOS 
@@ -160,7 +167,7 @@ class Medico extends \yii\db\ActiveRecord
     }
     
     /* ACTUALIZAR DATOS */
-    public function actualizarMedicos($data) {
+    /*public function actualizarMedicos($data) {
         $arroout = array();
         $con = \Yii::$app->db;
         $trans = $con->beginTransaction();
@@ -183,86 +190,41 @@ class Medico extends \yii\db\ActiveRecord
             $arroout["status"]= false;
             return $arroout;
         }
-    }
+    }*/
     
-    private function insertarDataSolicitud($con,$data_1,$data_2,$data_3,$reg_id) {
-        $doc_numero='00001';
-        $sql = "INSERT INTO " . $con->dbname . ".mce_formulario_temp
-            (doc_numero,can_id,reg_id,ind_id,ftem_condiciones,ftem_origen,ftem_personeria,ftem_nombre,ftem_apellido,ftem_cedula,ftem_ruc,
-             ftem_direccion,ftem_sitio_web,ftem_contacto,ftem_cargo_persona,ftem_contacto_cargo,ftem_contacto_correo,ftem_contacto_telefono,
-             pai_id_ext,ftem_ciudad_ext,ftem_exporta_servicio,ftem_definicion_sector,
-             ftem_correo,ftem_telefono,ftem_tipo_pyme,ftem_cedula_file,ftem_ruc_file,ftem_cert_file,ftem_trayectoria,
-             ftem_decl_jurada_file,ftem_trayectoria_file,ftem_genero,ftem_raza_etnica,
-             ftem_giroprincipal,ftem_vision,ftem_mision,ftem_referencia,ftem_estado,ftem_estado_logico,obj_id,ftem_detalle,
-             umar_id,ftem_registro_sanitario_file,ftem_perm_func_mitur_file,ftem_cert_super_compania_file,             
-             ftem_cert_obligaciones_file,ftem_razon_social,ftem_imp_renta_file)VALUES
-            (:doc_numero,:can_id,:reg_id,:ind_id,:ftem_condiciones,:ftem_origen,:ftem_personeria,:ftem_nombre,:ftem_apellido,:ftem_cedula,:ftem_ruc,
-             :ftem_direccion,:ftem_sitio_web,:ftem_contacto,:ftem_cargo_persona,:ftem_contacto_cargo,:ftem_contacto_correo,:ftem_contacto_telefono,
-             :pai_id_ext,:ftem_ciudad_ext,:ftem_exporta_servicio,:ftem_definicion_sector,
-             :ftem_correo,:ftem_telefono,:ftem_tipo_pyme,:ftem_cedula_file,:ftem_ruc_file,:ftem_cert_file,:ftem_trayectoria,
-             :ftem_decl_jurada_file,:ftem_trayectoria_file,:ftem_genero,:ftem_raza_etnica,
-             :ftem_giroprincipal,:ftem_vision,:ftem_mision,:ftem_referencia,1,1,:obj_id,:ftem_detalle,:umar_id,
-             :ftem_registro_sanitario_file,:ftem_perm_func_mitur_file,:ftem_cert_super_compania_file,             
-             :ftem_cert_obligaciones_file,:ftem_razon_social,:ftem_imp_renta_file)";
-        //Utilities::putMessageLogFile($sql);
-        //PASO 1
+    private function insertarDataMedico($con, $data, $per_id) {
+        //Datos Adicionales
+        $sql = "INSERT INTO " . $con->dbname . ".medico
+            (per_id,med_colegiado,med_registro,med_est_log)VALUES
+            (:per_id,:med_colegiado,:med_registro,1); ";
         $command = $con->createCommand($sql);
-        $command->bindParam(":doc_numero",$doc_numero, PDO::PARAM_STR);
-        $command->bindParam(":can_id", $data_1[0]['can_id'], PDO::PARAM_INT);
-        $command->bindParam(":reg_id", $reg_id, PDO::PARAM_INT);//ID REGISTRO SESION
-        $command->bindParam(":ind_id", $data_1[0]['ind_id'], PDO::PARAM_INT);//ID SECTOR       
-        $command->bindParam(":ftem_origen", $data_1[0]['ftem_origen'], PDO::PARAM_INT);
-        $command->bindParam(":ftem_personeria", $data_1[0]['ftem_personeria'], PDO::PARAM_INT);
-        $command->bindParam(":ftem_nombre", $data_1[0]['ftem_nombre'], PDO::PARAM_STR);
-        $command->bindParam(":ftem_apellido", $data_1[0]['ftem_apellido'], PDO::PARAM_STR);
-        $command->bindParam(":ftem_cedula", $data_1[0]['ftem_cedula'], PDO::PARAM_STR);
-        $command->bindParam(":ftem_ruc", $data_1[0]['ftem_ruc'], PDO::PARAM_STR);
-        $command->bindParam(":ftem_direccion", $data_1[0]['ftem_direccion'], PDO::PARAM_STR);
-        $command->bindParam(":ftem_sitio_web", $data_1[0]['ftem_sitio_web'], PDO::PARAM_STR);
-        $command->bindParam(":ftem_contacto", $data_1[0]['ftem_contacto'], PDO::PARAM_STR);
-        $command->bindParam(":ftem_cargo_persona", $data_1[0]['ftem_cargo_persona'], PDO::PARAM_STR);  
-        $command->bindParam(":ftem_contacto_cargo", $data_1[0]['ftem_contacto_cargo'], PDO::PARAM_STR);
-        $command->bindParam(":ftem_contacto_correo", $data_1[0]['ftem_contacto_correo'], PDO::PARAM_STR);
-        $command->bindParam(":ftem_contacto_telefono", $data_1[0]['ftem_contacto_telefono'], PDO::PARAM_STR);
-        $command->bindParam(":pai_id_ext", $data_1[0]['pai_id_ext'], PDO::PARAM_INT);
-        $command->bindParam(":ftem_ciudad_ext", $data_1[0]['ftem_ciudad_ext'], PDO::PARAM_STR);
-        $command->bindParam(":ftem_correo", $data_1[0]['ftem_correo'], PDO::PARAM_STR);
-        $command->bindParam(":ftem_telefono", $data_1[0]['ftem_telefono'], PDO::PARAM_STR);
-        $command->bindParam(":ftem_tipo_pyme", $data_1[0]['ftem_tipo_pyme'], PDO::PARAM_INT);
-        $command->bindParam(":ftem_cedula_file", $data_1[0]['ftem_cedula_file'], PDO::PARAM_STR);
-        $command->bindParam(":ftem_ruc_file", $data_1[0]['ftem_ruc_file'], PDO::PARAM_STR);
-        $command->bindParam(":ftem_cert_file", $data_1[0]['ftem_cert_file'], PDO::PARAM_STR);
-        $command->bindParam(":ftem_razon_social", $data_1[0]['ftem_razon_social'], PDO::PARAM_STR);
-        $command->bindParam(":ftem_genero", $data_1[0]['ftem_genero'], PDO::PARAM_INT);
-        $command->bindParam(":ftem_raza_etnica", $data_1[0]['ftem_raza_etnica'], PDO::PARAM_INT);
-        $command->bindParam(":ftem_registro_sanitario_file", $data_1[0]['ftem_registro_sanitario_file'], PDO::PARAM_STR);
-        $command->bindParam(":ftem_perm_func_mitur_file", $data_1[0]['ftem_perm_func_mitur_file'], PDO::PARAM_STR);
-        $command->bindParam(":ftem_cert_super_compania_file", $data_1[0]['ftem_cert_super_compania_file'], PDO::PARAM_STR);
-        $command->bindParam(":ftem_cert_obligaciones_file", $data_1[0]['ftem_cert_obligaciones_file'], PDO::PARAM_STR);
-        
-
-        //PASO 2
-        $command->bindParam(":ftem_trayectoria_file", $data_2[0]['ftem_trayectoria_file'], PDO::PARAM_STR);
-        $command->bindParam(":ftem_trayectoria", $data_2[0]['ftem_trayectoria'], PDO::PARAM_STR);
-        //$command->bindParam(":ftem_motivo", $data_2[0]['ftem_motivo'], PDO::PARAM_STR);
-        $command->bindParam(":ftem_giroprincipal", $data_2[0]['ftem_giroprincipal'], PDO::PARAM_STR);
-        $command->bindParam(":ftem_vision", $data_2[0]['ftem_vision'], PDO::PARAM_STR);
-        $command->bindParam(":ftem_mision", $data_2[0]['ftem_mision'], PDO::PARAM_STR);//Dato Eliminado
-        $command->bindParam(":ftem_referencia", $data_2[0]['ftem_referencia'], PDO::PARAM_STR);
-        $command->bindParam(":obj_id", $data_2[0]['obj_id'], PDO::PARAM_INT);
-        $command->bindParam(":ftem_detalle", $data_2[0]['ftem_detalle'], PDO::PARAM_STR);
-        $command->bindParam(":ftem_imp_renta_file", $data_2[0]['ftem_imp_renta_file'], PDO::PARAM_STR);
-
-        //PASO 3
-        $command->bindParam(":ftem_condiciones", $data_3[0]['ftem_condiciones'], PDO::PARAM_INT);//Acepta Condiciones
-        $command->bindParam(":ftem_decl_jurada_file", $data_3[0]['ftem_decl_jurada_file'], PDO::PARAM_STR);
-        $command->bindParam(":ftem_exporta_servicio", $data_3[0]['ftem_exporta_servicio'], PDO::PARAM_STR);
-        $command->bindParam(":ftem_definicion_sector", $data_3[0]['ftem_definicion_sector'], PDO::PARAM_STR);
-        $command->bindParam(":umar_id", $data_3[0]['umar_id'], PDO::PARAM_INT);
+        $command->bindParam(":per_id", $per_id, \PDO::PARAM_INT); //Id Comparacion
+        $command->bindParam(":med_colegiado", $data[0]['med_colegiado'], \PDO::PARAM_STR);
+        $command->bindParam(":med_registro", $data[0]['med_registro'], \PDO::PARAM_STR);
         $command->execute();
     }
     
+    private function insertarDataEspecialidad($con, $dts_especialidad,$med_id) {
+        //Si tiene valores Inserta Datos
+        for ($i = 0; $i < sizeof($dts_especialidad); $i++) {
+            $sql = "INSERT INTO " . $con->dbname . ".especialidad_medico
+                (esp_id,med_id,emed_nivel,emed_est_log)VALUES
+                (:esp_id,:med_id,5,1)";
+            $command = $con->createCommand($sql);
+            $command->bindParam(":esp_id", $dts_especialidad[$i], \PDO::PARAM_INT);//ID pais
+            $command->bindParam(":med_id", $med_id, \PDO::PARAM_INT);//ID pais
+            $command->execute();
+        }
+    }
     
-    
-    
+    private function insertarDataEmpresa($con, $emp_id,$med_id) {
+        //Si tiene valores Inserta Datos
+        $sql = "INSERT INTO " . $con->dbname . ".medico_empresa
+            (med_id,emp_id,memp_est_log)VALUES(:med_id,:emp_id,1);";
+            $command = $con->createCommand($sql);
+            $command->bindParam(":emp_id", $emp_id, \PDO::PARAM_INT);//ID pais
+            $command->bindParam(":med_id", $med_id, \PDO::PARAM_INT);//ID pais
+            $command->execute();
+    }
+
 }

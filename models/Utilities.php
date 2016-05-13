@@ -679,5 +679,19 @@ class Utilities {
         ];
     }
     
+    public static function insertarLogs($con, $reg_id,$table,$accion) {
+        //Datos de Log de Tablas
+        $usu_id = Yii::$app->session->get('PB_iduser', FALSE);
+        $sql = "INSERT INTO " . $con->dbname . ".log
+            (usu_id,log_registro,log_table,log_accion)VALUES
+            (:usu_id,:log_registro,:log_table,:log_accion)";
+            $command = $con->createCommand($sql);
+            $command->bindParam(":usu_id", $usu_id, \PDO::PARAM_INT);//Ids Usuario
+            $command->bindParam(":log_registro", $reg_id, \PDO::PARAM_INT);//ID pais
+            $command->bindParam(":log_table", $table, \PDO::PARAM_STR);
+            $command->bindParam(":log_accion", $accion, \PDO::PARAM_STR);
+            $command->execute();
+    }
+    
     
 }
