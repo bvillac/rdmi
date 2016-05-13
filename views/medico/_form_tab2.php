@@ -21,6 +21,27 @@ use yii\helpers\Url;
 </div>
 
 <div class="col-md-12">
+    <h3><?= Yii::t("perfil", "Registros Médico") ?></h3>
+</div>
+
+<div class="col-md-6">
+    <div class="form-group">
+        <label for="txt_med_colegiado" class="col-sm-3 control-label"><?= Yii::t("perfil", "Colegiado") ?></label>
+        <div class="col-sm-9">
+            <input type="text" maxlength="100" class="form-control PBvalidation keyupmce" id="txt_med_colegiado" data-type="alfa" data-keydown="true" placeholder="<?= Yii::t("perfil", "Colegiado") ?>">
+        </div>
+    </div>
+</div>
+<div class="col-md-6">
+    <div class="form-group">
+        <label for="txt_med_registro" class="col-sm-3 control-label"><?= Yii::t("perfil", "Registro") ?></label>
+        <div class="col-sm-9">
+            <input type="text" maxlength="20" class="form-control PBvalidation keyupmce" id="txt_med_registro" data-type="alfa" data-keydown="true" placeholder="<?= Yii::t("perfil", "Registro Médico") ?>">
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12">
     <h3><span><?= Yii::t("perfil", "Especialidad") ?></span></h3>
 </div>
 

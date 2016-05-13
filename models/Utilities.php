@@ -686,7 +686,7 @@ class Utilities {
             (usu_id,log_registro,log_table,log_accion)VALUES
             (:usu_id,:log_registro,:log_table,:log_accion)";
             $command = $con->createCommand($sql);
-            $command->bindParam(":usu_id", $usu_id, \PDO::PARAM_INT);//Ids Usuario
+            $command->bindParam(":usu_id", ($usu_id<>'')?$usu_id:1, \PDO::PARAM_INT);//Ids Usuario 
             $command->bindParam(":log_registro", $reg_id, \PDO::PARAM_INT);//ID pais
             $command->bindParam(":log_table", $table, \PDO::PARAM_STR);
             $command->bindParam(":log_accion", $accion, \PDO::PARAM_STR);

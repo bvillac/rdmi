@@ -196,5 +196,20 @@ class MedicoController extends Controller {
             return;
         }   
     }
+    
+    public function actionEliminar() {
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
+            $resul = Medico::eliminarMedico($data);
+            if ($resul) {
+                $message = ["info" => Yii::t('exception', '<strong>Well done!</strong> your information was successfully saved.')];
+                echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message);
+            }else{
+                $message = ["info" => Yii::t('exception', 'The above error occurred while the Web server was processing your request.')];
+                echo Utilities::ajaxResponse('NO_OK', 'alert', Yii::t('jslang', 'Error'), 'false', $message);
+            }
+            return;
+        }
+    }
 
 }

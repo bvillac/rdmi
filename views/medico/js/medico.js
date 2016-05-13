@@ -39,8 +39,8 @@ function dataPersona(ID) {
     //DATOS TAB ESPECIALIDAD
     objDat.especialidades = setEspecialidades('cmb_especialidad');
     objDat.emp_id = $('#cmb_empresa option:selected').val();
-    objDat.med_colegiado='224';
-    objDat.med_registro='22';
+    objDat.med_colegiado=$('#txt_med_colegiado').val();
+    objDat.med_registro=$('#txt_med_registro').val();
     
     datArray[0] = objDat;
     sessionStorage.dataPersona = JSON.stringify(datArray);
@@ -79,4 +79,40 @@ function guardarDatos(accion) {
     }
     //showAlert('NO_OK', 'error', {"wtmessage": 'Debe Aceptar los términos de la Declaración Jurada', "title":'Información'});
 }
+
+function eliminarDatos(ids) {
+    if (confirm("Está seguro de que desea continuar?") == true) {
+        var link = $('#txth_base').val() + "/medico/eliminar";
+        var arrParams = new Object();
+        arrParams.ids = ids;
+        //arrParams.ACCION = "Rechazar";
+        requestHttpAjax(link, arrParams, function (response) {
+            var data = response.message;
+            if (response.status == "OK") {
+                //actualizarGrid();
+                $('#TbG_MEDICO').yiiGridView('applyFilter');
+            }
+            showAlert(response.status, response.type, {"wtmessage": data.info, "title": response.label});
+        },true);
+    }
+}
+
+function actualizarGrid(){
+    var estado=$('#cmb_estado option:selected').val();
+    var licencia=$('#cmb_usomarca option:selected').val();
+    var f_ini =$('#dtp_f_inicio').val();
+    var f_fin =$('#dtp_f_fin').val();
+    var valor='';//$('#txt_buscarData').val();
+    //Codigo para AutoComplete
+    if(sessionStorage.src_buscIndex){
+        valor=$('#txth_ids').val();
+    } 
+    //Buscar almenos una clase con el nombre para ejecutar
+    if(!$(".blockUI").length){
+        showLoadingPopup();
+        $('#TbG_SOLICITUD').PbGridView('applyFilterData',{'estado':estado,'f_ini':f_ini,'f_fin':f_fin,'licencia':licencia,'valor':valor,'op':'1'});
+        setTimeout(hideLoadingPopup,2000);
+    }
+}
+
 

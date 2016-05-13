@@ -141,7 +141,6 @@ class Medico extends \yii\db\ActiveRecord
         $trans = $con->beginTransaction();
         try {
             $data = isset($data['DATA']) ? $data['DATA'] : array();
-            Utilities::putMessageLogFile($data);
             Persona::insertarDataPerfil($con, $data);
             $per_id=$con->getLastInsertID();//IDS de la Persona
             Persona::insertarDataPerfilDatoAdicional($con, $data, $per_id);
@@ -225,6 +224,26 @@ class Medico extends \yii\db\ActiveRecord
             $command->bindParam(":emp_id", $emp_id, \PDO::PARAM_INT);//ID pais
             $command->bindParam(":med_id", $med_id, \PDO::PARAM_INT);//ID pais
             $command->execute();
+    }
+    
+    public static function eliminarMedico($data) {
+        $con = \Yii::$app->db;
+        $trans = $con->beginTransaction();
+        try {
+            $ids = isset($data['ids']) ? base64_decode($data['ids']) :NULL;
+            $sql = "UPDATE " . $con->dbname . ".medico SET med_est_log=0 WHERE med_id=:med_id";
+            $command = $con->createCommand($sql);
+            $command->bindParam(":med_id", $ids, \PDO::PARAM_INT);
+            $command->execute();
+            $trans->commit();
+            $con->close();
+            return true;
+        } catch (\Exception $e) {
+            $trans->rollBack();
+            $con->close();
+            //throw $e;
+            return false;
+        }
     }
 
 }
