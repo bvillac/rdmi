@@ -80,15 +80,12 @@ class MedicoController extends Controller {
                 return;
             }
         }
-        //$perData = $perADO->buscarPersonaID(Yii::$app->session->get("PerId"));
-        //Utilities::putMessageLogFile($perData);
         if (count($paises) > 0) {
             $provincias = Provincia::getProvinciasByPais($this->id_pais);
         }
         if (count($provincias) > 0) {
             $cantones = Canton::getCantonesByProvincia($provincias[0]["prov_id"]);
         }
-
         return $this->render('create', [
                     //"persona" => json_encode($perData),
                     "especialidades" => Medico::getEspecilidades(),
@@ -120,10 +117,10 @@ class MedicoController extends Controller {
     
     public function actionUpdate($ids) {
         $perADO = new Persona();
+        $medADO = new Medico();
         $paises = Pais::getPaises();
         $provincias = array();
-        $cantones = array();
-        
+        $cantones = array();        
         if (Yii::$app->request->isAjax) {
             $data = Yii::$app->request->post();
             if (isset($data["getcantones"])) {
@@ -136,8 +133,10 @@ class MedicoController extends Controller {
             }
         }
         $ids = isset($_GET['ids']) ? base64_decode($_GET['ids']) : NULL;
-        Utilities::putMessageLogFile($perData);
-        $perData = $perADO->buscarPersonaID($ids);
+        $medData = $medADO->buscarMedicoID($ids);
+        $medEspData = Medico::getEspecilidadesMedico($ids);
+        $empData = Empresa::getEmpresaMedico($ids);
+        $perData = $perADO->buscarPersonaID($medData[0]["per_id"]);
         
         if (count($paises) > 0) {
             $provincias = Provincia::getProvinciasByPais($this->id_pais);
@@ -145,9 +144,15 @@ class MedicoController extends Controller {
         if (count($provincias) > 0) {
             $cantones = Canton::getCantonesByProvincia($provincias[0]["prov_id"]);
         }
-
+        //Utilities::putMessageLogFile($perData);
         return $this->render('update', [
+                    "model" => $medData,
+                    "medico" => json_encode($medData),
+                    "medicoEsp" => json_encode($medEspData),
+                    "medicoEmp" => json_encode($empData),
                     "persona" => json_encode($perData),
+                    "especialidades" => Medico::getEspecilidades(),
+                    "empresas" => Empresa::getEmpresas(),
                     "provincias" => $provincias,
                     "pais" => $paises,
                     "estCivil" => Utilities::estadoCivil(),
@@ -192,7 +197,7 @@ class MedicoController extends Controller {
                 $resul = $model->insertarMedicos($data);
             }else if($accion == "Update"){
                 //Modificar Registro
-                //$resul = $model->actualizarMedicos($data);                
+                $resul = $model->actualizarMedicos($data);                
             }
             if ($resul['status']) {
                 $message = ["info" => Yii::t('exception', '<strong>Well done!</strong> your information was successfully saved.')];

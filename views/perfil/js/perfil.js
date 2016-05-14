@@ -107,8 +107,8 @@ function mostrarDatos(varPer) {
     $('#cmb_ciudad').val((varPer[0]['Ciudad']!=null)?varPer[0]['Ciudad']:'1');
     $('#txt_dper_direccion').val((varPer[0]['Direccion']!=null)?varPer[0]['Direccion']:'');
     $('#txt_dper_telefono').val((varPer[0]['Telefono']!=null)?varPer[0]['Telefono']:'');
-    $('#txt_dper_contacto').val((varPer[0]['Telefono']!=null)?varPer[0]['Celular']:'');
-    $('#txt_dper_celular').val((varPer[0]['Telefono']!=null)?varPer[0]['Contacto']:'');
+    $('#txt_dper_contacto').val((varPer[0]['Celular']!=null)?varPer[0]['Celular']:'');
+    $('#txt_dper_celular').val((varPer[0]['Contacto']!=null)?varPer[0]['Contacto']:'');
     
     
 }

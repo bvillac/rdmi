@@ -79,4 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ])
     ?>
 </div>
+<script>
+    var AccionTipo='Index';
+</script>
 

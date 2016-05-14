@@ -104,5 +104,34 @@ class Empresa extends \yii\db\ActiveRecord
         return $comando->queryAll();
     }
     
+    public static function getEmpresaMedico($ids){
+        $con = \Yii::$app->db;
+        $sql="SELECT b.emp_id IdsEmp,b.emp_nombre Empresa FROM " . $con->dbname . ".medico_empresa a
+                INNER JOIN " . $con->dbname . ".empresa b
+                  ON a.emp_id=b.emp_id
+            WHERE a.med_id=:med_id ";
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":med_id", $ids, \PDO::PARAM_INT);
+        return $comando->queryAll();
+    }
+    
+    public static function insertarDataEmpresa($con, $emp_id,$med_id) {
+        //Si tiene valores Inserta Datos
+        $sql = "INSERT INTO " . $con->dbname . ".medico_empresa
+            (med_id,emp_id,memp_est_log)VALUES(:med_id,:emp_id,1);";
+            $command = $con->createCommand($sql);
+            $command->bindParam(":emp_id", $emp_id, \PDO::PARAM_INT);//ID pais
+            $command->bindParam(":med_id", $med_id, \PDO::PARAM_INT);//ID pais
+            $command->execute();
+    }
+    
+    public static function deleteDataEmpresa($con, $med_id) {
+        //Si tiene valores Inserta Datos
+        $sql = "DELETE FROM " . $con->dbname . ".medico_empresa WHERE med_id=:med_id ";
+        $command = $con->createCommand($sql);
+        $command->bindParam(":med_id", $med_id, \PDO::PARAM_INT); //ID pais
+        $command->execute();
+    }
+    
     
 }

@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\data\ArrayDataProvider;
 use app\models\Persona;
+use app\models\Especialidad;
 
 /**
  * This is the model class for table "medico".
@@ -127,12 +128,32 @@ class Medico extends \yii\db\ActiveRecord
         return $dataProvider;
     }
     
+    public function buscarMedicoID($ids){
+        $con = \Yii::$app->db;   
+        $sql = "SELECT med_id,per_id,med_colegiado,med_registro FROM " . $con->dbname . ".medico WHERE med_id=:med_id ";
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":med_id", $ids, \PDO::PARAM_INT);
+        return $comando->queryAll();
+    }
+    
     public static function getEspecilidades() {
         $con = \Yii::$app->db;
         $sql="SELECT esp_id,esp_nombre FROM " . $con->dbname . ".especialidad WHERE esp_est_log=1 ";
         $comando = $con->createCommand($sql);
         return $comando->queryAll();
     }
+    
+    public static function getEspecilidadesMedico($ids){
+        $con = \Yii::$app->db;
+        $sql="SELECT b.esp_id IdsEsp,b.esp_nombre Especialidad FROM " . $con->dbname . ".especialidad_medico a
+                INNER JOIN " . $con->dbname . ".especialidad b
+                  ON a.esp_id=b.esp_id
+            WHERE a.med_id=:med_id ";
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":med_id", $ids, \PDO::PARAM_INT);
+        return $comando->queryAll();
+    }
+
     
     /* ACTUALIZAR DATOS */
     public function insertarMedicos($data) {
@@ -146,8 +167,8 @@ class Medico extends \yii\db\ActiveRecord
             Persona::insertarDataPerfilDatoAdicional($con, $data, $per_id);
             $this->insertarDataMedico($con, $data, $per_id);
             $med_id=$con->getLastInsertID();
-            $this->insertarDataEspecialidad($con, $data[0]['especialidades'], $med_id);
-            $this->insertarDataEmpresa($con, $data[0]['emp_id'], $med_id);     
+            Especialidad::insertarDataEspecialidad($con, $data[0]['especialidades'], $med_id);
+            Empresa::insertarDataEmpresa($con, $data[0]['emp_id'], $med_id);     
             Utilities::insertarLogs($con, $med_id, 'medico', 'Insert -> Med_id');
             $trans->commit();
             $con->close();
@@ -166,15 +187,20 @@ class Medico extends \yii\db\ActiveRecord
     }
     
     /* ACTUALIZAR DATOS */
-    /*public function actualizarMedicos($data) {
+    public function actualizarMedicos($data) {
         $arroout = array();
         $con = \Yii::$app->db;
         $trans = $con->beginTransaction();
         try {
-            $data = isset($data['DATA']) ? $data['DATA'] : array();    
-            //$reg_id= Yii::$app->session->get('PB_idregister', FALSE);
-            $this->actualizarDataPerfil($con,$data); 
-            //$ftem_id=$data_1[0]['ftem_id'];//$con->getLastInsertID();//IDS Formulario Temp
+            $data = isset($data['DATA']) ? $data['DATA'] : array(); 
+            $med_id=$data[0]['med_id'];
+            $this->updateDataMedico($con, $data, $med_id);
+            Persona::actualizarDataPerfil($con,$data);
+            Especialidad::deleteDataEspecialidad($con, $med_id);
+            Especialidad::insertarDataEspecialidad($con, $data[0]['especialidades'], $med_id);
+            Empresa::deleteDataEmpresa($con, $med_id);
+            Empresa::insertarDataEmpresa($con, $data[0]['emp_id'], $med_id);  
+            Utilities::insertarLogs($con, $med_id, 'medico', 'Update -> Med_id');
             $trans->commit();
             $con->close();
             //RETORNA DATOS 
@@ -185,11 +211,25 @@ class Medico extends \yii\db\ActiveRecord
         } catch (\Exception $e) {
             $trans->rollBack();
             $con->close();
-            //throw $e;
+            throw $e;
             $arroout["status"]= false;
             return $arroout;
         }
-    }*/
+    }
+    
+    
+    private function updateDataMedico($con, $data, $med_id) {
+        //Datos Adicionales        
+        $sql = "UPDATE " . $con->dbname . ".medico
+            SET med_colegiado = :med_colegiado,med_registro = :med_registro,med_fec_mod = CURRENT_TIMESTAMP()
+        WHERE med_id = :med_id; ";        
+        $command = $con->createCommand($sql);
+        $command->bindParam(":med_id", $med_id, \PDO::PARAM_INT); //Id Comparacion
+        $command->bindParam(":med_colegiado", $data[0]['med_colegiado'], \PDO::PARAM_STR);
+        $command->bindParam(":med_registro", $data[0]['med_registro'], \PDO::PARAM_STR);
+        $command->execute();
+    }
+
     
     private function insertarDataMedico($con, $data, $per_id) {
         //Datos Adicionales
@@ -203,28 +243,9 @@ class Medico extends \yii\db\ActiveRecord
         $command->execute();
     }
     
-    private function insertarDataEspecialidad($con, $dts_especialidad,$med_id) {
-        //Si tiene valores Inserta Datos
-        for ($i = 0; $i < sizeof($dts_especialidad); $i++) {
-            $sql = "INSERT INTO " . $con->dbname . ".especialidad_medico
-                (esp_id,med_id,emed_nivel,emed_est_log)VALUES
-                (:esp_id,:med_id,5,1)";
-            $command = $con->createCommand($sql);
-            $command->bindParam(":esp_id", $dts_especialidad[$i], \PDO::PARAM_INT);//ID pais
-            $command->bindParam(":med_id", $med_id, \PDO::PARAM_INT);//ID pais
-            $command->execute();
-        }
-    }
     
-    private function insertarDataEmpresa($con, $emp_id,$med_id) {
-        //Si tiene valores Inserta Datos
-        $sql = "INSERT INTO " . $con->dbname . ".medico_empresa
-            (med_id,emp_id,memp_est_log)VALUES(:med_id,:emp_id,1);";
-            $command = $con->createCommand($sql);
-            $command->bindParam(":emp_id", $emp_id, \PDO::PARAM_INT);//ID pais
-            $command->bindParam(":med_id", $med_id, \PDO::PARAM_INT);//ID pais
-            $command->execute();
-    }
+    
+    
     
     public static function eliminarMedico($data) {
         $con = \Yii::$app->db;
@@ -245,5 +266,7 @@ class Medico extends \yii\db\ActiveRecord
             return false;
         }
     }
+    
+    
 
 }

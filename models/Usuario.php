@@ -156,6 +156,7 @@ class Usuario extends ActiveRecord implements IdentityInterface {
             $session->set('PB_objmodule_id', "");
             $session->set('RolId',$tipoUser['rolid']);
         }else{
+            Utilities::putMessageLogFile("cerrado");
             $session->destroy();
         }
     }

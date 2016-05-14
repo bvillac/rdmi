@@ -5,17 +5,20 @@
  */
 
 $(document).ready(function () {
-    $('#btn_save').click(function () {
+    InicioFormulario();//Inicia Datos de Formulario
+    $('#btn_saveCreate').click(function () {
         guardarDatos('Create');
     });
-    
-    
+    $('#btn_saveUpdate').click(function () {
+        guardarDatos('Update');
+    });
 });
 
-function dataPersona(ID) {
+function dataPersona(medID,perID) {
     var datArray = new Array();
     var objDat = new Object();
-    objDat.per_id = ID;//Genero Automatico
+    objDat.med_id = medID;//Genero Automatico
+    objDat.per_id = perID;
     objDat.per_ced_ruc = $('#txt_per_ced_ruc').val();
     objDat.per_nombre = $('#txt_per_nombre').val();
     objDat.per_apellido = $('#txt_per_apellido').val();
@@ -58,10 +61,11 @@ function setEspecialidades(elemento) {
 }
 
 function guardarDatos(accion) {
-    var ID = (accion == "Update") ? $('#txth_per_id').val() : 0;
+    var medID = (accion == "Update") ? $('#txth_med_id').val() : 0;
+    var perID = (accion == "Update") ? $('#txth_per_id').val() : 0;
     var link = $('#txth_base').val() + "/medico/savemedico";
     var arrParams = new Object();
-    arrParams.DATA = dataPersona(ID);
+    arrParams.DATA = dataPersona(medID,perID);
     arrParams.ACCION = accion;
     var validation = validateForm();
     if (!validation) {
@@ -117,10 +121,25 @@ function actualizarGrid(){
 
 function loadDataUpdate() {
     mostrarDatos(varPerData);
+    mostrarDatosMedico(varMedData,varEspData,varEmpData);
 }
-
+function InicioFormulario() {
+    if (AccionTipo == "Update") {
+        loadDataUpdate();
+    } else if (AccionTipo == "Create") {
+        //loadDataCreate();
+    }
+}
+function mostrarDatosMedico(varMed,varEsp,varEmp) {
+    $('#txt_med_colegiado').val(varMed[0]['med_colegiado']);
+    $('#txt_med_registro').val(varMed[0]['med_registro']);
+    $('#cmb_empresa').val((varEmp[0]['IdsEmp']!=null)?varEmp[0]['IdsEmp']:'1');
+    for (var i = 0; i < varEsp.length; i++) {
+        $("#cmb_especialidad option[value=" + varEsp[i]['IdsEsp'] + "]").attr("selected", true);
+    }
+}
 function mostrarDatos(varPer) {
-    $('#txth_per_id').val(varPer[0]['Ids']);
+    //$('#txth_per_id').val(varPer[0]['Ids']);
     $('#txt_per_nombre').val(varPer[0]['Nombre']);
     $('#txt_per_apellido').val(varPer[0]['Apellido']);
     $('#txt_per_ced_ruc').val((varPer[0]['Cedula']!=null)?varPer[0]['Cedula']:'');
@@ -133,9 +152,8 @@ function mostrarDatos(varPer) {
     $('#cmb_ciudad').val((varPer[0]['Ciudad']!=null)?varPer[0]['Ciudad']:'1');
     $('#txt_dper_direccion').val((varPer[0]['Direccion']!=null)?varPer[0]['Direccion']:'');
     $('#txt_dper_telefono').val((varPer[0]['Telefono']!=null)?varPer[0]['Telefono']:'');
-    $('#txt_dper_contacto').val((varPer[0]['Telefono']!=null)?varPer[0]['Celular']:'');
-    $('#txt_dper_celular').val((varPer[0]['Telefono']!=null)?varPer[0]['Contacto']:'');
-    
+    $('#txt_dper_contacto').val((varPer[0]['Celular']!=null)?varPer[0]['Celular']:'');
+    $('#txt_dper_celular').val((varPer[0]['Contacto']!=null)?varPer[0]['Contacto']:'');
 }
 
 

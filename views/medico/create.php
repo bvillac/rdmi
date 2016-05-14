@@ -51,5 +51,10 @@ $this->params['breadcrumbs'][] = $this->title;
     </div><!-- /.nav-tabs-custom -->
 </div><!-- /.col -->
 <div class="col-md-2">
-    <p><?= Html::a('<span class="glyphicon glyphicon-floppy-disk"></span> ' . Yii::t("accion", "Save"), 'javascript:', ['id' => 'btn_save','class' => 'btn btn-primary btn-block']); ?> </p>
+    <p><?= Html::a('<span class="glyphicon glyphicon-floppy-disk"></span> ' . Yii::t("accion", "Save"), 'javascript:', ['id' => 'btn_saveCreate','class' => 'btn btn-primary btn-block']); ?> </p>
 </div>
+
+<script>
+    var AccionTipo='Create';
+</script>
+

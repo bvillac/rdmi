@@ -247,7 +247,7 @@ class Persona extends ActiveRecord
         $command->execute();
     }
     
-    private function actualizarDataPerfil($con,$data) {
+    public static function actualizarDataPerfil($con,$data) {
         $sql = "UPDATE " . $con->dbname . ".persona
             SET per_ced_ruc = :per_ced_ruc,per_nombre = :per_nombre,per_apellido = :per_apellido,
             per_genero = :per_genero,per_fecha_nacimiento = :per_fecha_nacimiento,per_estado_civil = :per_estado_civil,
@@ -266,6 +266,7 @@ class Persona extends ActiveRecord
         $command->bindParam(":per_foto", $data[0]['per_foto'], \PDO::PARAM_STR);
         $command->execute();
         //Verificamos SI existe los Datos Adicionales
+        //Utilities::putMessageLogFile($data[0]['per_id']);
         $dper_id=$this->existeDatAdi($con, $data[0]['per_id']);
         if($dper_id>0){
             //Existe y Hay que Actualizar

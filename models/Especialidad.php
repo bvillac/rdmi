@@ -70,4 +70,27 @@ class Especialidad extends \yii\db\ActiveRecord
     {
         return $this->hasMany(EspecialidadMedico::className(), ['esp_id' => 'esp_id']);
     }
+    
+    public static function insertarDataEspecialidad($con, $dts_especialidad,$med_id) {
+        //Si tiene valores Inserta Datos
+        for ($i = 0; $i < sizeof($dts_especialidad); $i++) {
+            $sql = "INSERT INTO " . $con->dbname . ".especialidad_medico
+                (esp_id,med_id,emed_nivel,emed_est_log)VALUES
+                (:esp_id,:med_id,5,1)";
+            $command = $con->createCommand($sql);
+            $command->bindParam(":esp_id", $dts_especialidad[$i], \PDO::PARAM_INT);//ID pais
+            $command->bindParam(":med_id", $med_id, \PDO::PARAM_INT);//ID pais
+            $command->execute();
+        }
+    }
+    
+    
+    public static function deleteDataEspecialidad($con, $med_id) {
+        //Si tiene valores Inserta Datos
+        $sql = "DELETE FROM " . $con->dbname . ".especialidad_medico WHERE med_id=:med_id ";
+        $command = $con->createCommand($sql);
+        $command->bindParam(":med_id", $med_id, \PDO::PARAM_INT); //ID pais
+        $command->execute();
+    }
+
 }
