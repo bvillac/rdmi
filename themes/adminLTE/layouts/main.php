@@ -13,9 +13,16 @@ use app\vendor\penblu\magnificpopup\MagnificPopupAsset;
 /* @var $content string */
 $session = Yii::$app->session;
 $isUser = FALSE;
-if ($session->isActive){
-    $isUser = $session->get('PB_isuser');
-}
+$isUser = $session->get('PB_isuser', FALSE);
+//Verifica La Session Activa  
+//if ($session->isActive){
+if ($isUser != FALSE && $session->isActive ){
+    //\app\models\Utilities::putMessageLogFile(' Es Verdadero ');
+    $isUser = $session->get('PB_isuser', FALSE);
+}//else{
+    //\app\models\Utilities::putMessageLogFile(' Es falso ');
+    //$this->redirect(Yii::$app->urlManager->createUrl(["site/login"]));
+//}
 if (Yii::$app->controller->action->id === 'login' && $isUser) {
     echo $this->render(
         'login',
