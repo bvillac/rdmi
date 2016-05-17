@@ -100,7 +100,7 @@ class Provincia extends \yii\db\ActiveRecord
     }
     
     public static function getProvinciasByPaisID($pais_id){
-        $sql = "SELECT prov_id AS id, prov_nombre AS name FROM provincia WHERE pai_id=:pais_id";
+        $sql = "SELECT prov_id AS Ids, prov_nombre AS Nombre FROM provincia WHERE pai_id=:pais_id";
         $comando = Yii::$app->db->createCommand($sql);
         $comando->bindParam(":pais_id", $pais_id, \PDO::PARAM_INT);
         return $comando->queryAll();

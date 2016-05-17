@@ -7,7 +7,7 @@ function sentPassword(){
     arrParams.confirm = $("#frm_nueva_clave_repeat").val();
     if(arrParams.new != arrParams.confirm){
         // error verificar 
-        showAlert("NOOK", "Error", {"wtmessage": "Contraseñas no coinciden. Ingrese correctamente la nueva contraseña.", "title":"Exito"});
+        showAlert("NO_OK", "Error", {"wtmessage": "Contraseñas no coinciden. Ingrese correctamente la nueva contraseña.", "title":"Exito"});
     }else{
         requestHttpAjax(link, arrParams, function (response) {
                 showAlert(response.status, response.label, response.message);

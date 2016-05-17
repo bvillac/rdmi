@@ -4,7 +4,6 @@ use yii\helpers\ArrayHelper;
 use kartik\file\FileInput;
 use yii\helpers\Url;
 use kartik\date\DatePicker;
-
 ?>
 <div class="col-md-12">
     <h3><?= Yii::t("perfil", "Information person") ?></h3>
@@ -110,8 +109,8 @@ use kartik\date\DatePicker;
             <select id="cmb_provincia" class="form-control">
                 <?php
                 foreach ($provincias as $key2 => $value2) {
-                    $name = $value2["prov_nombre"];
-                    $id = $value2["prov_id"];
+                    $name = $value2["Nombre"];
+                    $id = $value2["Ids"];
                     if ($id <> 25) {//Para No presentar TODAS
                         echo "<option value='" . $id . "'>" . $name . "</option>";
                     }
@@ -128,8 +127,8 @@ use kartik\date\DatePicker;
             <select id="cmb_ciudad" class="form-control">
                 <?php
                 foreach ($cantones as $key3 => $value3) {
-                    $name = $value3["can_nombre"];
-                    $id = $value3["can_id"];
+                    $name = $value3["Nombre"];
+                    $id = $value3["Ids"];
                     echo "<option value='" . $id . "'>" . $name . "</option>";
                 }
                 ?>

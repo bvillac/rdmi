@@ -192,10 +192,11 @@ class Medico extends \yii\db\ActiveRecord
         $con = \Yii::$app->db;
         $trans = $con->beginTransaction();
         try {
-            $data = isset($data['DATA']) ? $data['DATA'] : array(); 
+            $data = isset($data['DATA']) ? $data['DATA'] : array();
             $med_id=$data[0]['med_id'];
             $this->updateDataMedico($con, $data, $med_id);
             Persona::actualizarDataPerfil($con,$data);
+            Persona::actualizarDataAdicional($con,$data);
             Especialidad::deleteDataEspecialidad($con, $med_id);
             Especialidad::insertarDataEspecialidad($con, $data[0]['especialidades'], $med_id);
             Empresa::deleteDataEmpresa($con, $med_id);

@@ -6,6 +6,10 @@
 
 $(document).ready(function () {
     InicioFormulario();//Inicia Datos de Formulario
+    $('#cmb_provincia').change(function () {
+        obtenerCanton();
+    });
+    
     $('#btn_saveCreate').click(function () {
         guardarDatos('Create');
     });
@@ -13,6 +17,20 @@ $(document).ready(function () {
         guardarDatos('Update');
     });
 });
+
+function obtenerCanton() {
+    var link = $('#txth_base').val() + "/medico/create";
+    var arrParams = new Object();
+    arrParams.prov_id = $('#cmb_provincia').val();
+    arrParams.getcantones = true;
+    requestHttpAjax(link, arrParams, function (response) {
+        if (response.status == "OK") {
+            var data = response.message;
+            setComboData(data.cantones, "cmb_ciudad");
+        }
+    }, true);
+}
+
 
 function dataPersona(medID,perID) {
     var datArray = new Array();
@@ -56,7 +74,7 @@ function setEspecialidades(elemento) {
         //alert($(selected).text());
         dat[i] = $(selected).val();
     });
-    sessionStorage.cmb_dataNacional = JSON.stringify(dat);
+    sessionStorage.cmb_dataEspecialidad = JSON.stringify(dat);
     return dat;
 }
 
@@ -149,11 +167,11 @@ function mostrarDatos(varPer) {
     $('#cmb_per_tipo_sangre').val((varPer[0]['Gru_San']!=null)?varPer[0]['Gru_San']:'A+');
     $('#dtp_per_fecha_nacimiento').val((varPer[0]['Fec_Nac']!=null)?varPer[0]['Fec_Nac']:'');
     $('#cmb_provincia').val((varPer[0]['Provincia']!=null)?varPer[0]['Provincia']:'1');
-    $('#cmb_ciudad').val((varPer[0]['Ciudad']!=null)?varPer[0]['Ciudad']:'1');
+    $('#cmb_ciudad').val((varPer[0]['Canton']!=null)?varPer[0]['Canton']:'1');
     $('#txt_dper_direccion').val((varPer[0]['Direccion']!=null)?varPer[0]['Direccion']:'');
     $('#txt_dper_telefono').val((varPer[0]['Telefono']!=null)?varPer[0]['Telefono']:'');
-    $('#txt_dper_contacto').val((varPer[0]['Celular']!=null)?varPer[0]['Celular']:'');
-    $('#txt_dper_celular').val((varPer[0]['Contacto']!=null)?varPer[0]['Contacto']:'');
+    $('#txt_dper_contacto').val((varPer[0]['Contacto']!=null)?varPer[0]['Contacto']:'');
+    $('#txt_dper_celular').val((varPer[0]['Celular']!=null)?varPer[0]['Celular']:'');
 }
 
 

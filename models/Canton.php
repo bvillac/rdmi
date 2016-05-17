@@ -97,7 +97,7 @@ class Canton extends \yii\db\ActiveRecord
     }
     
     public static function getCantonesByProvinciaID($provincia_id){
-        $sql = "SELECT can_id AS id, can_nombre AS name FROM canton WHERE prov_id=:provincia_id";
+        $sql = "SELECT can_id AS Ids, can_nombre AS Nombre FROM canton WHERE prov_id=:provincia_id";
         $comando = Yii::$app->db->createCommand($sql);
         $comando->bindParam(":provincia_id", $provincia_id, \PDO::PARAM_INT);
         return $comando->queryAll();

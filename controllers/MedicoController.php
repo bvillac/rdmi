@@ -66,7 +66,7 @@ class MedicoController extends Controller {
     public function actionCreate() {
         $model = new Medico();
         $perADO = new Persona();
-        $paises = Pais::getPaises();
+        //$paises = Pais::getPaises();
         $provincias = array();
         $cantones = array();
         if (Yii::$app->request->isAjax) {
@@ -80,11 +80,11 @@ class MedicoController extends Controller {
                 return;
             }
         }
-        if (count($paises) > 0) {
-            $provincias = Provincia::getProvinciasByPais($this->id_pais);
-        }
+        //if (count($paises) > 0) {
+            $provincias = Provincia::getProvinciasByPaisID($this->id_pais);
+        //}
         if (count($provincias) > 0) {
-            $cantones = Canton::getCantonesByProvincia($provincias[0]["prov_id"]);
+            $cantones = Canton::getCantonesByProvinciaID($provincias[0]["prov_id"]);
         }
         return $this->render('create', [
                     //"persona" => json_encode($perData),
@@ -103,22 +103,11 @@ class MedicoController extends Controller {
      * @param string $id
      * @return mixed
      */
-//    public function actionUpdate($id) {
-//        $model = $this->findModel($id);
-//
-//        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-//            return $this->redirect(['view', 'id' => $model->med_id]);
-//        } else {
-//            return $this->render('update', [
-//                        'model' => $model,
-//            ]);
-//        }
-//    }
-    
+
     public function actionUpdate($ids) {
         $perADO = new Persona();
         $medADO = new Medico();
-        $paises = Pais::getPaises();
+        //$paises = Pais::getPaises();
         $provincias = array();
         $cantones = array();        
         if (Yii::$app->request->isAjax) {
@@ -137,14 +126,10 @@ class MedicoController extends Controller {
         $medEspData = Medico::getEspecilidadesMedico($ids);
         $empData = Empresa::getEmpresaMedico($ids);
         $perData = $perADO->buscarPersonaID($medData[0]["per_id"]);
-        
-        if (count($paises) > 0) {
-            $provincias = Provincia::getProvinciasByPais($this->id_pais);
+        $provincias = Provincia::getProvinciasByPaisID($this->id_pais);
+        if (count($provincias) > 0) {            
+            $cantones = Canton::getCantonesByProvinciaID(($perData[0]["Provincia"]<>0)?$perData[0]["Provincia"]:$provincias[0]["Ids"]);
         }
-        if (count($provincias) > 0) {
-            $cantones = Canton::getCantonesByProvincia($provincias[0]["prov_id"]);
-        }
-        //Utilities::putMessageLogFile($perData);
         return $this->render('update', [
                     "model" => $medData,
                     "medico" => json_encode($medData),

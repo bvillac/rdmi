@@ -172,8 +172,8 @@ function createToastrNotification(
 function setComboData(arr_data, element_id) {
     var option_arr = "";
     for (var i = 0; i < arr_data.length; i++) {
-        var id = arr_data[i].id;
-        var value = arr_data[i].name;
+        var id = arr_data[i].Ids;
+        var value = arr_data[i].Nombre;
         option_arr += "<option value='" + id + "'>" + value + "</option>";
     }
     $("#" + element_id).html(option_arr);

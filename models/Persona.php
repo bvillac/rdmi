@@ -194,6 +194,7 @@ class Persona extends ActiveRecord
             $data = isset($data['DATA']) ? $data['DATA'] : array();    
             //$reg_id= Yii::$app->session->get('PB_idregister', FALSE);
             $this->actualizarDataPerfil($con,$data); 
+            $this->actualizarDataAdicional($con,$data);
             //$ftem_id=$data_1[0]['ftem_id'];//$con->getLastInsertID();//IDS Formulario Temp
             $trans->commit();
             $con->close();
@@ -265,9 +266,11 @@ class Persona extends ActiveRecord
         $command->bindParam(":per_tipo_sangre", $data[0]['per_tipo_sangre'], \PDO::PARAM_STR);
         $command->bindParam(":per_foto", $data[0]['per_foto'], \PDO::PARAM_STR);
         $command->execute();
+    }
+    
+    public static function actualizarDataAdicional($con,$data) {
         //Verificamos SI existe los Datos Adicionales
-        //Utilities::putMessageLogFile($data[0]['per_id']);
-        $dper_id=$this->existeDatAdi($con, $data[0]['per_id']);
+        $dper_id=  Persona::existeDataAdicional($con, $data[0]['per_id']);
         if($dper_id>0){
             //Existe y Hay que Actualizar
             $sql = "UPDATE " . $con->dbname . ".data_persona
@@ -290,10 +293,9 @@ class Persona extends ActiveRecord
         $command->bindParam(":dper_telefono", $data[0]['dper_telefono'], \PDO::PARAM_STR);
         $command->bindParam(":dper_celular", $data[0]['dper_celular'], \PDO::PARAM_STR);
         $command->execute();
-
     }
     
-    private function existeDatAdi($con,$ids){
+    public static function existeDataAdicional($con,$ids){
         $sql = "SELECT dper_id FROM " . $con->dbname . ".data_persona WHERE per_id=:per_id ";
         $comando = $con->createCommand($sql);
         $comando->bindParam(":per_id", $ids, \PDO::PARAM_INT);
