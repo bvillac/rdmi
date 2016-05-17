@@ -914,3 +914,29 @@ CREATE TABLE IF NOT EXISTS `resultados` (
   KEY `fk_resultados_eventos1` (`eve_id`),
   KEY `fk_resultados_medico1` (`med_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Estructura de tabla para la tabla `medico_atencion`
+--
+
+CREATE  TABLE IF NOT EXISTS `rdmi`.`medico_atencion` (
+  `mate_id` BIGINT(20) NOT NULL AUTO_INCREMENT ,
+  `med_id` BIGINT(20) NOT NULL ,
+  `pac_id` BIGINT(20) NOT NULL ,
+  `mate_est_log` VARCHAR(1) NULL DEFAULT NULL ,
+  `mate_fec_cre` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ,
+  `mate_fec_mod` TIMESTAMP NULL DEFAULT NULL ,
+  PRIMARY KEY (`mate_id`) ,
+  INDEX `fk_medico_atencion_medico1` (`med_id` ASC) ,
+  INDEX `fk_medico_atencion_paciente1` (`pac_id` ASC) ,
+  CONSTRAINT `fk_medico_atencion_medico1`
+    FOREIGN KEY (`med_id` )
+    REFERENCES `rdmi`.`medico` (`med_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_medico_atencion_paciente1`
+    FOREIGN KEY (`pac_id` )
+    REFERENCES `rdmi`.`paciente` (`pac_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;

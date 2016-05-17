@@ -5,6 +5,12 @@ namespace app\controllers;
 use Yii;
 use app\models\Paciente;
 use app\models\PacienteSearch;
+use app\models\Pais;
+use app\models\Provincia;
+use app\models\Canton;
+use app\models\Persona;
+use app\models\Usuario;
+use app\models\Utilities;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -14,6 +20,8 @@ use yii\filters\VerbFilter;
  */
 class PacienteController extends Controller
 {
+    private $id_pais = 56; //Id Pertenece al Pais Ecuador
+    
     public function behaviors()
     {
         return [
@@ -32,12 +40,10 @@ class PacienteController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new PacienteSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $data = null;
+        $dataProvider = Paciente::consultarPacientes($data);
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+                    'model' => $dataProvider,
         ]);
     }
 
@@ -59,16 +65,35 @@ class PacienteController extends Controller
      * @return mixed
      */
     public function actionCreate()
-    {
+    {        
         $model = new Paciente();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->pac_id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+        $perADO = new Persona();
+        $provincias = array();
+        $cantones = array();
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
+            if (isset($data["getcantones"])) {
+                $cantones = Canton::getCantonesByProvinciaID($data['prov_id']);
+                $message = [
+                    "cantones" => $cantones,
+                ];
+                echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message);
+                return;
+            }
         }
+        $provincias = Provincia::getProvinciasByPaisID($this->id_pais);
+        if (count($provincias) > 0) {
+            $cantones = Canton::getCantonesByProvinciaID($provincias[0]["Ids"]);
+        }
+        return $this->render('create', [
+                    //"persona" => json_encode($perData),
+                    //"especialidades" => Medico::getEspecilidades(),
+                    //"empresas" => Empresa::getEmpresas(),
+                    "provincias" => $provincias,
+                    "estCivil" => Utilities::estadoCivil(),
+                    "genero" => Utilities::genero(),
+                    "cantones" => $cantones]);
+        
     }
 
     /**

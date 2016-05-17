@@ -6,16 +6,12 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model app\models\Medico */
 
-$this->title = 'Create Medico';
+$this->title = 'Crear Médico';
 $this->params['breadcrumbs'][] = ['label' => 'Medicos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="medico-create">
-
     <h1><?= Html::encode($this->title) ?></h1>
-
-    
-
 </div>
 <div class="col-md-12">
     <div class="nav-tabs-custom">
