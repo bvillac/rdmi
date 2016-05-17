@@ -52,10 +52,33 @@ class MedicoController extends Controller {
      * @param string $id
      * @return mixed
      */
-    public function actionView($id) {
+    public function actionView($ids) {
+        $perADO = new Persona();
+        $medADO = new Medico();
+        $provincias = array();
+        $cantones = array();        
+        
+        $ids = isset($_GET['ids']) ? base64_decode($_GET['ids']) : NULL;
+        $medData = $medADO->buscarMedicoID($ids);
+        $medEspData = Medico::getEspecilidadesMedico($ids);
+        $empData = Empresa::getEmpresaMedico($ids);
+        $perData = $perADO->buscarPersonaID($medData[0]["per_id"]);
+        $provincias = Provincia::getProvinciasByPaisID($this->id_pais);
+        $cantones = Canton::getCantonesByProvinciaID($perData[0]["Provincia"]);
         return $this->render('view', [
-                    'model' => $this->findModel($id),
-        ]);
+                    "model" => $medData,
+                    "medico" => json_encode($medData),
+                    "medicoEsp" => json_encode($medEspData),
+                    "medicoEmp" => json_encode($empData),
+                    "persona" => json_encode($perData),
+                    "especialidades" => Medico::getEspecilidades(),
+                    "empresas" => Empresa::getEmpresas(),
+                    "provincias" => $provincias,
+                    "pais" => $paises,
+                    "estCivil" => Utilities::estadoCivil(),
+                    "genero" => Utilities::genero(),
+                    "cantones" => $cantones]);
+        
     }
 
     /**
