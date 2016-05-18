@@ -74,7 +74,6 @@ class MedicoController extends Controller {
                     "especialidades" => Medico::getEspecilidades(),
                     "empresas" => Empresa::getEmpresas(),
                     "provincias" => $provincias,
-                    "pais" => $paises,
                     "estCivil" => Utilities::estadoCivil(),
                     "genero" => Utilities::genero(),
                     "cantones" => $cantones]);

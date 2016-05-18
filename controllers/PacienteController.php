@@ -52,11 +52,28 @@ class PacienteController extends Controller
      * @param string $id
      * @return mixed
      */
-    public function actionView($id)
-    {
+    public function actionView($ids) {
+        $perADO = new Persona();
+        $pacADO = new Paciente();
+        $provincias = array();
+        $cantones = array();        
+        
+        $ids = isset($_GET['ids']) ? base64_decode($_GET['ids']) : NULL;
+        $pacData = $pacADO->buscarPacienteID($ids);
+        $perData = $perADO->buscarPersonaID($pacData[0]["per_id"]);
+        $provincias = Provincia::getProvinciasByPaisID($this->id_pais);
+        if (count($provincias) > 0) {            
+            $cantones = Canton::getCantonesByProvinciaID(($perData[0]["Provincia"]<>0)?$perData[0]["Provincia"]:$provincias[0]["Ids"]);
+        }
         return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+                    "model" => $pacData,
+                    "paciente" => json_encode($pacData),
+                    "persona" => json_encode($perData),
+                    "provincias" => $provincias,
+                    "estCivil" => Utilities::estadoCivil(),
+                    "genero" => Utilities::genero(),
+                    "cantones" => $cantones]);
+        
     }
 
     /**

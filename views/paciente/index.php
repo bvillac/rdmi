@@ -62,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{view} {update} {delete} ', //
                 'buttons' => [
                     'view' => function ($url, $model) {                       
-                        return Html::a('<span class="glyphicon glyphicon-list-alt"></span>', Url::to(['paciente/view', 'ids' => base64_encode($model['Ids'])]), ["data-toggle" => "tooltip", "title" => "Ver Ficha"]);
+                        return Html::a('<span class="glyphicon glyphicon-list-alt"></span>', Url::to(['paciente/view', 'ids' => base64_encode($model['Ids'])]), ["data-toggle" => "tooltip", "title" => "Ver Paciente"]);
                     },
                     'update' => function ($url, $model) {
                             return Html::a('<span class="glyphicon glyphicon-pencil"></span>', Url::to(['paciente/update', 'ids' => base64_encode($model['Ids'])]), ["data-toggle" => "tooltip", "title" => "Editar"]);
