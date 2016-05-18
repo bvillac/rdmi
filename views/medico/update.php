@@ -3,7 +3,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 
-$this->title = 'Modificar Médico ' //. ' ' . $model[0]["med_id"];
+$this->title = 'Modificar Médico '; //. ' ' . $model[0]["med_id"];
 //$this->params['breadcrumbs'][] = ['label' => 'Medicos', 'url' => ['index']];
 //$this->params['breadcrumbs'][] = ['label' => $model[0]["med_id"], 'url' => ['view', 'id' => $model[0]["med_id"]]];
 //$this->params['breadcrumbs'][] = 'Update';

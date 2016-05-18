@@ -194,7 +194,7 @@ class Usuario extends ActiveRecord implements IdentityInterface {
         $usu_password = base64_encode($security->encryptByPassword($usu_sha, $password));//Nuevo Pass con SHA Y 64 BITS        
         $sql = "INSERT INTO " . $con->dbname . ".usuario
             (per_id,usu_username,usu_password,usu_sha,usu_link_activo,usu_estado_activo,usu_est_log)VALUES
-            (:per_id,:usu_username,:usu_password,:usu_sha,:usu_link_activo,0,1);";
+            (:per_id,:usu_username,:usu_password,:usu_sha,:usu_link_activo,1,1);";
         $command = $con->createCommand($sql);
         $command->bindParam(":per_id", $id_persona, \PDO::PARAM_INT);//Id Comparacion
         $command->bindParam(":usu_username", $username, \PDO::PARAM_STR);

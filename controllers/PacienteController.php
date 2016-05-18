@@ -102,17 +102,38 @@ class PacienteController extends Controller
      * @param string $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->pac_id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+    public function actionUpdate($ids) {
+        $pacADO = new Paciente();
+        $perADO = new Persona();
+        $provincias = array();
+        $cantones = array();        
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
+            if (isset($data["getcantones"])) {
+                $cantones = Canton::getCantonesByProvinciaID($data['prov_id']);
+                $message = [
+                    "cantones" => $cantones,
+                ];
+                echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message);
+                return;
+            }
         }
+        $ids = isset($_GET['ids']) ? base64_decode($_GET['ids']) : NULL;
+        $pacData = $pacADO->buscarPacienteID($ids);
+        $perData = $perADO->buscarPersonaID($pacData[0]["per_id"]);
+        $provincias = Provincia::getProvinciasByPaisID($this->id_pais);
+        if (count($provincias) > 0) {            
+            $cantones = Canton::getCantonesByProvinciaID(($perData[0]["Provincia"]<>0)?$perData[0]["Provincia"]:$provincias[0]["Ids"]);
+        }
+        return $this->render('update', [
+                    "model" => $pacData,
+                    "paciente" => json_encode($pacData),
+                    "persona" => json_encode($perData),
+                    "provincias" => $provincias,
+                    "pais" => $paises,
+                    "estCivil" => Utilities::estadoCivil(),
+                    "genero" => Utilities::genero(),
+                    "cantones" => $cantones]);
     }
 
     /**
@@ -154,7 +175,7 @@ class PacienteController extends Controller
                 $resul = $model->insertarPacientes($data);
             }else if($accion == "Update"){
                 //Modificar Registro
-                //$resul = $model->actualizarMedicos($data);                
+                $resul = $model->actualizarPacientes($data);                
             }
             if ($resul['status']) {
                 $message = ["info" => Yii::t('exception', '<strong>Well done!</strong> your information was successfully saved.')];
@@ -165,6 +186,21 @@ class PacienteController extends Controller
             }
             return;
         }   
+    }
+    
+    public function actionEliminar() {
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
+            $resul = Paciente::eliminarPaciente($data);
+            if ($resul) {
+                $message = ["info" => Yii::t('exception', '<strong>Well done!</strong> your information was successfully saved.')];
+                echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message);
+            }else{
+                $message = ["info" => Yii::t('exception', 'The above error occurred while the Web server was processing your request.')];
+                echo Utilities::ajaxResponse('NO_OK', 'alert', Yii::t('jslang', 'Error'), 'false', $message);
+            }
+            return;
+        }
     }
     
     

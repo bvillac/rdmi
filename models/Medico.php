@@ -155,7 +155,7 @@ class Medico extends \yii\db\ActiveRecord
     }
 
     
-    /* ACTUALIZAR DATOS */
+    /* INSERTAR DATOS */
     public function insertarMedicos($data) {
         $arroout = array();
         $con = \Yii::$app->db;
@@ -212,7 +212,7 @@ class Medico extends \yii\db\ActiveRecord
         } catch (\Exception $e) {
             $trans->rollBack();
             $con->close();
-            throw $e;
+            //throw $e;
             $arroout["status"]= false;
             return $arroout;
         }

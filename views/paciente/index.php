@@ -62,10 +62,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{view} {update} {delete} ', //
                 'buttons' => [
                     'view' => function ($url, $model) {                       
-                        return Html::a('<span class="glyphicon glyphicon-list-alt"></span>', Url::to(['medico/view', 'ids' => base64_encode($model['Ids'])]), ["data-toggle" => "tooltip", "title" => "Ver Ficha"]);
+                        return Html::a('<span class="glyphicon glyphicon-list-alt"></span>', Url::to(['paciente/view', 'ids' => base64_encode($model['Ids'])]), ["data-toggle" => "tooltip", "title" => "Ver Ficha"]);
                     },
                     'update' => function ($url, $model) {
-                            return Html::a('<span class="glyphicon glyphicon-pencil"></span>', Url::to(['medico/update', 'ids' => base64_encode($model['Ids'])]), ["data-toggle" => "tooltip", "title" => "Editar"]);
+                            return Html::a('<span class="glyphicon glyphicon-pencil"></span>', Url::to(['paciente/update', 'ids' => base64_encode($model['Ids'])]), ["data-toggle" => "tooltip", "title" => "Editar"]);
                     },
                     'delete' => function ($url, $model) {
                         return Html::a('<span class="glyphicon glyphicon-remove"></span>', null, ['href' => 'javascript:eliminarDatos(\'' . base64_encode($model['Ids']) . '\');', "data-toggle" => "tooltip", "title" => "Eliminar"]);

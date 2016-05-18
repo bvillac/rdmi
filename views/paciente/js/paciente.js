@@ -32,10 +32,10 @@ function obtenerCanton() {
 }
 
 
-function dataPersona(medID,perID) {
+function dataPersona(pacID,perID) {
     var datArray = new Array();
     var objDat = new Object();
-    objDat.med_id = medID;//Genero Automatico
+    objDat.pac_id = pacID;//Genero Automatico
     objDat.per_id = perID;
     objDat.per_ced_ruc = $('#txt_per_ced_ruc').val();
     objDat.per_nombre = $('#txt_per_nombre').val();
@@ -74,11 +74,11 @@ function setEspecialidades(elemento) {
 }
 
 function guardarDatos(accion) {
-    var medID = (accion == "Update") ? $('#txth_pac_id').val() : 0;
+    var pacID = (accion == "Update") ? $('#txth_pac_id').val() : 0;
     var perID = (accion == "Update") ? $('#txth_per_id').val() : 0;
     var link = $('#txth_base').val() + "/paciente/save";
     var arrParams = new Object();
-    arrParams.DATA = dataPersona(medID,perID);
+    arrParams.DATA = dataPersona(pacID,perID);
     arrParams.ACCION = accion;
     var validation = validateForm();
     if (!validation) {
@@ -134,7 +134,6 @@ function actualizarGrid(){
 
 function loadDataUpdate() {
     mostrarDatos(varPerData);
-    mostrarDatosMedico(varMedData,varEspData,varEmpData);
 }
 function InicioFormulario() {
     if (AccionTipo == "Update") {
@@ -143,14 +142,7 @@ function InicioFormulario() {
         //loadDataCreate();
     }
 }
-function mostrarDatosMedico(varMed,varEsp,varEmp) {
-    $('#txt_med_colegiado').val(varMed[0]['med_colegiado']);
-    $('#txt_med_registro').val(varMed[0]['med_registro']);
-    $('#cmb_empresa').val((varEmp[0]['IdsEmp']!=null)?varEmp[0]['IdsEmp']:'1');
-    for (var i = 0; i < varEsp.length; i++) {
-        $("#cmb_especialidad option[value=" + varEsp[i]['IdsEsp'] + "]").attr("selected", true);
-    }
-}
+
 function mostrarDatos(varPer) {
     //$('#txth_per_id').val(varPer[0]['Ids']);
     $('#txt_per_nombre').val(varPer[0]['Nombre']);

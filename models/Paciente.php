@@ -101,6 +101,14 @@ class Paciente extends \yii\db\ActiveRecord
         return $dataProvider;
     }
     
+    public function buscarPacienteID($ids){
+        $con = \Yii::$app->db;   
+        $sql = "SELECT pac_id,per_id FROM " . $con->dbname . ".paciente WHERE pac_id=:pac_id ";
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":pac_id", $ids, \PDO::PARAM_INT);
+        return $comando->queryAll();
+    }
+    
     
     /* INSERTAR DATOS */
     public function insertarPacientes($data) {
@@ -116,7 +124,13 @@ class Paciente extends \yii\db\ActiveRecord
             $pac_id=$con->getLastInsertID();
             $password=  Utilities::generarCodigoKey(8);//Passw Generado Automaticamente
             $linkActiva=Usuario::crearLinkActivacion();
-            Usuario::insertarDataUser($con, $data[0]['per_correo'], $password, $per_id,$linkActiva);
+            Usuario::insertarDataUser($con, $data[0]['per_correo'], $password, $per_id,$linkActiva);            
+            Utilities::insertarLogs($con, $pac_id, 'paciente', 'Insert -> Pac_id,Per_id,Usu_id');
+            $trans->commit();
+            $con->close();
+            //RETORNA DATOS 
+            $arroout["status"]= true;
+            
             //Enviar correo electronico para activacion de cuenta
                 $nombres = $data[0]['per_nombre'];
                 $tituloMensaje = Yii::t("register","Successful Registration");
@@ -124,7 +138,29 @@ class Paciente extends \yii\db\ActiveRecord
                 $body = Utilities::getMailMessage("registerPaciente", array("[[user]]" => $nombres, "[[username]]" => $data[0]['per_correo'],"[[clave]]" => $password, "[[link_verification]]" => $linkActiva), Yii::$app->language);
                 Utilities::sendEmail($tituloMensaje, Yii::$app->params["adminEmail"], [$data[0]['per_correo'] => $data[0]['per_nombre'] . " " . $data[0]['per_apellido']], $asunto, $body);
             //Find Datos Mail
-            Utilities::insertarLogs($con, $pac_id, 'paciente', 'Insert -> Pac_id,Per_id,Usu_id');
+            
+            return $arroout;
+        } catch (\Exception $e) {
+            $trans->rollBack();
+            $con->close();
+            //throw $e;
+            $arroout["status"]= false;
+            return $arroout;
+        }
+    }
+    
+    /* ACTUALIZAR DATOS */
+    public function actualizarPacientes($data) {
+        $arroout = array();
+        $con = \Yii::$app->db;
+        $trans = $con->beginTransaction();
+        try {
+            $data = isset($data['DATA']) ? $data['DATA'] : array();
+            $pac_id=$data[0]['pac_id'];
+            $this->updateDataPaciente($con, $data, $pac_id);
+            Persona::actualizarDataPerfil($con,$data);
+            Persona::actualizarDataAdicional($con,$data);
+            Utilities::insertarLogs($con, $pac_id, 'paciente', 'Update -> Pac_id,Per_id');
             $trans->commit();
             $con->close();
             //RETORNA DATOS 
@@ -139,6 +175,7 @@ class Paciente extends \yii\db\ActiveRecord
         }
     }
     
+    
     private function insertarDataPaciente($con, $data, $per_id) {
         //Datos Adicionales
         $sql = "INSERT INTO " . $con->dbname . ".paciente
@@ -147,6 +184,38 @@ class Paciente extends \yii\db\ActiveRecord
         $command->bindParam(":per_id", $per_id, \PDO::PARAM_INT); //Id Comparacion
         $command->execute();
     }
+    
+    
+    public static function eliminarPaciente($data) {
+        $con = \Yii::$app->db;
+        $trans = $con->beginTransaction();
+        try {
+            $ids = isset($data['ids']) ? base64_decode($data['ids']) :NULL;
+            $sql = "UPDATE " . $con->dbname . ".paciente SET pac_est_log=0 WHERE pac_id=:pac_id ";
+            $command = $con->createCommand($sql);
+            $command->bindParam(":pac_id", $ids, \PDO::PARAM_INT);
+            $command->execute();
+            $trans->commit();
+            $con->close();
+            return true;
+        } catch (\Exception $e) {
+            $trans->rollBack();
+            $con->close();
+            //throw $e;
+            return false;
+        }
+    }
+    
+    private function updateDataPaciente($con, $data, $pac_id) {
+        //Datos Adicionales        
+        $sql = "UPDATE " . $con->dbname . ".paciente
+            SET pac_fec_mod = CURRENT_TIMESTAMP()
+        WHERE pac_id = :pac_id; ";        
+        $command = $con->createCommand($sql);
+        $command->bindParam(":pac_id", $pac_id, \PDO::PARAM_INT); //Id Comparacion
+        $command->execute();
+    }
+    
     
     
     
