@@ -2,6 +2,7 @@
 
 namespace app\models;
 use yii\data\ArrayDataProvider;
+use app\models\Persona;
 
 
 use Yii;
@@ -99,4 +100,54 @@ class Paciente extends \yii\db\ActiveRecord
 
         return $dataProvider;
     }
+    
+    
+    /* INSERTAR DATOS */
+    public function insertarPacientes($data) {
+        $arroout = array();
+        $con = \Yii::$app->db;
+        $trans = $con->beginTransaction();
+        try {
+            $data = isset($data['DATA']) ? $data['DATA'] : array();
+            Persona::insertarDataPerfil($con, $data);
+            $per_id=$con->getLastInsertID();//IDS de la Persona
+            Persona::insertarDataPerfilDatoAdicional($con, $data, $per_id);
+            $this->insertarDataPaciente($con, $data, $per_id);
+            $pac_id=$con->getLastInsertID();
+            $password=  Utilities::generarCodigoKey(8);//Passw Generado Automaticamente
+            $linkActiva=Usuario::crearLinkActivacion();
+            Usuario::insertarDataUser($con, $data[0]['per_correo'], $password, $per_id,$linkActiva);
+            //Enviar correo electronico para activacion de cuenta
+                $nombres = $data[0]['per_nombre'];
+                $tituloMensaje = Yii::t("register","Successful Registration");
+                $asunto = Yii::t("register", "User Register") . " " . Yii::$app->params["siteName"];
+                $body = Utilities::getMailMessage("registerPaciente", array("[[user]]" => $nombres, "[[username]]" => $data[0]['per_correo'],"[[clave]]" => $password, "[[link_verification]]" => $linkActiva), Yii::$app->language);
+                Utilities::sendEmail($tituloMensaje, Yii::$app->params["adminEmail"], [$data[0]['per_correo'] => $data[0]['per_nombre'] . " " . $data[0]['per_apellido']], $asunto, $body);
+            //Find Datos Mail
+            Utilities::insertarLogs($con, $pac_id, 'paciente', 'Insert -> Pac_id,Per_id,Usu_id');
+            $trans->commit();
+            $con->close();
+            //RETORNA DATOS 
+            $arroout["status"]= true;
+            return $arroout;
+        } catch (\Exception $e) {
+            $trans->rollBack();
+            $con->close();
+            //throw $e;
+            $arroout["status"]= false;
+            return $arroout;
+        }
+    }
+    
+    private function insertarDataPaciente($con, $data, $per_id) {
+        //Datos Adicionales
+        $sql = "INSERT INTO " . $con->dbname . ".paciente
+            (per_id,pac_est_log)VALUES(:per_id,1);";
+        $command = $con->createCommand($sql);
+        $command->bindParam(":per_id", $per_id, \PDO::PARAM_INT); //Id Comparacion
+        $command->execute();
+    }
+    
+    
+    
 }

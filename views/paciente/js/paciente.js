@@ -57,12 +57,7 @@ function dataPersona(medID,perID) {
     objDat.dper_celular = $('#txt_dper_celular').val();
     objDat.dper_contacto = $('#txt_dper_contacto').val();
     objDat.dper_est_log = 1;
-    //DATOS TAB ESPECIALIDAD
-    objDat.especialidades = setEspecialidades('cmb_especialidad');
-    objDat.emp_id = $('#cmb_empresa option:selected').val();
-    objDat.med_colegiado=$('#txt_med_colegiado').val();
-    objDat.med_registro=$('#txt_med_registro').val();
-    
+
     datArray[0] = objDat;
     sessionStorage.dataPersona = JSON.stringify(datArray);
     return datArray;
@@ -79,7 +74,7 @@ function setEspecialidades(elemento) {
 }
 
 function guardarDatos(accion) {
-    var medID = (accion == "Update") ? $('#txth_med_id').val() : 0;
+    var medID = (accion == "Update") ? $('#txth_pac_id').val() : 0;
     var perID = (accion == "Update") ? $('#txth_per_id').val() : 0;
     var link = $('#txth_base').val() + "/paciente/save";
     var arrParams = new Object();
@@ -112,7 +107,7 @@ function eliminarDatos(ids) {
             var data = response.message;
             if (response.status == "OK") {
                 //actualizarGrid();
-                $('#TbG_MEDICO').yiiGridView('applyFilter');
+                $('#TbG_PACIENTE').yiiGridView('applyFilter');
             }
             showAlert(response.status, response.type, {"wtmessage": data.info, "title": response.label});
         },true);
@@ -132,7 +127,7 @@ function actualizarGrid(){
     //Buscar almenos una clase con el nombre para ejecutar
     if(!$(".blockUI").length){
         showLoadingPopup();
-        $('#TbG_SOLICITUD').PbGridView('applyFilterData',{'estado':estado,'f_ini':f_ini,'f_fin':f_fin,'licencia':licencia,'valor':valor,'op':'1'});
+        $('#TbG_PACIENTE').PbGridView('applyFilterData',{'estado':estado,'f_ini':f_ini,'f_fin':f_fin,'licencia':licencia,'valor':valor,'op':'1'});
         setTimeout(hideLoadingPopup,2000);
     }
 }

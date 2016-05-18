@@ -188,6 +188,22 @@ class Usuario extends ActiveRecord implements IdentityInterface {
         return false;
     }
     
+    public static function insertarDataUser($con,$username, $password, $id_persona,$link) {
+        $security = new Security();
+        $usu_sha = $security->generateRandomString();//String de Seguridad
+        $usu_password = base64_encode($security->encryptByPassword($usu_sha, $password));//Nuevo Pass con SHA Y 64 BITS        
+        $sql = "INSERT INTO " . $con->dbname . ".usuario
+            (per_id,usu_username,usu_password,usu_sha,usu_link_activo,usu_estado_activo,usu_est_log)VALUES
+            (:per_id,:usu_username,:usu_password,:usu_sha,:usu_link_activo,0,1);";
+        $command = $con->createCommand($sql);
+        $command->bindParam(":per_id", $id_persona, \PDO::PARAM_INT);//Id Comparacion
+        $command->bindParam(":usu_username", $username, \PDO::PARAM_STR);
+        $command->bindParam(":usu_password", $usu_password, \PDO::PARAM_STR);
+        $command->bindParam(":usu_sha", $usu_sha, \PDO::PARAM_STR);
+        $command->bindParam(":usu_link_activo", $link, \PDO::PARAM_STR);
+        $command->execute();
+    }
+    
     /**
      * Función genera un link de acceso para ser enviado por correo
      *
@@ -209,6 +225,21 @@ class Usuario extends ActiveRecord implements IdentityInterface {
         $this->usu_link_activo = $link;
         $this->usu_estado_activo = 0;
         $this->save();
+        return $link;
+    }
+    
+    //Solo Genera Link Sin Guardar en la Base
+    public static function crearLinkActivacion(){
+        $security = new Security();
+        $hash = $security->generateRandomString();
+        $sublink = urlencode($hash);
+        $sublink = str_replace("/", "", $sublink);
+        $sublink = str_replace("+", "", $sublink);
+        $sublink = str_replace("-", "", $sublink);
+        $sublink = str_replace("_", "", $sublink);
+        $sublink = str_replace(" ", "", $sublink);
+        $sublink = str_replace("?", "", $sublink);
+        $link = Url::base(true)."/site/activation?wg=".$sublink;
         return $link;
     }
     
