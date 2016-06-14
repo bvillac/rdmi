@@ -162,8 +162,10 @@ engine=innodb  default charset=utf8 auto_increment=1;
 create  table if not exists  `log` (
   `log_id` bigint(20) not null auto_increment ,
   `usu_id` bigint(20) not null ,
-  `log_fecha` timestamp null default current_timestamp ,
+  `log_registro` bigint(20) not null ,  
   `log_accion` varchar(60) null ,
+  `log_table` varchar(60) null ,
+  `log_fecha` timestamp null default current_timestamp ,
   primary key (`log_id`) ,
   constraint `fk_log_usuario1`
     foreign key (`usu_id` )
