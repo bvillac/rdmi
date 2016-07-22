@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'yii\grid\ActionColumn',
                 //'header' => Yii::t("formulario", "Acciones"),
                 //'headerOptions' => ['width' => '30'],
-                'template' => '{view} {update} {delete} ', //
+                'template' => '{view} {update} {Horarios} {delete} ', //
                 'buttons' => [
                     'view' => function ($url, $model) {//glyphicon-download-alt
                         //return Html::a('<span class="glyphicon glyphicon-list-alt"></span>', Url::to(['medico/solicitudpdf', 'ids' => base64_encode($model['Ids']), 'pdf' => 1]), [ "data-toggle" => "tooltip", "title" => "Ver Ficha"]);
@@ -69,6 +69,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     },
                     'update' => function ($url, $model) {
                             return Html::a('<span class="glyphicon glyphicon-pencil"></span>', Url::to(['medico/update', 'ids' => base64_encode($model['Ids'])]), ["data-toggle" => "tooltip", "title" => "Editar"]);
+                    },
+                    'Horarios' => function ($url, $model) {
+                            return Html::a('<span class="glyphicon glyphicon-time"></span>', Url::to(['medico/adminmedico', 'ids' => base64_encode($model['Ids'])]), ["data-toggle" => "tooltip", "title" => "Horarios"]);
                     },
                     'delete' => function ($url, $model) {
                         return Html::a('<span class="glyphicon glyphicon-remove"></span>', null, ['href' => 'javascript:eliminarDatos(\'' . base64_encode($model['Ids']) . '\');', "data-toggle" => "tooltip", "title" => "Eliminar"]);

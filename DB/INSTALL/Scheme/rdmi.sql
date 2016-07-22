@@ -632,7 +632,7 @@ create table if not exists `tipo_password` (
 -- Estructura de tabla para la tabla `user_passreset`
 --
 CREATE TABLE IF NOT EXISTS `user_passreset` (
-`upas_id` bigint(20) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+`upas_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 `usu_id` bigint(20) NOT NULL,
 `upas_remote_ip_inactivo` varchar(20) DEFAULT NULL,
 `upas_remote_ip_activo` varchar(20) DEFAULT NULL,

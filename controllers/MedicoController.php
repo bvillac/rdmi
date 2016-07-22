@@ -231,5 +231,46 @@ class MedicoController extends Controller {
             return;
         }
     }
+    
+    public function actionadminmedico($ids) {
+        $perADO = new Persona();
+        $medADO = new Medico();
+        //$paises = Pais::getPaises();
+        $provincias = array();
+        $cantones = array();        
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
+            if (isset($data["getcantones"])) {
+                $cantones = Canton::getCantonesByProvinciaID($data['prov_id']);
+                $message = [
+                    "cantones" => $cantones,
+                ];
+                echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message);
+                return;
+            }
+        }
+        $ids = isset($_GET['ids']) ? base64_decode($_GET['ids']) : NULL;
+        $medData = $medADO->buscarMedicoID($ids);
+        $medEspData = Medico::getEspecilidadesMedico($ids);
+        $empData = Empresa::getEmpresaMedico($ids);
+        $perData = $perADO->buscarPersonaID($medData[0]["per_id"]);
+        $provincias = Provincia::getProvinciasByPaisID($this->id_pais);
+        if (count($provincias) > 0) {            
+            $cantones = Canton::getCantonesByProvinciaID(($perData[0]["Provincia"]<>0)?$perData[0]["Provincia"]:$provincias[0]["Ids"]);
+        }
+        return $this->render('adminmedico', [
+                    "model" => $medData,
+                    "medico" => json_encode($medData),
+                    "medicoEsp" => json_encode($medEspData),
+                    "medicoEmp" => json_encode($empData),
+                    "persona" => json_encode($perData),
+                    "especialidades" => Medico::getEspecilidades(),
+                    "empresas" => Empresa::getEmpresas(),
+                    "provincias" => $provincias,
+                    "pais" => $paises,
+                    "estCivil" => Utilities::estadoCivil(),
+                    "genero" => Utilities::genero(),
+                    "cantones" => $cantones]);
+    }
 
 }
