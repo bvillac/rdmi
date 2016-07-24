@@ -143,6 +143,7 @@ class Medico extends \yii\db\ActiveRecord
         return $comando->queryAll();
     }
     
+    //Extrae todas las especialidades 
     public static function getEspecilidadesMedico($ids){
         $con = \Yii::$app->db;
         $sql="SELECT b.esp_id IdsEsp,b.esp_nombre Especialidad FROM " . $con->dbname . ".especialidad_medico a

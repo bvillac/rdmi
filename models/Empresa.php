@@ -133,5 +133,22 @@ class Empresa extends \yii\db\ActiveRecord
         $command->execute();
     }
     
+    public static function getCentroMedicoEmp($ids){
+        $con = \Yii::$app->db;
+        $sql="SELECT cate_id Ids,cate_nombre Nombre FROM " . $con->dbname . ".centro_atencion WHERE emp_id=:emp_id ";
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":emp_id", $ids, \PDO::PARAM_INT);
+        return $comando->queryAll();
+    }
+    
+    public static function getConsultorioMedicoEmp($data){
+        $con = \Yii::$app->db;     
+        $sql="SELECT cons_id Ids,cons_nombre Nombre FROM " . $con->dbname . ".consultorio WHERE esp_id=:esp_id AND cate_id=:cate_id ";
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":esp_id", $data['esp_id'], \PDO::PARAM_INT);
+        $comando->bindParam(":cate_id", $data['cate_id'], \PDO::PARAM_INT);
+        return $comando->queryAll();
+    }
+    
     
 }

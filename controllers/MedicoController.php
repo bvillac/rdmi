@@ -23,7 +23,7 @@ class MedicoController extends Controller {
 
     private $id_pais = 56; //Id Pertenece al Pais Ecuador
 
-    public function behaviors() {
+    /*public function behaviors() {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -32,7 +32,7 @@ class MedicoController extends Controller {
                 ],
             ],
         ];
-    }
+    }*/
 
     /**
      * Lists all Medico models.
@@ -232,7 +232,7 @@ class MedicoController extends Controller {
         }
     }
     
-    public function actionadminmedico($ids) {
+    public function actionAdminmedico() {
         $perADO = new Persona();
         $medADO = new Medico();
         //$paises = Pais::getPaises();
@@ -240,37 +240,30 @@ class MedicoController extends Controller {
         $cantones = array();        
         if (Yii::$app->request->isAjax) {
             $data = Yii::$app->request->post();
-            if (isset($data["getcantones"])) {
-                $cantones = Canton::getCantonesByProvinciaID($data['prov_id']);
-                $message = [
-                    "cantones" => $cantones,
-                ];
+            if (isset($data["getcentro"])) {
+                $message = ["centroatencion" => Empresa::getCentroMedicoEmp($data['emp_id'])];
+                echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message);
+                return;
+            }
+            if (isset($data["getconsultorio"])) {
+                $message = ["consultorio" => Empresa::getConsultorioMedicoEmp($data)];
                 echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message);
                 return;
             }
         }
-        $ids = isset($_GET['ids']) ? base64_decode($_GET['ids']) : NULL;
+        $ids = 1;//isset($_GET['ids']) ? base64_decode($_GET['ids']) : NULL;
+        
         $medData = $medADO->buscarMedicoID($ids);
         $medEspData = Medico::getEspecilidadesMedico($ids);
         $empData = Empresa::getEmpresaMedico($ids);
         $perData = $perADO->buscarPersonaID($medData[0]["per_id"]);
-        $provincias = Provincia::getProvinciasByPaisID($this->id_pais);
-        if (count($provincias) > 0) {            
-            $cantones = Canton::getCantonesByProvinciaID(($perData[0]["Provincia"]<>0)?$perData[0]["Provincia"]:$provincias[0]["Ids"]);
-        }
+
         return $this->render('adminmedico', [
                     "model" => $medData,
                     "medico" => json_encode($medData),
-                    "medicoEsp" => json_encode($medEspData),
-                    "medicoEmp" => json_encode($empData),
-                    "persona" => json_encode($perData),
-                    "especialidades" => Medico::getEspecilidades(),
-                    "empresas" => Empresa::getEmpresas(),
-                    "provincias" => $provincias,
-                    "pais" => $paises,
-                    "estCivil" => Utilities::estadoCivil(),
-                    "genero" => Utilities::genero(),
-                    "cantones" => $cantones]);
+                    "medicoEsp" => $medEspData,
+                    "medicoEmp" => $empData,
+                    ]);
     }
 
 }

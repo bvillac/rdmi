@@ -3,7 +3,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 
-$this->title = 'Modificar Médico '; //. ' ' . $model[0]["med_id"];
+$this->title = 'Administrar Médico '; //. ' ' . $model[0]["med_id"];
 //$this->params['breadcrumbs'][] = ['label' => 'Medicos', 'url' => ['index']];
 //$this->params['breadcrumbs'][] = ['label' => $model[0]["med_id"], 'url' => ['view', 'id' => $model[0]["med_id"]]];
 //$this->params['breadcrumbs'][] = 'Update';
@@ -17,29 +17,23 @@ $this->title = 'Modificar Médico '; //. ' ' . $model[0]["med_id"];
 <div class="col-md-12">
     <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
-            <li class="active">             
-                <a href="#paso1" data-toggle="tab" aria-expanded="true"><?= Yii::t("Perfil", "Personal data") ?></a>
-            </li>
-            <li class=""><a href="#paso2" data-toggle="tab" aria-expanded="false"><?= Yii::t("Perfil", "Especialidad") ?></a></li>
+            <li class="active"><a href="#paso1" data-toggle="tab" aria-expanded="true"><?= Yii::t("Perfil", "Horarios") ?></a></li>
+            <li class=""><a href="#paso2" data-toggle="tab" aria-expanded="false"><?= Yii::t("Perfil", "Horarios") ?></a></li>
 <!--            <li class=""><a href="#paso3" data-toggle="tab" aria-expanded="false"><?= Yii::t("Perfil", "Objetivo2") ?></a></li>-->
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="paso1">
                 <form class="form-horizontal">
-                    <?=
-                    $this->render('_form_tab1', [
-                        'cantones' => $cantones,
-                        'genero' => $genero, 
-                        'estCivil' => $estCivil,
-                        'provincias' => $provincias]);
+                    <?=1
+                    //$this->render('_form_tab1');
                     ?>
                 </form>
             </div><!-- /.tab-pane -->
             <div class="tab-pane" id="paso2">
                 <form class="form-horizontal">
-                    <?= $this->render('_form_tab2', 
-                        ['especialidades' => $especialidades,
-                        'empresas' => $empresas]); ?>
+                    <?= $this->render('_form_Admintab1', 
+                        ['especialidades' => $medicoEsp,
+                        'empresas' => $medicoEmp]) ?>
                 </form>
             </div><!-- /.tab-pane -->
             
@@ -53,11 +47,11 @@ $this->title = 'Modificar Médico '; //. ' ' . $model[0]["med_id"];
 <script>
     //Datos de Solicitud
     //var varPerData=base64_decode('<?= $persona ?>');
-    var AccionTipo='Update';
-    var varPerData=<?= $persona ?>;
-    var varMedData=<?= $medico ?>;
-    var varEspData=<?= $medicoEsp ?>;
-    var varEmpData=<?= $medicoEmp ?>;
+    var AccionTipo='Admin';
+    //var varPerData=<?= $persona ?>;
+    //var varMedData=<?= $medico ?>;
+    //var varEspData=<?= $medicoEsp ?>;
+    //var varEmpData=<?= $medicoEmp ?>;
     //alert(varPerData[0].Nombre);
 </script>
 

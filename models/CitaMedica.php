@@ -118,4 +118,7 @@ class CitaMedica extends \yii\db\ActiveRecord
     {
         return $this->hasMany(SignosVitales::className(), ['cmde_id' => 'cmde_id']);
     }
+    
+
+    
 }

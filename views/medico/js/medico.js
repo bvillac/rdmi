@@ -10,6 +10,14 @@ $(document).ready(function () {
         obtenerCanton();
     });
     
+    $('#cmb_empresa').change(function () {
+        obtenerAdmCentro();
+    });
+    
+    $('#cmb_especialidad').change(function () {
+        obtenerAdmConsultorio();
+    });
+    
     $('#btn_saveCreate').click(function () {
         guardarDatos('Create');
     });
@@ -27,6 +35,33 @@ function obtenerCanton() {
         if (response.status == "OK") {
             var data = response.message;
             setComboData(data.cantones, "cmb_ciudad");
+        }
+    }, true);
+}
+
+function obtenerAdmCentro() {
+    var link = $('#txth_base').val() + "/medico/adminmedico";
+    var arrParams = new Object();
+    arrParams.emp_id = $('#cmb_empresa').val();
+    arrParams.getcentro = true;
+    requestHttpAjax(link, arrParams, function (response) {
+        if (response.status == "OK") {
+            var data = response.message;
+            setComboData(data.centroatencion, "cmb_centro");
+        }
+    }, true);
+}
+
+function obtenerAdmConsultorio() {
+    var link = $('#txth_base').val() + "/medico/adminmedico";
+    var arrParams = new Object();
+    arrParams.esp_id = $('#cmb_especialidad').val();
+    arrParams.cate_id = $('#cmb_centro').val();
+    arrParams.getconsultorio = true;
+    requestHttpAjax(link, arrParams, function (response) {
+        if (response.status == "OK") {
+            var data = response.message;
+            setComboData(data.consultorio, "cmb_consultorio");
         }
     }, true);
 }
@@ -145,6 +180,8 @@ function InicioFormulario() {
     if (AccionTipo == "Update") {
         loadDataUpdate();
     } else if (AccionTipo == "Create") {
+        //loadDataCreate();
+    } else if (AccionTipo == "Admin") {
         //loadDataCreate();
     }
 }
