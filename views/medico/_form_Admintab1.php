@@ -80,13 +80,28 @@ use kartik\date\DatePicker;
         </div>
     </div>
 </div>
+<div class="col-md-6">
+    <div class="col-sm-3">
+        <a id="cmd_generarHora" href="javascript:" class="btn btn-primary btn-block"> <?= Yii::t("formulario", "Generar Horas") ?> <span class="glyphicon glyphicon-search"></span></a>
+    </div>
+    <div class="col-sm-3">                
+        <a id="cmd_saveHora" href="javascript:" class="btn btn-primary btn-block"> <?= Yii::t("formulario", "Guardar") ?> <span class="glyphicon glyphicon-search"></span></a>
+    </div>
+</div>
 
 
 
 <div class="col-md-12">
-    <h3><span><?= Yii::t("perfil", "Especialidad") ?></span></h3>
+    <h3><span><?= Yii::t("perfil", "Horarios") ?></span></h3>
+    <p>
+        <span id="lbl_cons_hora_inicio" class="label label-primary"></span>
+        <span id="lbl_cons_hora_fin" class="label label-primary"></span>
+        <span id="lbl_cons_tiempo_consulta" class="label label-primary"></span>
+    </p>
 </div>
+<div id="info-Horarios" class="col-md-12">
 
+</div>
 
 
 <div class="row"></div>

@@ -24,6 +24,12 @@ $(document).ready(function () {
     $('#btn_saveUpdate').click(function () {
         guardarDatos('Update');
     });
+    $('#cmd_generarHora').click(function () {
+        obtenerHoraiosMedico();
+    });
+    $('#cmd_saveHora').click(function () {
+        guardarDatosHoras();
+    });
 });
 
 function obtenerCanton() {
@@ -210,5 +216,143 @@ function mostrarDatos(varPer) {
     $('#txt_dper_contacto').val((varPer[0]['Contacto']!=null)?varPer[0]['Contacto']:'');
     $('#txt_dper_celular').val((varPer[0]['Celular']!=null)?varPer[0]['Celular']:'');
 }
+
+
+//GENERAR HORARIOS
+
+function obtenerHoraiosMedico() {
+    var link = $('#txth_base').val() + "/medico/adminmedico";
+    var arrParams = new Object();
+    //arrParams.hora_id = $('#cmb_especialidad').val();
+    arrParams.fecha_cita = $('#cmb_centro').val();
+    arrParams.cons_id = $('#cmb_consultorio').val();
+    arrParams.cate_id = $('#cmb_centro').val();
+    arrParams.esp_id = $('#cmb_especialidad').val();
+    //arrParams.med_id = $('#cmb_centro').val();
+    arrParams.gethorio = true;
+    requestHttpAjax(link, arrParams, function (response) {
+        if (response.status == "OK") {
+            var data = response.message;//horarioCentro
+            if (data.horarioMedico.length>0){
+                //generarHorarios(data.horarioMedico);
+            }else{
+                if (data.horarioCentro.length>0){
+                    generarHorarios(data.horarioCentro);
+                }
+            }
+            
+        }
+    }, true);
+}
+
+function generarHorarios(data) {
+    $("#lbl_cons_hora_inicio").text('HI: '+data[0]['cons_hora_inicio']); 
+    $("#lbl_cons_hora_fin").text('HF: '+data[0]['cons_hora_fin']); 
+    $("#lbl_cons_tiempo_consulta").text('PE: '+data[0]['cons_tiempo_consulta']); 
+    var strData = "";
+    var ids="";
+    //var contador=1;
+    var timeGenerado = data[0]['cons_hora_inicio'];
+    strData += '<div class="form-group">';
+    while (timeGenerado < data[0]['cons_hora_fin']) {
+        ids=limpiarRutaSTR(timeGenerado);
+        strData += '<div class="checkbox-inline">';
+            strData += '<label>';
+                strData += '<input type="checkbox" id="'+ids+'" value="'+timeGenerado+'" >';
+                    strData += timeGenerado;
+            strData += '</label>';
+        strData += '</div>';
+        //strData += ((contador%10)==0)?'</div><br>':'</div>';
+        //contador++;
+        timeGenerado = formatTime(timestrToSec(timeGenerado) + timestrToSec(data[0]['cons_tiempo_consulta']));
+    }
+    strData += '</div>';
+    $("#info-Horarios").empty();
+    $("#info-Horarios").append(strData);  
+}
+
+//Verificacion de Los Check Seleccionado en Horario
+function obtenerAnteHabitoCheck(){
+    $("input:checkbox:checked").each(function(){
+	//cada elemento seleccionado
+	alert($(this).val());
+});
+    
+   //Obtenr el tamño de Check 
+   var c=0;
+   var datArray = new Array();
+   for(var i=0; i<5; i++){//Recorrer todos los chechbox
+       //var marcado = $("#chk_ant_"+i).prop("checked");
+       if($("#chk_antHab_"+i).prop("checked")){//Si es verdadero Ingresa al Array
+           objDat=new Object();
+           objDat.AntHabCheck_Id=i;
+           objDat.AntHabCheck_Val=$("#chk_antHab_"+i).val();
+           objDat.AntHabCheck_Text=$("#txt_antHab_"+i).val();
+           objDat.AntHabCheck_Name='';
+           datArray[c] = objDat;
+           sessionStorage.chk_AntHabito_id = JSON.stringify(datArray);
+           c++;
+       }
+   }
+}
+
+function guardarDatosHoras() {
+    var datArray = new Array();
+    var c=0;
+    var rango =String($('#lbl_cons_tiempo_consulta').text()).replace('PE: ', '');
+    $("input:checkbox:checked").each(function () {
+        //cada elemento seleccionado
+        var objDat=new Object();
+        objDat.hora_id=$(this).val();
+        //objDat.hora_inicio=$(this).val();
+        objDat.hora_fin=formatTime(timestrToSec($(this).val()) + timestrToSec(rango));;
+        datArray[c] = objDat;
+        sessionStorage.dataHorarios = JSON.stringify(datArray);
+        c++;
+        alert($(this).val());
+    });
+    /*var medID = (accion == "Update") ? $('#txth_med_id').val() : 0;
+    var perID = (accion == "Update") ? $('#txth_per_id').val() : 0;
+    var link = $('#txth_base').val() + "/medico/savemedico";
+    var arrParams = new Object();
+    arrParams.DATA = dataPersona(medID,perID);
+    arrParams.ACCION = accion;
+    var validation = validateForm();
+    if (!validation) {
+        requestHttpAjax(link, arrParams, function (response) {
+            var message = response.message;
+            if (response.status == "OK") {
+                showAlert(response.status, response.type, {"wtmessage": message.info, "title": response.label});
+                //limpiarDatos();
+                //var renderurl = $('#txth_base').val() + "/mceformulariotemp/index";
+                //window.location = renderurl;
+            } else {
+                showAlert(response.status, response.type, {"wtmessage": message.info, "title": response.label});
+            }
+        }, true);
+    }*/
+}
+
+function retornaDivFilaHorarios(contador,Grid){
+    //alert(contador); 
+    var strNueva_Fila="";
+    strNueva_Fila +='<div class="trow">';
+    strNueva_Fila +='<div class="tcol-td margen_td">';
+    strNueva_Fila +='<span >'+MyPrimera(Grid[contador]['TANT_NOMBRE'].toLowerCase())+'</span>';
+    strNueva_Fila +='</div>';
+    strNueva_Fila +='<div class="tcol-td margen_td">';
+    if(Grid[contador]['ANT_CHK']=="1"){
+        strNueva_Fila +='<input id="chk_ant_'+contador+'" type="checkbox" name="chk_ant_'+contador+'" value="'+Grid[contador]['ANT_ID']+'">';
+    }
+    strNueva_Fila +='</div>';
+    strNueva_Fila +='<div class="tcol-td margen_td">';
+    if(Grid[contador]['ANT_CHK']=="1"){
+        strNueva_Fila +='<input id="txt_ant_'+contador+'" class="max-ano" type="text" name="txt_ant_'+contador+'" enable="false" value="" maxlength="2" size="2">';
+    }
+    strNueva_Fila +='</div>';
+    strNueva_Fila +='</div>';   
+    return strNueva_Fila;
+}
+
 
 

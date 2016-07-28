@@ -235,7 +235,6 @@ class MedicoController extends Controller {
     public function actionAdminmedico() {
         $perADO = new Persona();
         $medADO = new Medico();
-        //$paises = Pais::getPaises();
         $provincias = array();
         $cantones = array();        
         if (Yii::$app->request->isAjax) {
@@ -247,6 +246,12 @@ class MedicoController extends Controller {
             }
             if (isset($data["getconsultorio"])) {
                 $message = ["consultorio" => Empresa::getConsultorioMedicoEmp($data)];
+                echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message);
+                return;
+            }
+            if (isset($data["gethorio"])) {
+                $message = ["horarioMedico" => Medico::mostraHorarioMedico($data),
+                            "horarioCentro" => Medico::mostraHorarioCentro($data)];
                 echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message);
                 return;
             }

@@ -269,6 +269,27 @@ class Medico extends \yii\db\ActiveRecord
         }
     }
     
+    public static function mostraHorarioMedico($data){
+        $con = \Yii::$app->db; 
+        $sql="SELECT * FROM " . $con->dbname . ".horario WHERE DATE(fecha_cita)=:fecha AND cons_id=:cons_id AND med_id=:med_id AND hora_est_log=1 ";
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":fecha",date("Y-m-d", strtotime($data['fecha_cita'])), \PDO::PARAM_STR);
+        $comando->bindParam(":cons_id", $data['cons_id'], \PDO::PARAM_INT);
+        $comando->bindParam(":med_id", $data['med_id'], \PDO::PARAM_INT);
+        return $comando->queryAll();
+    }
+    
+    public static function mostraHorarioCentro($data){
+        $con = \Yii::$app->db; 
+        $sql="SELECT cons_nombre,cons_hora_inicio,cons_hora_fin,cons_tiempo_consulta 
+                FROM " . $con->dbname . ".consultorio WHERE cons_id=:cons_id AND cate_id=:cate_id AND esp_id=:esp_id AND cons_est_log=1";
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":cons_id", $data['cons_id'], \PDO::PARAM_INT);
+        $comando->bindParam(":esp_id", $data['esp_id'], \PDO::PARAM_INT);
+        $comando->bindParam(":cate_id", $data['cate_id'], \PDO::PARAM_INT);
+        return $comando->queryAll();
+    }
+    
     
 
 }
