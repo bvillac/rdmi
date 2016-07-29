@@ -136,6 +136,14 @@ class Medico extends \yii\db\ActiveRecord
         return $comando->queryAll();
     }
     
+    public function buscarPerId_Medico($ids){
+        $con = \Yii::$app->db;   
+        $sql = "SELECT med_id,per_id,med_colegiado,med_registro FROM " . $con->dbname . ".medico WHERE per_id=:per_id ";
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":per_id", $ids, \PDO::PARAM_INT);
+        return $comando->queryAll();
+    }
+    
     public static function getEspecilidades() {
         $con = \Yii::$app->db;
         $sql="SELECT esp_id,esp_nombre FROM " . $con->dbname . ".especialidad WHERE esp_est_log=1 ";
@@ -290,6 +298,57 @@ class Medico extends \yii\db\ActiveRecord
         return $comando->queryAll();
     }
     
+    /* INSERTAR DATOS */
+    public function insertarMedicosHoras($data) {
+        $arroout = array();
+        $con = \Yii::$app->db;
+        $trans = $con->beginTransaction();
+        try {
+            $dtsHora = isset($data['DTS_HORARIOS']) ? json_decode($data['DTS_HORARIOS']) : array();
+            $fecha = isset($data['FECHA_CITA']) ? $data['FECHA_CITA'] : "";
+            $cons_id = isset($data['CONS_ID']) ? $data['CONS_ID'] : 0;
+            $med_id = isset($data['MED_ID']) ? $data['MED_ID'] : 0;
+            //Anular HOrario de Consultorios por fechas.
+            $this->anularMedicoHora($con, $fecha, $cons_id, $med_id);
+            for ($i = 0; $i < sizeof($dtsHora); $i++) {                
+                $sql = "INSERT INTO " . $con->dbname . ".horario
+                        (fecha_cita,cons_id,med_id,hora_inicio,hora_fin,hora_est_log)VALUES
+                        (:fecha_cita,:cons_id,:med_id,:hora_inicio,:hora_fin,1)";
+                $command = $con->createCommand($sql);
+                //$command->bindParam(":hora_id", $dtsHora[$i]->hora_id, \PDO::PARAM_STR); 
+                $command->bindParam(":fecha_cita", date("Y-m-d", strtotime($fecha)), \PDO::PARAM_STR); 
+                $command->bindParam(":cons_id", $cons_id, \PDO::PARAM_INT); 
+                $command->bindParam(":med_id", $med_id, \PDO::PARAM_INT);
+                $command->bindParam(":hora_inicio", $dtsHora[$i]->hora_inicio, \PDO::PARAM_STR);  
+                $command->bindParam(":hora_fin", $dtsHora[$i]->hora_fin, \PDO::PARAM_STR);  
+                $command->execute();
+                $hora_id=$con->getLastInsertID();
+                Utilities::insertarLogs($con, $hora_id, 'horario', 'Insert -> hora_id->'.$dtsHora[$i]->hora_id);
+            }
+            
+            $trans->commit();
+            $con->close();
+            //RETORNA DATOS 
+            //$arroout["ids"]= $ftem_id;
+            $arroout["status"]= true;
+            //$arroout["secuencial"]= $doc_numero;
+            return $arroout;
+        } catch (\Exception $e) {
+            $trans->rollBack();
+            $con->close();
+            //throw $e;
+            $arroout["status"]= false;
+            return $arroout;
+        }
+    }
     
+    private function anularMedicoHora($con, $fecha, $cons_id, $med_id) {
+        $sql = "UPDATE " . $con->dbname . ".horario SET hora_est_log=0 WHERE DATE(fecha_cita)=:fecha AND cons_id=:cons_id AND med_id=:med_id ";
+        $command = $con->createCommand($sql);
+        $command->bindParam(":fecha",date("Y-m-d", strtotime($fecha)), \PDO::PARAM_STR);
+        $command->bindParam(":cons_id", $cons_id, \PDO::PARAM_INT);
+        $command->bindParam(":med_id", $med_id, \PDO::PARAM_INT);
+        $command->execute();
+    }
 
 }

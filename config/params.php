@@ -28,8 +28,8 @@ return [
     'tokenid' => 'HU787390kdnhyyejkKJHWFDSYWUQB72573LOSNQ2JKTDCA67253',
     'numbersecret' => '2983981321',
     'socialNetworks' => [
-        'facebook' => 'https://www.facebook.com/AmaLaVidaEc',
-        'twitter'  => 'https://twitter.com/amalavidaEC',
-        'youtube'  => 'https://www.youtube.com/user/AmaLaVidaEc',
+        'facebook' => 'https://www.facebook.com/rdmi',
+        'twitter'  => 'https://twitter.com/rdmi',
+        'youtube'  => 'https://www.youtube.com/user/rdmi',
     ],
 ];

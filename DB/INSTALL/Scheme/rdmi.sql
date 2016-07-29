@@ -408,7 +408,7 @@ engine=innodb  default charset=utf8 auto_increment=1;
 -- table  `horario`
 -- -----------------------------------------------------
 create  table if not exists  `horario` (
-  `hora_id` time not null ,
+  `hora_id` BIGINT(20) NOT NULL AUTO_INCREMENT ,
   `fecha_cita` date not null ,
   `cons_id` bigint(20) not null ,
   `med_id` BIGINT(20) NOT NULL ,
@@ -417,7 +417,7 @@ create  table if not exists  `horario` (
   `hora_est_log` varchar(1) null ,
   `hora_fec_cre` timestamp null default current_timestamp ,
   `hora_fec_mod` timestamp null ,
-  primary key (`hora_id`, `fecha_cita`, `cons_id`) ,
+  primary key (`hora_id`, `fecha_cita`, `cons_id`,`hora_inicio`) ,
   constraint `fk_horario_consultorio1`
     foreign key (`cons_id` )
     references  `consultorio` (`cons_id` )
@@ -430,7 +430,6 @@ create  table if not exists  `horario` (
     on update no action)
 engine=innodb  default charset=utf8 auto_increment=1;
 
-
 -- -----------------------------------------------------
 -- table  `cita_medica`
 -- -----------------------------------------------------
@@ -440,7 +439,8 @@ create  table if not exists  `cita_medica` (
   `pac_id` bigint(20) not null ,
   `cprog_id` bigint(20) not null ,
   `tcon_id` bigint(20) not null ,
-  `hora_id` time not null ,
+  `hora_id` BIGINT(20) NOT NULL ,
+  `hora_inicio` TIME NOT NULL ,
   `fecha_cita` date not null ,
   `cons_id` bigint(20) not null ,
   `tur_numero` int(5) not null ,
@@ -450,22 +450,21 @@ create  table if not exists  `cita_medica` (
   `cmde_est_log` varchar(1) null ,
   `cmde_fec_cre` timestamp null default current_timestamp ,
   `cmde_fec_mod` timestamp null ,
-  primary key (`cmde_id`, `acit_id`, `pac_id`, `cprog_id`, `hora_id`,`fecha_cita`, `cons_id`, `tur_numero`) ,
+  primary key (`cmde_id`, `acit_id`, `pac_id`, `cprog_id`, `tur_numero`, `hora_id`, `fecha_cita`, `cons_id`, `hora_inicio`) ,
   constraint `fk_cita_medica_agendar_cita1`
     foreign key (`acit_id` , `pac_id` , `cprog_id` )
     references  `agendar_cita` (`acit_id` , `pac_id` , `cprog_id` )
     on delete no action
     on update no action,
   constraint `fk_cita_medica_horario1`
-    foreign key (`hora_id` , `fecha_cita` , `cons_id` )
-    references  `horario` (`hora_id` , `fecha_cita` , `cons_id` )
+    foreign key (`hora_id` , `fecha_cita` , `cons_id`,`hora_inicio` )
+    references  `horario` (`hora_id` , `fecha_cita` , `cons_id`,`hora_inicio` )
     on delete no action
     on update no action)
 engine=innodb  default charset=utf8 auto_increment=1;
 
 alter table `cita_medica`
 add constraint `fk_cita_medica_001` foreign key (`tcon_id`) references `tipo_consulta`(`tcon_id`);
-
 
 -- -----------------------------------------------------
 -- table  `signos_vitales`

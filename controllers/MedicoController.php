@@ -256,19 +256,44 @@ class MedicoController extends Controller {
                 return;
             }
         }
-        $ids = 1;//isset($_GET['ids']) ? base64_decode($_GET['ids']) : NULL;
-        
+        //$ids =isset($_GET['ids']) ? base64_decode($_GET['ids']) : NULL;
+        $ids =1;//$medADO->buscarPerId_Medico(@Yii::$app->session->get("PerId"));//Retorna Medico Segun la Sesion de la persona        
         $medData = $medADO->buscarMedicoID($ids);
         $medEspData = Medico::getEspecilidadesMedico($ids);
         $empData = Empresa::getEmpresaMedico($ids);
-        $perData = $perADO->buscarPersonaID($medData[0]["per_id"]);
+        //$perData = $perADO->buscarPersonaID($medData[0]["per_id"]);
 
         return $this->render('adminmedico', [
                     "model" => $medData,
-                    "medico" => json_encode($medData),
+                    //"medico" => json_encode($medData),
                     "medicoEsp" => $medEspData,
                     "medicoEmp" => $empData,
                     ]);
     }
+    
+    public function actionSavemedicohora() {
+        if (Yii::$app->request->isAjax) {
+            $model = new Medico();
+            $data = Yii::$app->request->post();
+            $accion = isset($data['ACCION']) ? $data['ACCION'] : "";
+            if ($accion == "Create") {
+                //Nuevo Registro
+                $resul = $model->insertarMedicosHoras($data);
+            }/*else if($accion == "Update"){
+                //Modificar Registro
+                $resul = $model->actualizarMedicos($data);                
+            }*/
+            if ($resul['status']) {
+                $message = ["info" => Yii::t('exception', '<strong>Well done!</strong> your information was successfully saved.')];
+                echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message,$resul);
+            }else{
+                $message = ["info" => Yii::t('exception', 'The above error occurred while the Web server was processing your request.')];
+                echo Utilities::ajaxResponse('NO_OK', 'alert', Yii::t('jslang', 'Error'), 'false', $message);
+            }
+            return;
+        }   
+    }
+    
+    
 
 }
