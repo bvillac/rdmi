@@ -81,11 +81,11 @@ use kartik\date\DatePicker;
     </div>
 </div>
 <div class="col-md-6">
-    <div class="col-sm-3">
-        <a id="cmd_generarHora" href="javascript:" class="btn btn-primary btn-block"> <?= Yii::t("formulario", "Generar Horas") ?> <span class="glyphicon glyphicon-search"></span></a>
+    <div class="col-sm-4">
+        <a id="cmd_generarHora" href="javascript:" class="btn btn-primary btn-block"> <?= Yii::t("formulario", "Generar Horas") ?> <span class="glyphicon"></span></a>
     </div>
-    <div class="col-sm-3">                
-        <a id="cmd_saveHora" href="javascript:" class="btn btn-primary btn-block"> <?= Yii::t("formulario", "Guardar") ?> <span class="glyphicon glyphicon-search"></span></a>
+    <div class="col-sm-4">                
+        <a id="cmd_saveHora" href="javascript:" class="btn btn-primary btn-block"> <?= Yii::t("formulario", "Guardar") ?> <span class="glyphicon "></span></a>
     </div>
 </div>
 

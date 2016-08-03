@@ -221,28 +221,41 @@ function mostrarDatos(varPer) {
 //GENERAR HORARIOS
 
 function obtenerHoraiosMedico() {
-    var link = $('#txth_base').val() + "/medico/adminmedico";
-    var arrParams = new Object();
-    //arrParams.hora_id = $('#cmb_especialidad').val();
-    arrParams.fecha_cita = $('#cmb_centro').val();
-    arrParams.cons_id = $('#cmb_consultorio').val();
-    arrParams.cate_id = $('#cmb_centro').val();
-    arrParams.esp_id = $('#cmb_especialidad').val();
-    //arrParams.med_id = $('#cmb_centro').val();
-    arrParams.gethorio = true;
-    requestHttpAjax(link, arrParams, function (response) {
-        if (response.status == "OK") {
-            var data = response.message;//horarioCentro
-            if (data.horarioMedico.length>0){
-                //generarHorarios(data.horarioMedico);
-            }else{
-                if (data.horarioCentro.length>0){
-                    generarHorarios(data.horarioCentro);
+    if (validarFormulario()) {
+        var link = $('#txth_base').val() + "/medico/adminmedico";
+        var arrParams = new Object();
+        //arrParams.hora_id = $('#cmb_especialidad').val();
+        arrParams.fecha_cita = $('#dtp_f_medHora').val();
+        arrParams.cons_id = $('#cmb_consultorio').val();
+        arrParams.cate_id = $('#cmb_centro').val();
+        arrParams.esp_id = $('#cmb_especialidad').val();
+        arrParams.med_id = $('#txth_med_id').val();
+        arrParams.gethorio = true;
+        requestHttpAjax(link, arrParams, function (response) {
+            if (response.status == "OK") {
+                $("#info-Horarios").empty();
+                var data = response.message;//horarioCentro
+                if (data.horarioMedico.length > 0) {
+                    generarHorarios(data.horarioCentro);//Genera los HOrarios
+                    recargarHorariosCheck(data.horarioMedico);//Recarga los Seleccionados
+                } else {
+                    if (data.horarioCentro.length > 0) {
+                        generarHorarios(data.horarioCentro);
+                    }
                 }
+
             }
-            
+        }, true);
+    }
+}
+
+function recargarHorariosCheck(data) {
+    if (data.length > 0) {
+        for (var i = 0; i < data.length; i++) {
+            var ids=limpiarRutaSTR(data[i]['hora_inicio']);
+            $("#"+ids).prop("checked", true);
         }
-    }, true);
+    }
 }
 
 function generarHorarios(data) {
@@ -289,15 +302,11 @@ function obtenerHorariosCheck(){
 }
 
 function guardarDatosHoras(accion) {
-    var validation =validarFormulario(); //validateForm();
-    //var cate=($('#cmb_cat_laboratorio option:selected').val()>0)?$('#cmb_cat_laboratorio option:selected').val():"";
-    //var cre=($('#cmb_credencial').val()>0)? $('#cmb_credencial').val():0;
-    alert()
-    if (!validation) {
+    if (validarFormulario()) {
         obtenerHorariosCheck();
         var link = $('#txth_base').val() + "/medico/savemedicohora";
         var medID = $('#txth_med_id').val();//(accion == "Update") ? $('#txth_med_id').val() : 0;
-        var perID = $('#txth_per_id').val();//(accion == "Update") ? $('#txth_per_id').val() : 0;
+        //var perID = $('#txth_per_id').val();//(accion == "Update") ? $('#txth_per_id').val() : 0;
         var arrParams = new Object();
         arrParams.FECHA_CITA = $('#dtp_f_medHora').val();
         arrParams.CONS_ID = $('#cmb_consultorio').val();
@@ -319,37 +328,25 @@ function guardarDatosHoras(accion) {
 }
 
 function validarFormulario(){
-    var valor=false;
-    if($('#cmb_consultorio').val()>0){
-        valor=true;
-    }else if($('#txth_med_id').val()>0){
-        valor=true;
-    }else if($('#dtp_f_medHora').val()>0){
-        valor=true;
+    var valor=true;
+    var texbox="";
+    if($('#cmb_consultorio').val()==0){
+        texbox="Ingresar Consultorio <br>";
+    }
+    if($('#txth_med_id').val()==""){
+        texbox+="Ingresar Mèdico <br>";
+    }
+    if($('#dtp_f_medHora').val()==""){
+        texbox+="Ingresar la Fecha de Horarios <br>";
+    }
+    if(texbox !=''){
+       showAlert('NO_OK', 'error', {"wtmessage": texbox, "title":'Información'});
+       valor=false; 
     }
     return valor;
 }
 
-function retornaDivFilaHorarios(contador,Grid){
-    //alert(contador); 
-    var strNueva_Fila="";
-    strNueva_Fila +='<div class="trow">';
-    strNueva_Fila +='<div class="tcol-td margen_td">';
-    strNueva_Fila +='<span >'+MyPrimera(Grid[contador]['TANT_NOMBRE'].toLowerCase())+'</span>';
-    strNueva_Fila +='</div>';
-    strNueva_Fila +='<div class="tcol-td margen_td">';
-    if(Grid[contador]['ANT_CHK']=="1"){
-        strNueva_Fila +='<input id="chk_ant_'+contador+'" type="checkbox" name="chk_ant_'+contador+'" value="'+Grid[contador]['ANT_ID']+'">';
-    }
-    strNueva_Fila +='</div>';
-    strNueva_Fila +='<div class="tcol-td margen_td">';
-    if(Grid[contador]['ANT_CHK']=="1"){
-        strNueva_Fila +='<input id="txt_ant_'+contador+'" class="max-ano" type="text" name="txt_ant_'+contador+'" enable="false" value="" maxlength="2" size="2">';
-    }
-    strNueva_Fila +='</div>';
-    strNueva_Fila +='</div>';   
-    return strNueva_Fila;
-}
+
 
 
 

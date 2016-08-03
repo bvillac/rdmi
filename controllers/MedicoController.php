@@ -257,7 +257,7 @@ class MedicoController extends Controller {
             }
         }
         //$ids =isset($_GET['ids']) ? base64_decode($_GET['ids']) : NULL;
-        $ids =1;//$medADO->buscarPerId_Medico(@Yii::$app->session->get("PerId"));//Retorna Medico Segun la Sesion de la persona        
+        $ids =$medADO->buscarPerId_Medico(@Yii::$app->session->get("PerId"));//Retorna Medico Segun la Sesion de la persona        
         $medData = $medADO->buscarMedicoID($ids);
         $medEspData = Medico::getEspecilidadesMedico($ids);
         $empData = Empresa::getEmpresaMedico($ids);

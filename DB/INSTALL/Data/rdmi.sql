@@ -40,10 +40,10 @@ INSERT INTO `persona` (`per_id`,`per_ced_ruc`,`per_nombre`,`per_apellido`,`per_g
 --
 
 INSERT INTO `usuario` (`usu_id`, `per_id`, `usu_username`, `usu_password`, `usu_sha`, `usu_session`, `usu_last_login`, `usu_link_activo`, `usu_estado_activo`, `usu_alias`, `usu_est_log`, `usu_fec_cre`, `usu_fec_mod`) VALUES
-(1, 1, 'admin', 'nohr0F0OmOEkE4IeKV48szJkYmIzYmQ0ODcyYzA4YmNkZjI0MDA0MjkyYzUwNzUzNzYwNjI1YjEwOGQ0YTE0ZDc3ZjIwOWZkMTNhMTZlMjKTyTGdwC22RmZAyIBI8FHsbMpZ6WnqV1+kuuOTkujEWeN3cet3WJKFxBF/x/bte5sJNwLGJTcIK69llvULNtOL', 'f2gLBc7wsBasMjYYnzp5hAMmXOwQNkFx', NULL, '2016-03-16 09:58:37', NULL, '1', NULL, '1', '2016-03-10 18:00:00', NULL),
-(2, 2, 'byron_villacresesf@hotmail.com', 'nohr0F0OmOEkE4IeKV48szJkYmIzYmQ0ODcyYzA4YmNkZjI0MDA0MjkyYzUwNzUzNzYwNjI1YjEwOGQ0YTE0ZDc3ZjIwOWZkMTNhMTZlMjKTyTGdwC22RmZAyIBI8FHsbMpZ6WnqV1+kuuOTkujEWeN3cet3WJKFxBF/x/bte5sJNwLGJTcIK69llvULNtOL', 'f2gLBc7wsBasMjYYnzp5hAMmXOwQNkFx', NULL, '2016-03-16 09:56:04', '', '1', NULL, '1', '2016-03-16 03:54:51', '2016-03-16 03:54:51'),
-(3,4,'byron_villacresesf@hotmail.com','Nsz9W8fjHsBVOV229KrqYmRkYmNlYjNjYTg1ODdkNGYzYzUwOTg4YTkxMzhmMDMyOGExNmM0ZGRjNjU1YmZlMGRiYWVlM2I3NjJiZTM1YTK80sJKMITy98WBBY4ymSLS0nxRVq5II2kDdAKIpEbfKTOOXtz4YEt/h3z2TZIUZa3S976ja2YO9zOwqOyrD97S','j7zxDqFoh1o0hdKPOg2o-ByqSGfY2zsf',NULL,NULL,'http://localhost/rdmi/site/activation?wg=KAhjvkvzHP77i6aO1d7VkvWkfGmYi6e','1',NULL,'1','2016-07-22 05:35:30',NULL);
-
+(1,1, 'admin', 'nohr0F0OmOEkE4IeKV48szJkYmIzYmQ0ODcyYzA4YmNkZjI0MDA0MjkyYzUwNzUzNzYwNjI1YjEwOGQ0YTE0ZDc3ZjIwOWZkMTNhMTZlMjKTyTGdwC22RmZAyIBI8FHsbMpZ6WnqV1+kuuOTkujEWeN3cet3WJKFxBF/x/bte5sJNwLGJTcIK69llvULNtOL', 'f2gLBc7wsBasMjYYnzp5hAMmXOwQNkFx', NULL, '2016-03-16 09:58:37', NULL, '1', NULL, '1', '2016-03-10 18:00:00', NULL),
+(2,2, 'byron_villacresesf@hotmail.com', 'nohr0F0OmOEkE4IeKV48szJkYmIzYmQ0ODcyYzA4YmNkZjI0MDA0MjkyYzUwNzUzNzYwNjI1YjEwOGQ0YTE0ZDc3ZjIwOWZkMTNhMTZlMjKTyTGdwC22RmZAyIBI8FHsbMpZ6WnqV1+kuuOTkujEWeN3cet3WJKFxBF/x/bte5sJNwLGJTcIK69llvULNtOL', 'f2gLBc7wsBasMjYYnzp5hAMmXOwQNkFx', NULL, '2016-03-16 09:56:04', '', '1', NULL, '1', '2016-03-16 03:54:51', '2016-03-16 03:54:51'),
+(3,4,'byron_villacresesf@hotmail.com','Nsz9W8fjHsBVOV229KrqYmRkYmNlYjNjYTg1ODdkNGYzYzUwOTg4YTkxMzhmMDMyOGExNmM0ZGRjNjU1YmZlMGRiYWVlM2I3NjJiZTM1YTK80sJKMITy98WBBY4ymSLS0nxRVq5II2kDdAKIpEbfKTOOXtz4YEt/h3z2TZIUZa3S976ja2YO9zOwqOyrD97S','j7zxDqFoh1o0hdKPOg2o-ByqSGfY2zsf',NULL,NULL,'http://localhost/rdmi/site/activation?wg=KAhjvkvzHP77i6aO1d7VkvWkfGmYi6e','1',NULL,'1','2016-07-22 05:35:30',NULL),
+(4,3,'byronvillacreses@gmail.com','Nsz9W8fjHsBVOV229KrqYmRkYmNlYjNjYTg1ODdkNGYzYzUwOTg4YTkxMzhmMDMyOGExNmM0ZGRjNjU1YmZlMGRiYWVlM2I3NjJiZTM1YTK80sJKMITy98WBBY4ymSLS0nxRVq5II2kDdAKIpEbfKTOOXtz4YEt/h3z2TZIUZa3S976ja2YO9zOwqOyrD97S','j7zxDqFoh1o0hdKPOg2o-ByqSGfY2zsf',NULL,'2016-03-16 14:56:04',NULL,'1',NULL,'1','2016-07-22 10:35:30',NULL);
 --
 -- Volcar la base de datos para la tabla `tipo_password`
 --
@@ -58,16 +58,20 @@ INSERT INTO `tipo_password` (`tpas_id`, `tpas_tipo`, `tpas_validacion`, `tpas_de
 -- Volcar la base de datos para la tabla `rol`
 --
 
-INSERT INTO `rol` (`rol_id`, `rol_nombre`, `rol_descripcion`, `rol_estado_activo`, `rol_fecha_creacion`, `rol_fecha_modificacion`, `rol_estado_logico`) VALUES
-(1, 'Administrador', 'Descripción', '1', '2012-09-03 15:00:00', NULL, '1'),
-(2, 'Otros', 'Descripción', '1', '2012-09-03 15:00:00', NULL, '1');
+INSERT INTO `rol` (`rol_id`, `rol_nombre`, `rol_descripcion`, `rol_estado_activo`, `rol_estado_logico`) VALUES
+(1, 'Administrador', 'Descripción', '1', '1'),
+(2, 'Usuario', 'Descripción', '1', '1'),
+(3, 'Medico', 'Descripción', '1', '1'),
+(4, 'Paciente', 'Descripción', '1', '1');
 
 --
 -- Volcado de datos para la tabla `usuario_empresa`
 --
 
-INSERT INTO `usuario_empresa` (`uemp_id`, `usu_id`, `rol_id`, `emp_id`, `uemp_est_log`, `uemp_fec_cre`, `uemp_fec_mod`) VALUES
-(1, 1, 1, 1, '1', '2016-03-03 02:50:58', NULL);
+INSERT INTO `usuario_empresa` (`uemp_id`, `usu_id`, `rol_id`, `emp_id`, `uemp_est_log`) VALUES
+(1, 1, 1, 1, '1',),
+('3', '3', '1', '1'),
+('4', '4', '1', '1');
 
 --
 -- Volcado de datos para la tabla `aplicacion`
@@ -140,7 +144,9 @@ INSERT INTO `omodulo_rol` (`omrol_id`, `omod_id`, `rol_id`, `omrol_est_log`, `om
 (12,12,1,'1','2016-03-18 10:47:02',NULL),
 (13,13,1,'1','2016-03-18 10:47:02',NULL),
 (14,14,1,'1','2016-07-22 06:38:34',NULL),
-(15,15,1,'1','2016-07-22 06:38:34',NULL);
+(15,15,1,'1','2016-07-22 06:38:34',NULL),
+(16,12,4,'1','2016-07-22 06:38:34',NULL),
+(17,15,4,'1','2016-07-22 06:38:34',NULL);
 
 
 --
