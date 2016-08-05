@@ -88,4 +88,15 @@ class UsuarioController extends CController
     {
 
     }
+    
+    public function actionActUserPersonal(){
+        $model = new Usuario();
+        $username='byron_villa@hotmail.com';
+        $password='Byron19';
+        $id_persona=3;
+        //\app\models\Utilities::putMessageLogFile("llego datos");
+        $model->crearUsuario($username, $password, $id_persona);
+
+    }
+    
 }

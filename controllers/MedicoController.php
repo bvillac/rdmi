@@ -257,10 +257,10 @@ class MedicoController extends Controller {
             }
         }
         //$ids =isset($_GET['ids']) ? base64_decode($_GET['ids']) : NULL;
-        $ids =$medADO->buscarPerId_Medico(@Yii::$app->session->get("PerId"));//Retorna Medico Segun la Sesion de la persona        
-        $medData = $medADO->buscarMedicoID($ids);
-        $medEspData = Medico::getEspecilidadesMedico($ids);
-        $empData = Empresa::getEmpresaMedico($ids);
+        $DataMed =$medADO->buscarPerId_Medico(@Yii::$app->session->get("PerId"));//Retorna Medico Segun la Sesion de la persona 
+        $medData = $medADO->buscarMedicoID($DataMed[0]["med_id"]);
+        $medEspData = Medico::getEspecilidadesMedico($DataMed[0]["med_id"]);
+        $empData = Empresa::getEmpresaMedico($DataMed[0]["med_id"]);
         //$perData = $perADO->buscarPersonaID($medData[0]["per_id"]);
 
         return $this->render('adminmedico', [
