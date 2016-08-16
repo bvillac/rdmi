@@ -295,5 +295,17 @@ class MedicoController extends Controller {
     }
     
     
+    public function actionBuscarpersonas() {
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
+            $valor = isset($data['valor']) ? $data['valor'] : "";
+            $op = isset($data['op']) ? $data['op'] : "";
+            $arrayData = array();
+            $arrayData = Persona::retornarPersona($valor, $op);
+            echo json_encode($arrayData);
+        }
+    }
+    
+    
 
 }

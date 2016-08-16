@@ -18,7 +18,7 @@ $this->title = 'Administrar Médico '; //. ' ' . $model[0]["med_id"];
     <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
             <li class="active"><a href="#paso1" data-toggle="tab" aria-expanded="true"><?= Yii::t("Perfil", "Horarios") ?></a></li>
-            <li class=""><a href="#paso2" data-toggle="tab" aria-expanded="true"><?= Yii::t("Perfil", "Admin") ?></a></li>
+            <li class=""><a href="#paso2" data-toggle="tab" aria-expanded="true"><?= Yii::t("Perfil", "Programar Cita") ?></a></li>
 <!--            <li class=""><a href="#paso3" data-toggle="tab" aria-expanded="false"><?= Yii::t("Perfil", "Objetivo2") ?></a></li>-->
         </ul>
         <div class="tab-content">
@@ -31,7 +31,9 @@ $this->title = 'Administrar Médico '; //. ' ' . $model[0]["med_id"];
             </div><!-- /.tab-pane -->
             <div class="tab-pane" id="paso2">
                 <form class="form-horizontal">
-                    
+                    <?= $this->render('_form_Admintab2', 
+                        ['especialidades' => $medicoEsp,
+                        'empresas' => $medicoEmp]) ?>
                 </form>
             </div><!-- /.tab-pane -->
             

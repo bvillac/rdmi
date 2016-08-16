@@ -249,3 +249,7 @@ INSERT INTO `consultorio` VALUES
 (2,1,17,2,'Consultorio 2','1254543','con2@med.com','07:00:00','18:00:00','00:30:00','1','2016-07-22 06:05:15',NULL),
 (3,1,2,3,'Consultorio 3','5214119','con3@med.com','07:00:00','13:00:00','00:30:00','1','2016-07-22 06:05:15',NULL);
 
+--
+-- Dumping data for table `medico_atencion`
+--
+INSERT INTO `medico_atencion` (`med_id`, `pac_id`, `mate_est_log`) VALUES ('1', '1', '1');
