@@ -324,10 +324,10 @@ class Persona extends ActiveRecord
             }
         }
         
-        $sql = "SELECT A.per_ced_ruc Cedula,CONCAT(A.per_nombre,' ',A.per_apellido) Nombres
+        /*$sql = "SELECT A.per_ced_ruc Cedula,CONCAT(A.per_nombre,' ',A.per_apellido) Nombres
                 FROM " . $con->dbname . ".paciente B
                 INNER JOIN " . $con->dbname . ".persona A ON A.per_id=B.per_id AND A.per_est_log=1
-            WHERE B.pac_est_log=1 ";
+            WHERE B.pac_est_log=1 ";*/
 
         switch ($op) {
             case 'CED':

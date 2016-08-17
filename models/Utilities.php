@@ -689,6 +689,27 @@ class Utilities {
         ];
     }
     
+    public static function getEstadoLogico($estado) {
+        $mensaje = "";
+        switch ($estado) {
+            case '0':
+                $mensaje = Yii::t("formulario", "Anulado");
+                break;
+            case '1':
+                $mensaje = Yii::t("formulario", "Activo");
+                break;
+            case '2':
+                $mensaje = Yii::t("formulario", "Cancelado");
+                break;
+            default:
+                $mensaje = "";
+        }
+        return $mensaje;
+    }
+    
+    /*
+     * 
+     */
     public static function insertarLogs($con, $reg_id,$table,$accion) {
         //Datos de Log de Tablas
         $usu_id = Yii::$app->session->get('PB_iduser', FALSE);

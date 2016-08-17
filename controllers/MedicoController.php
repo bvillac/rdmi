@@ -9,6 +9,8 @@ use app\models\Pais;
 use app\models\Provincia;
 use app\models\Canton;
 use app\models\Persona;
+use app\models\Paciente;
+use app\models\CitaMedica;
 use app\models\Usuario;
 use app\models\Utilities;
 use app\models\Empresa;
@@ -233,8 +235,10 @@ class MedicoController extends Controller {
     }
     
     public function actionAdminmedico() {
+        $data = null;
         $perADO = new Persona();
         $medADO = new Medico();
+        $citaADO = new CitaMedica();        
         $provincias = array();
         $cantones = array();        
         if (Yii::$app->request->isAjax) {
@@ -260,14 +264,17 @@ class MedicoController extends Controller {
         $DataMed =$medADO->buscarPerId_Medico(@Yii::$app->session->get("PerId"));//Retorna Medico Segun la Sesion de la persona 
         $medData = $medADO->buscarMedicoID($DataMed[0]["med_id"]);
         $medEspData = Medico::getEspecilidadesMedico($DataMed[0]["med_id"]);
+        $medEspMedico = Medico::getEspecilidades_Medico($DataMed[0]["med_id"]);
         $empData = Empresa::getEmpresaMedico($DataMed[0]["med_id"]);
         //$perData = $perADO->buscarPersonaID($medData[0]["per_id"]);
-
+        $dataProvider = $citaADO->consultarCitasProg($data);
         return $this->render('adminmedico', [
                     "model" => $medData,
+                    "modelCita" => $dataProvider,
                     //"medico" => json_encode($medData),
                     "medicoEsp" => $medEspData,
                     "medicoEmp" => $empData,
+                    "medicoEmpMed" => $medEspMedico,
                     ]);
     }
     
@@ -294,17 +301,77 @@ class MedicoController extends Controller {
         }   
     }
     
+    public function actionSavemedicocita() {
+        if (Yii::$app->request->isAjax) {
+            $model = new \app\models\CitaMedica();
+            $data = Yii::$app->request->post();
+            $accion = isset($data['ACCION']) ? $data['ACCION'] : "";
+            if ($accion == "Create") {
+                //Nuevo Registro
+                $resul = $model->insertarCitasMedicas($data);
+            }/*else if($accion == "Update"){
+                //Modificar Registro
+                $resul = $model->actualizarMedicos($data);                
+            }*/
+            if ($resul['status']) {
+                $message = ["info" => Yii::t('exception', '<strong>Well done!</strong> your information was successfully saved.')];
+                echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message,$resul);
+            }else{
+                $message = ["info" => Yii::t('exception', 'The above error occurred while the Web server was processing your request.')];
+                echo Utilities::ajaxResponse('NO_OK', 'alert', Yii::t('jslang', 'Error'), 'false', $message);
+            }
+            return;
+        }   
+    }
     
-    public function actionBuscarpersonas() {
+    
+    public function actionBuscarpacientes() {
         if (Yii::$app->request->isAjax) {
             $data = Yii::$app->request->post();
             $valor = isset($data['valor']) ? $data['valor'] : "";
             $op = isset($data['op']) ? $data['op'] : "";
-            $arrayData = array();
-            $arrayData = Persona::retornarPersona($valor, $op);
+            $arrayData = array();            
+            $arrayData = Paciente::retornarPersonaPaciente($valor, $op);
             echo json_encode($arrayData);
         }
     }
+    
+    public function actionRechazarcitaprogramada() {
+        //$formulario = new MceFormularioTemp;
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
+            $resul = CitaMedica::rechazarCitaProgramada($data);
+            if ($resul['status']) {
+                $message = ["info" => Yii::t('exception', '<strong>Well done!</strong> your information was successfully saved.')];
+                echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message,$resul);
+            }else{
+                $message = ["info" => Yii::t('exception', 'The above error occurred while the Web server was processing your request.')];
+                echo Utilities::ajaxResponse('NO_OK', 'alert', Yii::t('jslang', 'Error'), 'false', $message);
+            }
+            
+            /*if ($resul) {
+                //Datos de Mail
+                $ids = isset($data['ids']) ? base64_decode($data['ids']) : NULL;
+                $solicitud = $formulario->getSolicitudTempID($ids);
+                $userData= Usuario::getUserPersona($solicitud[0]["reg_id"]);
+                $correo = ($userData[0]["Usuario"]<>'admin')?$userData[0]["Usuario"]:Yii::$app->params["adminEmail"];
+                $nombres = Yii::$app->session->get("PB_nombres");//Utilities::getNombresApellidos($this->firstName);
+                $tituloMensaje = Yii::t("formulario","Application Rejected");
+                $url=Yii::$app->params["contactoEmail"];
+                $asunto = Yii::t("formulario", "Application Rejected") . " " . Yii::$app->params["siteName"];
+                $body = Utilities::getMailMessage("rejected", array("[[user]]" => $userData[0]["Nombre"],"[[url]]" => $url, "[[link]]" => Url::base(true)), Yii::$app->language);
+                Utilities::sendEmail($tituloMensaje, Yii::$app->params["adminEmail"], [$correo => $userData[0]["Nombres"]], $asunto, $body);
+                $message = ["info" => Yii::t('exception', '<strong>Well done!</strong> your information was successfully saved.')];
+                echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message);
+            }else{
+                $message = ["info" => Yii::t('exception', 'The above error occurred while the Web server was processing your request.')];
+                echo Utilities::ajaxResponse('NO_OK', 'alert', Yii::t('jslang', 'Error'), 'false', $message);
+            }*/
+            return;
+        }
+    }
+    
+    
     
     
 

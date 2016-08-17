@@ -162,6 +162,17 @@ class Medico extends \yii\db\ActiveRecord
         $comando->bindParam(":med_id", $ids, \PDO::PARAM_INT);
         return $comando->queryAll();
     }
+    
+    public static function getEspecilidades_Medico($ids){
+        $con = \Yii::$app->db;
+        $sql="SELECT a.emed_id IdsEsp,b.esp_nombre Especialidad FROM " . $con->dbname . ".especialidad_medico a
+                INNER JOIN " . $con->dbname . ".especialidad b
+                  ON a.esp_id=b.esp_id
+            WHERE a.med_id=:med_id ";
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":med_id", $ids, \PDO::PARAM_INT);
+        return $comando->queryAll();
+    }
 
     
     /* INSERTAR DATOS */

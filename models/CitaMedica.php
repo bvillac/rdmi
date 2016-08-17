@@ -1,9 +1,8 @@
 <?php
 
 namespace app\models;
-
 use Yii;
-
+use yii\data\ArrayDataProvider;
 /**
  * This is the model class for table "cita_medica".
  *
@@ -119,6 +118,107 @@ class CitaMedica extends \yii\db\ActiveRecord
         return $this->hasMany(SignosVitales::className(), ['cmde_id' => 'cmde_id']);
     }
     
+    /*CONSULTAR CITA PROGRAMADA*/
+    public static function consultarCitasProg($data){
+        $con = \Yii::$app->db;        
+        $sql = "SELECT A.cprog_id Ids,C.per_ced_ruc Cedula,CONCAT(C.per_nombre,' ',C.per_apellido) Nombres,
+                        A.cprog_observacion Observacion,E.esp_nombre Especialidad,A.cprog_est_log Estado
+                    FROM " . $con->dbname . ".cita_programada A
+                            INNER JOIN (" . $con->dbname . ".paciente B 
+                                            INNER JOIN " . $con->dbname . ".persona C
+                                                    ON B.per_id=C.per_id)
+                                    ON B.pac_id=A.pac_id
+                            INNER JOIN (" . $con->dbname . ".especialidad_medico D
+                                            INNER JOIN " . $con->dbname . ".especialidad E
+                                                    ON D.esp_id=E.esp_id)
+                                    ON A.emed_id=D.emed_id
+                    WHERE A.cprog_est_log<>0 ";
+                    $sql .= "ORDER BY A.cprog_id DESC ";
+        
+        //Utilities::putMessageLogFile($sql);
+        $comando = $con->createCommand($sql);
 
+        $resultData=$comando->queryAll();
+        $dataProvider = new ArrayDataProvider([
+            'key' => 'Ids',
+            'allModels' => $resultData,
+            'pagination' => [
+                'pageSize' => Yii::$app->params["pageSize"],
+            ],
+            'sort' => [              
+                'attributes' => ['Ids','Cedula','Nombres','Especialidad','Observacion','Estado'],
+            ],
+        ]);
+
+        return $dataProvider;
+    }
+    
+    /* INSERTAR DATOS */
+    public function insertarCitasMedicas($data) {
+        $arroout = array();
+        $con = \Yii::$app->db;
+        $trans = $con->beginTransaction();
+        try {
+            $observ = isset($data['OBSERV']) ? $data['OBSERV'] : "";
+            $pac_id = isset($data['PAC_ID']) ? $data['PAC_ID'] : 0;
+            $emed_id = isset($data['EMED_ID']) ? $data['EMED_ID'] : 0;
+
+            $sql = "INSERT INTO " . $con->dbname . ".cita_programada
+                (pac_id,emed_id,cprog_numero,cprog_observacion,cprog_est_log)VALUES
+                (:pac_id,:emed_id,0,:cprog_observacion,1);";
+            
+            $command = $con->createCommand($sql);
+            $command->bindParam(":pac_id", $pac_id, \PDO::PARAM_INT); 
+            $command->bindParam(":emed_id", $emed_id, \PDO::PARAM_INT);
+            $command->bindParam(":cprog_observacion", $observ, \PDO::PARAM_STR);
+            $command->execute();
+            $ids=$con->getLastInsertID();
+            Utilities::insertarLogs($con, $ids, 'cita_programada', 'Insert -> cprog_id->'.$ids);
+            
+            $trans->commit();
+            $con->close();
+            //RETORNA DATOS 
+            //$arroout["ids"]= $ftem_id;
+            $arroout["status"]= true;
+            //$arroout["secuencial"]= $doc_numero;
+            return $arroout;
+        } catch (\Exception $e) {
+            $trans->rollBack();
+            $con->close();
+            //throw $e;
+            $arroout["status"]= false;
+            return $arroout;
+        }
+    }
+    /*
+     * RECHAZAR O CANCELAR LAS CITAS PROGRAMADAS
+     */
+    
+    public static function rechazarCitaProgramada($data) {
+        $arroout = array();
+        $con = \Yii::$app->db;
+        $trans = $con->beginTransaction();
+        try {
+            $ids = isset($data['ids']) ? base64_decode($data['ids']) :NULL;
+            $sql = "UPDATE " . $con->dbname . ".cita_programada SET cprog_est_log=2 WHERE cprog_id=:cprog_id";
+            $command = $con->createCommand($sql);
+            $command->bindParam(":cprog_id", $ids, \PDO::PARAM_INT);
+            $command->execute();
+            $trans->commit();
+            $con->close();
+            //RETORNA DATOS 
+            //$arroout["ids"]= $ftem_id;
+            $arroout["status"]= true;
+            //$arroout["secuencial"]= $doc_numero;
+            return $arroout;
+        } catch (\Exception $e) {
+            $trans->rollBack();
+            $con->close();
+            //throw $e;
+            $arroout["status"]= false;
+            return $arroout;
+        }
+    }
+    
     
 }

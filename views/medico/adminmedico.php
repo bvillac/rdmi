@@ -32,17 +32,15 @@ $this->title = 'Administrar Médico '; //. ' ' . $model[0]["med_id"];
             <div class="tab-pane" id="paso2">
                 <form class="form-horizontal">
                     <?= $this->render('_form_Admintab2', 
-                        ['especialidades' => $medicoEsp,
-                        'empresas' => $medicoEmp]) ?>
+                        ['medEspMedico' => $medicoEmpMed,
+                        'modelCita' => $modelCita]) ?>
                 </form>
             </div><!-- /.tab-pane -->
             
         </div><!-- /.tab-content -->
     </div><!-- /.nav-tabs-custom -->
 </div><!-- /.col -->
-<div class="col-md-2">
-    <p><?= Html::a('<span class="glyphicon glyphicon-floppy-disk"></span> ' . Yii::t("accion", "Save"), 'javascript:', ['id' => 'btn_saveUpdate','class' => 'btn btn-primary btn-block']); ?> </p>
-</div>
+
 
 <script>
     //Datos de Solicitud

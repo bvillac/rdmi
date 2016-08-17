@@ -27,9 +27,19 @@ $(document).ready(function () {
     $('#cmd_generarHora').click(function () {
         obtenerHoraiosMedico();
     });
+    $('#cmd_saveCita').click(function () {
+        guardarDatosCitas('Create');
+    });
     $('#cmd_saveHora').click(function () {
         guardarDatosHoras('Create');
     });
+    /*
+     * TAB2
+     */
+    $('#cmd_clearCita').click(function () {
+        clearTab2();
+    });
+    
 });
 
 function obtenerCanton() {
@@ -173,7 +183,7 @@ function actualizarGrid(){
     //Buscar almenos una clase con el nombre para ejecutar
     if(!$(".blockUI").length){
         showLoadingPopup();
-        $('#TbG_SOLICITUD').PbGridView('applyFilterData',{'estado':estado,'f_ini':f_ini,'f_fin':f_fin,'licencia':licencia,'valor':valor,'op':'1'});
+        $('#TbG_DATOS').PbGridView('applyFilterData',{'estado':estado,'f_ini':f_ini,'f_fin':f_fin,'licencia':licencia,'valor':valor,'op':'1'});
         setTimeout(hideLoadingPopup,2000);
     }
 }

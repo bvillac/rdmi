@@ -513,3 +513,24 @@ function formatTime(seconds) {
           ].join(":");
 }
 //###################
+
+/*
+ * Permite Retornar el Ids de un ArrayList de Una Session
+ * 
+ * @param {type} array (Retornado de la Session Stores)
+ * @param {type} property (Propiedad o nombre que se va a comparar que esta almacenado)
+ * @param {type} value (Valor de Comparacion extraido de la caja de texto)
+ * @param {type} ids (Nombre Ids que retorna segun la comparacion)
+ * @returns {Number}
+ */
+function retornarIndLista(array,property,value,ids){
+    var index=-1;
+    for(var i=0; i<array.length; i++){
+        if(array[i][property]==value){
+            index=array[i][ids];
+            return index;
+        }
+    }
+    //Retorna  -1 si no esta en ls lista
+    return index;
+}

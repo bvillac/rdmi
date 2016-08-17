@@ -216,6 +216,47 @@ class Paciente extends \yii\db\ActiveRecord
         $command->execute();
     }
     
+    public static function retornarPersonaPaciente($valor, $op) {
+        $con = \Yii::$app->db;
+        $rawData = array();
+        //Patron de Busqueda
+        /* http://www.mclibre.org/consultar/php/lecciones/php_expresiones_regulares.html */
+        $patron = "/^[[:digit:]]+$/"; //Los patrones deben empezar y acabar con el carácter / (barra).
+        if (preg_match($patron, $valor)) {
+            $op = "CED"; //La cadena son sólo números.
+        } else {
+            $op = "NOM"; //La cadena son Alfanumericos.
+            //Las separa en un array 
+            $aux = explode(" ", $valor);
+            $condicion = " ";
+            for ($i = 0; $i < count($aux); $i++) {
+                //Crea la Sentencia de Busqueda
+                $condicion .=" AND (A.per_nombre LIKE '%$aux[$i]%' OR A.per_apellido LIKE '%$aux[$i]%' ) ";
+            }
+        }
+        
+        $sql = "SELECT B.pac_id Ids,A.per_ced_ruc Cedula,CONCAT(A.per_nombre,' ',A.per_apellido) Nombres
+                FROM " . $con->dbname . ".paciente B
+                INNER JOIN " . $con->dbname . ".persona A ON A.per_id=B.per_id AND A.per_est_log=1
+            WHERE B.pac_est_log=1 ";
+
+        switch ($op) {
+            case 'CED':
+                $sql .=" AND A.per_ced_ruc LIKE '%$valor%' ";
+                break;
+            case 'NOM':
+                $sql .=$condicion;
+                break;
+            default:
+        }
+        $sql .= " GROUP BY A.per_ced_ruc ";
+        $sql .= " LIMIT " . Yii::$app->params["limitRow"];
+        //Utilities::putMessageLogFile($sql);
+        $comando = $con->createCommand($sql);
+        //$comando->bindParam(":valor", $ids, \PDO::PARAM_STR);
+        return $comando->queryAll();
+    }
+    
     
     
     
