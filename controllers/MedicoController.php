@@ -243,6 +243,7 @@ class MedicoController extends Controller {
         $cantones = array();        
         if (Yii::$app->request->isAjax) {
             $data = Yii::$app->request->post();
+            Utilities::putMessageLogFile($data);
             if (isset($data["getcentro"])) {
                 $message = ["centroatencion" => Empresa::getCentroMedicoEmp($data['emp_id'])];
                 echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message);
@@ -259,7 +260,13 @@ class MedicoController extends Controller {
                 echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message);
                 return;
             }
+             
+            if (isset($data["op"]) && $data["op"]=='1' ) {                
+                $citaADO->consultarCitasProg($data);
+                return;
+            }
         }
+        
         //$ids =isset($_GET['ids']) ? base64_decode($_GET['ids']) : NULL;
         $DataMed =$medADO->buscarPerId_Medico(@Yii::$app->session->get("PerId"));//Retorna Medico Segun la Sesion de la persona 
         $medData = $medADO->buscarMedicoID($DataMed[0]["med_id"]);
@@ -267,10 +274,9 @@ class MedicoController extends Controller {
         $medEspMedico = Medico::getEspecilidades_Medico($DataMed[0]["med_id"]);
         $empData = Empresa::getEmpresaMedico($DataMed[0]["med_id"]);
         //$perData = $perADO->buscarPersonaID($medData[0]["per_id"]);
-        $dataProvider = $citaADO->consultarCitasProg($data);
         return $this->render('adminmedico', [
                     "model" => $medData,
-                    "modelCita" => $dataProvider,
+                    "modelCita" => $citaADO->consultarCitasProg($data),
                     //"medico" => json_encode($medData),
                     "medicoEsp" => $medEspData,
                     "medicoEmp" => $empData,

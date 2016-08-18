@@ -707,6 +707,15 @@ class Utilities {
         return $mensaje;
     }
     
+    public static function mostrarEstadoLogico() {
+        return [
+            '-1' => Yii::t('formulario', 'Todos'),
+            '0' => Yii::t('formulario', 'Anulado'),
+            '1' => Yii::t('formulario', 'Activo'),
+            '2' => Yii::t('formulario', 'Cancelado'),
+        ];
+    }
+    
     /*
      * 
      */

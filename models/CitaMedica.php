@@ -132,11 +132,14 @@ class CitaMedica extends \yii\db\ActiveRecord
                                             INNER JOIN " . $con->dbname . ".especialidad E
                                                     ON D.esp_id=E.esp_id)
                                     ON A.emed_id=D.emed_id
-                    WHERE A.cprog_est_log<>0 ";
+                    WHERE  ";
+                    $sql .= ($data['estado'] > -1) ? " A.cprog_est_log = :cprog_est_log  " : " A.cprog_est_log<>0 ";
                     $sql .= "ORDER BY A.cprog_id DESC ";
-        
-        //Utilities::putMessageLogFile($sql);
         $comando = $con->createCommand($sql);
+        
+        if($data['estado'] > -1){
+            $comando->bindParam(":cprog_est_log", $data['estado'], \PDO::PARAM_STR);
+        }
 
         $resultData=$comando->queryAll();
         $dataProvider = new ArrayDataProvider([
@@ -149,7 +152,6 @@ class CitaMedica extends \yii\db\ActiveRecord
                 'attributes' => ['Ids','Cedula','Nombres','Especialidad','Observacion','Estado'],
             ],
         ]);
-
         return $dataProvider;
     }
     

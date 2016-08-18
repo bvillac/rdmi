@@ -6,6 +6,7 @@ use yii\helpers\Url;
 use kartik\date\DatePicker;
 use yii\jui\AutoComplete;
 use yii\web\JsExpression;
+//use yii\grid\GridView;
 use app\widgets\PbGridView\PbGridView;
 use yii\data\ArrayDataProvider;
 ?>
@@ -76,13 +77,21 @@ use yii\data\ArrayDataProvider;
     </div>
 </div>
 <div class="row"></div>
+<div class="col-md-6">
+    <div class="form-group">
+        <label for="lbl_estado" class="col-sm-3 control-label"><?= Yii::t("formulario", "Filtrar por Estado") ?></label>
+        <div class="col-sm-9">
+            <?= Html::dropDownList("cmb_estado", -1, \app\models\Utilities::mostrarEstadoLogico(), ["class" => "form-control", "id" => "cmb_estado"]) ?>
+        </div>
+    </div>
+</div>
+<div class="row"></div>
 <div>
     <?=
     PbGridView::widget([
         'id' => 'TbG_DATOS',
         'dataProvider' => $modelCita,
         //'summary' => false,
-        //'pajax' => false,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn', 'options' => ['width' => '10']],
             // format one

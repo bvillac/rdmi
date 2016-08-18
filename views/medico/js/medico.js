@@ -17,6 +17,9 @@ $(document).ready(function () {
     $('#cmb_especialidad').change(function () {
         obtenerAdmConsultorio();
     });
+    $('#cmb_estado').change(function () {
+        actualizarGridTab2();
+    });
     
     $('#btn_saveCreate').click(function () {
         guardarDatos('Create');
@@ -172,9 +175,9 @@ function eliminarDatos(ids) {
 
 function actualizarGrid(){
     var estado=$('#cmb_estado option:selected').val();
-    var licencia=$('#cmb_usomarca option:selected').val();
-    var f_ini =$('#dtp_f_inicio').val();
-    var f_fin =$('#dtp_f_fin').val();
+    //var licencia=$('#cmb_usomarca option:selected').val();
+    //var f_ini =$('#dtp_f_inicio').val();
+    //var f_fin =$('#dtp_f_fin').val();
     var valor='';//$('#txt_buscarData').val();
     //Codigo para AutoComplete
     if(sessionStorage.src_buscIndex){

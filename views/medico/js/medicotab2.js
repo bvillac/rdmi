@@ -122,20 +122,23 @@ function rechazarCitaProgramada(ids) {
     }
 }
 
+
+
+
 function actualizarGridTab2(){
     var estado=$('#cmb_estado option:selected').val();
-    var licencia=$('#cmb_usomarca option:selected').val();
-    var f_ini =$('#dtp_f_inicio').val();
-    var f_fin =$('#dtp_f_fin').val();
+    //var licencia=$('#cmb_usomarca option:selected').val();
+    //var f_ini =$('#dtp_f_inicio').val();
+    //var f_fin =$('#dtp_f_fin').val();
     var valor='';//$('#txt_buscarData').val();
     //Codigo para AutoComplete
-    if(sessionStorage.src_buscIndex){
+    /*if(sessionStorage.src_buscIndex){
         valor=$('#txth_ids').val();
-    } 
+    } */
     //Buscar almenos una clase con el nombre para ejecutar
     if(!$(".blockUI").length){
         showLoadingPopup();
-        $('#TbG_DATOS').PbGridView('applyFilterData',{'estado':estado,'f_ini':f_ini,'f_fin':f_fin,'licencia':licencia,'valor':valor,'op':'1'});
+        $('#TbG_DATOS').PbGridView('applyFilterData',{'estado':estado,'valor':valor,'op':'1'});
         setTimeout(hideLoadingPopup,2000);
     }
 }
