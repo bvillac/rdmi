@@ -242,8 +242,8 @@ class MedicoController extends Controller {
         $provincias = array();
         $cantones = array();        
         if (Yii::$app->request->isAjax) {
-            $data = Yii::$app->request->post();
-            Utilities::putMessageLogFile($data);
+            $data =(Yii::$app->request->post())? Yii::$app->request->post():Yii::$app->request->get();
+            //$data =Yii::$app->request->get();
             if (isset($data["getcentro"])) {
                 $message = ["centroatencion" => Empresa::getCentroMedicoEmp($data['emp_id'])];
                 echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message);
@@ -263,7 +263,7 @@ class MedicoController extends Controller {
              
             if (isset($data["op"]) && $data["op"]=='1' ) {                
                 $citaADO->consultarCitasProg($data);
-                return;
+                //return;
             }
         }
         
@@ -314,7 +314,13 @@ class MedicoController extends Controller {
             $accion = isset($data['ACCION']) ? $data['ACCION'] : "";
             if ($accion == "Create") {
                 //Nuevo Registro
-                $resul = $model->insertarCitasMedicas($data);
+                if (CitaMedica::existeCitaMedica($data)==0){
+                    //Si No exite inserta
+                    $resul = $model->insertarCitasMedicas($data);
+                }else{
+                    $resul['status']= false;
+                }
+                
             }/*else if($accion == "Update"){
                 //Modificar Registro
                 $resul = $model->actualizarMedicos($data);                

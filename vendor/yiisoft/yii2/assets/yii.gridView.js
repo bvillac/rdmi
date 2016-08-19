@@ -114,7 +114,8 @@
             
             $grid.trigger(gridEvents.afterFilter);
         },
-
+        
+        
         setSelectionColumn: function (options) {
             var $grid = $(this);
             var id = $(this).attr('id');
@@ -156,5 +157,6 @@
             var id = $(this).attr('id');
             return gridData[id];
         }
+        
     };
 })(window.jQuery);

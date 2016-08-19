@@ -56,7 +56,8 @@ function guardarDatosCitas(accion) {
             var message = response.message;
             if (response.status == "OK") {
                 showAlert(response.status, response.type, {"wtmessage": message.info, "title": response.label});
-                //limpiarDatos();
+                clearTab2();
+                actualizarGridTab2();
                 //var renderurl = $('#txth_base').val() + "/mceformulariotemp/index";
                 //window.location = renderurl;
             } else {
@@ -114,7 +115,7 @@ function rechazarCitaProgramada(ids) {
             var data = response.message;
             if (response.status == "OK") {
                 $('#TbG_DATOS').PbGridView('updatePAjax');
-                //actualizarGridTab2();
+                actualizarGridTab2();
             }
             //var message = {"wtmessage": data.info,"title": response.label};
             showAlert(response.status, response.type, {"wtmessage": data.info, "title": response.label});
@@ -138,6 +139,7 @@ function actualizarGridTab2(){
     //Buscar almenos una clase con el nombre para ejecutar
     if(!$(".blockUI").length){
         showLoadingPopup();
+        //$('#TbG_DATOS').yiiGridView("applyFilterData",{'estado':estado,'valor':valor,'op':'1'});
         $('#TbG_DATOS').PbGridView('applyFilterData',{'estado':estado,'valor':valor,'op':'1'});
         setTimeout(hideLoadingPopup,2000);
     }

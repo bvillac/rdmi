@@ -192,6 +192,25 @@ class CitaMedica extends \yii\db\ActiveRecord
             return $arroout;
         }
     }
+    
+    public static function existeCitaMedica($data){
+        $con = \Yii::$app->db; 
+        $pac_id = isset($data['PAC_ID']) ? $data['PAC_ID'] : 0;
+        $emed_id = isset($data['EMED_ID']) ? $data['EMED_ID'] : 0;
+        
+        $sql = "SELECT cprog_id FROM " . $con->dbname . ".cita_programada 
+            WHERE pac_id=:pac_id AND emed_id=:emed_id AND cprog_est_log NOT IN(0,2) ;";
+        //AND DATE(cprog_fec_cre)='2016-08-16'
+
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":pac_id", $pac_id, \PDO::PARAM_INT);
+        $comando->bindParam(":emed_id", $emed_id, \PDO::PARAM_INT);
+        $rawData=$comando->queryScalar();
+        if ($rawData === false)
+            return 0; //en caso de que existe problema o no retorne nada tiene 1 por defecto 
+        return $rawData;
+    }
+    
     /*
      * RECHAZAR O CANCELAR LAS CITAS PROGRAMADAS
      */
