@@ -9,6 +9,7 @@ use app\models\Pais;
 use app\models\Provincia;
 use app\models\Canton;
 use app\models\Persona;
+use app\models\CitaMedica;
 use app\models\Usuario;
 use app\models\Utilities;
 use yii\web\Controller;
@@ -218,6 +219,31 @@ class PacienteController extends Controller
             }
             return;
         }
+    }
+    
+    public function actionAdminpaciente() {
+        $data = null;
+        $datADO = new Paciente;
+        $citaADO = new CitaMedica();        
+        
+        if (Yii::$app->request->isAjax) {
+            $data =(Yii::$app->request->post())? Yii::$app->request->post():Yii::$app->request->get();
+
+            if (isset($data["op"]) && $data["op"]=='1' ) {                
+                $citaADO->consultarCitasProg($data);
+                //return;
+            }
+        }
+        
+        //$ids =isset($_GET['ids']) ? base64_decode($_GET['ids']) : NULL;
+        $DataMed =$datADO->buscarPerId_Paciente(@Yii::$app->session->get("PerId"));//Retorna Medico Segun la Sesion de la persona 
+        $EspPac = Paciente::getEspePaciente($DataMed[0]["pac_id"]);
+
+        return $this->render('adminpaciente', [
+                    "modelCita" => $citaADO->consultarCitasProg($data),
+                    //"medico" => json_encode($medData),
+                    "EspPac" => $EspPac,
+                    ]);
     }
     
     

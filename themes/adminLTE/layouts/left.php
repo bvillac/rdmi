@@ -15,6 +15,7 @@ use app\models\ObjetoModulo;
         <ul class="sidebar-menu">
 
             <?php
+            //MENU LATERAL IZQ
             $modules = Menu::getMenuModulos();
             $rutaControl = Yii::$app->controller->route;
             $mod = new ObjetoModulo();

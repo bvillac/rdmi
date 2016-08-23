@@ -111,7 +111,7 @@ INSERT INTO `objeto_modulo` (`omod_id`, `mod_id`, `omod_padre_id`, `omod_nombre`
 (12,6,6,'Patient','S','0','Applications','','','paciente/index',1,0,'perfil','1','2014-01-09 04:43:51',NULL,'1'),
 (13,6,6,'Medico','S','0','Applications','','','medico/index',1,0,'perfil','1','2014-01-09 04:43:51',NULL,'1'),
 (14,6,6,'Admin Medico','S','0','My Forms','','','medico/adminmedico',1,0,'application','1','2014-01-09 04:43:51',NULL,'1'),
-(15,6,6,'Admin Paciente','S','0','My Forms','','','mceformulariotemp/view',1,0,'application','1','2014-01-09 04:43:51',NULL,'1'),
+(15,6,6,'Admin Paciente','S','0','My Forms','','','paciente/adminpaciente',1,0,'application','1','2014-01-09 04:43:51',NULL,'1'),
 (16,3,14,'Create Form','A','0','My Forms','','','mceformulariotemp/create',1,0,'application','1','2014-01-09 04:43:51',NULL,'1'),
 (17,3,14,'Update Form','A','0','My Forms','','','mceformulariotemp/update',1,0,'application','1','2014-01-09 04:43:51',NULL,'1'),
 (18,3,14,'Save Form','A','0','My Forms','','','mceformulariotemp/save',1,0,'application','1','2014-01-09 04:43:51',NULL,'1'),
@@ -145,8 +145,10 @@ INSERT INTO `omodulo_rol` (`omrol_id`, `omod_id`, `rol_id`, `omrol_est_log`, `om
 (13,13,1,'1','2016-03-18 10:47:02',NULL),
 (14,14,1,'1','2016-07-22 06:38:34',NULL),
 (15,15,1,'1','2016-07-22 06:38:34',NULL),
-(16,12,4,'1','2016-07-22 06:38:34',NULL),
-(17,15,4,'1','2016-07-22 06:38:34',NULL);
+(16,13,3,'1','2016-07-22 06:38:34',NULL),
+(17,14,3,'1','2016-07-22 06:38:34',NULL),
+(18,12,4,'1','2016-07-22 06:38:34',NULL),
+(19,15,4,'1','2016-07-22 06:38:34',NULL);
 
 
 --

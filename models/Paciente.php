@@ -109,6 +109,14 @@ class Paciente extends \yii\db\ActiveRecord
         return $comando->queryAll();
     }
     
+    public function buscarPerId_Paciente($ids){
+        $con = \Yii::$app->db;   
+        $sql = "SELECT pac_id,per_id FROM " . $con->dbname . ".paciente WHERE per_id=:per_id ";
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":per_id", $ids, \PDO::PARAM_INT);
+        return $comando->queryAll();
+    }
+    
     
     /* INSERTAR DATOS */
     public function insertarPacientes($data) {
@@ -254,6 +262,22 @@ class Paciente extends \yii\db\ActiveRecord
         //Utilities::putMessageLogFile($sql);
         $comando = $con->createCommand($sql);
         //$comando->bindParam(":valor", $ids, \PDO::PARAM_STR);
+        return $comando->queryAll();
+    }
+    
+    public static function getEspePaciente($ids){
+        $con = \Yii::$app->db;
+        $sql="SELECT DISTINCT(D.esp_id) IdsEsp,D.esp_nombre Especialidad
+                FROM " . $con->dbname . ".paciente A
+                        INNER JOIN (" . $con->dbname . ".cita_programada B
+                                        INNER JOIN (" . $con->dbname . ".especialidad_medico C
+                                                        INNER JOIN " . $con->dbname . ".especialidad D
+                                                                ON D.esp_id=C.esp_id)
+                                                ON B.emed_id=C.emed_id)
+                                ON B.pac_id=A.pac_id
+            WHERE pac_est_log=1 AND B.cprog_est_log=1 AND A.pac_id=:pac_id;";
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":pac_id", $ids, \PDO::PARAM_INT);
         return $comando->queryAll();
     }
     
