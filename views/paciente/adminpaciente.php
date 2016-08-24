@@ -15,9 +15,9 @@ $this->title = 'Administrar Paciente '; //. ' ' . $model[0]["med_id"];
 <div class="col-md-12">
     <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#paso1" data-toggle="tab" aria-expanded="true"><?= Yii::t("Perfil", "Cita Programada") ?></a></li>
-<!--            <li class=""><a href="#paso2" data-toggle="tab" aria-expanded="true"><?= Yii::t("Perfil", "Programar Cita") ?></a></li>-->
-<!--            <li class=""><a href="#paso3" data-toggle="tab" aria-expanded="false"><?= Yii::t("Perfil", "Objetivo2") ?></a></li>-->
+            <li class="active"><a href="#paso1" data-toggle="tab" aria-expanded="true"><?= Yii::t("perfil", "Cita Programada") ?></a></li>
+<!--            <li class=""><a href="#paso2" data-toggle="tab" aria-expanded="true"><?= Yii::t("perfil", "Programar Cita") ?></a></li>-->
+<!--            <li class=""><a href="#paso3" data-toggle="tab" aria-expanded="false"><?= Yii::t("perfil", "Objetivo2") ?></a></li>-->
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="paso1">

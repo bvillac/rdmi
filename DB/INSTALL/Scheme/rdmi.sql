@@ -317,21 +317,31 @@ engine=innodb  default charset=utf8 auto_increment=1;
 -- -----------------------------------------------------
 -- table  `agendar_cita`
 -- -----------------------------------------------------
-create  table if not exists  `agendar_cita` (
-  `acit_id` bigint(20) not null auto_increment ,
-  `cprog_id` bigint(20) not null ,
-  `pac_id` bigint(20) not null ,
-  `acit_motivo` blob null ,
-  `acit_est_log` varchar(1) null ,
-  `acit_fec_cre` timestamp null default current_timestamp ,
-  `acit_fec_mod` timestamp null ,
-  primary key (`acit_id`, `pac_id`, `cprog_id`) ,
-  constraint `fk_agendar_cita_cita_programada1`
-    foreign key (`cprog_id` , `pac_id` )
-    references  `cita_programada` (`cprog_id` , `pac_id` )
-    on delete no action
-    on update no action)
-engine=innodb  default charset=utf8 auto_increment=1;
+
+CREATE  TABLE IF NOT EXISTS `agendar_cita` (
+  `acit_id` BIGINT(20) NOT NULL AUTO_INCREMENT ,
+  `cprog_id` BIGINT(20) NOT NULL ,
+  `pac_id` BIGINT(20) NOT NULL ,
+  `hora_id` BIGINT(20) NOT NULL ,
+  `fecha_cita` DATE NOT NULL ,
+  `cons_id` BIGINT(20) NOT NULL ,
+  `hora_inicio` TIME NOT NULL ,
+  `acit_motivo` BLOB NULL DEFAULT NULL ,
+  `acit_est_log` VARCHAR(1) NULL DEFAULT NULL ,
+  `acit_fec_cre` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ,
+  `acit_fec_mod` TIMESTAMP NULL DEFAULT NULL ,
+  PRIMARY KEY (`acit_id`, `cprog_id`, `pac_id`) ,
+  CONSTRAINT `fk_agendar_cita_cita_programada1`
+    FOREIGN KEY (`cprog_id` , `pac_id` )
+    REFERENCES `cita_programada` (`cprog_id` , `pac_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_agendar_cita_horario1`
+    FOREIGN KEY (`hora_id` , `fecha_cita` , `cons_id` , `hora_inicio` )
+    REFERENCES `horario` (`hora_id` , `fecha_cita` , `cons_id` , `hora_inicio` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB DEFAULT charset = utf8 auto_increment=1;
 
 
 -- -----------------------------------------------------

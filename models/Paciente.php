@@ -74,6 +74,14 @@ class Paciente extends \yii\db\ActiveRecord
         return $this->hasOne(Persona::className(), ['per_id' => 'per_id']);
     }
     
+    public static function getPacId($ids){
+        $con = \Yii::$app->db;   
+        $sql = "SELECT pac_id PacId FROM " . $con->dbname . ".paciente WHERE per_id=:per_id ";
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":per_id", $ids, \PDO::PARAM_INT);
+        return $comando->queryOne();
+    }
+    
     public static function consultarPacientes($data){
         $con = \Yii::$app->db;
         $sql = "SELECT a.pac_id Ids,a.per_id,b.per_ced_ruc DNI,CONCAT(b.per_nombre,' ',b.per_apellido) Nombres,a.pac_est_log Estado
@@ -116,7 +124,6 @@ class Paciente extends \yii\db\ActiveRecord
         $comando->bindParam(":per_id", $ids, \PDO::PARAM_INT);
         return $comando->queryAll();
     }
-    
     
     /* INSERTAR DATOS */
     public function insertarPacientes($data) {
@@ -279,6 +286,45 @@ class Paciente extends \yii\db\ActiveRecord
         $comando = $con->createCommand($sql);
         $comando->bindParam(":pac_id", $ids, \PDO::PARAM_INT);
         return $comando->queryAll();
+    }
+    
+    /*CONSULTAR CITA PROGRAMADA*/
+    public static function consultarCitasProgPac($data){
+        $PacId=Yii::$app->session->get('PacId', FALSE);
+        $con = \Yii::$app->db;        
+        $sql = "SELECT A.cprog_id Ids,C.per_ced_ruc Cedula,CONCAT(C.per_nombre,' ',C.per_apellido) Nombres,
+                        A.cprog_observacion Observacion,E.esp_nombre Especialidad,A.cprog_est_log Estado
+                    FROM " . $con->dbname . ".cita_programada A
+                            INNER JOIN (" . $con->dbname . ".paciente B 
+                                            INNER JOIN " . $con->dbname . ".persona C
+                                                    ON B.per_id=C.per_id)
+                                    ON B.pac_id=A.pac_id
+                            INNER JOIN (" . $con->dbname . ".especialidad_medico D
+                                            INNER JOIN " . $con->dbname . ".especialidad E
+                                                    ON D.esp_id=E.esp_id)
+                                    ON A.emed_id=D.emed_id
+                    WHERE A.pac_id=:pac_id  ";
+                    $sql .= ($data['estado'] > -1) ? " AND A.cprog_est_log = :cprog_est_log  " : " AND A.cprog_est_log>0 ";
+                    $sql .= "ORDER BY A.cprog_id DESC ";
+          
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":pac_id", $PacId, \PDO::PARAM_INT);
+        if($data['estado'] > -1){
+            $comando->bindParam(":cprog_est_log", $data['estado'], \PDO::PARAM_STR);
+        }
+
+        $resultData=$comando->queryAll();
+        $dataProvider = new ArrayDataProvider([
+            'key' => 'Ids',
+            'allModels' => $resultData,
+            'pagination' => [
+                'pageSize' => Yii::$app->params["pageSize"],
+            ],
+            'sort' => [              
+                'attributes' => ['Ids','Cedula','Nombres','Especialidad','Observacion','Estado'],
+            ],
+        ]);
+        return $dataProvider;
     }
     
     

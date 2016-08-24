@@ -230,7 +230,7 @@ class PacienteController extends Controller
             $data =(Yii::$app->request->post())? Yii::$app->request->post():Yii::$app->request->get();
 
             if (isset($data["op"]) && $data["op"]=='1' ) {                
-                $citaADO->consultarCitasProg($data);
+                $datADO->consultarCitasProgPac($data);
                 //return;
             }
         }
@@ -240,7 +240,7 @@ class PacienteController extends Controller
         $EspPac = Paciente::getEspePaciente($DataMed[0]["pac_id"]);
 
         return $this->render('adminpaciente', [
-                    "modelCita" => $citaADO->consultarCitasProg($data),
+                    "modelCita" => $datADO->consultarCitasProgPac($data),
                     //"medico" => json_encode($medData),
                     "EspPac" => $EspPac,
                     ]);

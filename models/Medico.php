@@ -96,6 +96,14 @@ class Medico extends \yii\db\ActiveRecord
         return $this->hasMany(Resultados::className(), ['med_id' => 'med_id']);
     }
     
+    public static function getMedId($ids){
+        $con = \Yii::$app->db;   
+        $sql = "SELECT med_id MedId FROM " . $con->dbname . ".medico WHERE per_id=:per_id ";
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":per_id", $ids, \PDO::PARAM_INT);
+        return $comando->queryOne();
+    }
+    
     public static function consultarMedicos($data){
         $con = \Yii::$app->db;
         

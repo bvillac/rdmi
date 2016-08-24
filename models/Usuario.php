@@ -155,6 +155,14 @@ class Usuario extends ActiveRecord implements IdentityInterface {
             $session->set('PB_module_id', "");
             $session->set('PB_objmodule_id', "");
             $session->set('RolId',$tipoUser['rolid']);
+            //RECUPERA VALORES DE PACIENTE Y MEDICO
+            if($tipoUser['rolid']==3){//Medico
+                $datSes=  Medico::getMedId($this->per_id);
+                $session->set('MedId', $datSes['MedId'] );               
+            }elseif ($tipoUser['rolid']==4) {//Paciente
+                $datSes=Paciente::getPacId($this->per_id);
+                $session->set('PacId', $datSes['PacId'] );
+            }
         }else{
             Utilities::putMessageLogFile("cerrado");
             $session->destroy();

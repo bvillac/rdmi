@@ -43,7 +43,7 @@ use yii\data\ArrayDataProvider;
         'dataProvider' => $modelCita,
         //'summary' => false,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn', 'options' => ['width' => '10']],
+            //['class' => 'yii\grid\SerialColumn', 'options' => ['width' => '10']],
             // format one
             //[
             //'attribute' => 'Ids',
@@ -51,15 +51,17 @@ use yii\data\ArrayDataProvider;
             //],
             // format two
             [
-                'header' => Yii::t("formulario", "Cédula"),
-                //'options' => ['width' => '200'],
-                'value' => 'Cedula',
+                'class' => 'yii\grid\ActionColumn',
+                //'header' => 'Action',
+                'headerOptions' => ['width' => '40'],
+                'template' => '{delete}',
+                'buttons' => [
+                    'delete' => function ($url, $modelCita) {
+                        return Html::a('<span class="glyphicon glyphicon-remove"></span>', null, ['href' => 'javascript:rechazarCitaProgramada(\'' . base64_encode($modelCita['Ids']) . '\');', "data-toggle" => "tooltip", "title" => "Cancelar Cita"]);
+                    },
+                ],
             ],
-            [
-                'header' => Yii::t("formulario", "Nombres"),
-                //'options' => ['width' => '200'],
-                'value' => 'Nombres',
-            ],
+            
             [
                 'header' => Yii::t("formulario", "Especialidad"),
                 //'options' => ['width' => '200'],
@@ -84,20 +86,10 @@ use yii\data\ArrayDataProvider;
                     return \app\models\Utilities::getEstadoLogico($modelCita['Estado']);
                 },
             ],
-            [
-                'class' => 'yii\grid\ActionColumn',
-                //'header' => 'Action',
-                'headerOptions' => ['width' => '40'],
-                'template' => '{delete}',
-                'buttons' => [
-                        'delete' => function ($url, $modelCita) {
-                            return Html::a('<span class="glyphicon glyphicon-remove"></span>', null, ['href' => 'javascript:rechazarCitaProgramada(\'' . base64_encode($modelCita['Ids']) . '\');', "data-toggle" => "tooltip", "title" => "Cancelar Cita"]);
-                        },
-                    ],
-                ],
-            ],
-        ])
-            ?>
+            
+        ],
+    ])
+?>
 </div>
 
 <div class="row"></div>
