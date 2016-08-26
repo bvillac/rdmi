@@ -88,8 +88,8 @@ CREATE TABLE IF NOT EXISTS `tipo_consulta` (
 -- table `rdmi`.`persona`
 -- -----------------------------------------------------
 
-CREATE TABLE `persona` (
-  `per_id` bigint(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `persona` (
+  `per_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `per_ced_ruc` varchar(15) DEFAULT NULL,
   `per_nombre` varchar(100) DEFAULT NULL,
   `per_apellido` varchar(100) DEFAULT NULL,
@@ -102,15 +102,14 @@ CREATE TABLE `persona` (
   `per_estado_activo` varchar(1) NOT NULL,
   `per_est_log` varchar(1) DEFAULT NULL,
   `per_fec_cre` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `per_fec_mod` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`per_id`)
+  `per_fec_mod` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
 -- table  `data_persona`
 -- -----------------------------------------------------
-create  table if not exists  `data_persona` (
-  `dper_id` bigint(20) not null auto_increment ,
+CREATE TABLE IF NOT EXISTS  `data_persona` (
+  `dper_id` bigint(20) not null auto_increment primary key,
   `per_id` bigint(20) not null ,
   `pai_id` bigint(20) null ,
   `prov_id` bigint(20) null ,
@@ -123,119 +122,89 @@ create  table if not exists  `data_persona` (
   `dper_est_log` varchar(1) null ,
   `dper_fec_cre` timestamp null default current_timestamp ,
   `dper_fec_mod` timestamp null ,
-  primary key (`dper_id`) ,
-  constraint `fk_data_persona_persona`
-    foreign key (`per_id` )
-    references  `persona` (`per_id` )
-    on delete no action
-    on update no action)
-engine=innodb  default charset=utf8 auto_increment=1;
+  FOREIGN KEY (per_id) REFERENCES `persona`(per_id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
 -- table  `usuario`
 -- -----------------------------------------------------
-create  table if not exists  `usuario` (
-  `usu_id` bigint(20) not null auto_increment ,
-  `per_id` bigint(20) not null ,
-  `usu_username` varchar(45) default null,
-  `usu_password` varchar(255) default null,
-  `usu_sha` varchar(255),
-  `usu_session` varchar(255) default null,
-  `usu_last_login` timestamp null default null,
-  `usu_link_activo` text null default null,
-  `usu_estado_activo` varchar(1) not null,
-  `usu_alias` varchar(60) null ,
-  `usu_est_log` varchar(1) null ,
-  `usu_fec_cre` timestamp null default current_timestamp ,
-  `usu_fec_mod` timestamp null ,
-  primary key (`usu_id`) ,
-  constraint `fk_usuario_persona1`
-    foreign key (`per_id` )
-    references  `persona` (`per_id` )
-    on delete no action
-    on update no action)
-engine=innodb  default charset=utf8 auto_increment=1;
+CREATE TABLE IF NOT EXISTS `usuario` (
+  `usu_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `per_id` bigint(20) NOT NULL,
+  `usu_username` varchar(45) DEFAULT NULL,
+  `usu_password` varchar(255) DEFAULT NULL,
+  `usu_sha` varchar(255) DEFAULT NULL,
+  `usu_session` varchar(255) DEFAULT NULL,
+  `usu_last_login` timestamp NULL DEFAULT NULL,
+  `usu_link_activo` text,
+  `usu_estado_activo` varchar(1) NOT NULL,
+  `usu_alias` varchar(60) DEFAULT NULL,
+  `usu_est_log` varchar(1) DEFAULT NULL,
+  `usu_fec_cre` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `usu_fec_mod` timestamp NULL DEFAULT NULL,
+  FOREIGN KEY (per_id) REFERENCES `persona` (per_id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
 -- table  `log`
 -- -----------------------------------------------------
-create  table if not exists  `log` (
-  `log_id` bigint(20) not null auto_increment ,
+CREATE TABLE IF NOT EXISTS  `log` (
+  `log_id` bigint(20) not null auto_increment primary key,
   `usu_id` bigint(20) not null ,
   `log_registro` bigint(20) not null ,  
   `log_accion` varchar(60) null ,
   `log_table` varchar(60) null ,
   `log_fecha` timestamp null default current_timestamp ,
-  primary key (`log_id`) ,
-  constraint `fk_log_usuario1`
-    foreign key (`usu_id` )
-    references  `usuario` (`usu_id` )
-    on delete no action
-    on update no action)
-engine=innodb  default charset=utf8 auto_increment=1;
+  foreign key (usu_id) references  `usuario` (usu_id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 -- -----------------------------------------------------
 -- table  `medico`
 -- -----------------------------------------------------
-create  table if not exists  `medico` (
-  `med_id` bigint(20) not null auto_increment ,
-  `per_id` bigint(20) not null ,
-  `med_colegiado` varchar(100) null ,
-  `med_registro` varchar(20) null ,
-  `med_est_log` varchar(1) null ,
-  `med_fec_cre` timestamp null default current_timestamp ,
-  `med_fec_mod` timestamp null ,
-  primary key (`med_id`) ,
-  constraint `fk_medico_persona1`
-    foreign key (`per_id` )
-    references  `persona` (`per_id` )
-    on delete no action
-    on update no action)
-engine=innodb  default charset=utf8 auto_increment=1;
+CREATE TABLE IF NOT EXISTS `medico` (
+  `med_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `per_id` bigint(20) NOT NULL,
+  `med_colegiado` varchar(100) DEFAULT NULL,
+  `med_registro` varchar(20) DEFAULT NULL,
+  `med_est_log` varchar(1) DEFAULT NULL,
+  `med_fec_cre` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `med_fec_mod` timestamp NULL DEFAULT NULL,
+   FOREIGN KEY (per_id) REFERENCES `persona` (per_id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
 -- table  `especialidad`
 -- -----------------------------------------------------
-create  table if not exists  `especialidad` (
-  `esp_id` bigint(20) not null auto_increment ,
-  `esp_nombre` varchar(60) null ,
-  `esp_nivel` int(5) null ,
-  `esp_est_log` varchar(1) null ,
-  `esp_fec_cre` timestamp null default current_timestamp ,
-  `esp_fec_mod` timestamp null ,
-  primary key (`esp_id`) )
-engine=innodb  default charset=utf8 auto_increment=1;
+CREATE TABLE IF NOT EXISTS `especialidad` (
+  `esp_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `esp_nombre` varchar(60) DEFAULT NULL,
+  `esp_nivel` int(5) DEFAULT NULL,
+  `esp_est_log` varchar(1) DEFAULT NULL,
+  `esp_fec_cre` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `esp_fec_mod` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
 -- table  `especialidad_medico`
 -- -----------------------------------------------------
-create  table if not exists  `especialidad_medico` (
-  `emed_id` bigint(20) not null auto_increment ,
-  `esp_id` bigint(20) not null ,
-  `med_id` bigint(20) not null ,
-  `emed_nivel` int(5) null ,
-  `emed_est_log` varchar(1) null ,
-  `emed_fec_cre` timestamp null default current_timestamp ,
-  `emed_fec_mod` timestamp null ,
-  primary key (`emed_id`) ,
-  constraint `fk_especialidad_medico_especialidad1`
-    foreign key (`esp_id` )
-    references  `especialidad` (`esp_id` )
-    on delete no action
-    on update no action,
-  constraint `fk_especialidad_medico_medico1`
-    foreign key (`med_id` )
-    references  `medico` (`med_id` )
-    on delete no action
-    on update no action)
-engine=innodb  default charset=utf8 auto_increment=1;
+CREATE TABLE IF NOT EXISTS `especialidad_medico` (
+  `emed_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `esp_id` bigint(20) NOT NULL,
+  `med_id` bigint(20) NOT NULL,
+  `emed_nivel` int(5) DEFAULT NULL,
+  `emed_est_log` varchar(1) DEFAULT NULL,
+  `emed_fec_cre` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `emed_fec_mod` timestamp NULL DEFAULT NULL,
+  FOREIGN KEY (esp_id) REFERENCES `especialidad` (esp_id),
+  FOREIGN KEY (med_id) REFERENCES `medico` (med_id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
 -- table  `empresa`
 -- -----------------------------------------------------
-create  table if not exists  `empresa` (
-  `emp_id` bigint(20) not null auto_increment ,
+CREATE TABLE IF NOT EXISTS  `empresa` (
+  `emp_id` bigint(20) not null auto_increment primary key,
   `emp_nombre` varchar(50) null ,
   `emp_ruc` varchar(15) null ,
   `emp_descripcion` varchar(100) null ,
@@ -243,306 +212,226 @@ create  table if not exists  `empresa` (
   `emp_telefono` varchar(20) null ,
   `emp_est_log` varchar(1) null ,
   `emp_fec_cre` timestamp null default current_timestamp ,
-  `emp_fec_mod` timestamp null ,
-  primary key (`emp_id`) )
-engine=innodb  default charset=utf8 auto_increment=1;
+  `emp_fec_mod` timestamp null 
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 -- -----------------------------------------------------
 -- table  `medico_empresa`
 -- -----------------------------------------------------
-create  table if not exists  `medico_empresa` (
-  `memp_id` bigint(20) not null auto_increment ,
-  `med_id` bigint(20) not null ,
-  `emp_id` bigint(20) not null ,
-  `memp_est_log` varchar(1) null ,
-  `memp_fec_cre` timestamp null default current_timestamp ,
-  `memp_fec_mod` timestamp null ,
-  primary key (`memp_id`) ,
-  constraint `fk_medico_empresa_medico1`
-    foreign key (`med_id` )
-    references  `medico` (`med_id` )
-    on delete no action
-    on update no action,
-  constraint `fk_medico_empresa_empresa1`
-    foreign key (`emp_id` )
-    references  `empresa` (`emp_id` )
-    on delete no action
-    on update no action)
-engine=innodb  default charset=utf8 auto_increment=1;
+CREATE TABLE IF NOT EXISTS `medico_empresa` (
+  `memp_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `med_id` bigint(20) NOT NULL,
+  `emp_id` bigint(20) NOT NULL,
+  `memp_est_log` varchar(1) DEFAULT NULL,
+  `memp_fec_cre` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `memp_fec_mod` timestamp NULL DEFAULT NULL,
+  FOREIGN KEY (emp_id) REFERENCES `empresa` (emp_id),
+  FOREIGN KEY (med_id) REFERENCES `medico` (med_id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
 -- table  `paciente`
 -- -----------------------------------------------------
-create  table if not exists  `paciente` (
-  `pac_id` bigint(20) not null auto_increment ,
-  `per_id` bigint(20) not null ,
-  `pac_fecha_ingreso` timestamp null ,
-  `pac_est_log` varchar(1) null ,
-  `pac_fec_cre` timestamp null default current_timestamp ,
-  `pac_fec_mod` timestamp null ,
-  primary key (`pac_id`) ,
-  constraint `fk_paciente_persona1`
-    foreign key (`per_id` )
-    references  `persona` (`per_id` )
-    on delete no action
-    on update no action)
-engine=innodb  default charset=utf8 auto_increment=1;
+
+CREATE TABLE IF NOT EXISTS `paciente` (
+  `pac_id` bigint(20) NOT NULL AUTO_INCREMENT  PRIMARY KEY,
+  `per_id` bigint(20) NOT NULL,
+  `pac_fecha_ingreso` timestamp NULL DEFAULT NULL,
+  `pac_est_log` varchar(1) DEFAULT NULL,
+  `pac_fec_cre` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `pac_fec_mod` timestamp NULL DEFAULT NULL,
+  FOREIGN KEY (per_id) REFERENCES `persona` (per_id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
 -- table  `cita_programada`
 -- -----------------------------------------------------
-create  table if not exists  `cita_programada` (
-  `cprog_id` bigint(20) not null auto_increment ,
-  `pac_id` bigint(20) not null ,
-  `emed_id` bigint(20) not null ,
-  `cprog_numero` int(10) null ,
-  `cprog_observacion` blob null ,
-  `cprog_est_log` varchar(1) null ,
-  `cprog_fec_cre` timestamp null default current_timestamp ,
-  `cprog_fec_mod` timestamp null ,
-  primary key (`cprog_id`, `pac_id`) ,
-  constraint `fk_cita_programada_paciente1`
-    foreign key (`pac_id` )
-    references  `paciente` (`pac_id` )
-    on delete no action
-    on update no action,
-  constraint `fk_cita_programada_especialidad_medico1`
-    foreign key (`emed_id` )
-    references  `especialidad_medico` (`emed_id` )
-    on delete no action
-    on update no action)
-engine=innodb  default charset=utf8 auto_increment=1;
+CREATE TABLE IF NOT EXISTS `cita_programada` (
+  `cprog_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `pac_id` bigint(20) NOT NULL,
+  `emed_id` bigint(20) NOT NULL,
+  `cprog_numero` int(10) DEFAULT NULL,
+  `cprog_observacion` text,
+  `cprog_est_log` varchar(1) DEFAULT NULL,
+  `cprog_fec_cre` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `cprog_fec_mod` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (cprog_id,pac_id),
+  FOREIGN KEY (emed_id) REFERENCES `especialidad_medico` (emed_id),
+  FOREIGN KEY (pac_id) REFERENCES `paciente` (pac_id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
 -- table  `agendar_cita`
 -- -----------------------------------------------------
-
 CREATE  TABLE IF NOT EXISTS `agendar_cita` (
   `acit_id` BIGINT(20) NOT NULL AUTO_INCREMENT ,
   `cprog_id` BIGINT(20) NOT NULL ,
   `pac_id` BIGINT(20) NOT NULL ,
   `hora_id` BIGINT(20) NOT NULL ,
-  `fecha_cita` DATE NOT NULL ,
-  `cons_id` BIGINT(20) NOT NULL ,
-  `hora_inicio` TIME NOT NULL ,
-  `acit_motivo` BLOB NULL DEFAULT NULL ,
+  `fecha_cita` DATE NULL ,
+  `cons_id` BIGINT(20) NULL ,
+  `hora_inicio` TIME NULL ,
+  `acit_motivo` text NULL DEFAULT NULL ,
   `acit_est_log` VARCHAR(1) NULL DEFAULT NULL ,
   `acit_fec_cre` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ,
   `acit_fec_mod` TIMESTAMP NULL DEFAULT NULL ,
-  PRIMARY KEY (`acit_id`, `cprog_id`, `pac_id`) ,
-  CONSTRAINT `fk_agendar_cita_cita_programada1`
-    FOREIGN KEY (`cprog_id` , `pac_id` )
-    REFERENCES `cita_programada` (`cprog_id` , `pac_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_agendar_cita_horario1`
-    FOREIGN KEY (`hora_id` , `fecha_cita` , `cons_id` , `hora_inicio` )
-    REFERENCES `horario` (`hora_id` , `fecha_cita` , `cons_id` , `hora_inicio` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB DEFAULT charset = utf8 auto_increment=1;
-
+  PRIMARY KEY (acit_id,cprog_id,pac_id),
+  FOREIGN KEY (cprog_id,pac_id) REFERENCES `cita_programada` (cprog_id,pac_id),
+  FOREIGN KEY (hora_id,fecha_cita,cons_id,hora_inicio)  REFERENCES `horario` (hora_id,fecha_cita,cons_id,hora_inicio)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
 -- table  `centro_atencion`
 -- -----------------------------------------------------
-create  table if not exists  `centro_atencion` (
-  `cate_id` bigint(20) not null auto_increment ,
-  `emp_id` bigint(20) not null ,
-  `cate_nombre` varchar(50) null ,
-  `cate_direccion` varchar(100) null ,
-  `cate_telefono` varchar(20) null ,
-  `cate_correo` varchar(60) null ,
-  `cate_hora_inicio` time null ,
-  `cate_hora_fin` time null ,
-  `cate_est_log` varchar(1) null ,
-  `cate_fec_cre` timestamp null default current_timestamp ,
-  `cate_fec_mod` timestamp null ,
-  primary key (`cate_id`) ,
-  constraint `fk_centro_atencion_empresa1`
-    foreign key (`emp_id` )
-    references  `empresa` (`emp_id` )
-    on delete no action
-    on update no action)
-engine=innodb  default charset=utf8 auto_increment=1;
+CREATE  TABLE IF NOT EXISTS `centro_atencion` (
+  `cate_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `emp_id` bigint(20) NOT NULL,
+  `cate_nombre` varchar(50) DEFAULT NULL,
+  `cate_direccion` varchar(100) DEFAULT NULL,
+  `cate_telefono` varchar(20) DEFAULT NULL,
+  `cate_correo` varchar(60) DEFAULT NULL,
+  `cate_hora_inicio` time DEFAULT NULL,
+  `cate_hora_fin` time DEFAULT NULL,
+  `cate_est_log` varchar(1) DEFAULT NULL,
+  `cate_fec_cre` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `cate_fec_mod` timestamp NULL DEFAULT NULL,
+  FOREIGN KEY (emp_id) REFERENCES `empresa` (emp_id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
 -- table  `oficina`
 -- -----------------------------------------------------
-create  table if not exists  `oficina` (
-  `ofi_id` bigint(20) not null auto_increment ,
-  `ofi_nombre` varchar(50) null ,
-  `ofi_est_log` varchar(1) null ,
-  `ofi_fec_cre` timestamp null default current_timestamp ,
-  `ofi_fec_mod` timestamp null ,
-  primary key (`ofi_id`) )
-engine=innodb  default charset=utf8 auto_increment=1;
+CREATE  TABLE IF NOT EXISTS  `oficina` (
+  `ofi_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `ofi_nombre` varchar(50) DEFAULT NULL,
+  `ofi_est_log` varchar(1) DEFAULT NULL,
+  `ofi_fec_cre` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `ofi_fec_mod` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
 -- table  `consultorio`
 -- -----------------------------------------------------
-create  table if not exists  `consultorio` (
-  `cons_id` bigint(20) not null auto_increment ,
-  `cate_id` bigint(20) not null ,
-  `esp_id` bigint(20) not null ,
-  `ofi_id` bigint(20) not null ,
-  `cons_nombre` varchar(50) null ,
-  `cons_telefono` varchar(20) null ,
-  `cons_correo` varchar(60) null ,
-  `cons_hora_inicio` time null ,
-  `cons_hora_fin` time null ,
-  `cons_tiempo_consulta` time null ,
-  `cons_est_log` varchar(1) null ,
-  `cons_fec_cre` timestamp null default current_timestamp ,
-  `cons_fec_mod` timestamp null ,
-  primary key (`cons_id`) ,
-  constraint `fk_consultorio_centro_atencion1`
-    foreign key (`cate_id` )
-    references  `centro_atencion` (`cate_id` )
-    on delete no action
-    on update no action,
-  constraint `fk_consultorio_especialidad1`
-    foreign key (`esp_id` )
-    references  `especialidad` (`esp_id` )
-    on delete no action
-    on update no action,
-  constraint `fk_consultorio_oficina1`
-    foreign key (`ofi_id` )
-    references  `oficina` (`ofi_id` )
-    on delete no action
-    on update no action)
-engine=innodb  default charset=utf8 auto_increment=1;
+
+CREATE  TABLE IF NOT EXISTS `consultorio` (
+  `cons_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+  `cate_id` bigint(20) NOT NULL,
+  `esp_id` bigint(20) NOT NULL,
+  `ofi_id` bigint(20) NOT NULL,
+  `cons_nombre` varchar(50) DEFAULT NULL,
+  `cons_telefono` varchar(20) DEFAULT NULL,
+  `cons_correo` varchar(60) DEFAULT NULL,
+  `cons_hora_inicio` time DEFAULT NULL,
+  `cons_hora_fin` time DEFAULT NULL,
+  `cons_tiempo_consulta` time DEFAULT NULL,
+  `cons_est_log` varchar(1) DEFAULT NULL,
+  `cons_fec_cre` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `cons_fec_mod` timestamp NULL DEFAULT NULL,
+  FOREIGN KEY (`cate_id`) REFERENCES `centro_atencion` (`cate_id`) ,
+  FOREIGN KEY (`esp_id`) REFERENCES `especialidad` (`esp_id`),
+  FOREIGN KEY (`ofi_id`) REFERENCES `oficina` (`ofi_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
 -- table  `horario`
 -- -----------------------------------------------------
-create  table if not exists  `horario` (
-  `hora_id` BIGINT(20) NOT NULL AUTO_INCREMENT ,
-  `fecha_cita` date not null ,
-  `cons_id` bigint(20) not null ,
-  `med_id` BIGINT(20) NOT NULL ,
-  `hora_inicio` time null ,
-  `hora_fin` time null ,
-  `hora_est_log` varchar(1) null ,
-  `hora_fec_cre` timestamp null default current_timestamp ,
-  `hora_fec_mod` timestamp null ,
-  primary key (`hora_id`, `fecha_cita`, `cons_id`,`hora_inicio`) ,
-  constraint `fk_horario_consultorio1`
-    foreign key (`cons_id` )
-    references  `consultorio` (`cons_id` )
-    on delete no action
-    on update no action,
-  constraint `fk_horario_medico1`
-    foreign key (`med_id` )
-    references  `medico` (`med_id` )
-    on delete no action
-    on update no action)
-engine=innodb  default charset=utf8 auto_increment=1;
+CREATE  TABLE IF NOT EXISTS  `horario` (
+  `hora_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `fecha_cita` date NOT NULL,
+  `cons_id` bigint(20) NOT NULL,
+  `med_id` bigint(20) NOT NULL,
+  `hora_inicio` time NOT NULL DEFAULT '00:00:00',
+  `hora_fin` time DEFAULT NULL,
+  `hora_est_log` varchar(1) DEFAULT NULL,
+  `hora_fec_cre` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `hora_fec_mod` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`hora_id`,`fecha_cita`,`cons_id`,`hora_inicio`),
+  FOREIGN KEY (`cons_id`) REFERENCES `consultorio` (`cons_id`) ,
+  FOREIGN KEY (`med_id`) REFERENCES `medico` (`med_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
 -- table  `cita_medica`
 -- -----------------------------------------------------
-create  table if not exists  `cita_medica` (
-  `cmde_id` bigint(20) not null auto_increment ,
-  `acit_id` bigint(20) not null ,
-  `pac_id` bigint(20) not null ,
-  `cprog_id` bigint(20) not null ,
-  `tcon_id` bigint(20) not null ,
-  `hora_id` BIGINT(20) NOT NULL ,
-  `hora_inicio` TIME NOT NULL ,
-  `fecha_cita` date not null ,
-  `cons_id` bigint(20) not null ,
-  `tur_numero` int(5) not null ,
-  `cmde_motivo` blob null ,
-  `cmde_observacion` blob null ,
-  `cmde_estado_asistencia` varchar(1) null ,
-  `cmde_est_log` varchar(1) null ,
-  `cmde_fec_cre` timestamp null default current_timestamp ,
-  `cmde_fec_mod` timestamp null ,
-  primary key (`cmde_id`, `acit_id`, `pac_id`, `cprog_id`, `tur_numero`, `hora_id`, `fecha_cita`, `cons_id`, `hora_inicio`) ,
-  constraint `fk_cita_medica_agendar_cita1`
-    foreign key (`acit_id` , `pac_id` , `cprog_id` )
-    references  `agendar_cita` (`acit_id` , `pac_id` , `cprog_id` )
-    on delete no action
-    on update no action,
-  constraint `fk_cita_medica_horario1`
-    foreign key (`hora_id` , `fecha_cita` , `cons_id`,`hora_inicio` )
-    references  `horario` (`hora_id` , `fecha_cita` , `cons_id`,`hora_inicio` )
-    on delete no action
-    on update no action)
-engine=innodb  default charset=utf8 auto_increment=1;
+CREATE  TABLE IF NOT EXISTS `cita_medica` (
+  `cmde_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `acit_id` bigint(20) NOT NULL,
+  `pac_id` bigint(20) NOT NULL,
+  `cprog_id` bigint(20) NOT NULL,
+  `tcon_id` bigint(20) NOT NULL,
+  `hora_id` bigint(20) NOT NULL,
+  `hora_inicio` time NOT NULL,
+  `fecha_cita` date NOT NULL,
+  `cons_id` bigint(20) NOT NULL,
+  `tur_numero` int(5) NOT NULL,
+  `cmde_motivo` text,
+  `cmde_observacion` text,
+  `cmde_estado_asistencia` varchar(1) DEFAULT NULL,
+  `cmde_est_log` varchar(1) DEFAULT NULL,
+  `cmde_fec_cre` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `cmde_fec_mod` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`cmde_id`,`acit_id`,`pac_id`,`cprog_id`,`tur_numero`,`hora_id`,`fecha_cita`,`cons_id`,`hora_inicio`),
+  FOREIGN KEY (`tcon_id`) REFERENCES `tipo_consulta` (`tcon_id`),
+  FOREIGN KEY (`acit_id`, `pac_id`, `cprog_id`) REFERENCES `agendar_cita` (`acit_id`, `pac_id`, `cprog_id`),
+  FOREIGN KEY (`hora_id`, `fecha_cita`, `cons_id`, `hora_inicio`) REFERENCES `horario` (`hora_id`, `fecha_cita`, `cons_id`, `hora_inicio`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-alter table `cita_medica`
-add constraint `fk_cita_medica_001` foreign key (`tcon_id`) references `tipo_consulta`(`tcon_id`);
 
 -- -----------------------------------------------------
 -- table  `signos_vitales`
 -- -----------------------------------------------------
-create  table if not exists  `signos_vitales` (
-  `svit_id` bigint(20) not null auto_increment ,
-  `cmde_id` bigint(20) not null ,
-  `svit_peso` decimal(5,2) null ,
-  `svit_talla` decimal(5,2) null ,
-  `svit_temperatura` decimal(5,2) null ,
-  `svit_temperatura_axilar` decimal(5,2) null ,
-  `svit_presion_arteriar` decimal(5,2) null ,
-  `svit_frecuencia_respiratoria` decimal(5,2) null ,
-  `svit_frecuencia_cardiaca` decimal(5,2) null ,
-  `svit_observacion` blob null ,
-  `svit_est_log` varchar(1) null ,
-  `svit_fec_cre` timestamp null default current_timestamp ,
-  `svit_fec_mod` timestamp null ,
-  primary key (`svit_id`) ,
-  constraint `fk_signos_vitales_cita_medica1`
-    foreign key (`cmde_id` )
-    references  `cita_medica` (`cmde_id` )
-    on delete no action
-    on update no action)
-engine=innodb  default charset=utf8 auto_increment=1;
+CREATE  TABLE IF NOT EXISTS `signos_vitales` (
+  `svit_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `cmde_id` bigint(20) NOT NULL,
+  `svit_peso` decimal(5,2) DEFAULT NULL,
+  `svit_talla` decimal(5,2) DEFAULT NULL,
+  `svit_temperatura` decimal(5,2) DEFAULT NULL,
+  `svit_temperatura_axilar` decimal(5,2) DEFAULT NULL,
+  `svit_presion_arteriar` decimal(5,2) DEFAULT NULL,
+  `svit_frecuencia_respiratoria` decimal(5,2) DEFAULT NULL,
+  `svit_frecuencia_cardiaca` decimal(5,2) DEFAULT NULL,
+  `svit_observacion` text,
+  `svit_est_log` varchar(1) DEFAULT NULL,
+  `svit_fec_cre` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `svit_fec_mod` timestamp NULL DEFAULT NULL,
+  FOREIGN KEY (`cmde_id`) REFERENCES `cita_medica` (`cmde_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
 -- table  `tipo_dicom`
 -- -----------------------------------------------------
-create  table if not exists  `tipo_dicom` (
-  `tdic_id` bigint(20) not null auto_increment ,
-  `tdic_nomenclatura` varchar(5) null ,
-  `tdic_detalle` varchar(100) null ,
-  `tdic_est_log` varchar(1) null ,
-  `tdic_fec_cre` timestamp null default current_timestamp ,
-  `tdic_fec_mod` timestamp null ,
-  primary key (`tdic_id`) )
-engine=innodb  default charset=utf8 auto_increment=1;
+CREATE  TABLE IF NOT EXISTS `tipo_dicom` (
+  `tdic_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `tdic_nomenclatura` varchar(5) DEFAULT NULL,
+  `tdic_detalle` varchar(100) DEFAULT NULL,
+  `tdic_est_log` varchar(1) DEFAULT NULL,
+  `tdic_fec_cre` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `tdic_fec_mod` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
 -- table  `dicom`
 -- -----------------------------------------------------
-create  table if not exists  `dicom` (
-  `dic_id` bigint(20) not null auto_increment ,
-  `tdic_id` bigint(20) not null ,
-  `dic_size` decimal(10,2) null ,
-  `dic_ruta` varchar(80) null ,
-  `dic_est_log` varchar(1) null ,
-  `dic_fec_cre` timestamp null default current_timestamp ,
-  `dic_fec_mod` timestamp null ,
-  primary key (`dic_id`) ,
-  constraint `fk_dicom_tipo_dicom1`
-    foreign key (`tdic_id` )
-    references  `tipo_dicom` (`tdic_id` )
-    on delete no action
-    on update no action)
-engine=innodb  default charset=utf8 auto_increment=1;
+CREATE  TABLE IF NOT EXISTS `dicom` (
+  `dic_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `tdic_id` bigint(20) NOT NULL,
+  `dic_size` decimal(10,2) DEFAULT NULL,
+  `dic_ruta` varchar(80) DEFAULT NULL,
+  `dic_est_log` varchar(1) DEFAULT NULL,
+  `dic_fec_cre` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `dic_fec_mod` timestamp NULL DEFAULT NULL,
+  FOREIGN KEY (`tdic_id`) REFERENCES `tipo_dicom` (`tdic_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
 -- table  `session`
 -- -----------------------------------------------------
-
-create  table if not exists `session` (
-  `id` varchar(40) not null ,
-  `expire` bigint(20) null ,
-  `data` blob null ,
-  primary key (`id`) )
-engine=innodb  default charset=utf8 auto_increment=1;
+CREATE  TABLE IF NOT EXISTS `session` (
+  `id` varchar(40) NOT NULL PRIMARY KEY,
+  `expire` bigint(20) DEFAULT NULL,
+  `data` blob DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 -- --------------------------------------------------------
@@ -631,127 +520,88 @@ CREATE TABLE IF NOT EXISTS `grupo_rol` (
 -- -----------------------------------------------------
 -- table  `aplicacion`
 -- -----------------------------------------------------
-create  table if not exists  `aplicacion` (
-  `apl_id` bigint(20) not null auto_increment ,
-  `apl_nombre` varchar(50) null ,
-  `apl_tipo` varchar(45) null ,
-  `apl_lang_file` varchar(100) null ,
-  `apl_est_log` varchar(1) null ,
-  `apl_fec_cre` timestamp null default current_timestamp ,
-  `apl_fec_mod` timestamp null ,
-  primary key (`apl_id`) )
-engine=innodb  default charset=utf8 auto_increment=1;
+CREATE TABLE IF NOT EXISTS `aplicacion` (
+  `apl_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `apl_nombre` varchar(50) DEFAULT NULL,
+  `apl_tipo` varchar(45) DEFAULT NULL,
+  `apl_lang_file` varchar(100) DEFAULT NULL,
+  `apl_est_log` varchar(1) DEFAULT NULL,
+  `apl_fec_cre` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `apl_fec_mod` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
 -- table  `modulo`
 -- -----------------------------------------------------
-create  table if not exists  `modulo` (
-  `mod_id` bigint(20) not null auto_increment ,
-  `apl_id` bigint(20) not null ,
-  `mod_nombre` varchar(50) null ,  
+CREATE TABLE IF NOT EXISTS `modulo` (
+  `mod_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `apl_id` bigint(20) NOT NULL,
+  `mod_nombre` varchar(50) DEFAULT NULL,
   `mod_dir_imagen` varchar(100) DEFAULT NULL,
-  `mod_url` varchar(100) null ,
-  `mod_orden` bigint(2) default null,
-  `mod_lang_file` varchar(60) default null,
-  `mod_estado_activo` varchar(1) not null,
+  `mod_url` varchar(100) DEFAULT NULL,
+  `mod_orden` bigint(2) DEFAULT NULL,
+  `mod_lang_file` varchar(60) DEFAULT NULL,
+  `mod_estado_activo` varchar(1) NOT NULL,
   `mod_fecha_creacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `mod_fecha_modificacion` timestamp NULL DEFAULT NULL,
   `mod_estado_logico` varchar(1) NOT NULL,
-  primary key (`mod_id`) ,
-  constraint `fk_modulo_aplicacion1`
-    foreign key (`apl_id` )
-    references  `aplicacion` (`apl_id` )
-    on delete no action
-    on update no action)
-engine=innodb  default charset=utf8 auto_increment=1;
+  FOREIGN KEY (`apl_id`) REFERENCES `aplicacion` (`apl_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
 -- table  `objeto_modulo`
 -- -----------------------------------------------------
-create  table if not exists  `objeto_modulo` (
-  `omod_id` bigint(20) not null auto_increment ,
-  `mod_id` bigint(20) not null ,
-  `omod_padre_id` bigint(20) default null ,
-  `omod_nombre` varchar(50) default null ,
-  `omod_tipo` varchar(60) default null ,
-  `omod_tipo_boton` varchar(1) default null ,
-  `omod_accion` varchar(50) default null ,
-  `omod_function` varchar(100) default null ,
+CREATE TABLE IF NOT EXISTS `objeto_modulo` (
+  `omod_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `mod_id` bigint(20) NOT NULL,
+  `omod_padre_id` bigint(20) DEFAULT NULL,
+  `omod_nombre` varchar(50) DEFAULT NULL,
+  `omod_tipo` varchar(60) DEFAULT NULL,
+  `omod_tipo_boton` varchar(1) DEFAULT NULL,
+  `omod_accion` varchar(50) DEFAULT NULL,
+  `omod_function` varchar(100) DEFAULT NULL,
   `omod_dir_imagen` varchar(100) DEFAULT NULL,
-  `omod_entidad` varchar(100) default null ,
-  `omod_orden` bigint(2) default null ,
-  `omod_estado_visible` int(1) default null ,
-  `omod_lang_file` varchar(60) default null ,
-  `omod_estado_activo` varchar(1) not null,
+  `omod_entidad` varchar(100) DEFAULT NULL,
+  `omod_orden` bigint(2) DEFAULT NULL,
+  `omod_estado_visible` int(1) DEFAULT NULL,
+  `omod_lang_file` varchar(60) DEFAULT NULL,
+  `omod_estado_activo` varchar(1) NOT NULL,
   `omod_fecha_creacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `omod_fecha_modificacion` timestamp NULL DEFAULT NULL,
   `omod_estado_logico` varchar(1) NOT NULL,
-  primary key (`omod_id`) ,
-  constraint `fk_objeto_modulo_modulo1`
-    foreign key (`mod_id` )
-    references  `modulo` (`mod_id` )
-    on delete no action
-    on update no action,
-  constraint `fk_objeto_modulo_objeto_modulo1`
-    foreign key (`omod_padre_id` )
-    references  `objeto_modulo` (`omod_id` )
-    on delete no action
-    on update no action)
-engine=innodb  default charset=utf8 auto_increment=1;
+  FOREIGN KEY (`mod_id`) REFERENCES `modulo` (`mod_id`) ,
+  FOREIGN KEY (`omod_padre_id`) REFERENCES `objeto_modulo` (`omod_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
 -- table  `usuario_empresa`
 -- -----------------------------------------------------
-create  table if not exists  `usuario_empresa` (
-  `uemp_id` bigint(20) not null auto_increment ,
-  `usu_id` bigint(20) not null ,
-  `rol_id` bigint(20) not null ,
-  `emp_id` bigint(20) not null ,
-  `uemp_est_log` varchar(1) null ,
-  `uemp_fec_cre` timestamp null default current_timestamp ,
-  `uemp_fec_mod` timestamp null ,
-  primary key (`uemp_id`) ,
-  constraint `fk_usuario_rol_usuario1`
-    foreign key (`usu_id` )
-    references  `usuario` (`usu_id` )
-    on delete no action
-    on update no action,
-  constraint `fk_usuario_rol_rol1`
-    foreign key (`rol_id` )
-    references  `rol` (`rol_id` )
-    on delete no action
-    on update no action,
-  constraint `fk_usuario_empresa_empresa1`
-    foreign key (`emp_id` )
-    references  `empresa` (`emp_id` )
-    on delete no action
-    on update no action)
-engine=innodb  default charset=utf8 auto_increment=1;
+CREATE TABLE IF NOT EXISTS `usuario_empresa` (
+  `uemp_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `usu_id` bigint(20) NOT NULL,
+  `rol_id` bigint(20) NOT NULL,
+  `emp_id` bigint(20) NOT NULL,
+  `uemp_est_log` varchar(1) DEFAULT NULL,
+  `uemp_fec_cre` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `uemp_fec_mod` timestamp NULL DEFAULT NULL,
+  FOREIGN KEY (`emp_id`) REFERENCES `empresa` (`emp_id`) ,
+  FOREIGN KEY (`rol_id`) REFERENCES `rol` (`rol_id`) ,
+  FOREIGN KEY (`usu_id`) REFERENCES `usuario` (`usu_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
 -- table  `omodulo_rol`
 -- -----------------------------------------------------
-create  table if not exists  `omodulo_rol` (
-  `omrol_id` bigint(20) not null auto_increment ,
-  `omod_id` bigint(20) not null ,
-  `rol_id` bigint(20) not null ,
-  `omrol_est_log` varchar(1) null ,
-  `omrol_fec_cre` timestamp null default current_timestamp ,
-  `omrol_fec_mod` timestamp null ,
-  primary key (`omrol_id`) ,
-  constraint `fk_omodulo_rol_objeto_modulo1`
-    foreign key (`omod_id` )
-    references  `objeto_modulo` (`omod_id` )
-    on delete no action
-    on update no action,
-  constraint `fk_omodulo_rol_rol1`
-    foreign key (`rol_id` )
-    references  `rol` (`rol_id` )
-    on delete no action
-    on update no action)
-engine=innodb  default charset=utf8 auto_increment=1;
-
-
+CREATE TABLE IF NOT EXISTS `omodulo_rol` (
+  `omrol_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `omod_id` bigint(20) NOT NULL,
+  `rol_id` bigint(20) NOT NULL,
+  `omrol_est_log` varchar(1) DEFAULT NULL,
+  `omrol_fec_cre` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `omrol_fec_mod` timestamp NULL DEFAULT NULL,
+  FOREIGN KEY (`omod_id`) REFERENCES `objeto_modulo` (`omod_id`) ,
+  FOREIGN KEY (`rol_id`) REFERENCES `rol` (`rol_id`) 
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 -- --------------------------------------------------------
@@ -772,7 +622,7 @@ CREATE TABLE IF NOT EXISTS `accion` (
   `acc_fecha_creacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `acc_fecha_modificacion` timestamp NULL DEFAULT NULL,
   `acc_estado_logico` varchar(1) CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -800,16 +650,14 @@ CREATE TABLE IF NOT EXISTS `obmo_acci` (
 --
 
 CREATE TABLE IF NOT EXISTS `eventos` (
-  `eve_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `eve_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `cmde_id` bigint(20) NOT NULL,
   `eve_usu_id` bigint(20) NOT NULL,
   `eve_nombre` varchar(50) DEFAULT NULL,
   `eve_observacion` text,
   `eve_fec_cre` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `eve_fec_mod` timestamp NULL DEFAULT NULL,
-  `eve_est_log` varchar(1) NOT NULL,
-  PRIMARY KEY (`eve_id`),
-  KEY `fk_eventos_cita_medica1` (`cmde_id`)
+  `eve_est_log` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
@@ -817,7 +665,7 @@ CREATE TABLE IF NOT EXISTS `eventos` (
 --
 
 CREATE TABLE IF NOT EXISTS `imagenes` (
-  `ima_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `ima_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
   `eve_id` bigint(20) NOT NULL,
   `ima_titulo` varchar(60) DEFAULT NULL,
   `ima_nombre_archivo` varchar(60) DEFAULT NULL,
@@ -829,51 +677,40 @@ CREATE TABLE IF NOT EXISTS `imagenes` (
   `ima_fecha_publica` timestamp NULL DEFAULT NULL,
   `ima_fec_cre` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ima_fec_mod` timestamp NULL DEFAULT NULL,
-  `ima_est_log` varchar(1) NOT NULL,
-  PRIMARY KEY (`ima_id`),
-  KEY `fk_imagenes_eventos1` (`eve_id`)
+  `ima_est_log` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Estructura de tabla para la tabla `resultados`
 --
 
-CREATE TABLE IF NOT EXISTS `resultados` (
-  `resul_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `eve_id` bigint(20) NOT NULL,
-  `med_id` bigint(20) NOT NULL,
-  `usu_id` bigint(20) DEFAULT NULL,
-  `resul_observacion` text,
-  `resul_fec_cre` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `resul_fec_mod` timestamp NULL DEFAULT NULL,
-  `resul_est_log` varchar(1) NOT NULL,
-  PRIMARY KEY (`resul_id`),
-  KEY `fk_resultados_eventos1` (`eve_id`),
-  KEY `fk_resultados_medico1` (`med_id`)
+CREATE  TABLE IF NOT EXISTS `resultados` (
+  `resul_id` BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+  `eve_id` BIGINT(20) NOT NULL ,
+  `med_id` BIGINT(20) NOT NULL ,
+  `usu_id` BIGINT(20) NULL ,
+  `resul_observacion` TEXT NULL ,
+  `resul_fec_cre` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  `resul_fec_mod` TIMESTAMP NULL DEFAULT NULL ,
+  `resul_est_log` VARCHAR(1) NOT NULL ,
+  FOREIGN KEY (`eve_id` )  REFERENCES `eventos` (`eve_id` ),
+  FOREIGN KEY (`med_id` )  REFERENCES `medico` (`med_id` )
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Estructura de tabla para la tabla `medico_atencion`
 --
 
-CREATE  TABLE IF NOT EXISTS `rdmi`.`medico_atencion` (
-  `mate_id` BIGINT(20) NOT NULL AUTO_INCREMENT ,
-  `med_id` BIGINT(20) NOT NULL ,
-  `pac_id` BIGINT(20) NOT NULL ,
-  `mate_est_log` VARCHAR(1) NULL DEFAULT NULL ,
-  `mate_fec_cre` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ,
-  `mate_fec_mod` TIMESTAMP NULL DEFAULT NULL ,
-  PRIMARY KEY (`mate_id`) ,
-  INDEX `fk_medico_atencion_medico1` (`med_id` ASC) ,
-  INDEX `fk_medico_atencion_paciente1` (`pac_id` ASC) ,
-  CONSTRAINT `fk_medico_atencion_medico1`
-    FOREIGN KEY (`med_id` )
-    REFERENCES `rdmi`.`medico` (`med_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_medico_atencion_paciente1`
-    FOREIGN KEY (`pac_id` )
-    REFERENCES `rdmi`.`paciente` (`pac_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+CREATE  TABLE IF NOT EXISTS `medico_atencion` (
+  `mate_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `med_id` bigint(20) NOT NULL,
+  `pac_id` bigint(20) NOT NULL,
+  `mate_est_log` varchar(1) DEFAULT NULL,
+  `mate_fec_cre` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `mate_fec_mod` timestamp NULL DEFAULT NULL,
+  FOREIGN KEY (`med_id`) REFERENCES `medico` (`med_id`),
+  FOREIGN KEY (`pac_id`) REFERENCES `paciente` (`pac_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+
