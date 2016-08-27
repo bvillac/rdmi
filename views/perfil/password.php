@@ -80,3 +80,7 @@ use yii\helpers\Html;
 <div class="col-md-2">
     <p><?= Html::a('<span class="glyphicon glyphicon-floppy-disk"></span>' . Yii::t("accion", "Save"), 'javascript:sentPassword()', ['class' => 'btn btn-primary btn-block']); ?> </p>
 </div>
+<script>
+    var AccionTipo='password';
+</script>
+

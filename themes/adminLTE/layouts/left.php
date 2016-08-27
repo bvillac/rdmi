@@ -17,11 +17,13 @@ use app\models\ObjetoModulo;
             <?php
             //MENU LATERAL IZQ
             $modules = Menu::getMenuModulos();
+            //\app\models\Utilities::putMessageLogFile($modules);
             $rutaControl = Yii::$app->controller->route;
             $mod = new ObjetoModulo();
-            $arr_mod = $mod->getModuleByObjModule($this->params["omod_id"]);
+            $arr_mod = $mod->getModuleByObjModule($this->params["omod_id"]);            
             foreach ($modules as $row) {
                 $objMod = Menu::getObjetoModulo($row['mod_id']);
+                //\app\models\Utilities::putMessageLogFile($objMod);
                 $mod_lang_file = isset($row['mod_lang_file']) ? $row['mod_lang_file'] : "menu";
                 $mod_nombre = Yii::t($mod_lang_file, $row['mod_nombre']);
                 $mod_imagen = $row['mod_dir_imagen'];

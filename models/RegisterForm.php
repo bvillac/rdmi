@@ -75,12 +75,14 @@ class RegisterForm extends Model
                 Yii::$app->session->setFlash('error',Yii::t("register","<h4>Error</h4>Email already exists. Please choose another."));
                 return false;
             }else{
+                //Las constraseñas deben ser iguales
                 if($this->password !== $this->password_repeat){
                     $this->setErrorSession(true);
                     $this->addError("error", Yii::t("register","<h4>Error</h4>Password and Password Confirm are different"));
                     Yii::$app->session->setFlash('error',Yii::t("register","<h4>Error</h4>Password and Password Confirm are different"));
                     return false;
                 }
+                //Si pasa correctamente se Crea a la Persona y despues al usuarios
                 // primero se crea a la persona
                 $persona = new Persona();
                 $persona->per_nombre   = Html::encode($this->firstName);
@@ -116,8 +118,8 @@ class RegisterForm extends Model
                 $usu_id = $usuario->usu_id;
                 // tercero se crea los permisos del usuario con la empresa
                 $emp_rol = new Rol();
-                $emp_id=1;
-                $rol_id=1;
+                $emp_id=1;//Empresa Medical Por Defecto
+                $rol_id=2;//Rol de Usuario Normal
                 if(!$emp_rol->guardarEmpresaRol($usu_id,$emp_id,$rol_id)){
                     $this->addError("error", Yii::t("exception","The above error occurred while the Web server was processing your request."));
                     Yii::$app->session->setFlash('error',Yii::t("exception","The above error occurred while the Web server was processing your request."));

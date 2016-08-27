@@ -22,6 +22,7 @@ use Yii;
  */
 class Paciente extends \yii\db\ActiveRecord
 {
+    private $rolDefault = 4;
     /**
      * @inheritdoc
      */
@@ -137,9 +138,14 @@ class Paciente extends \yii\db\ActiveRecord
             Persona::insertarDataPerfilDatoAdicional($con, $data, $per_id);
             $this->insertarDataPaciente($con, $data, $per_id);
             $pac_id=$con->getLastInsertID();
-            $password=  Utilities::generarCodigoKey(8);//Passw Generado Automaticamente
+            //Inserta Datos de Usuario
+            $password=Utilities::generarCodigoKey(8);//Passw Generado Automaticamente
             $linkActiva=Usuario::crearLinkActivacion();
-            Usuario::insertarDataUser($con, $data[0]['per_correo'], $password, $per_id,$linkActiva);            
+            Usuario::insertarDataUser($con, $data[0]['per_correo'], $password, $per_id,$linkActiva); 
+            $usu_id=$con->getLastInsertID();//IDS de la Persona
+            Rol::saveEmpresaRol($con, $usu_id, 1, $this->rolDefault);//Empresas 1 Por Defecto
+            //###############################
+            
             Utilities::insertarLogs($con, $pac_id, 'paciente', 'Insert -> Pac_id,Per_id,Usu_id');
             $trans->commit();
             $con->close();

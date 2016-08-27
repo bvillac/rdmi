@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\data\ArrayDataProvider;
 use app\models\Persona;
+use app\models\Rol;
 use app\models\Especialidad;
 
 /**
@@ -25,6 +26,8 @@ use app\models\Especialidad;
  */
 class Medico extends \yii\db\ActiveRecord
 {
+    private $rolDefault = 3;
+    
     /**
      * @inheritdoc
      */
@@ -191,12 +194,21 @@ class Medico extends \yii\db\ActiveRecord
         try {
             $data = isset($data['DATA']) ? $data['DATA'] : array();
             Persona::insertarDataPerfil($con, $data);
-            $per_id=$con->getLastInsertID();//IDS de la Persona
+            $per_id=$con->getLastInsertID();//IDS de la Persona            
             Persona::insertarDataPerfilDatoAdicional($con, $data, $per_id);
             $this->insertarDataMedico($con, $data, $per_id);
             $med_id=$con->getLastInsertID();
             Especialidad::insertarDataEspecialidad($con, $data[0]['especialidades'], $med_id);
-            Empresa::insertarDataEmpresa($con, $data[0]['emp_id'], $med_id);     
+            Empresa::insertarDataEmpresa($con, $data[0]['emp_id'], $med_id); 
+            
+            //Inserta Datos de Usuario
+            $password=Utilities::generarCodigoKey(8);//Passw Generado Automaticamente
+            $linkActiva=Usuario::crearLinkActivacion();
+            Usuario::insertarDataUser($con, $data[0]['per_correo'], $password, $per_id,$linkActiva); 
+            $usu_id=$con->getLastInsertID();//IDS de la Persona
+            Rol::saveEmpresaRol($con, $usu_id, $data[0]['emp_id'], $this->rolDefault);
+            //###############################
+            
             Utilities::insertarLogs($con, $med_id, 'medico', 'Insert -> Med_id');
             $trans->commit();
             $con->close();
@@ -204,6 +216,15 @@ class Medico extends \yii\db\ActiveRecord
             //$arroout["ids"]= $ftem_id;
             $arroout["status"]= true;
             //$arroout["secuencial"]= $doc_numero;
+            
+            //Enviar correo electronico para activacion de cuenta
+                $nombres = $data[0]['per_nombre'];
+                $tituloMensaje = Yii::t("register","Successful Registration");
+                $asunto = Yii::t("register", "User Register") . " " . Yii::$app->params["siteName"];
+                $body = Utilities::getMailMessage("registerPaciente", array("[[user]]" => $nombres, "[[username]]" => $data[0]['per_correo'],"[[clave]]" => $password, "[[link_verification]]" => $linkActiva), Yii::$app->language);
+                Utilities::sendEmail($tituloMensaje, Yii::$app->params["adminEmail"], [$data[0]['per_correo'] => $data[0]['per_nombre'] . " " . $data[0]['per_apellido']], $asunto, $body);
+            //Find Datos Mail
+            
             return $arroout;
         } catch (\Exception $e) {
             $trans->rollBack();

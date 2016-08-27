@@ -168,6 +168,47 @@ class MedicoController extends Controller {
                     "genero" => Utilities::genero(),
                     "cantones" => $cantones]);
     }
+    
+    public function actionUpdateperfil() {
+        $perADO = new Persona();
+        $medADO = new Medico();
+        $provincias = array();
+        $cantones = array();        
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
+            if (isset($data["getcantones"])) {
+                $cantones = Canton::getCantonesByProvinciaID($data['prov_id']);
+                $message = [
+                    "cantones" => $cantones,
+                ];
+                echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message);
+                return;
+            }
+        }
+        $MedId=Yii::$app->session->get('MedId', FALSE);//Recupera el Id Paciente
+        //$ids = isset($_GET['ids']) ? base64_decode($_GET['ids']) : NULL;
+        $medData = $medADO->buscarMedicoID($MedId);
+        $medEspData = Medico::getEspecilidadesMedico($MedId);
+        $empData = Empresa::getEmpresaMedico($MedId);
+        $perData = $perADO->buscarPersonaID($medData[0]["per_id"]);
+        $provincias = Provincia::getProvinciasByPaisID($this->id_pais);
+        if (count($provincias) > 0) {            
+            $cantones = Canton::getCantonesByProvinciaID(($perData[0]["Provincia"]<>0)?$perData[0]["Provincia"]:$provincias[0]["Ids"]);
+        }
+        return $this->render('updateperfil', [
+                    "model" => $medData,
+                    "medico" => json_encode($medData),
+                    "medicoEsp" => json_encode($medEspData),
+                    "medicoEmp" => json_encode($empData),
+                    "persona" => json_encode($perData),
+                    "especialidades" => Medico::getEspecilidades(),
+                    "empresas" => Empresa::getEmpresas(),
+                    "provincias" => $provincias,
+                    "pais" => $paises,
+                    "estCivil" => Utilities::estadoCivil(),
+                    "genero" => Utilities::genero(),
+                    "cantones" => $cantones]);
+    }
 
     /**
      * Deletes an existing Medico model.

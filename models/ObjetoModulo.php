@@ -142,7 +142,7 @@ class ObjetoModulo extends \yii\db\ActiveRecord
                       inner join (" . $con->dbname . ".objeto_modulo b
                           inner join (" . $con->dbname . ".omodulo_rol c
                               inner join " . $con->dbname . ".rol d on c.rol_id=d.rol_id)
-                          on b.omod_id=c.omod_id)
+                          on b.omod_id=c.omod_id and c.omrol_est_log=1)
                       on b.mod_id=a.mod_id
                   where a.mod_estado_logico=1 and b.mod_id=:mod_id and b.omod_tipo='S' 
                   and d.rol_id=:rol_id order by b.omod_orden ";      

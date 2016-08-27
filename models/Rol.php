@@ -124,5 +124,18 @@ class Rol extends \yii\db\ActiveRecord
             return false;
         }
     }
+    
+    //Guarada Datos de Empreasa y roles para los accesos
+    public static function saveEmpresaRol($con,$usu_id,$emp_id,$rol_id) {     
+            $sql = "INSERT INTO " . $con->dbname . ".usuario_empresa
+                (usu_id,rol_id,emp_id,uemp_est_log)VALUES
+                (:usu_id,:rol_id,:emp_id,1) ";
+            $command = $con->createCommand($sql);
+            $command->bindParam(":usu_id",$usu_id, \PDO::PARAM_INT);
+            $command->bindParam(":rol_id",$rol_id, \PDO::PARAM_INT);
+            $command->bindParam(":emp_id",$emp_id, \PDO::PARAM_INT);
+            $command->execute();
+
+    }
 
 }
