@@ -262,26 +262,6 @@ CREATE TABLE IF NOT EXISTS `cita_programada` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
--- table  `agendar_cita`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `agendar_cita` (
-  `acit_id` BIGINT(20) NOT NULL AUTO_INCREMENT ,
-  `cprog_id` BIGINT(20) NOT NULL ,
-  `pac_id` BIGINT(20) NOT NULL ,
-  `hora_id` BIGINT(20) NOT NULL ,
-  `fecha_cita` DATE NULL ,
-  `cons_id` BIGINT(20) NULL ,
-  `hora_inicio` TIME NULL ,
-  `acit_motivo` text NULL DEFAULT NULL ,
-  `acit_est_log` VARCHAR(1) NULL DEFAULT NULL ,
-  `acit_fec_cre` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ,
-  `acit_fec_mod` TIMESTAMP NULL DEFAULT NULL ,
-  PRIMARY KEY (acit_id,cprog_id,pac_id),
-  FOREIGN KEY (cprog_id,pac_id) REFERENCES `cita_programada` (cprog_id,pac_id),
-  FOREIGN KEY (hora_id,fecha_cita,cons_id,hora_inicio)  REFERENCES `horario` (hora_id,fecha_cita,cons_id,hora_inicio)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
--- -----------------------------------------------------
 -- table  `centro_atencion`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `centro_atencion` (
@@ -352,29 +332,45 @@ CREATE  TABLE IF NOT EXISTS  `horario` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
+-- table  `agendar_cita`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `agendar_cita` (
+  `acit_id` BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+  `cprog_id` BIGINT(20) NOT NULL ,
+  `pac_id` BIGINT(20) NOT NULL ,
+  `hora_id` BIGINT(20) NOT NULL ,
+  `fecha_cita` DATE NULL ,
+  `cons_id` BIGINT(20) NULL ,
+  `hora_inicio` TIME NULL ,
+  `acit_motivo` BLOB NULL DEFAULT NULL ,
+  `acit_est_log` VARCHAR(1) NULL DEFAULT NULL ,
+  `acit_fec_cre` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ,
+  `acit_fec_mod` TIMESTAMP NULL DEFAULT NULL ,
+  FOREIGN KEY (`cprog_id` , `pac_id` ) REFERENCES `cita_programada` (`cprog_id` , `pac_id` ),
+  FOREIGN KEY (`hora_id` , `fecha_cita` , `cons_id` , `hora_inicio` ) REFERENCES `horario` (`hora_id`,`fecha_cita`,`cons_id` , `hora_inicio`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+-- -----------------------------------------------------
 -- table  `cita_medica`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `cita_medica` (
-  `cmde_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `acit_id` bigint(20) NOT NULL,
-  `pac_id` bigint(20) NOT NULL,
-  `cprog_id` bigint(20) NOT NULL,
-  `tcon_id` bigint(20) NOT NULL,
-  `hora_id` bigint(20) NOT NULL,
-  `hora_inicio` time NOT NULL,
-  `fecha_cita` date NOT NULL,
-  `cons_id` bigint(20) NOT NULL,
-  `tur_numero` int(5) NOT NULL,
-  `cmde_motivo` text,
-  `cmde_observacion` text,
-  `cmde_estado_asistencia` varchar(1) DEFAULT NULL,
-  `cmde_est_log` varchar(1) DEFAULT NULL,
-  `cmde_fec_cre` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `cmde_fec_mod` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`cmde_id`,`acit_id`,`pac_id`,`cprog_id`,`tur_numero`,`hora_id`,`fecha_cita`,`cons_id`,`hora_inicio`),
-  FOREIGN KEY (`tcon_id`) REFERENCES `tipo_consulta` (`tcon_id`),
-  FOREIGN KEY (`acit_id`, `pac_id`, `cprog_id`) REFERENCES `agendar_cita` (`acit_id`, `pac_id`, `cprog_id`),
-  FOREIGN KEY (`hora_id`, `fecha_cita`, `cons_id`, `hora_inicio`) REFERENCES `horario` (`hora_id`, `fecha_cita`, `cons_id`, `hora_inicio`)
+  `cmde_id` BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `tur_numero` INT(5) NOT NULL ,
+  `hora_id` BIGINT(20) NOT NULL ,
+  `fecha_cita` DATE NOT NULL ,
+  `cons_id` BIGINT(20) NOT NULL ,
+  `hora_inicio` TIME NOT NULL ,
+  `tcon_id` BIGINT(20) NOT NULL ,
+  `acit_id` BIGINT(20) NOT NULL ,
+  `cmde_motivo` BLOB NULL DEFAULT NULL ,
+  `cmde_observacion` BLOB NULL DEFAULT NULL ,
+  `cmde_estado_asistencia` VARCHAR(1) NULL DEFAULT NULL ,
+  `cmde_est_log` VARCHAR(1) NULL DEFAULT NULL ,
+  `cmde_fec_cre` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ,
+  `cmde_fec_mod` TIMESTAMP NULL DEFAULT NULL ,
+  FOREIGN KEY (`tcon_id` ) REFERENCES `tipo_consulta` (`tcon_id` ),
+  FOREIGN KEY (`hora_id`,`fecha_cita` , `cons_id` , `hora_inicio` ) REFERENCES `horario` (`hora_id`,`fecha_cita`,`cons_id`,`hora_inicio`),
+  FOREIGN KEY (`acit_id` ) REFERENCES `agendar_cita` (`acit_id` )
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 

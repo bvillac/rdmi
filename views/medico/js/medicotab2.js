@@ -55,6 +55,7 @@ function guardarDatosCitas(accion) {
         requestHttpAjax(link, arrParams, function (response) {
             var message = response.message;
             if (response.status == "OK") {
+                $('#TbG_DATOS').PbGridView('updatePAjax');
                 showAlert(response.status, response.type, {"wtmessage": message.info, "title": response.label});
                 clearTab2();
                 actualizarGridTab2();
