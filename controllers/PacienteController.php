@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Paciente;
+use app\models\Medico;
 use app\models\PacienteSearch;
 use app\models\Pais;
 use app\models\Provincia;
@@ -244,6 +245,20 @@ class PacienteController extends Controller
                     //"medico" => json_encode($medData),
                     "EspPac" => $EspPac,
                     ]);
+    }
+    
+    /**
+     * Lists all Paciente models.
+     * @return mixed
+     */
+    public function actionAtencion()
+    {
+        //$data = null;
+        //$dataProvider = Paciente::consultarPacientes($data);
+        Utilities::putMessageLogFile(Medico::getEspecilidades());
+        return $this->render('atencion', [
+            "especialidades" => Medico::getEspecilidades(),
+        ]);
     }
     
     

@@ -92,7 +92,7 @@ class Rol extends \yii\db\ActiveRecord
     
     public static function buscarTipoUser($ids){
         $con = \Yii::$app->db;
-        $sql="select a.rol_id rolid
+        $sql="select a.rol_id rolid,c.rol_nombre rolName
                 from  " . $con->dbname . ".usuario_empresa a
                   inner join " . $con->dbname . ".usuario b on a.usu_id=b.usu_id
                   inner join " . $con->dbname . ".rol c on a.rol_id=c.rol_id

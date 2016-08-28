@@ -45,7 +45,7 @@ use yii\bootstrap\NavBar;
                 <li class="user user-menu">
                     <!-- Menu Toggle Button -->
                     <a href="javascript:" class="usuSession">
-                        <span><?= Html::encode(Yii::t("perfil", "Hello")) . ", " . @Yii::$app->session->get("PB_nombres") ?></span>
+                        <span><?= @Yii::$app->session->get("RolName").": ". Html::encode(Yii::t("perfil", "Hello")) . ", " . @Yii::$app->session->get("PB_nombres") ?></span>
                     </a>
                 </li>
                 <li>

@@ -162,6 +162,23 @@ function mostrarDatos(varPer) {
 }
 
 
+/*
+ OPCIONES DE OTROS USOS DE LA MARCA
+ */
+function especialidadMedico(ids) {
+    var link = $('#txth_base').val() + "/mceformulariotemp/usomarca";
+    var arrParams = new Object();
+    arrParams.umar_id = ids;
+    requestHttpAjax(link, arrParams, function (response) {
+        if (response.status == "OK") {
+            data = response.message;
+            mostrarOtrosUsos(data.otrosusos, "div_otrasMarca");
+            mensajeOtrosUsos(data.usomarca, "div_mensOtrosUsos");
+        }
+    }, true);
+}
+
+
 
 
 

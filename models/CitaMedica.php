@@ -120,13 +120,21 @@ class CitaMedica extends \yii\db\ActiveRecord
     
     /*CONSULTAR CITA PROGRAMADA*/
     public static function consultarCitasProg($data){
-        $con = \Yii::$app->db;        
+        $con = \Yii::$app->db;
+        $sqlMedico="";
+        //Verifico si el Rol es de Medico
+        if(Yii::$app->session->get('RolId', FALSE)==3){ //Agrega Sentencia Sql
+            $MedId=Yii::$app->session->get('MedId', FALSE);
+            $sqlMedico="INNER JOIN " . $con->dbname . ".medico_atencion F
+                            ON F.pac_id=B.pac_id AND F.mate_est_log=1 AND F.med_id=$MedId ";
+        }  
         $sql = "SELECT A.cprog_id Ids,C.per_ced_ruc Cedula,CONCAT(C.per_nombre,' ',C.per_apellido) Nombres,
                         A.cprog_observacion Observacion,E.esp_nombre Especialidad,A.cprog_est_log Estado
                     FROM " . $con->dbname . ".cita_programada A
                             INNER JOIN (" . $con->dbname . ".paciente B 
                                             INNER JOIN " . $con->dbname . ".persona C
-                                                    ON B.per_id=C.per_id)
+                                                    ON B.per_id=C.per_id
+                                            $sqlMedico )
                                     ON B.pac_id=A.pac_id
                             INNER JOIN (" . $con->dbname . ".especialidad_medico D
                                             INNER JOIN " . $con->dbname . ".especialidad E
