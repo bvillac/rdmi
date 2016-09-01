@@ -16,6 +16,11 @@ $(document).ready(function () {
     $('#btn_saveUpdate').click(function () {
         guardarDatos('Update');
     });
+    
+    $('#cmb_especialidad').change(function () {
+        obtenerMedicoEspecialidad();
+    });
+    
 });
 
 function obtenerCanton() {

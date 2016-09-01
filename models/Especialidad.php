@@ -92,5 +92,22 @@ class Especialidad extends \yii\db\ActiveRecord
         $command->bindParam(":med_id", $med_id, \PDO::PARAM_INT); //ID pais
         $command->execute();
     }
+    
+    public static function getMedicoEspecialidad($Ids){
+        $con = \Yii::$app->db;
+        $sql = "SELECT C.med_id Ids,CONCAT(D.per_nombre,' ',D.per_apellido,' (',A.esp_nombre,')') Nombre
+                    FROM " . $con->dbname . ".especialidad A
+                            INNER JOIN (" . $con->dbname . ".especialidad_medico B
+                                            INNER JOIN (" . $con->dbname . ".medico C
+                                                            INNER JOIN " . $con->dbname . ".persona D
+                                                                    ON C.per_id=D.per_id)
+                                                    ON B.med_id=C.med_id)
+                                    ON A.esp_id=B.esp_id
+            WHERE A.esp_est_log=1 AND A.esp_id=:esp_id  ";
+        
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":esp_id", $Ids, \PDO::PARAM_INT);
+        return $comando->queryAll();
+    }
 
 }

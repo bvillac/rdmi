@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Paciente;
 use app\models\Medico;
+use app\models\Especialidad;
 use app\models\PacienteSearch;
 use app\models\Pais;
 use app\models\Provincia;
@@ -253,9 +254,18 @@ class PacienteController extends Controller
      */
     public function actionAtencion()
     {
-        //$data = null;
-        //$dataProvider = Paciente::consultarPacientes($data);
-        Utilities::putMessageLogFile(Medico::getEspecilidades());
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
+            if (isset($data["espcialidad"])) {
+                $medicos = Especialidad::getMedicoEspecialidad($data['esp_id']);
+                $message = [
+                    "medicos" => $medicos,
+                ];
+                echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message);
+                return;
+            }
+        }
+        //Utilities::putMessageLogFile(Medico::getEspecilidades());
         return $this->render('atencion', [
             "especialidades" => Medico::getEspecilidades(),
         ]);
