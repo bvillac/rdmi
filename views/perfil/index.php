@@ -11,7 +11,7 @@ use yii\helpers\Html;
             <li class="active">             
                 <a href="#paso1" data-toggle="tab" aria-expanded="true">
 <!--                    <img class="" src="<?= Url::home() ?>img/users/n1.png" alt="User Image">-->
-                    <?= Yii::t("Perfil", "Personal data") ?>
+                    <?= Yii::t("perfil", "Personal data") ?>
                 </a>
             </li>
 <!--            <li class=""><a href="#paso2" data-toggle="tab" aria-expanded="false"><?= Yii::t("perfil", "Objetivo") ?></a></li>

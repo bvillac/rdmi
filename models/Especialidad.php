@@ -109,5 +109,23 @@ class Especialidad extends \yii\db\ActiveRecord
         $comando->bindParam(":esp_id", $Ids, \PDO::PARAM_INT);
         return $comando->queryAll();
     }
+    
+    public static function getMedicoEspeLine($Ids){
+        $con = \Yii::$app->db;
+        $Espec="";
+        $sql = "SELECT N.esp_nombre Especialidad FROM " . $con->dbname . ".especialidad_medico M 
+			INNER JOIN " . $con->dbname . ".especialidad N
+				ON M.esp_id=N.esp_id
+		WHERE M.med_id=:med_id ";        
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":med_id", $Ids, \PDO::PARAM_INT);
+        $result = $comando->queryAll();
+        foreach($result as $key => $value){
+            $Espec .=$value["Especialidad"].", ";
+        }
+        return $Espec;
+    }
+    
+    
 
 }

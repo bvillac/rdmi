@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
+use app\widgets\PbGridView\PbGridView;
+use yii\data\ArrayDataProvider;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\PacienteSearch */
@@ -19,7 +21,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="col-md-6">
     <div class="box box-success">
         <div class="box-header with-border">
-            <h3 class="box-title">Especialidades</h3>
+            <h3 class="box-title pull-right">
+            <?= Html::a('<span class="fa fa-fw fa-paper-plane"></span> ' . Yii::t("accion", "Enviar Solicitud"), 'javascript:', ['id' => 'btn_send','class' => 'btn btn-primary btn-block']); ?>
+            </h3>    
         </div>
         <div class="box-body">
             <div class="col-md-12">
@@ -51,60 +55,45 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="col-md-6">
     <div class="box box-success">
         <div class="box-header with-border">
-            <h3 class="box-title">Different Height</h3>
+            <h3 class="box-title">Médicos Asignados</h3>
         </div>
         <div class="box-body">
-            <?=
-            PbGridView::widget([
+        <?= PbGridView::widget([
                 'id' => 'TbG_DATOS',
-                'dataProvider' => $modelCita,
+                'dataProvider' => $model,
                 //'summary' => false,
                 'columns' => [
-                    //['class' => 'yii\grid\SerialColumn', 'options' => ['width' => '10']],
+                    ['class' => 'yii\grid\SerialColumn', 'options' => ['width' => '10']],
                     // format one
                     //[
-                    //'attribute' => 'Ids',
-                    //'label' => 'Idst',
+                    //    'attribute' => 'Ids',
+                    //    'label' => 'Ids',
                     //],
-                    // format two
                     [
                         'class' => 'yii\grid\ActionColumn',
                         //'header' => 'Action',
-                        'headerOptions' => ['width' => '40'],
+                        'headerOptions' => ['width' => '10'],
                         'template' => '{delete}',
                         'buttons' => [
-                            'delete' => function ($url, $modelCita) {
-                                return Html::a('<span class="glyphicon glyphicon-remove"></span>', null, ['href' => 'javascript:rechazarCitaProgramada(\'' . base64_encode($modelCita['Ids']) . '\');', "data-toggle" => "tooltip", "title" => "Cancelar Cita"]);
+                            'delete' => function ($url, $model) {
+                                return Html::a('<span class="glyphicon glyphicon-remove"></span>', null, ['href' => 'javascript:eliminarAtencionMed(\'' . base64_encode($model['Ids']) . '\');', "data-toggle" => "tooltip", "title" => "Cancelar Atención"]);
                             },
-                                ],
-                            ],
-                            [
-                                'header' => Yii::t("formulario", "Especialidad"),
-                                //'options' => ['width' => '200'],
-                                'value' => 'Especialidad',
-                            ],
-                            [
-                                //'attribute' => 'Observacion',
-                                'label' => 'Observación',
-                                //'contentOptions' => ['class' => 'table_class', 'style' => 'display:block;'],
-                                'options' => ['width' => '400'],
-                                'format' => 'raw',
-                                'value' => function ($modelCita) {
-                            $urlReporte = Html::a((strlen($modelCita['Observacion']) < 30) ? $modelCita['Observacion'] : substr($modelCita['Observacion'], 0, 30) . ' (Ver Mas..)', null, ['href' => 'javascript:divComentario(\'' . $modelCita['Observacion'] . '\')', "data-toggle" => "tooltip", "title" => "Ver Observación"]);
-                            return ($modelCita['Observacion'] != '') ? Html::decode($urlReporte) : Yii::t("formulario", "Without comments");
-                        },
-                            ],
-                            [
-                                //'attribute' => 'Estado',
-                                'label' => 'Estado',
-                                'options' => ['width' => '130'],
-                                'value' => function ($modelCita) {
-                            return \app\models\Utilities::getEstadoLogico($modelCita['Estado']);
-                        },
-                            ],
                         ],
-                    ])
-                    ?>
+                    ],
+                    [
+                        'header' => Yii::t("formulario", "Nombres"),
+                        //'options' => ['width' => '200'],
+                        'value' => 'Nombres',
+                    ],
+                    [
+                        'header' => Yii::t("formulario", "Especialidad"),
+                        //'options' => ['width' => '200'],
+                        'value' => function ($model) {
+                            return  \app\models\Especialidad::getMedicoEspeLine($model['Ids']);
+                        },
+                    ],                      
+                ],
+        ]) ?>
         </div>
         <!-- /.box-body -->
     </div>

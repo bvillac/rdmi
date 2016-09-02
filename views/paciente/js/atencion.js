@@ -19,4 +19,22 @@ function obtenerMedicoEspecialidad() {
     }, true);
 }
 
+function eliminarAtencionMed(ids) {
+    if (confirm("Está seguro de que desea continuar?") == true) {
+        var link = $('#txth_base').val() + "/paciente/eliminaratencionmed";
+        var arrParams = new Object();
+        arrParams.ids = ids;
+        //arrParams.ACCION = "Rechazar";
+        requestHttpAjax(link, arrParams, function (response) {
+            var data = response.message;
+            if (response.status == "OK") {
+                $('#TbG_DATOS').PbGridView('updatePAjax');
+                //actualizarGridTab2();
+            }
+            //var message = {"wtmessage": data.info,"title": response.label};
+            showAlert(response.status, response.type, {"wtmessage": data.info, "title": response.label});
+        },true);
+    }
+}
+
 

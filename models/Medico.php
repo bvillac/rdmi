@@ -317,6 +317,30 @@ class Medico extends \yii\db\ActiveRecord
         }
     }
     
+    public static function eliminarAtencionMedico($data) {
+        $arroout = array();
+        $con = \Yii::$app->db;
+        $trans = $con->beginTransaction();
+        try {
+            $ids = isset($data['ids']) ? base64_decode($data['ids']) :NULL;
+            $sql = "UPDATE " . $con->dbname . ".medico_atencion SET mate_est_log=0 WHERE mate_id=:mate_id";
+            $command = $con->createCommand($sql);
+            $command->bindParam(":mate_id", $ids, \PDO::PARAM_INT);
+            $command->execute();
+            $trans->commit();
+            $con->close();
+            //RETORNA DATOS 
+            $arroout["status"]= true;
+            return $arroout;
+        } catch (\Exception $e) {
+            $trans->rollBack();
+            $con->close();
+            //throw $e;
+            $arroout["status"]= false;
+            return $arroout;
+        }
+    }
+    
     public static function mostraHorarioMedico($data){
         $con = \Yii::$app->db; 
         $sql="SELECT * FROM " . $con->dbname . ".horario WHERE DATE(fecha_cita)=:fecha AND cons_id=:cons_id AND med_id=:med_id AND hora_est_log=1 ";
@@ -389,6 +413,40 @@ class Medico extends \yii\db\ActiveRecord
         $command->bindParam(":cons_id", $cons_id, \PDO::PARAM_INT);
         $command->bindParam(":med_id", $med_id, \PDO::PARAM_INT);
         $command->execute();
+    }
+    
+    public static function solicitarAtencionMedico($data) {
+        $arroout = array();
+        $PacId=Yii::$app->session->get('PacId', FALSE);
+        $con = \Yii::$app->db;
+        $trans = $con->beginTransaction();
+        try {
+            $dts_medico = isset($data['DATA']) ? base64_decode($data['DATA']) :NULL;  
+            for ($i = 0; $i < sizeof($dts_medico); $i++) {
+                    $sql = "INSERT INTO " . $con->dbname . ".medico_atencion
+                    (med_id,pac_id,mate_est_log)VALUES
+                    (:med_id,:pac_id,1) ";            
+                    $command = $con->createCommand($sql);
+                    $command->bindParam(":med_id", $ids, \PDO::PARAM_INT);
+                    $command->bindParam(":pac_id", $PacId, \PDO::PARAM_INT);
+                    $command->execute();
+                
+            }
+            
+            
+            
+            $trans->commit();
+            $con->close();
+            //RETORNA DATOS 
+            $arroout["status"]= true;
+            return $arroout;
+        } catch (\Exception $e) {
+            $trans->rollBack();
+            $con->close();
+            //throw $e;
+            $arroout["status"]= false;
+            return $arroout;
+        }
     }
 
 }

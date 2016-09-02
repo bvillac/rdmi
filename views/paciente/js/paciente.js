@@ -16,6 +16,9 @@ $(document).ready(function () {
     $('#btn_saveUpdate').click(function () {
         guardarDatos('Update');
     });
+    $('#btn_send').click(function () {
+        EnviarSolicitudAte('Create');
+    });
     
     $('#cmb_especialidad').change(function () {
         obtenerMedicoEspecialidad();
@@ -181,6 +184,50 @@ function especialidadMedico(ids) {
             mensajeOtrosUsos(data.usomarca, "div_mensOtrosUsos");
         }
     }, true);
+}
+
+function EnviarSolicitudAte(accion) {    
+    if (validarFormSol()) {
+        var link = $('#txth_base').val() + "/paciente/guardarsolicitud";
+        var arrParams = new Object();
+        arrParams.DATA = obtenerMedicos('cmb_medicos');
+        arrParams.ACCION = accion;
+        requestHttpAjax(link, arrParams, function (response) {
+            var message = response.message;
+            if (response.status == "OK") {
+                showAlert(response.status, response.type, {"wtmessage": message.info, "title": response.label});
+                //limpiarDatos();
+            } else {
+                showAlert(response.status, response.type, {"wtmessage": message.info, "title": response.label});
+            }
+        }, true);
+    }
+}
+
+function validarFormSol(){
+    var valor=true;
+    var texbox="";
+    if($('#cmb_especialidad').val()==0){
+        texbox="Seleccionar Especialidades <br>";
+    }
+    if($('#cmb_especialidad').val()>0){
+        texbox+="Selecionar Mèdico <br>";
+    }
+    if(texbox !=''){
+       showAlert('NO_OK', 'error', {"wtmessage": texbox, "title":'Información'});
+       valor=false; 
+    }
+    return valor;
+}
+
+
+function obtenerMedicos(elemento) {
+    var dat = [];
+    $('#' + elemento + ' :selected').each(function (i, selected) {
+        dat[i] = $(selected).val();
+    });
+    sessionStorage.cmb_medicos = JSON.stringify(dat);
+    return dat;
 }
 
 
