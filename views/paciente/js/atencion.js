@@ -38,3 +38,56 @@ function eliminarAtencionMed(ids) {
 }
 
 
+
+
+function EnviarSolicitudAte(accion) {    
+    if (validarFormSol()) {
+        var link = $('#txth_base').val() + "/paciente/solicitudatencion";
+        var arrParams = new Object();
+        arrParams.DATA = obtenerMedicos('cmb_medicos');
+        arrParams.ACCION = accion;
+        requestHttpAjax(link, arrParams, function (response) {
+            var message = response.message;
+            if (response.status == "OK") {
+                $('#TbG_DATOS').PbGridView('updatePAjax');
+                showAlert(response.status, response.type, {"wtmessage": message.info, "title": response.label});
+                
+                //limpiarDatos();
+            } else {
+                showAlert(response.status, response.type, {"wtmessage": message.info, "title": response.label});
+            }
+        }, true);
+    }
+}
+
+function validarFormSol(){
+    var valor=true;
+    var texbox="";
+    if($('#cmb_especialidad').val()==0){
+        texbox="Seleccionar Especialidades <br>";
+    }
+    //alert($("#cmb_medicos").val());
+    if($("#cmb_medicos").val()==null){//Verifica que esten selecionado almenso 1
+        texbox+="Selecionar Mèdico <br>";
+    }
+    if(texbox !=''){
+       showAlert('NO_OK', 'error', {"wtmessage": texbox, "title":'Información'});
+       valor=false; 
+    }
+    return valor;
+}
+
+
+function obtenerMedicos(elemento) {
+    var dat = [];
+    $('#' + elemento + ' :selected').each(function (i, selected) {
+        dat[i] = $(selected).val();
+    });
+    sessionStorage.cmb_medicos = JSON.stringify(dat);
+    return dat;
+}
+
+
+
+
+

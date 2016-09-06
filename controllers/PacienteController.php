@@ -305,10 +305,34 @@ class PacienteController extends Controller
     }
     
     public function actionSolicitudatencion() {
+        $perADO = new Persona();
         if (Yii::$app->request->isAjax) {
             $data = Yii::$app->request->post();
             $resul = Medico::solicitarAtencionMedico($data);
-            if ($resul['status']) {
+            if ($resul['status']) {                
+                //Datos de Mail   
+                $dtsData=Medico::mostraMedicoCorreoGrupo($resul['MedData']);
+                $dataPaciente=$perADO->buscarPersonaID(Yii::$app->session->get('PerId', FALSE));//Recupera Datos de la Persona
+                for ($i = 0; $i < sizeof($dtsData); $i++) { 
+                    $correo = $dtsData[$i]["Correo"];//($userData[0]["Usuario"]<>'admin')?$userData[0]["Usuario"]:Yii::$app->params["adminEmail"];
+                    $nombres = $dtsData[$i]["Nombre"];
+                    $tituloMensaje = Yii::t("formulario","Solicitud de Atención");
+                    //$url=Yii::$app->params["contactoEmail"];
+                    $asunto = Yii::t("formulario","Solicitud de Atención") . " " . Yii::$app->params["siteName"];
+                    $body = Utilities::getMailMessage("solicitudmedica", 
+                            array("[[PacienteNombre]]" => $dataPaciente[0]["Nombre"].' '.$dataPaciente[0]["Apellido"],
+                                  "[[DNI]]" => $dataPaciente[0]["Cedula"], 
+                                  "[[Direccion]]" =>$dataPaciente[0]["Direccion"]
+                                  //"[[link]]" => Url::base(true)
+                            ), Yii::$app->language);
+                    Utilities::sendEmail($tituloMensaje, Yii::$app->params["adminEmail"],
+                                        [$correo => $dtsData[$i]["Correo"]], 
+                                        [],//Bcc
+                                        $asunto, $body);
+                }
+                
+                
+                
                 $message = ["info" => Yii::t('exception', '<strong>Well done!</strong> your information was successfully saved.')];
                 echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message,$resul);
             }else{
@@ -316,48 +340,10 @@ class PacienteController extends Controller
                 echo Utilities::ajaxResponse('NO_OK', 'alert', Yii::t('jslang', 'Error'), 'false', $message);
             }
             
-            /*if ($resul) {
-                //Datos de Mail
-                $ids = isset($data['ids']) ? base64_decode($data['ids']) : NULL;
-                $solicitud = $formulario->getSolicitudTempID($ids);
-                $userData= Usuario::getUserPersona($solicitud[0]["reg_id"]);
-                $correo = ($userData[0]["Usuario"]<>'admin')?$userData[0]["Usuario"]:Yii::$app->params["adminEmail"];
-                $nombres = Yii::$app->session->get("PB_nombres");//Utilities::getNombresApellidos($this->firstName);
-                $tituloMensaje = Yii::t("formulario","Application Rejected");
-                $url=Yii::$app->params["contactoEmail"];
-                $asunto = Yii::t("formulario", "Application Rejected") . " " . Yii::$app->params["siteName"];
-                $body = Utilities::getMailMessage("rejected", array("[[user]]" => $userData[0]["Nombre"],"[[url]]" => $url, "[[link]]" => Url::base(true)), Yii::$app->language);
-                Utilities::sendEmail($tituloMensaje, Yii::$app->params["adminEmail"], [$correo => $userData[0]["Nombres"]], $asunto, $body);
-                $message = ["info" => Yii::t('exception', '<strong>Well done!</strong> your information was successfully saved.')];
-                echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message);
-            }*/
+            
             return;
         }
     }
     
-    public function actionGuardarsolicitud() {
-        if (Yii::$app->request->isAjax) {
-            $model = new Paciente();
-            $data = Yii::$app->request->post();
-            $accion = isset($data['ACCION']) ? $data['ACCION'] : "";
-            if ($accion == "Create") {
-                //Nuevo Registro
-                $resul = Medico::solicitarAtencionMedico($data); //$model->insertarPacientes($data);
-            }else if($accion == "Update"){
-                //Modificar Registro
-                //$resul = $model->actualizarPacientes($data);                
-            }
-            if ($resul['status']) {
-                $message = ["info" => Yii::t('exception', '<strong>Well done!</strong> your information was successfully saved.')];
-                echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message,$resul);
-            }else{
-                $message = ["info" => Yii::t('exception', 'The above error occurred while the Web server was processing your request.')];
-                echo Utilities::ajaxResponse('NO_OK', 'alert', Yii::t('jslang', 'Error'), 'false', $message);
-            }
-            return;
-        }   
-    }
-    
-    
-    
+
 }

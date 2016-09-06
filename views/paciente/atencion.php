@@ -89,7 +89,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'header' => Yii::t("formulario", "Especialidad"),
                         //'options' => ['width' => '200'],
                         'value' => function ($model) {
-                            return  \app\models\Especialidad::getMedicoEspeLine($model['Ids']);
+                            return  \app\models\Especialidad::getMedicoEspeLine($model['MedId']);
                         },
                     ],                      
                 ],

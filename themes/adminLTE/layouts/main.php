@@ -19,10 +19,15 @@ $isUser = $session->get('PB_isuser', FALSE);
 if ($isUser != FALSE && $session->isActive ){
     //\app\models\Utilities::putMessageLogFile(' Es Verdadero ');
     $isUser = $session->get('PB_isuser', FALSE);
-}//else{
+}else{
     //\app\models\Utilities::putMessageLogFile(' Es falso ');
     //$this->redirect(Yii::$app->urlManager->createUrl(["site/login"]));
-//}
+    
+    //$url=Yii::$app->urlManager->createUrl([‘user/view’, ‘id’ => 1]);
+    $url=Yii::$app->urlManager->createUrl(["site/login"]);
+    Yii::$app->getResponse()->redirect($url);
+}
+
 if (Yii::$app->controller->action->id === 'login' && $isUser) {
     echo $this->render(
         'login',

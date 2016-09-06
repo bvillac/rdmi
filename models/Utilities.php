@@ -412,7 +412,7 @@ class Utilities {
         return json_encode($arroout);
     }
     
-    public static function sendEmail($titleMessage = "", $from = "no-responder@rdmi.com", $to = array(), $subject, $body, $files = array(), $template = "/mail/layouts/mailing", $fileRoute = "/mail/layouts/files"){
+    public static function sendEmail($titleMessage = "", $from = "no-responder@rdmi.com", $to = array(),$bcc = array(), $subject, $body, $files = array(), $template = "/mail/layouts/mailing", $fileRoute = "/mail/layouts/files"){
         if(function_exists('proc_open')){
             self::putMessageLogFile("Mail function exist");
         }else {
@@ -420,7 +420,6 @@ class Utilities {
         }
         $routeBase = Yii::$app->basePath;
         $socialNetwork = Yii::$app->params["socialNetworks"];
-        
         //Pasas Parametros a la Plantilla Mailing
         $mail = Yii::$app->mailer->compose("@app".$template, [
             'titleMessage' => $titleMessage,

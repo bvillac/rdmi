@@ -419,26 +419,25 @@ class Medico extends \yii\db\ActiveRecord
         $arroout = array();
         $PacId=Yii::$app->session->get('PacId', FALSE);
         $con = \Yii::$app->db;
+        $MedData="";
         $trans = $con->beginTransaction();
         try {
-            $dts_medico = isset($data['DATA']) ? base64_decode($data['DATA']) :NULL;  
-            for ($i = 0; $i < sizeof($dts_medico); $i++) {
-                    $sql = "INSERT INTO " . $con->dbname . ".medico_atencion
-                    (med_id,pac_id,mate_est_log)VALUES
-                    (:med_id,:pac_id,1) ";            
-                    $command = $con->createCommand($sql);
-                    $command->bindParam(":med_id", $ids, \PDO::PARAM_INT);
-                    $command->bindParam(":pac_id", $PacId, \PDO::PARAM_INT);
-                    $command->execute();
-                
+            $dts_medico = isset($data['DATA']) ? $data['DATA'] :NULL; 
+            for ($i = 0; $i < sizeof($dts_medico); $i++) {                
+                $sql = "INSERT INTO " . $con->dbname . ".medico_atencion
+                (med_id,pac_id,mate_est_log)VALUES
+                (:med_id,:pac_id,1) ";            
+                $command = $con->createCommand($sql);
+                $command->bindParam(":med_id", $dts_medico[$i], \PDO::PARAM_INT);
+                $command->bindParam(":pac_id", $PacId, \PDO::PARAM_INT);
+                $command->execute();
+                $MedData=($i==0)?$dts_medico[$i]:','.$dts_medico[$i];//Concatena los Ids Insetados de Medicos
             }
-            
-            
-            
             $trans->commit();
             $con->close();
             //RETORNA DATOS 
             $arroout["status"]= true;
+            $arroout["MedData"]= $MedData;
             return $arroout;
         } catch (\Exception $e) {
             $trans->rollBack();
@@ -447,6 +446,19 @@ class Medico extends \yii\db\ActiveRecord
             $arroout["status"]= false;
             return $arroout;
         }
+    }
+    
+    public static function mostraMedicoCorreoGrupo($data){
+        $con = \Yii::$app->db;         
+        $sql="SELECT CONCAT(B.per_nombre,' ',B.per_apellido) Nombre,B.per_correo Correo
+                FROM " . $con->dbname . ".medico A
+                        INNER JOIN " . $con->dbname . ".persona B
+                                ON A.per_id=B.per_id
+            WHERE A.med_est_log=1 AND A.med_id IN(:GrpIds) ";
+
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":GrpIds", $data, \PDO::PARAM_STR);
+        return $comando->queryAll();
     }
 
 }

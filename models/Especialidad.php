@@ -116,7 +116,8 @@ class Especialidad extends \yii\db\ActiveRecord
         $sql = "SELECT N.esp_nombre Especialidad FROM " . $con->dbname . ".especialidad_medico M 
 			INNER JOIN " . $con->dbname . ".especialidad N
 				ON M.esp_id=N.esp_id
-		WHERE M.med_id=:med_id ";        
+		WHERE M.med_id=:med_id ";  
+        //Utilities::putMessageLogFile($sql.$Ids);
         $comando = $con->createCommand($sql);
         $comando->bindParam(":med_id", $Ids, \PDO::PARAM_INT);
         $result = $comando->queryAll();

@@ -336,14 +336,14 @@ class Paciente extends \yii\db\ActiveRecord
     public static function atencionPacMedico($data){
         $con = \Yii::$app->db;
         $PacId=Yii::$app->session->get('PacId', FALSE);
-        $sql = "SELECT A.mate_id Ids,CONCAT(C.per_nombre,' ',C.per_apellido) Nombres	
+        $sql = "SELECT A.mate_id Ids,CONCAT(C.per_nombre,' ',C.per_apellido) Nombres,A.med_id MedId	
             FROM " . $con->dbname . ".medico_atencion A
                 INNER JOIN (" . $con->dbname . ".medico B
                         INNER JOIN " . $con->dbname . ".persona C
                                 ON C.per_id=B.per_id)
                 ON B.med_id=A.med_id
         WHERE A.mate_est_log=1 AND A.pac_id=:pac_id  ";
-        $sql .= "ORDER BY Nombres DESC ";
+        $sql .= "GROUP BY A.med_id ORDER BY Nombres DESC ";
         
         //Utilities::putMessageLogFile($sql);
         $comando = $con->createCommand($sql);
@@ -357,7 +357,7 @@ class Paciente extends \yii\db\ActiveRecord
                 'pageSize' => Yii::$app->params["pageSize"],
             ],
             'sort' => [              
-                'attributes' => ['Ids','Nombres'],
+                'attributes' => ['Ids','Nombres','MedId'],
             ],
         ]);
         return $dataProvider;
