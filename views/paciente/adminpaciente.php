@@ -16,7 +16,7 @@ $this->title = 'Administrar Paciente '; //. ' ' . $model[0]["med_id"];
     <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
             <li class="active"><a href="#paso1" data-toggle="tab" aria-expanded="true"><?= Yii::t("perfil", "Cita Programada") ?></a></li>
-<!--            <li class=""><a href="#paso2" data-toggle="tab" aria-expanded="true"><?= Yii::t("perfil", "Programar Cita") ?></a></li>-->
+            <li class=""><a href="#paso2" data-toggle="tab" aria-expanded="true"><?= Yii::t("perfil", "Agendar Cita") ?></a></li>
 <!--            <li class=""><a href="#paso3" data-toggle="tab" aria-expanded="false"><?= Yii::t("perfil", "Objetivo2") ?></a></li>-->
         </ul>
         <div class="tab-content">
@@ -26,6 +26,14 @@ $this->title = 'Administrar Paciente '; //. ' ' . $model[0]["med_id"];
                         ['EspPac' => $EspPac,
                         'modelCita' => $modelCita]) ?>
                 </form>
+            </div><!-- /.tab-pane -->
+            <div class="tab-pane" id="paso2">
+                <form class="form-horizontal">
+                    <?= $this->render('_form_Admintab2', 
+                        ['EspPac' => $EspPac,
+                        'modelCita' => $modelCita]) ?>
+                </form>
+                
             </div><!-- /.tab-pane -->
             
             

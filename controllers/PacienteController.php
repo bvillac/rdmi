@@ -228,7 +228,7 @@ class PacienteController extends Controller
         $datADO = new Paciente;
         $citaADO = new CitaMedica();        
         
-        if (Yii::$app->request->isAjax) {
+        if (Yii::$app->request->isAjax) {//Yii::$app->request->isPjax
             $data =(Yii::$app->request->post())? Yii::$app->request->post():Yii::$app->request->get();
 
             if (isset($data["op"]) && $data["op"]=='1' ) {                
@@ -330,9 +330,7 @@ class PacienteController extends Controller
                                         [],//Bcc
                                         $asunto, $body);
                 }
-                
-                
-                
+
                 $message = ["info" => Yii::t('exception', '<strong>Well done!</strong> your information was successfully saved.')];
                 echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message,$resul);
             }else{

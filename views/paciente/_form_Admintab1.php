@@ -20,7 +20,7 @@ use yii\data\ArrayDataProvider;
         <div class="col-sm-9">
             <?=
             Html::dropDownList(
-                    "cmb_especialidadCita", 0, ['0' => Yii::t('formulario', '-Select-')] + ArrayHelper::map($EspPac, 'IdsEsp', 'Especialidad'), ["class" => "form-control", "id" => "cmb_especialidadCita"]
+                    "cmb_especialidadCita", 0, ['0' => Yii::t('formulario', 'Todos')] + ArrayHelper::map($EspPac, 'IdsEsp', 'Especialidad'), ["class" => "form-control", "id" => "cmb_especialidadCita"]
             )
             ?>
         </div>

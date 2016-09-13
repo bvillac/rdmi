@@ -311,12 +311,16 @@ class Paciente extends \yii\db\ActiveRecord
                                     ON A.emed_id=D.emed_id
                     WHERE A.pac_id=:pac_id  ";
                     $sql .= ($data['estado'] > -1) ? " AND A.cprog_est_log = :cprog_est_log  " : " AND A.cprog_est_log>0 ";
+                    $sql .= ($data['especi'] > 0) ? " AND D.esp_id=:esp_id  " : " ";
                     $sql .= "ORDER BY A.cprog_id DESC ";
           
         $comando = $con->createCommand($sql);
         $comando->bindParam(":pac_id", $PacId, \PDO::PARAM_INT);
         if($data['estado'] > -1){
             $comando->bindParam(":cprog_est_log", $data['estado'], \PDO::PARAM_STR);
+        }
+        if($data['especi'] > 0){
+            $comando->bindParam(":esp_id", $data['especi'], \PDO::PARAM_STR);
         }
 
         $resultData=$comando->queryAll();

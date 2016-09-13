@@ -5,6 +5,36 @@
  */
 
 
+$(document).ready(function () {
+
+    $('#cmb_estado').change(function () {
+        actualizarGridCP();
+    });
+    $('#cmb_especialidadCita').change(function () {
+        actualizarGridCP();
+    });
+
+
+});
+
+function actualizarGridCP(){
+    var estado=$('#cmb_estado option:selected').val();
+    var especi=$('#cmb_especialidadCita option:selected').val();
+    //var f_ini =$('#dtp_f_inicio').val();
+    //var f_fin =$('#dtp_f_fin').val();
+    var valor='';//$('#txt_buscarData').val();
+    //Codigo para AutoComplete
+    /*if(sessionStorage.src_buscIndex){
+        valor=$('#txth_ids').val();
+    } */
+    //Buscar almenos una clase con el nombre para ejecutar
+    if(!$(".blockUI").length){
+        showLoadingPopup();
+        $('#TbG_DATOS').PbGridView('applyFilterData',{'estado':estado,'especi':especi,'valor':valor,'op':'1'});
+        setTimeout(hideLoadingPopup,2000);
+    }
+}
+
 function divComentario(data) {
     //$("#countMensaje").html(data.length);
     var option_arr = '';
