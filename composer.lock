@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3f7e33973322bfc0aa4110e0ab838ee6",
-    "content-hash": "0dc0d961fc61619ca85bce13cee966f4",
+    "hash": "962de67c0e296dbd9357be17efc2450b",
+    "content-hash": "e732fbf830b97d292b283b5b85d507d3",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -58,16 +58,16 @@
         },
         {
             "name": "bower-asset/font-awesome",
-            "version": "v4.6.3",
+            "version": "v4.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FortAwesome/Font-Awesome.git",
-                "reference": "8e241f209faa1dd2182c9fdc9c352d8806504a4e"
+                "reference": "a8386aae19e200ddb0f6845b5feeee5eb7013687"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/8e241f209faa1dd2182c9fdc9c352d8806504a4e",
-                "reference": "8e241f209faa1dd2182c9fdc9c352d8806504a4e",
+                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/a8386aae19e200ddb0f6845b5feeee5eb7013687",
+                "reference": "a8386aae19e200ddb0f6845b5feeee5eb7013687",
                 "shasum": ""
             },
             "type": "bower-asset-library",
@@ -95,30 +95,21 @@
         },
         {
             "name": "bower-asset/fullcalendar",
-            "version": "v2.7.2",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fullcalendar/fullcalendar.git",
-                "reference": "0725d49df0243bd7c97519a42f9a5002bd4c3fc9"
+                "reference": "8aa93919d8227140f98bba543cd97ee9975426f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fullcalendar/fullcalendar/zipball/0725d49df0243bd7c97519a42f9a5002bd4c3fc9",
-                "reference": "0725d49df0243bd7c97519a42f9a5002bd4c3fc9",
+                "url": "https://api.github.com/repos/fullcalendar/fullcalendar/zipball/8aa93919d8227140f98bba543cd97ee9975426f7",
+                "reference": "8aa93919d8227140f98bba543cd97ee9975426f7",
                 "shasum": ""
             },
             "require": {
-                "bower-asset/jquery": ">=1.7.1",
-                "bower-asset/moment": ">=2.5.0"
-            },
-            "require-dev": {
-                "bower-asset/bootstrap": "~3.2.0",
-                "bower-asset/jasmine-fixture": "~1.2.0",
-                "bower-asset/jasmine-jquery": "~2.0.3",
-                "bower-asset/jquery-mockjax": "~2.1.1",
-                "bower-asset/jquery-simulate": "~1.0.1",
-                "bower-asset/jquery-ui": ">=1.11.1",
-                "bower-asset/moment-timezone": "~0.2.1"
+                "bower-asset/jquery": ">=2.0.0",
+                "bower-asset/moment": ">=2.9.0"
             },
             "type": "bower-asset-library",
             "extra": {
@@ -146,51 +137,6 @@
                 "full-sized",
                 "jquery-plugin"
             ]
-        },
-        {
-            "name": "bower-asset/fullcalendar-scheduler",
-            "version": "v1.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fullcalendar/fullcalendar-scheduler.git",
-                "reference": "e00b6ff3b7a108e5c2c9768e31c6a46eb567db1b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fullcalendar/fullcalendar-scheduler/zipball/e00b6ff3b7a108e5c2c9768e31c6a46eb567db1b",
-                "reference": "e00b6ff3b7a108e5c2c9768e31c6a46eb567db1b",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/fullcalendar": ">=2.7.1",
-                "bower-asset/jquery": ">=1.8.0",
-                "bower-asset/moment": ">=2.5.0"
-            },
-            "require-dev": {
-                "bower-asset/jasmine-fixture": "~1.3.2",
-                "bower-asset/jasmine-jquery": "~2.1.0",
-                "bower-asset/jquery-simulate": "~1.0.1",
-                "bower-asset/jquery-ui": ">=1.11.1"
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": [
-                    "dist/scheduler.js",
-                    "dist/scheduler.css"
-                ],
-                "bower-asset-ignore": [
-                    "*",
-                    "**/.*",
-                    "!/dist/**",
-                    "!/CHANGELOG.*",
-                    "!/LICENSE.*",
-                    "!/README.*"
-                ]
-            },
-            "license": [
-                "SEE LICENSE IN LICENSE.md"
-            ],
-            "description": "A premium add-on to FullCalendar for displaying events and resources"
         },
         {
             "name": "bower-asset/jquery",
@@ -334,16 +280,16 @@
         },
         {
             "name": "bower-asset/moment",
-            "version": "2.15.0",
+            "version": "2.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moment/moment.git",
-                "reference": "c587bf0063c18214238ca83f3f9c6170daf25bed"
+                "reference": "4710a7935cb347d8b2cf50f5befccfea8180619d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moment/moment/zipball/c587bf0063c18214238ca83f3f9c6170daf25bed",
-                "reference": "c587bf0063c18214238ca83f3f9c6170daf25bed",
+                "url": "https://api.github.com/repos/moment/moment/zipball/4710a7935cb347d8b2cf50f5befccfea8180619d",
+                "reference": "4710a7935cb347d8b2cf50f5befccfea8180619d",
                 "shasum": ""
             },
             "type": "bower-asset-library",
@@ -365,9 +311,14 @@
                     "Gruntfile.js",
                     "Moment.js.nuspec",
                     "package.js",
-                    "package.json"
+                    "package.json",
+                    "ISSUE_TEMPLATE.md",
+                    "typing-tests"
                 ]
-            }
+            },
+            "license": [
+                "MIT"
+            ]
         },
         {
             "name": "bower-asset/punycode",
@@ -461,16 +412,16 @@
         },
         {
             "name": "branchonline/yii2-lightbox",
-            "version": "1.1.1",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BranchOnline/yii2-lightbox.git",
-                "reference": "67dc401eb6626b7aa4f4c0fa1156729bd075cf1e"
+                "reference": "6cfe1a4a4fba046294b718904f7e57f671558fd1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BranchOnline/yii2-lightbox/zipball/67dc401eb6626b7aa4f4c0fa1156729bd075cf1e",
-                "reference": "67dc401eb6626b7aa4f4c0fa1156729bd075cf1e",
+                "url": "https://api.github.com/repos/BranchOnline/yii2-lightbox/zipball/6cfe1a4a4fba046294b718904f7e57f671558fd1",
+                "reference": "6cfe1a4a4fba046294b718904f7e57f671558fd1",
                 "shasum": ""
             },
             "require": {
@@ -498,20 +449,20 @@
                 "module",
                 "yii2"
             ],
-            "time": "2015-09-16 09:59:26"
+            "time": "2016-10-27 15:13:14"
         },
         {
             "name": "cebe/markdown",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cebe/markdown.git",
-                "reference": "54a2c49de31cc44e864ebf0500a35ef21d0010b2"
+                "reference": "c30eb5e01fe021cc5bba2f9ee0eeef96d4931166"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cebe/markdown/zipball/54a2c49de31cc44e864ebf0500a35ef21d0010b2",
-                "reference": "54a2c49de31cc44e864ebf0500a35ef21d0010b2",
+                "url": "https://api.github.com/repos/cebe/markdown/zipball/c30eb5e01fe021cc5bba2f9ee0eeef96d4931166",
+                "reference": "c30eb5e01fe021cc5bba2f9ee0eeef96d4931166",
                 "shasum": ""
             },
             "require": {
@@ -558,7 +509,7 @@
                 "markdown",
                 "markdown-extra"
             ],
-            "time": "2015-03-06 05:28:07"
+            "time": "2016-09-14 20:40:20"
         },
         {
             "name": "cebe/yii2-gravatar",
@@ -602,59 +553,6 @@
                 "yii"
             ],
             "time": "2013-12-10 17:49:58"
-        },
-        {
-            "name": "edofre/yii2-fullcalendar-scheduler",
-            "version": "V1.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Edofre/yii2-fullcalendar-scheduler.git",
-                "reference": "53621a7508c0bd562d0f140f909da1ae438f0215"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Edofre/yii2-fullcalendar-scheduler/zipball/53621a7508c0bd562d0f140f909da1ae438f0215",
-                "reference": "53621a7508c0bd562d0f140f909da1ae438f0215",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/fullcalendar": "v2.7.2",
-                "bower-asset/fullcalendar-scheduler": "v1.3.1",
-                "php": ">=5.5.0",
-                "yiisoft/yii2": "*",
-                "yiisoft/yii2-jui": "*"
-            },
-            "type": "yii2-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "edofre\\fullcalendarscheduler\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Edo Freriks",
-                    "email": "edofre@gmail.com"
-                }
-            ],
-            "description": "Yii2 widget for fullcalendar scheduler module",
-            "homepage": "https://github.com/edofre/yii2-fullcalendar-scheduler",
-            "keywords": [
-                "calendar",
-                "event",
-                "fullcalendar-scheduler",
-                "javascript",
-                "scheduler"
-            ],
-            "time": "2016-06-03 21:48:45"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -702,16 +600,16 @@
         },
         {
             "name": "kartik-v/bootstrap-fileinput",
-            "version": "v4.3.4",
+            "version": "v4.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/bootstrap-fileinput.git",
-                "reference": "abde5a9611d4939b951fdd00f70a9fec935c7b6b"
+                "reference": "6e1a8ca5ca04d4927540ccf18bbfc3253286bd0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/abde5a9611d4939b951fdd00f70a9fec935c7b6b",
-                "reference": "abde5a9611d4939b951fdd00f70a9fec935c7b6b",
+                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/6e1a8ca5ca04d4927540ccf18bbfc3253286bd0c",
+                "reference": "6e1a8ca5ca04d4927540ccf18bbfc3253286bd0c",
                 "shasum": ""
             },
             "type": "library",
@@ -751,7 +649,7 @@
                 "progress",
                 "upload"
             ],
-            "time": "2016-08-07 07:50:42"
+            "time": "2016-09-20 05:47:41"
         },
         {
             "name": "kartik-v/yii2-krajee-base",
@@ -810,12 +708,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-datepicker.git",
-                "reference": "8738f6dc3211d949b05189ba103aab786143fc6c"
+                "reference": "92e04c6a9ff90c4290db7566f68af429f2d641d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-datepicker/zipball/8738f6dc3211d949b05189ba103aab786143fc6c",
-                "reference": "8738f6dc3211d949b05189ba103aab786143fc6c",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-datepicker/zipball/92e04c6a9ff90c4290db7566f68af429f2d641d5",
+                "reference": "92e04c6a9ff90c4290db7566f68af429f2d641d5",
                 "shasum": ""
             },
             "require": {
@@ -856,7 +754,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-09-04 10:52:50"
+            "time": "2016-11-11 15:42:04"
         },
         {
             "name": "kartik-v/yii2-widget-fileinput",
@@ -864,12 +762,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-fileinput.git",
-                "reference": "6fc8922716bf0b3638c67ff0895a9ff688b6c027"
+                "reference": "744e12c1f5be45357ec50eea6f678ecc9ba67dc2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-fileinput/zipball/6fc8922716bf0b3638c67ff0895a9ff688b6c027",
-                "reference": "6fc8922716bf0b3638c67ff0895a9ff688b6c027",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-fileinput/zipball/744e12c1f5be45357ec50eea6f678ecc9ba67dc2",
+                "reference": "744e12c1f5be45357ec50eea6f678ecc9ba67dc2",
                 "shasum": ""
             },
             "require": {
@@ -911,7 +809,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-07-23 15:30:48"
+            "time": "2016-10-18 06:35:15"
         },
         {
             "name": "mpdf/mpdf",
@@ -1168,16 +1066,16 @@
         },
         {
             "name": "yiisoft/yii2",
-            "version": "2.0.9",
+            "version": "2.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "2b75151ea60e1fd820046416eee2e89c3dda1133"
+                "reference": "5bfcb7a6dfa9771e2248eb8c4448613330f343ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/2b75151ea60e1fd820046416eee2e89c3dda1133",
-                "reference": "2b75151ea60e1fd820046416eee2e89c3dda1133",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/5bfcb7a6dfa9771e2248eb8c4448613330f343ff",
+                "reference": "5bfcb7a6dfa9771e2248eb8c4448613330f343ff",
                 "shasum": ""
             },
             "require": {
@@ -1258,7 +1156,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2016-07-11 13:36:42"
+            "time": "2016-10-20 12:02:50"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -1615,6 +1513,7 @@
                 "codeception",
                 "yii2"
             ],
+            "abandoned": "codeception/codeception",
             "time": "2016-03-17 03:41:26"
         },
         {

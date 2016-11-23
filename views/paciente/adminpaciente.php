@@ -43,13 +43,6 @@ $this->title = 'Administrar Paciente '; //. ' ' . $model[0]["med_id"];
 
 
 <script>
-    //Datos de Solicitud
-    //var varPerData=base64_decode('<?= $persona ?>');
     var AccionTipo='Admin';
-    //var varPerData=<?= $persona ?>;
-    //var varMedData=<?= $medico ?>;
-    //var varEspData=<?= $medicoEsp ?>;
-    //var varEmpData=<?= $medicoEmp ?>;
-    //alert(varPerData[0].Nombre);
 </script>
 

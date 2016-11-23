@@ -30,15 +30,6 @@ return array (
       '@odaialali/yii2toastr' => $vendorDir . '/odaialali/yii2-toastr',
     ),
   ),
-  'branchonline/yii2-lightbox' => 
-  array (
-    'name' => 'branchonline/yii2-lightbox',
-    'version' => '1.1.1.0',
-    'alias' => 
-    array (
-      '@branchonline/lightbox' => $vendorDir . '/branchonline/yii2-lightbox/src',
-    ),
-  ),
   'yiisoft/yii2-jui' => 
   array (
     'name' => 'yiisoft/yii2-jui',
@@ -102,6 +93,15 @@ return array (
       '@kartik/base' => $vendorDir . '/kartik-v/yii2-krajee-base',
     ),
   ),
+  'branchonline/yii2-lightbox' => 
+  array (
+    'name' => 'branchonline/yii2-lightbox',
+    'version' => '1.2.0.0',
+    'alias' => 
+    array (
+      '@branchonline/lightbox' => $vendorDir . '/branchonline/yii2-lightbox/src',
+    ),
+  ),
   'kartik-v/yii2-widget-fileinput' => 
   array (
     'name' => 'kartik-v/yii2-widget-fileinput',
@@ -118,15 +118,6 @@ return array (
     'alias' => 
     array (
       '@kartik/date' => $vendorDir . '/kartik-v/yii2-widget-datepicker',
-    ),
-  ),
-  'edofre/yii2-fullcalendar-scheduler' => 
-  array (
-    'name' => 'edofre/yii2-fullcalendar-scheduler',
-    'version' => '1.1.1.0',
-    'alias' => 
-    array (
-      '@edofre/fullcalendarscheduler' => $vendorDir . '/edofre/yii2-fullcalendar-scheduler',
     ),
   ),
 );

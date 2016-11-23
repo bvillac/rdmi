@@ -23,7 +23,7 @@ $(document).ready(function () {
     $('#cmb_especialidad').change(function () {
         obtenerMedicoEspecialidad();
     });
-    
+
 });
 
 function obtenerCanton() {

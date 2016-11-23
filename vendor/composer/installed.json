@@ -94,68 +94,6 @@
         ]
     },
     {
-        "name": "cebe/markdown",
-        "version": "1.1.0",
-        "version_normalized": "1.1.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/cebe/markdown.git",
-            "reference": "54a2c49de31cc44e864ebf0500a35ef21d0010b2"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/cebe/markdown/zipball/54a2c49de31cc44e864ebf0500a35ef21d0010b2",
-            "reference": "54a2c49de31cc44e864ebf0500a35ef21d0010b2",
-            "shasum": ""
-        },
-        "require": {
-            "lib-pcre": "*",
-            "php": ">=5.4.0"
-        },
-        "require-dev": {
-            "cebe/indent": "*",
-            "facebook/xhprof": "*@dev",
-            "phpunit/phpunit": "4.1.*"
-        },
-        "time": "2015-03-06 05:28:07",
-        "bin": [
-            "bin/markdown"
-        ],
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.1.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "cebe\\markdown\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Carsten Brandt",
-                "email": "mail@cebe.cc",
-                "homepage": "http://cebe.cc/",
-                "role": "Creator"
-            }
-        ],
-        "description": "A super fast, highly extensible markdown parser for PHP",
-        "homepage": "https://github.com/cebe/markdown#readme",
-        "keywords": [
-            "extensible",
-            "fast",
-            "gfm",
-            "markdown",
-            "markdown-extra"
-        ]
-    },
-    {
         "name": "odaialali/yii2-toastr",
         "version": "1.0b",
         "version_normalized": "1.0.0.0-beta",
@@ -257,49 +195,6 @@
             "spreadsheet",
             "xls",
             "xlsx"
-        ]
-    },
-    {
-        "name": "branchonline/yii2-lightbox",
-        "version": "1.1.1",
-        "version_normalized": "1.1.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/BranchOnline/yii2-lightbox.git",
-            "reference": "67dc401eb6626b7aa4f4c0fa1156729bd075cf1e"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/BranchOnline/yii2-lightbox/zipball/67dc401eb6626b7aa4f4c0fa1156729bd075cf1e",
-            "reference": "67dc401eb6626b7aa4f4c0fa1156729bd075cf1e",
-            "shasum": ""
-        },
-        "require": {
-            "bower-asset/lightbox2": "2.7.1",
-            "yiisoft/yii2": "*"
-        },
-        "time": "2015-09-16 09:59:26",
-        "type": "yii2-extension",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "branchonline\\lightbox\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "Apache-2.0"
-        ],
-        "authors": [
-            {
-                "name": "Jap Mul",
-                "email": "jap@branchonline.nl"
-            }
-        ],
-        "description": "Lightbox widget for Yii2",
-        "keywords": [
-            "module",
-            "yii2"
         ]
     },
     {
@@ -756,7 +651,8 @@
         "keywords": [
             "codeception",
             "yii2"
-        ]
+        ],
+        "abandoned": "codeception/codeception"
     },
     {
         "name": "yiisoft/yii2-bootstrap",
@@ -1058,174 +954,6 @@
         ]
     },
     {
-        "name": "kartik-v/bootstrap-fileinput",
-        "version": "v4.3.4",
-        "version_normalized": "4.3.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/kartik-v/bootstrap-fileinput.git",
-            "reference": "abde5a9611d4939b951fdd00f70a9fec935c7b6b"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/abde5a9611d4939b951fdd00f70a9fec935c7b6b",
-            "reference": "abde5a9611d4939b951fdd00f70a9fec935c7b6b",
-            "shasum": ""
-        },
-        "time": "2016-08-07 07:50:42",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "4.3.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "kartik\\plugins\\fileinput\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Kartik Visweswaran",
-                "email": "kartikv2@gmail.com",
-                "homepage": "http://www.krajee.com/"
-            }
-        ],
-        "description": "An enhanced HTML 5 file input for Bootstrap 3.x with features for file preview for many file types, multiple selection, ajax uploads, and more.",
-        "homepage": "https://github.com/kartik-v/bootstrap-fileinput",
-        "keywords": [
-            "ajax",
-            "bootstrap",
-            "delete",
-            "file",
-            "image",
-            "input",
-            "jquery",
-            "multiple",
-            "preview",
-            "progress",
-            "upload"
-        ]
-    },
-    {
-        "name": "kartik-v/yii2-widget-fileinput",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/kartik-v/yii2-widget-fileinput.git",
-            "reference": "6fc8922716bf0b3638c67ff0895a9ff688b6c027"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/kartik-v/yii2-widget-fileinput/zipball/6fc8922716bf0b3638c67ff0895a9ff688b6c027",
-            "reference": "6fc8922716bf0b3638c67ff0895a9ff688b6c027",
-            "shasum": ""
-        },
-        "require": {
-            "kartik-v/bootstrap-fileinput": "~4.2",
-            "kartik-v/yii2-krajee-base": "~1.7"
-        },
-        "time": "2016-07-23 15:30:48",
-        "type": "yii2-extension",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0.x-dev"
-            }
-        },
-        "installation-source": "source",
-        "autoload": {
-            "psr-4": {
-                "kartik\\file\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Kartik Visweswaran",
-                "email": "kartikv2@gmail.com",
-                "homepage": "http://www.krajee.com/"
-            }
-        ],
-        "description": "An enhanced FileInput widget for Bootstrap 3.x with file preview, multiple selection, and more features (sub repo split from yii2-widgets)",
-        "homepage": "https://github.com/kartik-v/yii2-widget-fileinput",
-        "keywords": [
-            "extension",
-            "file",
-            "form",
-            "input",
-            "jquery",
-            "plugin",
-            "upload",
-            "widget",
-            "yii2"
-        ]
-    },
-    {
-        "name": "kartik-v/yii2-widget-datepicker",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/kartik-v/yii2-widget-datepicker.git",
-            "reference": "8738f6dc3211d949b05189ba103aab786143fc6c"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/kartik-v/yii2-widget-datepicker/zipball/8738f6dc3211d949b05189ba103aab786143fc6c",
-            "reference": "8738f6dc3211d949b05189ba103aab786143fc6c",
-            "shasum": ""
-        },
-        "require": {
-            "kartik-v/yii2-krajee-base": "~1.7"
-        },
-        "time": "2016-09-04 10:52:50",
-        "type": "yii2-extension",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.4.x-dev"
-            }
-        },
-        "installation-source": "source",
-        "autoload": {
-            "psr-4": {
-                "kartik\\date\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Kartik Visweswaran",
-                "email": "kartikv2@gmail.com",
-                "homepage": "http://www.krajee.com/"
-            }
-        ],
-        "description": "Enhanced Yii2 wrapper for the bootstrap datepicker plugin (sub repo split from yii2-widgets).",
-        "homepage": "https://github.com/kartik-v/yii2-widget-datepicker",
-        "keywords": [
-            "date",
-            "extension",
-            "form",
-            "jquery",
-            "picker",
-            "plugin",
-            "select2",
-            "widget",
-            "yii2"
-        ]
-    },
-    {
         "name": "bower-asset/jquery",
         "version": "2.2.4",
         "version_normalized": "2.2.4.0",
@@ -1389,141 +1117,6 @@
         ]
     },
     {
-        "name": "yiisoft/yii2",
-        "version": "2.0.9",
-        "version_normalized": "2.0.9.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/yiisoft/yii2-framework.git",
-            "reference": "2b75151ea60e1fd820046416eee2e89c3dda1133"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/2b75151ea60e1fd820046416eee2e89c3dda1133",
-            "reference": "2b75151ea60e1fd820046416eee2e89c3dda1133",
-            "shasum": ""
-        },
-        "require": {
-            "bower-asset/jquery": "2.2.*@stable | 2.1.*@stable | 1.11.*@stable | 1.12.*@stable",
-            "bower-asset/jquery.inputmask": "~3.2.2",
-            "bower-asset/punycode": "1.3.*",
-            "bower-asset/yii2-pjax": "~2.0.1",
-            "cebe/markdown": "~1.0.0 | ~1.1.0",
-            "ext-ctype": "*",
-            "ext-mbstring": "*",
-            "ezyang/htmlpurifier": "~4.6",
-            "lib-pcre": "*",
-            "php": ">=5.4.0",
-            "yiisoft/yii2-composer": "~2.0.4"
-        },
-        "time": "2016-07-11 13:36:42",
-        "bin": [
-            "yii"
-        ],
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.0.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "yii\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Qiang Xue",
-                "email": "qiang.xue@gmail.com",
-                "homepage": "http://www.yiiframework.com/",
-                "role": "Founder and project lead"
-            },
-            {
-                "name": "Alexander Makarov",
-                "email": "sam@rmcreative.ru",
-                "homepage": "http://rmcreative.ru/",
-                "role": "Core framework development"
-            },
-            {
-                "name": "Maurizio Domba",
-                "homepage": "http://mdomba.info/",
-                "role": "Core framework development"
-            },
-            {
-                "name": "Carsten Brandt",
-                "email": "mail@cebe.cc",
-                "homepage": "http://cebe.cc/",
-                "role": "Core framework development"
-            },
-            {
-                "name": "Timur Ruziev",
-                "email": "resurtm@gmail.com",
-                "homepage": "http://resurtm.com/",
-                "role": "Core framework development"
-            },
-            {
-                "name": "Paul Klimov",
-                "email": "klimov.paul@gmail.com",
-                "role": "Core framework development"
-            },
-            {
-                "name": "Dmitry Naumenko",
-                "email": "d.naumenko.a@gmail.com",
-                "role": "Core framework development"
-            }
-        ],
-        "description": "Yii PHP Framework Version 2",
-        "homepage": "http://www.yiiframework.com/",
-        "keywords": [
-            "framework",
-            "yii2"
-        ]
-    },
-    {
-        "name": "bower-asset/font-awesome",
-        "version": "v4.6.3",
-        "version_normalized": "4.6.3.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/FortAwesome/Font-Awesome.git",
-            "reference": "8e241f209faa1dd2182c9fdc9c352d8806504a4e"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/8e241f209faa1dd2182c9fdc9c352d8806504a4e",
-            "reference": "8e241f209faa1dd2182c9fdc9c352d8806504a4e",
-            "shasum": ""
-        },
-        "type": "bower-asset-library",
-        "extra": {
-            "bower-asset-main": [
-                "less/font-awesome.less",
-                "scss/font-awesome.scss"
-            ],
-            "bower-asset-ignore": [
-                "*/.*",
-                "*.json",
-                "src",
-                "*.yml",
-                "Gemfile",
-                "Gemfile.lock",
-                "*.md"
-            ]
-        },
-        "installation-source": "dist",
-        "license": [
-            "OFL-1.1",
-            "MIT",
-            "CC-BY-3.0"
-        ],
-        "description": "Font Awesome"
-    },
-    {
         "name": "bower-asset/toastr",
         "version": "2.1.3",
         "version_normalized": "2.1.3.0",
@@ -1634,71 +1227,263 @@
         "installation-source": "dist"
     },
     {
-        "name": "bower-asset/moment",
-        "version": "2.15.0",
-        "version_normalized": "2.15.0.0",
+        "name": "bower-asset/font-awesome",
+        "version": "v4.7.0",
+        "version_normalized": "4.7.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/moment/moment.git",
-            "reference": "c587bf0063c18214238ca83f3f9c6170daf25bed"
+            "url": "https://github.com/FortAwesome/Font-Awesome.git",
+            "reference": "a8386aae19e200ddb0f6845b5feeee5eb7013687"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/moment/moment/zipball/c587bf0063c18214238ca83f3f9c6170daf25bed",
-            "reference": "c587bf0063c18214238ca83f3f9c6170daf25bed",
+            "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/a8386aae19e200ddb0f6845b5feeee5eb7013687",
+            "reference": "a8386aae19e200ddb0f6845b5feeee5eb7013687",
             "shasum": ""
         },
         "type": "bower-asset-library",
         "extra": {
-            "bower-asset-main": "moment.js",
+            "bower-asset-main": [
+                "less/font-awesome.less",
+                "scss/font-awesome.scss"
+            ],
             "bower-asset-ignore": [
-                "**/.*",
-                "benchmarks",
-                "bower_components",
-                "meteor",
-                "node_modules",
-                "scripts",
-                "tasks",
-                "test",
-                "component.json",
-                "composer.json",
-                "CONTRIBUTING.md",
-                "ender.js",
-                "Gruntfile.js",
-                "Moment.js.nuspec",
-                "package.js",
-                "package.json"
+                "*/.*",
+                "*.json",
+                "src",
+                "*.yml",
+                "Gemfile",
+                "Gemfile.lock",
+                "*.md"
             ]
         },
-        "installation-source": "dist"
+        "installation-source": "dist",
+        "license": [
+            "OFL-1.1",
+            "MIT",
+            "CC-BY-3.0"
+        ],
+        "description": "Font Awesome"
     },
     {
-        "name": "bower-asset/fullcalendar",
-        "version": "v2.7.2",
-        "version_normalized": "2.7.2.0",
+        "name": "cebe/markdown",
+        "version": "1.1.1",
+        "version_normalized": "1.1.1.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/fullcalendar/fullcalendar.git",
-            "reference": "0725d49df0243bd7c97519a42f9a5002bd4c3fc9"
+            "url": "https://github.com/cebe/markdown.git",
+            "reference": "c30eb5e01fe021cc5bba2f9ee0eeef96d4931166"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/fullcalendar/fullcalendar/zipball/0725d49df0243bd7c97519a42f9a5002bd4c3fc9",
-            "reference": "0725d49df0243bd7c97519a42f9a5002bd4c3fc9",
+            "url": "https://api.github.com/repos/cebe/markdown/zipball/c30eb5e01fe021cc5bba2f9ee0eeef96d4931166",
+            "reference": "c30eb5e01fe021cc5bba2f9ee0eeef96d4931166",
             "shasum": ""
         },
         "require": {
-            "bower-asset/jquery": ">=1.7.1",
-            "bower-asset/moment": ">=2.5.0"
+            "lib-pcre": "*",
+            "php": ">=5.4.0"
         },
         "require-dev": {
-            "bower-asset/bootstrap": "~3.2.0",
-            "bower-asset/jasmine-fixture": "~1.2.0",
-            "bower-asset/jasmine-jquery": "~2.0.3",
-            "bower-asset/jquery-mockjax": "~2.1.1",
-            "bower-asset/jquery-simulate": "~1.0.1",
-            "bower-asset/jquery-ui": ">=1.11.1",
-            "bower-asset/moment-timezone": "~0.2.1"
+            "cebe/indent": "*",
+            "facebook/xhprof": "*@dev",
+            "phpunit/phpunit": "4.1.*"
+        },
+        "time": "2016-09-14 20:40:20",
+        "bin": [
+            "bin/markdown"
+        ],
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.1.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "cebe\\markdown\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Carsten Brandt",
+                "email": "mail@cebe.cc",
+                "homepage": "http://cebe.cc/",
+                "role": "Creator"
+            }
+        ],
+        "description": "A super fast, highly extensible markdown parser for PHP",
+        "homepage": "https://github.com/cebe/markdown#readme",
+        "keywords": [
+            "extensible",
+            "fast",
+            "gfm",
+            "markdown",
+            "markdown-extra"
+        ]
+    },
+    {
+        "name": "yiisoft/yii2",
+        "version": "2.0.10",
+        "version_normalized": "2.0.10.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yiisoft/yii2-framework.git",
+            "reference": "5bfcb7a6dfa9771e2248eb8c4448613330f343ff"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/5bfcb7a6dfa9771e2248eb8c4448613330f343ff",
+            "reference": "5bfcb7a6dfa9771e2248eb8c4448613330f343ff",
+            "shasum": ""
+        },
+        "require": {
+            "bower-asset/jquery": "2.2.*@stable | 2.1.*@stable | 1.11.*@stable | 1.12.*@stable",
+            "bower-asset/jquery.inputmask": "~3.2.2",
+            "bower-asset/punycode": "1.3.*",
+            "bower-asset/yii2-pjax": "~2.0.1",
+            "cebe/markdown": "~1.0.0 | ~1.1.0",
+            "ext-ctype": "*",
+            "ext-mbstring": "*",
+            "ezyang/htmlpurifier": "~4.6",
+            "lib-pcre": "*",
+            "php": ">=5.4.0",
+            "yiisoft/yii2-composer": "~2.0.4"
+        },
+        "time": "2016-10-20 12:02:50",
+        "bin": [
+            "yii"
+        ],
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "yii\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Qiang Xue",
+                "email": "qiang.xue@gmail.com",
+                "homepage": "http://www.yiiframework.com/",
+                "role": "Founder and project lead"
+            },
+            {
+                "name": "Alexander Makarov",
+                "email": "sam@rmcreative.ru",
+                "homepage": "http://rmcreative.ru/",
+                "role": "Core framework development"
+            },
+            {
+                "name": "Maurizio Domba",
+                "homepage": "http://mdomba.info/",
+                "role": "Core framework development"
+            },
+            {
+                "name": "Carsten Brandt",
+                "email": "mail@cebe.cc",
+                "homepage": "http://cebe.cc/",
+                "role": "Core framework development"
+            },
+            {
+                "name": "Timur Ruziev",
+                "email": "resurtm@gmail.com",
+                "homepage": "http://resurtm.com/",
+                "role": "Core framework development"
+            },
+            {
+                "name": "Paul Klimov",
+                "email": "klimov.paul@gmail.com",
+                "role": "Core framework development"
+            },
+            {
+                "name": "Dmitry Naumenko",
+                "email": "d.naumenko.a@gmail.com",
+                "role": "Core framework development"
+            }
+        ],
+        "description": "Yii PHP Framework Version 2",
+        "homepage": "http://www.yiiframework.com/",
+        "keywords": [
+            "framework",
+            "yii2"
+        ]
+    },
+    {
+        "name": "branchonline/yii2-lightbox",
+        "version": "v1.2.0",
+        "version_normalized": "1.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/BranchOnline/yii2-lightbox.git",
+            "reference": "6cfe1a4a4fba046294b718904f7e57f671558fd1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/BranchOnline/yii2-lightbox/zipball/6cfe1a4a4fba046294b718904f7e57f671558fd1",
+            "reference": "6cfe1a4a4fba046294b718904f7e57f671558fd1",
+            "shasum": ""
+        },
+        "require": {
+            "bower-asset/lightbox2": "2.7.1",
+            "yiisoft/yii2": "*"
+        },
+        "time": "2016-10-27 15:13:14",
+        "type": "yii2-extension",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "branchonline\\lightbox\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "Jap Mul",
+                "email": "jap@branchonline.nl"
+            }
+        ],
+        "description": "Lightbox widget for Yii2",
+        "keywords": [
+            "module",
+            "yii2"
+        ]
+    },
+    {
+        "name": "bower-asset/fullcalendar",
+        "version": "v3.0.1",
+        "version_normalized": "3.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/fullcalendar/fullcalendar.git",
+            "reference": "8aa93919d8227140f98bba543cd97ee9975426f7"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/fullcalendar/fullcalendar/zipball/8aa93919d8227140f98bba543cd97ee9975426f7",
+            "reference": "8aa93919d8227140f98bba543cd97ee9975426f7",
+            "shasum": ""
+        },
+        "require": {
+            "bower-asset/jquery": ">=2.0.0",
+            "bower-asset/moment": ">=2.9.0"
         },
         "type": "bower-asset-library",
         "extra": {
@@ -1729,105 +1514,215 @@
         ]
     },
     {
-        "name": "bower-asset/fullcalendar-scheduler",
-        "version": "v1.3.1",
-        "version_normalized": "1.3.1.0",
+        "name": "kartik-v/bootstrap-fileinput",
+        "version": "v4.3.5",
+        "version_normalized": "4.3.5.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/fullcalendar/fullcalendar-scheduler.git",
-            "reference": "e00b6ff3b7a108e5c2c9768e31c6a46eb567db1b"
+            "url": "https://github.com/kartik-v/bootstrap-fileinput.git",
+            "reference": "6e1a8ca5ca04d4927540ccf18bbfc3253286bd0c"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/fullcalendar/fullcalendar-scheduler/zipball/e00b6ff3b7a108e5c2c9768e31c6a46eb567db1b",
-            "reference": "e00b6ff3b7a108e5c2c9768e31c6a46eb567db1b",
+            "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/6e1a8ca5ca04d4927540ccf18bbfc3253286bd0c",
+            "reference": "6e1a8ca5ca04d4927540ccf18bbfc3253286bd0c",
             "shasum": ""
         },
-        "require": {
-            "bower-asset/fullcalendar": ">=2.7.1",
-            "bower-asset/jquery": ">=1.8.0",
-            "bower-asset/moment": ">=2.5.0"
-        },
-        "require-dev": {
-            "bower-asset/jasmine-fixture": "~1.3.2",
-            "bower-asset/jasmine-jquery": "~2.1.0",
-            "bower-asset/jquery-simulate": "~1.0.1",
-            "bower-asset/jquery-ui": ">=1.11.1"
-        },
-        "type": "bower-asset-library",
-        "extra": {
-            "bower-asset-main": [
-                "dist/scheduler.js",
-                "dist/scheduler.css"
-            ],
-            "bower-asset-ignore": [
-                "*",
-                "**/.*",
-                "!/dist/**",
-                "!/CHANGELOG.*",
-                "!/LICENSE.*",
-                "!/README.*"
-            ]
-        },
-        "installation-source": "dist",
-        "license": [
-            "SEE LICENSE IN LICENSE.md"
-        ],
-        "description": "A premium add-on to FullCalendar for displaying events and resources"
-    },
-    {
-        "name": "edofre/yii2-fullcalendar-scheduler",
-        "version": "V1.1.1",
-        "version_normalized": "1.1.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/Edofre/yii2-fullcalendar-scheduler.git",
-            "reference": "53621a7508c0bd562d0f140f909da1ae438f0215"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/Edofre/yii2-fullcalendar-scheduler/zipball/53621a7508c0bd562d0f140f909da1ae438f0215",
-            "reference": "53621a7508c0bd562d0f140f909da1ae438f0215",
-            "shasum": ""
-        },
-        "require": {
-            "bower-asset/fullcalendar": "v2.7.2",
-            "bower-asset/fullcalendar-scheduler": "v1.3.1",
-            "php": ">=5.5.0",
-            "yiisoft/yii2": "*",
-            "yiisoft/yii2-jui": "*"
-        },
-        "time": "2016-06-03 21:48:45",
-        "type": "yii2-extension",
+        "time": "2016-09-20 05:47:41",
+        "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.1.x-dev"
+                "dev-master": "4.3.x-dev"
             }
         },
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "edofre\\fullcalendarscheduler\\": ""
+                "kartik\\plugins\\fileinput\\": ""
             }
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
-            "MIT"
+            "BSD-3-Clause"
         ],
         "authors": [
             {
-                "name": "Edo Freriks",
-                "email": "edofre@gmail.com"
+                "name": "Kartik Visweswaran",
+                "email": "kartikv2@gmail.com",
+                "homepage": "http://www.krajee.com/"
             }
         ],
-        "description": "Yii2 widget for fullcalendar scheduler module",
-        "homepage": "https://github.com/edofre/yii2-fullcalendar-scheduler",
+        "description": "An enhanced HTML 5 file input for Bootstrap 3.x with features for file preview for many file types, multiple selection, ajax uploads, and more.",
+        "homepage": "https://github.com/kartik-v/bootstrap-fileinput",
         "keywords": [
-            "calendar",
-            "event",
-            "fullcalendar-scheduler",
-            "javascript",
-            "scheduler"
+            "ajax",
+            "bootstrap",
+            "delete",
+            "file",
+            "image",
+            "input",
+            "jquery",
+            "multiple",
+            "preview",
+            "progress",
+            "upload"
+        ]
+    },
+    {
+        "name": "kartik-v/yii2-widget-fileinput",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/kartik-v/yii2-widget-fileinput.git",
+            "reference": "744e12c1f5be45357ec50eea6f678ecc9ba67dc2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/kartik-v/yii2-widget-fileinput/zipball/744e12c1f5be45357ec50eea6f678ecc9ba67dc2",
+            "reference": "744e12c1f5be45357ec50eea6f678ecc9ba67dc2",
+            "shasum": ""
+        },
+        "require": {
+            "kartik-v/bootstrap-fileinput": "~4.2",
+            "kartik-v/yii2-krajee-base": "~1.7"
+        },
+        "time": "2016-10-18 06:35:15",
+        "type": "yii2-extension",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "kartik\\file\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Kartik Visweswaran",
+                "email": "kartikv2@gmail.com",
+                "homepage": "http://www.krajee.com/"
+            }
+        ],
+        "description": "An enhanced FileInput widget for Bootstrap 3.x with file preview, multiple selection, and more features (sub repo split from yii2-widgets)",
+        "homepage": "https://github.com/kartik-v/yii2-widget-fileinput",
+        "keywords": [
+            "extension",
+            "file",
+            "form",
+            "input",
+            "jquery",
+            "plugin",
+            "upload",
+            "widget",
+            "yii2"
+        ]
+    },
+    {
+        "name": "kartik-v/yii2-widget-datepicker",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/kartik-v/yii2-widget-datepicker.git",
+            "reference": "92e04c6a9ff90c4290db7566f68af429f2d641d5"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/kartik-v/yii2-widget-datepicker/zipball/92e04c6a9ff90c4290db7566f68af429f2d641d5",
+            "reference": "92e04c6a9ff90c4290db7566f68af429f2d641d5",
+            "shasum": ""
+        },
+        "require": {
+            "kartik-v/yii2-krajee-base": "~1.7"
+        },
+        "time": "2016-11-11 15:42:04",
+        "type": "yii2-extension",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.4.x-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "kartik\\date\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Kartik Visweswaran",
+                "email": "kartikv2@gmail.com",
+                "homepage": "http://www.krajee.com/"
+            }
+        ],
+        "description": "Enhanced Yii2 wrapper for the bootstrap datepicker plugin (sub repo split from yii2-widgets).",
+        "homepage": "https://github.com/kartik-v/yii2-widget-datepicker",
+        "keywords": [
+            "date",
+            "extension",
+            "form",
+            "jquery",
+            "picker",
+            "plugin",
+            "select2",
+            "widget",
+            "yii2"
+        ]
+    },
+    {
+        "name": "bower-asset/moment",
+        "version": "2.17.0",
+        "version_normalized": "2.17.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/moment/moment.git",
+            "reference": "4710a7935cb347d8b2cf50f5befccfea8180619d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/moment/moment/zipball/4710a7935cb347d8b2cf50f5befccfea8180619d",
+            "reference": "4710a7935cb347d8b2cf50f5befccfea8180619d",
+            "shasum": ""
+        },
+        "type": "bower-asset-library",
+        "extra": {
+            "bower-asset-main": "moment.js",
+            "bower-asset-ignore": [
+                "**/.*",
+                "benchmarks",
+                "bower_components",
+                "meteor",
+                "node_modules",
+                "scripts",
+                "tasks",
+                "test",
+                "component.json",
+                "composer.json",
+                "CONTRIBUTING.md",
+                "ender.js",
+                "Gruntfile.js",
+                "Moment.js.nuspec",
+                "package.js",
+                "package.json",
+                "ISSUE_TEMPLATE.md",
+                "typing-tests"
+            ]
+        },
+        "installation-source": "dist",
+        "license": [
+            "MIT"
         ]
     }
 ]

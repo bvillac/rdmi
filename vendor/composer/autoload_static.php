@@ -35,10 +35,6 @@ class ComposerStaticInit58a41864cde071407a524a64a8bf5a31
             'kartik\\date\\' => 12,
             'kartik\\base\\' => 12,
         ),
-        'e' => 
-        array (
-            'edofre\\fullcalendarscheduler\\' => 29,
-        ),
         'c' => 
         array (
             'cebe\\markdown\\' => 14,
@@ -109,10 +105,6 @@ class ComposerStaticInit58a41864cde071407a524a64a8bf5a31
         'kartik\\base\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-krajee-base',
-        ),
-        'edofre\\fullcalendarscheduler\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/edofre/yii2-fullcalendar-scheduler',
         ),
         'cebe\\markdown\\' => 
         array (

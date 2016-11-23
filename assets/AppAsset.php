@@ -34,5 +34,6 @@ class AppAsset extends AssetBundle
         'yii\jui\JuiAsset',
         'yii\bootstrap\BootstrapAsset',
         'yii\bootstrap\BootstrapPluginAsset',
+        '\app\assets\CalendarRdmiAsset',
     ];
 }

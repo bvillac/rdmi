@@ -20,7 +20,6 @@ return array(
     'kartik\\file\\' => array($vendorDir . '/kartik-v/yii2-widget-fileinput'),
     'kartik\\date\\' => array($vendorDir . '/kartik-v/yii2-widget-datepicker'),
     'kartik\\base\\' => array($vendorDir . '/kartik-v/yii2-krajee-base'),
-    'edofre\\fullcalendarscheduler\\' => array($vendorDir . '/edofre/yii2-fullcalendar-scheduler'),
     'cebe\\markdown\\' => array($vendorDir . '/cebe/markdown'),
     'branchonline\\lightbox\\' => array($vendorDir . '/branchonline/yii2-lightbox/src'),
     'Faker\\' => array($vendorDir . '/fzaninotto/faker/src/Faker'),

@@ -25,10 +25,10 @@
         "branchonline/yii2-lightbox": "*",
         "cebe/yii2-gravatar": "1.*",
         "bower-asset/toastr": "*",
+        "bower-asset/fullcalendar": "*",
         "odaialali/yii2-toastr": "1.0b",
         "kartik-v/yii2-widget-datepicker": "@dev",
-        "kartik-v/yii2-widget-fileinput": "@dev",
-        "edofre/yii2-fullcalendar-scheduler": "*"
+        "kartik-v/yii2-widget-fileinput": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
