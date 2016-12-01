@@ -343,5 +343,14 @@ class PacienteController extends Controller
         }
     }
     
+    public function actionVideo()
+    {
+        //$data = null;
+        //$dataProvider = Paciente::consultarPacientes($data);
+        return $this->render('video', [
+                    //'model' => $dataProvider,
+        ]);
+    }
+    
 
 }

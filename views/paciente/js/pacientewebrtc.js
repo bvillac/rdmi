@@ -90,6 +90,7 @@ function gotStream(stream) {
   callButton.disabled = false;
 }
 
+//Iniciar la Video Local
 function start() {
   trace('Requesting local stream');
   startButton.disabled = true;
@@ -116,17 +117,20 @@ function call() {
   if (audioTracks.length > 0) {
     trace('Using audio device: ' + audioTracks[0].label);
   }
+  
   var servers = null;
   pc1 = new RTCPeerConnection(servers);
   trace('Created local peer connection object pc1');
   pc1.onicecandidate = function(e) {
     onIceCandidate(pc1, e);
   };
+  
   pc2 = new RTCPeerConnection(servers);
   trace('Created remote peer connection object pc2');
   pc2.onicecandidate = function(e) {
     onIceCandidate(pc2, e);
   };
+  
   pc1.oniceconnectionstatechange = function(e) {
     onIceStateChange(pc1, e);
   };
@@ -212,6 +216,7 @@ function onCreateAnswerSuccess(desc) {
   );
 }
 
+//Verifica que los candidatos de red esten disponibles
 function onIceCandidate(pc, event) {
   if (event.candidate) {
     getOtherPc(pc).addIceCandidate(
