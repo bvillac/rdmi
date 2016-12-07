@@ -24,8 +24,8 @@
         "bower-asset/font-awesome": "~4.0",
         "branchonline/yii2-lightbox": "*",
         "cebe/yii2-gravatar": "1.*",
-        "bower-asset/toastr": "*",
-        "bower-asset/fullcalendar": "*",
+        "bower-asset/toastr": "*",        
+        "bower-asset/webrtc-adapter": "*",
         "odaialali/yii2-toastr": "1.0b",
         "kartik-v/yii2-widget-datepicker": "@dev",
         "kartik-v/yii2-widget-fileinput": "@dev"

@@ -10,15 +10,17 @@ namespace app\assets;
 use yii\web\AssetBundle;
 
 class WebRtcAsset extends AssetBundle{
-    public $sourcePath = '@vendor/webrtc';
+    //public $sourcePath = '@vendor/webrtc';
+    public $sourcePath = '@bower/webrtc-adapter';
     public $baseUrl = '@web';
     public $css = [ 
         'src/css/main.css', 
     ];
     public $js = [          
-        'src/js/adapter.js', 
-        'src/js/common.js', 
-        'src/js/lib/ga.js', 
+        'release/adapter.js', 
+        //'src/js/adapter.js', 
+        //'src/js/common.js', 
+        //'src/js/lib/ga.js', 
     ]; 
 
 }

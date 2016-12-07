@@ -1,0 +1,28 @@
+
+https://developer.mozilla.org/es/docs/Web/API/WebRTC_API/Connectivity
+
+Conceptos Basicos
+STUN :- para obtener la dirección IP de su ordenador,  para funcionar como servidores de retransmisión en caso de peer-to-peer falla la comunicación. debido a problema de NAT
+
+ICE:-Esto se conoce como un candidato ICE y detalla los métodos disponibles los pares es capaz de comunicarse (directamente oa través de un servidor TURN).
+
+SDP:- utilizando el formato de protocolo de descripción de sesión, conocido como SDP :
+
+API RTCPeerConnection para transmitir vídeo.
+
+http://loading.io/
+byron_villacresesf@hotmail.com
+Byron2016
+
+User Paciente
+byronvillacreses@gmail.com
+Byron2016
+victor_villacresesf@hotmil.com
+47rqvgwg
+
+
+User Medico
+byron_villa@hotmail.com
+Byron2016
+maria_villacresesf@hotmail.com
+d1g2zbaf

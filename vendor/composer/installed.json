@@ -396,61 +396,6 @@
         ]
     },
     {
-        "name": "swiftmailer/swiftmailer",
-        "version": "v5.4.3",
-        "version_normalized": "5.4.3.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/swiftmailer/swiftmailer.git",
-            "reference": "4cc92842069c2bbc1f28daaaf1d2576ec4dfe153"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/4cc92842069c2bbc1f28daaaf1d2576ec4dfe153",
-            "reference": "4cc92842069c2bbc1f28daaaf1d2576ec4dfe153",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "require-dev": {
-            "mockery/mockery": "~0.9.1"
-        },
-        "time": "2016-07-08 11:51:25",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "5.4-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "files": [
-                "lib/swift_required.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Chris Corbyn"
-            },
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            }
-        ],
-        "description": "Swiftmailer, free feature-rich PHP mailer",
-        "homepage": "http://swiftmailer.org",
-        "keywords": [
-            "email",
-            "mail",
-            "mailer"
-        ]
-    },
-    {
         "name": "yiisoft/yii2-swiftmailer",
         "version": "2.0.6",
         "version_normalized": "2.0.6.0",
@@ -703,55 +648,6 @@
         "description": "The Twitter Bootstrap extension for the Yii framework",
         "keywords": [
             "bootstrap",
-            "yii2"
-        ]
-    },
-    {
-        "name": "yiisoft/yii2-debug",
-        "version": "2.0.6",
-        "version_normalized": "2.0.6.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/yiisoft/yii2-debug.git",
-            "reference": "55ed2e853ed8050a34415f63a4da84f88a56f895"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/55ed2e853ed8050a34415f63a4da84f88a56f895",
-            "reference": "55ed2e853ed8050a34415f63a4da84f88a56f895",
-            "shasum": ""
-        },
-        "require": {
-            "yiisoft/yii2": ">=2.0.4",
-            "yiisoft/yii2-bootstrap": "*"
-        },
-        "time": "2016-03-17 03:50:19",
-        "type": "yii2-extension",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.0.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "yii\\debug\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Qiang Xue",
-                "email": "qiang.xue@gmail.com"
-            }
-        ],
-        "description": "The debugger extension for the Yii framework",
-        "keywords": [
-            "debug",
-            "debugger",
             "yii2"
         ]
     },
@@ -1467,53 +1363,6 @@
         ]
     },
     {
-        "name": "bower-asset/fullcalendar",
-        "version": "v3.0.1",
-        "version_normalized": "3.0.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/fullcalendar/fullcalendar.git",
-            "reference": "8aa93919d8227140f98bba543cd97ee9975426f7"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/fullcalendar/fullcalendar/zipball/8aa93919d8227140f98bba543cd97ee9975426f7",
-            "reference": "8aa93919d8227140f98bba543cd97ee9975426f7",
-            "shasum": ""
-        },
-        "require": {
-            "bower-asset/jquery": ">=2.0.0",
-            "bower-asset/moment": ">=2.9.0"
-        },
-        "type": "bower-asset-library",
-        "extra": {
-            "bower-asset-main": [
-                "dist/fullcalendar.js",
-                "dist/fullcalendar.css"
-            ],
-            "bower-asset-ignore": [
-                "*",
-                "**/.*",
-                "!/dist/**",
-                "!/README.*",
-                "!/LICENSE.*",
-                "!/CHANGELOG.*",
-                "!/CONTRIBUTING.*"
-            ]
-        },
-        "installation-source": "dist",
-        "license": [
-            "MIT"
-        ],
-        "description": "Full-sized drag & drop event calendar",
-        "keywords": [
-            "calendar",
-            "event",
-            "full-sized",
-            "jquery-plugin"
-        ]
-    },
-    {
         "name": "kartik-v/bootstrap-fileinput",
         "version": "v4.3.5",
         "version_normalized": "4.3.5.0",
@@ -1683,17 +1532,17 @@
     },
     {
         "name": "bower-asset/moment",
-        "version": "2.17.0",
-        "version_normalized": "2.17.0.0",
+        "version": "2.17.1",
+        "version_normalized": "2.17.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/moment/moment.git",
-            "reference": "4710a7935cb347d8b2cf50f5befccfea8180619d"
+            "reference": "b8a297c1f99b3918f44dd9e3d7bd59379a876ba6"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/moment/moment/zipball/4710a7935cb347d8b2cf50f5befccfea8180619d",
-            "reference": "4710a7935cb347d8b2cf50f5befccfea8180619d",
+            "url": "https://api.github.com/repos/moment/moment/zipball/b8a297c1f99b3918f44dd9e3d7bd59379a876ba6",
+            "reference": "b8a297c1f99b3918f44dd9e3d7bd59379a876ba6",
             "shasum": ""
         },
         "type": "bower-asset-library",
@@ -1723,6 +1572,197 @@
         "installation-source": "dist",
         "license": [
             "MIT"
+        ]
+    },
+    {
+        "name": "bower-asset/fullcalendar",
+        "version": "v3.1.0",
+        "version_normalized": "3.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/fullcalendar/fullcalendar.git",
+            "reference": "c9e90782f61b7a6ebd47a6314be1648749a7a7d6"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/fullcalendar/fullcalendar/zipball/c9e90782f61b7a6ebd47a6314be1648749a7a7d6",
+            "reference": "c9e90782f61b7a6ebd47a6314be1648749a7a7d6",
+            "shasum": ""
+        },
+        "require": {
+            "bower-asset/jquery": ">=2.0.0",
+            "bower-asset/moment": ">=2.9.0"
+        },
+        "type": "bower-asset-library",
+        "extra": {
+            "bower-asset-main": [
+                "dist/fullcalendar.js",
+                "dist/fullcalendar.css"
+            ],
+            "bower-asset-ignore": [
+                "*",
+                "**/.*",
+                "!/dist/**",
+                "!/README.*",
+                "!/LICENSE.*",
+                "!/CHANGELOG.*",
+                "!/CONTRIBUTING.*"
+            ]
+        },
+        "installation-source": "dist",
+        "license": [
+            "MIT"
+        ],
+        "description": "Full-sized drag & drop event calendar",
+        "keywords": [
+            "calendar",
+            "event",
+            "full-sized",
+            "jquery-plugin"
+        ]
+    },
+    {
+        "name": "yiisoft/yii2-debug",
+        "version": "2.0.7",
+        "version_normalized": "2.0.7.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yiisoft/yii2-debug.git",
+            "reference": "a74a2433ad1dfda30a253a92f6db52c131807432"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/a74a2433ad1dfda30a253a92f6db52c131807432",
+            "reference": "a74a2433ad1dfda30a253a92f6db52c131807432",
+            "shasum": ""
+        },
+        "require": {
+            "yiisoft/yii2": "~2.0.4",
+            "yiisoft/yii2-bootstrap": "~2.0.0"
+        },
+        "time": "2016-11-24 09:42:29",
+        "type": "yii2-extension",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "yii\\debug\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Qiang Xue",
+                "email": "qiang.xue@gmail.com"
+            }
+        ],
+        "description": "The debugger extension for the Yii framework",
+        "keywords": [
+            "debug",
+            "debugger",
+            "yii2"
+        ]
+    },
+    {
+        "name": "swiftmailer/swiftmailer",
+        "version": "v5.4.4",
+        "version_normalized": "5.4.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/swiftmailer/swiftmailer.git",
+            "reference": "545ce9136690cea74f98f86fbb9c92dd9ab1a756"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/545ce9136690cea74f98f86fbb9c92dd9ab1a756",
+            "reference": "545ce9136690cea74f98f86fbb9c92dd9ab1a756",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "require-dev": {
+            "mockery/mockery": "~0.9.1"
+        },
+        "time": "2016-11-24 01:01:23",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "5.4-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "lib/swift_required.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Chris Corbyn"
+            },
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            }
+        ],
+        "description": "Swiftmailer, free feature-rich PHP mailer",
+        "homepage": "http://swiftmailer.org",
+        "keywords": [
+            "email",
+            "mail",
+            "mailer"
+        ]
+    },
+    {
+        "name": "bower-asset/webrtc-adapter",
+        "version": "v2.0.8",
+        "version_normalized": "2.0.8.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/webrtc/adapter.git",
+            "reference": "aa6f7cbb9a2ab3604d1c35fae82870ac3ae7e915"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/webrtc/adapter/zipball/aa6f7cbb9a2ab3604d1c35fae82870ac3ae7e915",
+            "reference": "aa6f7cbb9a2ab3604d1c35fae82870ac3ae7e915",
+            "shasum": ""
+        },
+        "type": "bower-asset-library",
+        "extra": {
+            "bower-asset-main": "./release/adapter.js",
+            "bower-asset-ignore": [
+                "test/*"
+            ]
+        },
+        "installation-source": "dist",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "description": "A shim to insulate apps from WebRTC spec changes and browser prefix differences",
+        "keywords": [
+            "Adapter",
+            "Chrome",
+            "Chromium",
+            "Edge",
+            "Firefox",
+            "PeerConnection",
+            "RTCPeerConnection",
+            "Shim",
+            "WebRTC",
+            "getUserMedia"
         ]
     }
 ]
