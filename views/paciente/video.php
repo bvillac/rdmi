@@ -4,6 +4,10 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
 
+//namespace app\commands;
+use consik\yii2websocket\WebSocketServer;
+//use yii\console\Controller;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\PacienteSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */

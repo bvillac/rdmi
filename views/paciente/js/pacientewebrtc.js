@@ -31,7 +31,7 @@ function errorCallback(error) {
 
 navigator.getUserMedia(constraints, successCallback, errorCallback);*/
 
-/*
+
 'use strict';
 
 var startButton = document.getElementById('startButton');
@@ -261,12 +261,12 @@ function hangup() {
   hangupButton.disabled = true;
   callButton.disabled = false;
 }
-*/
+
 
 
 //TRANFERENCIA DE DATOS
 
-'use strict';
+/*'use strict';
 
 var localConnection;
 var remoteConnection;
@@ -562,4 +562,5 @@ function displayStats() {
       }
     }
   }
-}
+}*/
+

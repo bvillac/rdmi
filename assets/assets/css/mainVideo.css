@@ -1,0 +1,112 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 07-dic-2016, 22:01:02
+    Author     : root
+*/
+
+
+
+/***** DATOS DE VIDEO ****/
+
+.hidden {
+  display: none;
+}
+
+.highlight {
+  background-color: #eee;
+  font-size: 1.2em;
+  margin: 0 0 30px 0;
+  padding: 0.2em 1.5em;
+}
+.warning {
+  color: red;
+  font-weight: 400;
+}
+
+div#errorMsg p {
+  color: #F00;
+}
+
+
+
+
+a#viewSource {
+display: block;
+margin: 1.3em 0 0 0;
+border-top: 1px solid #999;
+padding: 1em 0 0 0;
+}
+
+div#links a {
+display: block;
+line-height: 1.3em;
+margin: 0 0 1.5em 0;
+}
+
+div.outputSelector {
+margin: -1.3em 0 2em 0;
+}
+
+@media screen and (min-width: 1000px) {
+/* hack! to detect non-touch devices */
+  div#links a {
+		line-height: 0.8em;
+  }
+}
+
+audio {
+max-width: 100%;
+}
+
+code {
+font-family: 'Roboto', sans-serif;
+font-weight: 400;
+}
+
+video {
+  background: #222;
+  margin: 0 0 20px 0;
+  width: 100%;
+}
+
+/* Aplicar Filtro en el video
+video {
+  -webkit-filter: blur(4px) invert(1) opacity(0.5);
+}
+video {
+   filter: hue-rotate(180deg) saturate(200%);
+   -moz-filter: hue-rotate(180deg) saturate(200%);
+   -webkit-filter: hue-rotate(180deg) saturate(200%);
+ }*/
+
+@media screen and (max-width: 650px) {
+  .highlight {
+    font-size: 1em;
+    margin: 0 0 20px 0;
+    padding: 0.2em 1em;
+  }
+  h1 {
+    font-size: 24px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  button:active {
+    background-color: darkRed;
+  }
+  h1 {
+    font-size: 22px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  h1 {
+    font-size: 20px;
+  }
+}
+
+

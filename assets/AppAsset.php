@@ -20,11 +20,13 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/PBstyles.css',
         'css/PBvalida.css',
+        'css/mainVideo.css',
     ];
     public $js  = [
         'js/PBscripts.js',
         'js/PBvalidation.js',
         'js/cedulaRucPass.js',
+        //'js/serverSocket.js',
         //'js/smooth-scroll.js'
     ];
     public $jsOptions = ['position' => \yii\web\View::POS_END];

@@ -14,7 +14,7 @@ class WebRtcAsset extends AssetBundle{
     public $sourcePath = '@bower/webrtc-adapter';
     public $baseUrl = '@web';
     public $css = [ 
-        'src/css/main.css', 
+        //'src/css/main.css', 
     ];
     public $js = [          
         'release/adapter.js', 
