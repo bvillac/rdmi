@@ -151,8 +151,7 @@ var edgeShim = {
               sections[j] += 'a=end-of-candidates\r\n';
             }
           }
-        } else if (event.candidate.candidate.indexOf('typ endOfCandidates')
-            === -1) {
+        } else {
           sections[event.candidate.sdpMLineIndex + 1] +=
               'a=' + event.candidate.candidate + '\r\n';
         }
@@ -289,14 +288,6 @@ var edgeShim = {
               if (iceGatherer.state === undefined) {
                 iceGatherer.state = 'completed';
               }
-
-              // Emit a candidate with type endOfCandidates to make the samples
-              // work. Edge requires addIceCandidate with this empty candidate
-              // to start checking. The real solution is to signal
-              // end-of-candidates to the other side when getting the null
-              // candidate but some apps (like the samples) don't do that.
-              event.candidate.candidate =
-                  'candidate:1 1 udp 1 0.0.0.0 9 typ endOfCandidates';
             } else {
               // RTCIceCandidate doesn't have a component, needs to be added
               cand.component = iceTransport.component === 'RTCP' ? 2 : 1;
@@ -305,8 +296,7 @@ var edgeShim = {
 
             // update local description.
             var sections = SDPUtils.splitSections(self.localDescription.sdp);
-            if (event.candidate.candidate.indexOf('typ endOfCandidates')
-                === -1) {
+            if (!end) {
               sections[event.candidate.sdpMLineIndex + 1] +=
                   'a=' + event.candidate.candidate + '\r\n';
             } else {
@@ -314,8 +304,9 @@ var edgeShim = {
                   'a=end-of-candidates\r\n';
             }
             self.localDescription.sdp = sections.join('');
-
-            var complete = self.transceivers.every(function(transceiver) {
+            var transceivers = self._pendingOffer ? self._pendingOffer :
+                self.transceivers;
+            var complete = transceivers.every(function(transceiver) {
               return transceiver.iceGatherer &&
                   transceiver.iceGatherer.state === 'completed';
             });
@@ -324,7 +315,9 @@ var edgeShim = {
             // Also emits null candidate when all gatherers are complete.
             switch (self.iceGatheringState) {
               case 'new':
-                self._localIceCandidatesBuffer.push(event);
+                if (!end) {
+                  self._localIceCandidatesBuffer.push(event);
+                }
                 if (end && complete) {
                   self._localIceCandidatesBuffer.push(
                       new Event('icecandidate'));
@@ -332,9 +325,11 @@ var edgeShim = {
                 break;
               case 'gathering':
                 self._emitBufferedCandidates();
-                self.dispatchEvent(event);
-                if (self.onicecandidate !== null) {
-                  self.onicecandidate(event);
+                if (!end) {
+                  self.dispatchEvent(event);
+                  if (self.onicecandidate !== null) {
+                    self.onicecandidate(event);
+                  }
                 }
                 if (complete) {
                   self.dispatchEvent(new Event('icecandidate'));
@@ -446,21 +441,6 @@ var edgeShim = {
               if (!rejected && !transceiver.isDatachannel) {
                 var remoteIceParameters = SDPUtils.getIceParameters(
                     mediaSection, sessionpart);
-                if (isIceLite) {
-                  var cands = SDPUtils.matchPrefix(mediaSection, 'a=candidate:')
-                  .map(function(cand) {
-                    return SDPUtils.parseCandidate(cand);
-                  })
-                  .filter(function(cand) {
-                    return cand.component === '1';
-                  });
-                  // ice-lite only includes host candidates in the SDP so we can
-                  // use setRemoteCandidates (which implies an
-                  // RTCIceCandidateComplete)
-                  if (cands.length) {
-                    iceTransport.setRemoteCandidates(cands);
-                  }
-                }
                 var remoteDtlsParameters = SDPUtils.getDtlsParameters(
                     mediaSection, sessionpart);
                 if (isIceLite) {
@@ -619,7 +599,7 @@ var edgeShim = {
                 dtlsTransport: self.transceivers[0].dtlsTransport
               } : self._createIceAndDtlsTransports(mid, sdpMLineIndex);
 
-              if (isComplete) {
+              if (isComplete && (!self.usingBundle || sdpMLineIndex === 0)) {
                 transports.iceTransport.setRemoteCandidates(cands);
               }
 
@@ -753,7 +733,7 @@ var edgeShim = {
                 trackEvent.track = track;
                 trackEvent.receiver = receiver;
                 trackEvent.streams = [stream];
-                self.dispatchEvent(event);
+                self.dispatchEvent(trackEvent);
                 if (self.ontrack !== null) {
                   window.setTimeout(function() {
                     self.ontrack(trackEvent);
@@ -1044,9 +1024,12 @@ var edgeShim = {
 
     window.RTCPeerConnection.prototype.addIceCandidate = function(candidate) {
       if (!candidate) {
-        this.transceivers.forEach(function(transceiver) {
-          transceiver.iceTransport.addRemoteCandidate({});
-        });
+        for (var j = 0; j < this.transceivers.length; j++) {
+          this.transceivers[j].iceTransport.addRemoteCandidate({});
+          if (this.usingBundle) {
+            return;
+          }
+        }
       } else {
         var mLineIndex = candidate.sdpMLineIndex;
         if (candidate.sdpMid) {
@@ -1068,10 +1051,6 @@ var edgeShim = {
           // Ignore RTCP candidates, we assume RTCP-MUX.
           if (cand.component !== '1') {
             return;
-          }
-          // A dirty hack to make samples work.
-          if (cand.type === 'endOfCandidates') {
-            cand = {};
           }
           transceiver.iceTransport.addRemoteCandidate(cand);
 
@@ -1100,14 +1079,24 @@ var edgeShim = {
       });
       var cb = arguments.length > 1 && typeof arguments[1] === 'function' &&
           arguments[1];
+      var fixStatsType = function(stat) {
+        stat.type = {
+          inboundrtp: 'inbound-rtp',
+          outboundrtp: 'outbound-rtp',
+          candidatepair: 'candidate-pair',
+          localcandidate: 'local-candidate',
+          remotecandidate: 'remote-candidate'
+        }[stat.type] || stat.type;
+        return stat;
+      };
       return new Promise(function(resolve) {
         // shim getStats with maplike support
         var results = new Map();
         Promise.all(promises).then(function(res) {
           res.forEach(function(result) {
             Object.keys(result).forEach(function(id) {
+              result[id].type = fixStatsType(result[id]);
               results.set(id, result[id]);
-              results[id] = result[id];
             });
           });
           if (cb) {

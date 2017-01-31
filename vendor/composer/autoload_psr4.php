@@ -29,6 +29,7 @@ return array(
     'Symfony\\Component\\EventDispatcher\\' => array($vendorDir . '/symfony/event-dispatcher'),
     'React\\Stream\\' => array($vendorDir . '/react/stream/src'),
     'React\\Socket\\' => array($vendorDir . '/react/socket/src'),
+    'React\\Promise\\' => array($vendorDir . '/react/promise/src'),
     'React\\EventLoop\\' => array($vendorDir . '/react/event-loop/src'),
     'Ratchet\\' => array($vendorDir . '/cboden/ratchet/src/Ratchet'),
     'Faker\\' => array($vendorDir . '/fzaninotto/faker/src/Faker'),

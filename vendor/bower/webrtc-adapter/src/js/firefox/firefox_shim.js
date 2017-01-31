@@ -130,26 +130,42 @@ var firefoxShim = {
       return nativeAddIceCandidate.apply(this, arguments);
     };
 
-    if (browserDetails.version < 48) {
-      // shim getStats with maplike support
-      var makeMapStats = function(stats) {
-        var map = new Map();
-        Object.keys(stats).forEach(function(key) {
-          map.set(key, stats[key]);
-          map[key] = stats[key];
-        });
-        return map;
-      };
+    // shim getStats with maplike support
+    var makeMapStats = function(stats) {
+      var map = new Map();
+      Object.keys(stats).forEach(function(key) {
+        map.set(key, stats[key]);
+        map[key] = stats[key];
+      });
+      return map;
+    };
 
-      var nativeGetStats = RTCPeerConnection.prototype.getStats;
-      RTCPeerConnection.prototype.getStats = function(selector, onSucc, onErr) {
-        return nativeGetStats.apply(this, [selector || null])
-          .then(function(stats) {
-            return makeMapStats(stats);
-          })
-          .then(onSucc, onErr);
-      };
-    }
+    var modernStatsTypes = {
+      inboundrtp: 'inbound-rtp',
+      outboundrtp: 'outbound-rtp',
+      candidatepair: 'candidate-pair',
+      localcandidate: 'local-candidate',
+      remotecandidate: 'remote-candidate'
+    };
+
+    var nativeGetStats = RTCPeerConnection.prototype.getStats;
+    RTCPeerConnection.prototype.getStats = function(selector, onSucc, onErr) {
+      return nativeGetStats.apply(this, [selector || null])
+        .then(function(stats) {
+          if (browserDetails.version < 48) {
+            stats = makeMapStats(stats);
+          }
+          if (browserDetails.version < 53 && !onSucc) {
+            // Shim only promise getStats with spec-hyphens in type names
+            // Leave callback version alone; misc old uses of forEach before Map
+            stats.forEach(function(stat) {
+              stat.type = modernStatsTypes[stat.type] || stat.type;
+            });
+          }
+          return stats;
+        })
+        .then(onSucc, onErr);
+    };
   }
 };
 

@@ -8,6 +8,7 @@ class ComposerStaticInit58a41864cde071407a524a64a8bf5a31
 {
     public static $files = array (
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
+        'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
     );
@@ -56,6 +57,7 @@ class ComposerStaticInit58a41864cde071407a524a64a8bf5a31
         array (
             'React\\Stream\\' => 13,
             'React\\Socket\\' => 13,
+            'React\\Promise\\' => 14,
             'React\\EventLoop\\' => 16,
             'Ratchet\\' => 8,
         ),
@@ -157,6 +159,10 @@ class ComposerStaticInit58a41864cde071407a524a64a8bf5a31
         'React\\Socket\\' => 
         array (
             0 => __DIR__ . '/..' . '/react/socket/src',
+        ),
+        'React\\Promise\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/react/promise/src',
         ),
         'React\\EventLoop\\' => 
         array (

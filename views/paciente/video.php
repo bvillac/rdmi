@@ -5,8 +5,9 @@ use yii\helpers\Url;
 use yii\grid\GridView;
 
 //namespace app\commands;
-use consik\yii2websocket\WebSocketServer;
+//use consik\yii2websocket\WebSocketServer;
 //use yii\console\Controller;
+
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\PacienteSearch */
@@ -30,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col-md-12">
                 <!--<video id="gum-local" autoplay></video>-->
 
-                <video id="localVideo" autoplay></video>
+<!--                <video id="localVideo" autoplay></video>
                 <video id="remoteVideo" autoplay></video>
 
                 <div>
@@ -39,7 +40,24 @@ $this->params['breadcrumbs'][] = $this->title;
                     <button id="hangupButton">Hang Up</button>
                 </div>
 
-                <div id="errorMsg"></div>
+                <div id="errorMsg"></div>-->
+
+
+<input type="text" id="room-id" value="abcdef">
+<button id="open-room">Open Room</button>
+<button id="join-room">Join Room</button>
+<button id="open-or-join-room">Auto Open Or Join Room</button>
+<hr>
+<div id="chat-container">
+    <input type="text" id="input-text-chat" placeholder="Enter Text Chat" disabled>
+    <button id="share-file" disabled>Share File</button>
+    <br>
+    <div id="file-container"></div>
+    <div class="chat-output"></div>
+</div>
+
+
+
             </div>
         </div>
         <!-- /.box-body -->
@@ -55,7 +73,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="box-body">
             <div class="col-md-12">
 
-                <section>
+<!--                <section>
                     <form id="fileInfo">
                         <input type="file" id="fileInput" name="files"/>
                     </form>
@@ -74,7 +92,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <a id="download"></a>
                     <span id="status"></span>
 
-                </section>
+                </section>-->
 
             </div>
         </div>
