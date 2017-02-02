@@ -28,7 +28,6 @@
         "bower-asset/fullcalendar": "*",
         "bower-asset/webrtc-adapter": "*",
         "bower-asset/rtcmulticonnection": "*",
-        "node/nodejs-installer": "^1.0",
         "odaialali/yii2-toastr": "1.0b",
         "kartik-v/yii2-widget-datepicker": "@dev",
         "kartik-v/yii2-widget-fileinput": "@dev"

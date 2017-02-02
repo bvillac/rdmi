@@ -3,6 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  * Change trace() call to console.log()
+ * 
+ * https://codelabs.developers.google.com/codelabs/webrtc-web/#4
  */
 
 /*'use strict';
@@ -31,7 +33,7 @@ function errorCallback(error) {
 
 navigator.getUserMedia(constraints, successCallback, errorCallback);*/
 
-/*
+
 'use strict';
 
 var startButton = document.getElementById('startButton');
@@ -565,7 +567,7 @@ function displayStats() {
 }*/
 
 
-
+/* INICIO
 document.getElementById('open-room').onclick = function() {
     this.disabled = true;
     connection.open(document.getElementById('room-id').value);
@@ -632,3 +634,4 @@ connection.onopen = function() {
     document.getElementById('share-file').disabled      = false;
     document.getElementById('input-text-chat').disabled = false;
 };
+FIN  */
