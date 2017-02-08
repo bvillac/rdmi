@@ -29,3 +29,22 @@ d1g2zbaf
 
 #### socket yii
 https://packagist.org/packages/consik/yii2-websocket
+
+##################
+Intalar NodeJS
+
+https://codelabs.developers.google.com/codelabs/webrtc-web/#4
+ * https://www.html5rocks.com/en/tutorials/webrtc/infrastructure/
+
+http://socket.io/
+http://socket.io/docs/
+ * yum install npm
+npm install socket.io
+ver que este instaldo
+node -v
+
+Intall socket
+npm install socket.io@0.9.x
+npm install -g express@2.5.x
+express -v
+http://codigo44.blogspot.mx/2014/06/nodejs-socket.html

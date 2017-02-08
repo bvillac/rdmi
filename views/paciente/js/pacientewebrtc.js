@@ -5,6 +5,9 @@
  * Change trace() call to console.log()
  * 
  * https://codelabs.developers.google.com/codelabs/webrtc-web/#4
+ * https://www.html5rocks.com/en/tutorials/webrtc/infrastructure/
+ * http://socket.io/
+ * yum install npm
  */
 
 /*'use strict';
