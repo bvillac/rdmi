@@ -34,12 +34,32 @@ https://packagist.org/packages/consik/yii2-websocket
 Intalar NodeJS
 
 https://codelabs.developers.google.com/codelabs/webrtc-web/#4
- * https://www.html5rocks.com/en/tutorials/webrtc/infrastructure/
+https://www.html5rocks.com/en/tutorials/webrtc/infrastructure/
+
+Instalacion
+yum install nodejs
+node -v  -> Version
+Para reinciar los servicios instalr nodemon
+npm install nodemon
+usar
+nodemon [your app name]
+
+Para probar crear un archivo.js y ejecuatar
+node demoserver.js
+
+Ver los procesos que se estan corriendpo
+ps aux | grep node
+
+
+
 
 http://socket.io/
 http://socket.io/docs/
- * yum install npm
+
+Instala NPM
+yum install npm
 npm install socket.io
+npm install express
 ver que este instaldo
 node -v
 
@@ -48,3 +68,7 @@ npm install socket.io@0.9.x
 npm install -g express@2.5.x
 express -v
 http://codigo44.blogspot.mx/2014/06/nodejs-socket.html
+socket.io yii2
+https://www.my-yii.com/learn/view-episode/yii-2-real-time-chat-app-with-nodejs-socketio-and-redisio
+https://github.com/ratacibernetica/yii2-node-socket
+
