@@ -15,6 +15,13 @@ $config = [
     'sourceLanguage' => 'en',
     'modules' => [],
     'components' => [
+        //Configuracion de Redis.
+        'redis' => [
+            'class' => 'yii\redis\Connection',
+            'hostname' => 'localhost',
+            'port' => 6379,
+            'database' => 0,
+        ],
         'i18n' => [
             'translations' => [
                 '*' => [

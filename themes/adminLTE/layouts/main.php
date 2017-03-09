@@ -71,6 +71,7 @@ if (Yii::$app->controller->action->id === 'login' && $isUser) {
         <link rel="shortcut icon" href="<?= $directoryAsset; ?>/img/logos/favicon.ico" type="image/x-icon" />
         <?= Html::csrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
+        <!--<script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>-->
         <?php $this->head() ?>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

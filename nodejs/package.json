@@ -1,0 +1,20 @@
+{
+  "name": "ProyectRdmi",
+  "version": "0.0.1",
+  "description": "ProyectoWebRtc",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node /var/www/html/rdmi/nodejs/server.js"
+  },
+  "author": "Byron Villacreses",
+  "license": "GLP",
+  "dependencies": {
+    "express": "~4.15.2",
+    "socket.io": "~1.7.3",
+    "log": "~1.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "~1.11.0"
+  }
+}

@@ -72,3 +72,7 @@ socket.io yii2
 https://www.my-yii.com/learn/view-episode/yii-2-real-time-chat-app-with-nodejs-socketio-and-redisio
 https://github.com/ratacibernetica/yii2-node-socket
 
+como iniciar mpm
+npm start
+http://localhost:8081/
+

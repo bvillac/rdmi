@@ -26,7 +26,7 @@ class AppAsset extends AssetBundle
         'js/PBscripts.js',
         'js/PBvalidation.js',
         'js/cedulaRucPass.js',
-        //'js/serverSocket.js',
+        'js/serverSocket.js',
         //'js/smooth-scroll.js'
     ];
     public $jsOptions = ['position' => \yii\web\View::POS_END];
