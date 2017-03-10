@@ -41,6 +41,33 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
 
                 <div id="errorMsg"></div>
+                
+                
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div class="form-group">
+                            <?= Html::textInput('name', null, [
+                                'id' => 'txt_name',
+                                'class' => 'form-control',
+                                'placeholder' => 'Nombre'
+                            ]) ?>
+                        </div>
+                    </div>
+                    <div class="col-xs-7">
+                        <div class="form-group">
+                            <?= Html::textInput('message', null, [
+                                'id' => 'txt_message',
+                                'class' => 'form-control',
+                                'placeholder' => 'Message'
+                            ]) ?>
+                        </div>
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="form-group">
+                            <p><?= Html::a('<span class="glyphicon glyphicon-floppy-disk"></span> ' . Yii::t("accion", "Save"), 'javascript:', ['id' => 'btn_sendmessage','class' => 'btn btn-primary btn-block']); ?> </p>
+                        </div>
+                    </div>
+                </div>
 
 
 <!--<input type="text" id="room-id" value="abcdef">

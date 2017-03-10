@@ -4,8 +4,7 @@
   "description": "ProyectoWebRtc",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node /var/www/html/rdmi/nodejs/server.js"
+    "start": "nodemon /var/www/html/rdmi/nodejs/server.js"
   },
   "author": "Byron Villacreses",
   "license": "GLP",

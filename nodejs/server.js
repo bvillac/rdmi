@@ -13,12 +13,14 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var redis = require('redis');
 
-server.listen(8890);
+var Port=8890;//data port cs
+server.listen(Port);
 
 io.on('connection', function (socket) {
 
     console.log("new client connected");
-
+    //De forma predeterminada, redis.createClient()utilizará 127.0.0.1y Port 6379
+    //var client = redis.createClient(port, host);
     var redisClient = redis.createClient();
 
     redisClient.subscribe('notification');
@@ -34,7 +36,7 @@ io.on('connection', function (socket) {
 
 });
 
-server.listen(8890, function() {  
-    console.log('Servidor corriendo en http://localhost:8890-'+__dirname);
+server.listen(Port, function() {  
+    console.log('Servidor corriendo en http://localhost:'+Port+' Ruta'+__dirname);
     //logs.info('Servidor escuancha',port);
 });

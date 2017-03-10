@@ -20,6 +20,9 @@ MaterialAsset::register($this);
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
+    <!-- Importar Libreria de Socket.io -->
+    <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>-->
     <?php $this->head() ?>
 </head>
 <body>

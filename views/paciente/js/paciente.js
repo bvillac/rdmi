@@ -20,6 +20,10 @@ $(document).ready(function () {
         EnviarSolicitudAte('Create');
     });
     
+    $('#btn_sendmessage').click(function () {
+        sendMessage();
+    });
+    
     $('#cmb_especialidad').change(function () {
         obtenerMedicoEspecialidad();
     });
@@ -168,6 +172,26 @@ function mostrarDatos(varPer) {
     $('#txt_dper_contacto').val((varPer[0]['Contacto']!=null)?varPer[0]['Contacto']:'');
     $('#txt_dper_celular').val((varPer[0]['Celular']!=null)?varPer[0]['Celular']:'');
 }
+
+
+
+function sendMessage() {
+    var link = $('#txth_base').val() + "/paciente/sendmessage";
+    var arrParams = new Object();
+    arrParams.name = $('#txt_name').val();
+    arrParams.message = $('#txt_message').val();
+    //rrParams.getcentro = true;
+    requestHttpAjax(link, arrParams, function (response) {
+        alert('Regreso');
+        /*if (response.status == "OK") {
+            var data = response.message;
+            setComboData(data.centroatencion, "cmb_centro");
+        }*/
+        //$("#message-field").val("");
+    }, true);
+}
+
+
 
 
 

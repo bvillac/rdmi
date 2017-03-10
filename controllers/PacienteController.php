@@ -352,5 +352,32 @@ class PacienteController extends Controller
         ]);
     }
     
+    
+    public function actionSendmessage() {
+        //$formulario = new MceFormularioTemp;
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
+            Utilities::putMessageLogFile($data);
+            $name=$data["name"];
+            $message=$data["message"];//json_encode
+            
+            return Yii::$app->redis->executeCommand('PUBLISH', [
+                'channel' => 'notification',
+                'message' => Json::encode(['name' => $name, 'message' => $message])
+            ]);
+                    
+
+//            if ($resul['status']) {
+//                $message = ["info" => Yii::t('exception', '<strong>Well done!</strong> your information was successfully saved.')];
+//                echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message,$resul);
+//            }else{
+//                $message = ["info" => Yii::t('exception', 'The above error occurred while the Web server was processing your request.')];
+//                echo Utilities::ajaxResponse('NO_OK', 'alert', Yii::t('jslang', 'Error'), 'false', $message);
+//            }
+//            
+//            return;
+        }
+    }
+    
 
 }
