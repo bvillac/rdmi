@@ -1,9 +1,11 @@
 <?php
+//Definicion de Alisas para Uso Directorios
 Yii::setAlias('@modules', dirname(__DIR__) . '/modules');
 Yii::setAlias('@themes', dirname(__DIR__) . '/themes');
 Yii::setAlias('@widgets', dirname(__DIR__) . '/widgets');
 Yii::setAlias('@views', dirname(__DIR__) . '/views');
 Yii::setAlias('@assets', dirname(__DIR__) . '/assets');
+Yii::setAlias('@nodejs', dirname(__DIR__) . '/nodejs');
 $params = require(__DIR__ . '/params.php');
 
 $config = [

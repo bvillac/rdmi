@@ -4,6 +4,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 //use app\assets\AppAsset;
+//use app\assets\NodeJsAsset;
 use app\themes\material\assets\MaterialAsset;
 
 /* @var $this \yii\web\View */
@@ -21,7 +22,7 @@ MaterialAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <!-- Importar Libreria de Socket.io -->
-    <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
+<!--    <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>-->
 <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>-->
     <?php $this->head() ?>
 </head>

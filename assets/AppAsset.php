@@ -26,7 +26,7 @@ class AppAsset extends AssetBundle
         'js/PBscripts.js',
         'js/PBvalidation.js',
         'js/cedulaRucPass.js',
-        'js/clientSocket.js',
+        //'js/clientSocket.js',
         //'js/smooth-scroll.js'
     ];
     public $jsOptions = ['position' => \yii\web\View::POS_END];
@@ -38,5 +38,6 @@ class AppAsset extends AssetBundle
         'yii\bootstrap\BootstrapPluginAsset',
         '\app\assets\CalendarRdmiAsset',
         '\app\assets\WebRtcAsset',
+        '\app\assets\NodeJsAsset',
     ];
 }
