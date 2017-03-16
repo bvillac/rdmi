@@ -16,12 +16,18 @@ namespace app\assets;
 use yii\web\AssetBundle;
 
 class NodeJsAsset  extends AssetBundle {
-    public $sourcePath = '@nodejs/node_modules';
+    //public $sourcePath = '@nodejs/node_modules';
+    public $sourcePath = '@nodejs';
     public $baseUrl = '@web';
     public $css = [ 
         //'src/css/main.css', 
     ];
-    public $js = [          
+    public $js = [        
+        //'//cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js', 
+        'node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js',
         'public/main.js', 
-    ]; 
+    ];
+//    public $depends = [
+//        'socket.io\socket.io.js',
+//    ];
 }
