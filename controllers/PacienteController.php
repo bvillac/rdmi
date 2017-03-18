@@ -361,9 +361,14 @@ class PacienteController extends Controller
             $name=$data["name"];
             $message=$data["message"];//json_encode
             
-            return Yii::$app->redis->executeCommand('PUBLISH', [
+            /*return Yii::$app->redis->executeCommand('PUBLISH', [
                 'channel' => 'notification',
                 'message' => Json::encode(['name' => $name, 'message' => $message])
+            ]);*/
+            
+            return Yii::$app->redis->executeCommand('PUBLISH', [
+                'channel' => 'main',
+                'message' => json_encode(['name' => $name, 'message' => $message])
             ]);
                     
 
@@ -377,6 +382,9 @@ class PacienteController extends Controller
 //            
 //            return;
         }
+        
+         return $this->render('video');
+        
     }
     
 
