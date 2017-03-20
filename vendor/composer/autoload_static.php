@@ -8,8 +8,6 @@ class ComposerStaticInit58a41864cde071407a524a64a8bf5a31
 {
     public static $files = array (
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
-        'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
     );
 
@@ -17,6 +15,7 @@ class ComposerStaticInit58a41864cde071407a524a64a8bf5a31
         'y' => 
         array (
             'yii\\swiftmailer\\' => 16,
+            'yii\\redis\\' => 10,
             'yii\\jui\\' => 8,
             'yii\\gii\\' => 8,
             'yii\\faker\\' => 10,
@@ -39,27 +38,11 @@ class ComposerStaticInit58a41864cde071407a524a64a8bf5a31
         ),
         'c' => 
         array (
-            'consik\\yii2websocket\\' => 21,
             'cebe\\markdown\\' => 14,
         ),
         'b' => 
         array (
             'branchonline\\lightbox\\' => 22,
-        ),
-        'S' => 
-        array (
-            'Symfony\\Polyfill\\Mbstring\\' => 26,
-            'Symfony\\Component\\Routing\\' => 26,
-            'Symfony\\Component\\HttpFoundation\\' => 33,
-            'Symfony\\Component\\EventDispatcher\\' => 34,
-        ),
-        'R' => 
-        array (
-            'React\\Stream\\' => 13,
-            'React\\Socket\\' => 13,
-            'React\\Promise\\' => 14,
-            'React\\EventLoop\\' => 16,
-            'Ratchet\\' => 8,
         ),
         'F' => 
         array (
@@ -71,6 +54,10 @@ class ComposerStaticInit58a41864cde071407a524a64a8bf5a31
         'yii\\swiftmailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-swiftmailer',
+        ),
+        'yii\\redis\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-redis',
         ),
         'yii\\jui\\' => 
         array (
@@ -124,10 +111,6 @@ class ComposerStaticInit58a41864cde071407a524a64a8bf5a31
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-krajee-base',
         ),
-        'consik\\yii2websocket\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/consik/yii2-websocket',
-        ),
         'cebe\\markdown\\' => 
         array (
             0 => __DIR__ . '/..' . '/cebe/markdown',
@@ -135,42 +118,6 @@ class ComposerStaticInit58a41864cde071407a524a64a8bf5a31
         'branchonline\\lightbox\\' => 
         array (
             0 => __DIR__ . '/..' . '/branchonline/yii2-lightbox/src',
-        ),
-        'Symfony\\Polyfill\\Mbstring\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
-        ),
-        'Symfony\\Component\\Routing\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/routing',
-        ),
-        'Symfony\\Component\\HttpFoundation\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/http-foundation',
-        ),
-        'Symfony\\Component\\EventDispatcher\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/event-dispatcher',
-        ),
-        'React\\Stream\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/react/stream/src',
-        ),
-        'React\\Socket\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/react/socket/src',
-        ),
-        'React\\Promise\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/react/promise/src',
-        ),
-        'React\\EventLoop\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/react/event-loop/src',
-        ),
-        'Ratchet\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/cboden/ratchet/src/Ratchet',
         ),
         'Faker\\' => 
         array (
@@ -198,32 +145,6 @@ class ComposerStaticInit58a41864cde071407a524a64a8bf5a31
             'HTMLPurifier' => 
             array (
                 0 => __DIR__ . '/..' . '/ezyang/htmlpurifier/library',
-            ),
-        ),
-        'G' => 
-        array (
-            'Guzzle\\Stream' => 
-            array (
-                0 => __DIR__ . '/..' . '/guzzle/stream',
-            ),
-            'Guzzle\\Parser' => 
-            array (
-                0 => __DIR__ . '/..' . '/guzzle/parser',
-            ),
-            'Guzzle\\Http' => 
-            array (
-                0 => __DIR__ . '/..' . '/guzzle/http',
-            ),
-            'Guzzle\\Common' => 
-            array (
-                0 => __DIR__ . '/..' . '/guzzle/common',
-            ),
-        ),
-        'E' => 
-        array (
-            'Evenement' => 
-            array (
-                0 => __DIR__ . '/..' . '/evenement/evenement/src',
             ),
         ),
         'D' => 
