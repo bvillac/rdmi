@@ -19,6 +19,7 @@
         "yiisoft/yii2-jui": "*",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
+        "yiisoft/yii2-redis": "~2.x",
         "mpdf/mpdf": "*",
         "phpoffice/phpexcel": "*",
         "bower-asset/font-awesome": "~4.0",
