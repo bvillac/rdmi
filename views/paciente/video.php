@@ -68,6 +68,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div id="notifications" ></div>
+                </div>
 
 
 <!--<input type="text" id="room-id" value="abcdef">

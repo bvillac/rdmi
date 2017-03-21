@@ -357,7 +357,7 @@ class PacienteController extends Controller
         //$formulario = new MceFormularioTemp;
         if (Yii::$app->request->isAjax) {
             $data = Yii::$app->request->post();
-            Utilities::putMessageLogFile($data);
+            //Utilities::putMessageLogFile($data);
             $name=$data["name"];
             $message=$data["message"];//json_encode
             
@@ -367,7 +367,7 @@ class PacienteController extends Controller
             ]);*/
             
             return Yii::$app->redis->executeCommand('PUBLISH', [
-                'channel' => 'main',
+                'channel' => 'notification',
                 'message' => json_encode(['name' => $name, 'message' => $message])
             ]);
                     

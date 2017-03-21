@@ -182,7 +182,7 @@ function sendMessage() {
     arrParams.message = $('#txt_message').val();
     //rrParams.getcentro = true;
     requestHttpAjax(link, arrParams, function (response) {
-        alert('Regreso');
+        //alert(response);
         /*if (response.status == "OK") {
             var data = response.message;
             setComboData(data.centroatencion, "cmb_centro");
