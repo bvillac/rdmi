@@ -19,9 +19,13 @@
 //CETIFICADO CREADO EN EL SERVIDOR 
 //Configuracion para el uso de Certiciado
 var fs = require('fs');
-var ssl_options = {
+/*var ssl_options = {
   key: fs.readFileSync('/etc/pki/tls/private/vs.server.pem'),//para que no pida Clave
   cert: fs.readFileSync('/etc/pki/tls/certs/vs.server.crt')
+};*/
+var ssl_options = {
+  key: fs.readFileSync('/etc/pki/tls/private/prueba.utimpor.pem'),//para que no pida Clave
+  cert: fs.readFileSync('/etc/pki/tls/certs/prueba.utimpor.crt')
 };
 //%%%%%%%%%%%%%%%%%%%%%%
 
