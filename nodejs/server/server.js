@@ -6,10 +6,28 @@
  * https://www.my-yii.com/learn/view-episode/yii-2-real-time-chat-app-with-nodejs-socketio-and-redisio
  * https://codelabs.developers.google.com/codelabs/webrtc-web/#5
  * 
+ * SSLCertificateFile /etc/pki/tls/certs/vs.server.crt
+ * SSLCertificateKeyFile /etc/pki/tls/private/vs.server.pem
+ * 
+ * key: fs.readFileSync('/etc/apache2/ssl/apache.key'),(EJEMPLO)
+ *  cert: fs.readFileSync('/etc/apache2/ssl/apache.crt')(EJEMPLO)
+ * USO DE PUERTOS
+ * 8890 SOCKET
+ * 6379 REDIS
  */
 
+//CETIFICADO CREADO EN EL SERVIDOR 
+//Configuracion para el uso de Certiciado
+var fs = require('fs');
+var ssl_options = {
+  key: fs.readFileSync('/etc/pki/tls/private/vs.server.pem'),//para que no pida Clave
+  cert: fs.readFileSync('/etc/pki/tls/certs/vs.server.crt')
+};
+//%%%%%%%%%%%%%%%%%%%%%%
+
 var app = require('express')();
-var server = require('http').Server(app);
+//var server = require('https').Server(app);//Uso Normal sin Certificado
+var server = require('https').Server(ssl_options,app);//Configuracion con Certiciado
 var io = require('socket.io')(server);
 var redis = require('redis');
 
@@ -37,6 +55,6 @@ io.on('connection', function (socket) {
 });
 
 server.listen(Port, function() {  
-    console.log('Servidor corriendo en http://localhost:'+Port+' Ruta'+__dirname);
+    console.log('Servidor corriendo en https://localhost:'+Port+' Ruta'+__dirname);
     //logs.info('Servidor escuancha',port);
 });
