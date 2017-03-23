@@ -125,6 +125,32 @@ $this->params['breadcrumbs'][] = $this->title;
                 </section>
 
             </div>
+            
+            <div class="col-md-12">
+                <section>
+                    <div id="messgeFile"></div>
+<!--                    <form id="fileInfo">-->
+                    <input type="file" id="fileImage" name="fileImage"/>
+<!--                    </form>-->
+                    <div class="form-group">
+                            <?= Html::textInput('message', null, [
+                                'id' => 'txt_messageFile',
+                                'class' => 'form-control',
+                                'placeholder' => 'Message'
+                            ]) ?>
+                        </div>
+
+                    <div class="col-xs-2">
+                        <div class="form-group">
+                            <p><?= Html::a('<span class="glyphicon glyphicon-floppy-send"></span> ' . Yii::t("accion", "Send"), 'javascript:', ['id' => 'btn_sendFile','class' => 'btn btn-primary btn-block']); ?> </p>
+                        </div>
+                    </div>
+
+                    
+
+                </section>
+            </div>
+            
         </div>
         <!-- /.box-body -->
     </div>

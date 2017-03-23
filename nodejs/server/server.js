@@ -31,14 +31,14 @@ var ssl_options = {
 
 var app = require('express')();
 //var server = require('https').Server(app);//Uso Normal sin Certificado
-var server = require('https').Server(ssl_options,app);//Configuracion con Certiciado
-var io = require('socket.io')(server);
+var https = require('https').Server(ssl_options,app);//Configuracion con Certiciado
+var io = require('socket.io')(https);
 var redis = require('redis');
 
 var Port=8890;//data port cs
-server.listen(Port);
+//https.listen(Port);
 
-io.on('connection', function (socket) {
+io.on('connection', function (socket) {//coneccion para Uso Socket
 
     console.log("new client connected");
     //De forma predeterminada, redis.createClient()utilizará 127.0.0.1y Port 6379
@@ -51,14 +51,22 @@ io.on('connection', function (socket) {
         console.log("New message: " + message + ". In channel: " + channel);
         socket.emit(channel, message);
     });
+    
+    socket.on('user image',function(image){
+        socket.emit('addimage','Imagen Compartida :',image);
+    });
 
     socket.on('disconnect', function() {
         redisClient.quit();
     });
+    
+    
 
 });
 
-server.listen(Port, function() {  
+
+
+https.listen(Port, function() {  
     console.log('Servidor corriendo en https://localhost:'+Port+' Ruta'+__dirname);
     //logs.info('Servidor escuancha',port);
 });

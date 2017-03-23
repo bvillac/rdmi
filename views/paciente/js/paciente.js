@@ -190,8 +190,4 @@ function sendMessage() {
         //$("#message-field").val("");
     }, true);
 }
-
-
-
-
-
+ 
