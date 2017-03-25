@@ -6,8 +6,8 @@
 
 $( document ).ready(function() {
     //Nota: Para el Uso de Certificado agregar HTTPS  y HTTP para hacerlo normal
-    //var socket = io.connect('https://192.168.10.100:8890');
-    var socket = io.connect('https://192.168.10.156:8890');
+    var socket = io.connect('https://192.168.10.100:8890');
+    //var socket = io.connect('https://192.168.10.156:8890');
     //var socket = io.connect('http://localhost:8890');
 
     socket.on('notification', function (data) {
@@ -26,8 +26,6 @@ $( document ).ready(function() {
             $('<p>').append($('<b>').text(msg),'<a target="_blank" href="'+ base64img +'"> ')
             )
     });
-    
-    
 
     $("#fileImage").on('change',function(e){
       var file =e.originalEvent.target.files[0];
