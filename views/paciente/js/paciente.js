@@ -176,6 +176,7 @@ function mostrarDatos(varPer) {
 
 
 function sendMessage() {
+    //Envia el Mensaje al Controlador
     var link = $('#txth_base').val() + "/paciente/sendmessage";
     var arrParams = new Object();
     arrParams.name = $('#txt_name').val();

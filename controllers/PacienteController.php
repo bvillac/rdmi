@@ -359,6 +359,7 @@ class PacienteController extends Controller
             //Utilities::putMessageLogFile($data);
             $name=$data["name"];
             $message=$data["message"];//json_encode
+            //Ejecutar y Enviar la Info al Servidor
             return Yii::$app->redis->executeCommand('PUBLISH', [
                 'channel' => 'notification',
                 'message' => json_encode(['name' => $name, 'message' => $message])
