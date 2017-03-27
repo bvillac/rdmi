@@ -41,6 +41,7 @@ var Port=8890;//data port cs
 io.on('connection', function (socket) {//coneccion para Uso Socket
 
     console.log("new client connected");
+    
     //De forma predeterminada, redis.createClient()utilizará 127.0.0.1y Port 6379
     //var client = redis.createClient(port, host);
     var redisClient = redis.createClient();
@@ -54,6 +55,22 @@ io.on('connection', function (socket) {//coneccion para Uso Socket
     
     socket.on('user image',function(image){
         socket.emit('addimage','Imagen Compartida :',image);
+    });
+    
+    socket.broadcast.emit('byron', 'Another client has just connected!');
+    socket.on('byron', function (message) {
+        console.log('A client is speaking to me! Theyre saying: ' + message);
+        socket.emit('byron', 'bien gracias! como estas');
+    }); 
+    
+    socket.on('little_newbie', function(username) {
+        socket.username = username;
+    });
+    
+    socket.on('notiByron', function(message) {
+        console.log("New message: " + message );
+        socket.emit('notiByron', message);
+        socket.broadcast.emit('notiByron', message);
     });
 
     socket.on('disconnect', function() {

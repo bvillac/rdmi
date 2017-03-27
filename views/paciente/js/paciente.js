@@ -177,12 +177,20 @@ function mostrarDatos(varPer) {
 
 function sendMessage() {
     //Envia el Mensaje al Controlador
-    var link = $('#txth_base').val() + "/paciente/sendmessage";
+    /*var link = $('#txth_base').val() + "/paciente/sendmessage";
     var arrParams = new Object();
     arrParams.name = $('#txt_name').val();
     arrParams.message = $('#txt_message').val();
     requestHttpAjax(link, arrParams, function (response) {
         
-    }, true);
+    }, true);*/
+    
+    var datArray = new Array();
+    var arrParams = new Object();
+    arrParams.name = $('#txt_name').val();//JSON.stringify
+    arrParams.message = $('#txt_message').val();//new Array()
+    datArray[0] = arrParams;
+    
+    socket.emit('notiByron', JSON.stringify(datArray));
+    
 }
- 
