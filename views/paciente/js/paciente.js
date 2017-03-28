@@ -192,6 +192,7 @@ function sendMessage() {
     datArray[0] = arrParams;
     
     //socket.emit('notiByron', JSON.parse(datArray));
-    socket.emit('notiByron', arrParams);
+    socket.emit('notiByron', datArray);
+    //socket.emit('notiByron', arrParams);
     
 }
