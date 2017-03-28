@@ -19,14 +19,15 @@
 //CETIFICADO CREADO EN EL SERVIDOR 
 //Configuracion para el uso de Certiciado
 var fs = require('fs');
-/*var ssl_options = {
+var ssl_options = {
   key: fs.readFileSync('/etc/pki/tls/private/vs.server.pem'),//para que no pida Clave
   cert: fs.readFileSync('/etc/pki/tls/certs/vs.server.crt')
-};*/
-var ssl_options = {
+};
+
+/*var ssl_options = {
   key: fs.readFileSync('/etc/pki/tls/private/prueba.utimpor.pem'),//para que no pida Clave
   cert: fs.readFileSync('/etc/pki/tls/certs/prueba.utimpor.crt')
-};
+};*/
 //%%%%%%%%%%%%%%%%%%%%%%
 
 var app = require('express')();
@@ -68,7 +69,11 @@ io.on('connection', function (socket) {//coneccion para Uso Socket
     });
     
     socket.on('notiByron', function(message) {
-        console.log("New message: " + message );
+        //message=JSON.stringify(message)
+        //console.log(message.toSource());
+        message=JSON.parse(message);
+        //console.log("Entro  " + message[0]['name']);
+        //console.log("New message: " + message );
         socket.emit('notiByron', message);
         socket.broadcast.emit('notiByron', message);
     });

@@ -191,6 +191,7 @@ function sendMessage() {
     arrParams.message = $('#txt_message').val();//new Array()
     datArray[0] = arrParams;
     
-    socket.emit('notiByron', JSON.stringify(datArray));
+    //socket.emit('notiByron', JSON.parse(datArray));
+    socket.emit('notiByron', arrParams);
     
 }

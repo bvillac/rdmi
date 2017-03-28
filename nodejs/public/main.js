@@ -32,13 +32,14 @@
 });*/
 
 
-var socket = io.connect('https://192.168.10.156:8890');
+//var socket = io.connect('https://192.168.10.156:8890');
+var socket = io.connect('https://192.168.10.100:8890');
 
 socket.on('notiByron', function (data) {
     //recibe el Mensaje.    
-    var message = JSON.parse(data);
+    var message = data;//JSON.parse(data);
     console.log(message);
-    $("#notifications").prepend("<p><strong>" + message.name + "</strong>: " + message.message + "</p>");
+    $("#notifications").prepend("<p><strong>" + message[0]['name'] + "</strong>: " + message[0]['message'] + "</p>");
 });
 
 
