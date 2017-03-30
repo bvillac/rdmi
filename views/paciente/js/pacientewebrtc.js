@@ -644,8 +644,36 @@ connection.onopen = function() {
 FIN  */
 
 
-//var socket = io.connect('https://192.168.10.156:8890');
-//var socket = io.connect('https://192.168.10.100:8890');
+// ......................................................
+// ..................RTCMultiConnection Code.............
+// ......................................................
+var connection = new RTCMultiConnection();  
+//connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
+//connection.socketURL = 'https://192.168.10.156:443/';
+connection.socketURL = 'https://192.168.10.156:8890/';
+//connection.socket=socket;
+connection.enableFileSharing = true; // by default, it is "false".
+connection.session = {
+    audio: true,
+    video: true,
+    data : true
+};
+connection.sdpConstraints.mandatory = {
+    OfferToReceiveAudio: true,
+    OfferToReceiveVideo: true
+};
+connection.onstream = function(event) {
+    document.body.appendChild(event.mediaElement);
+};
+connection.onmessage = appendDIV;
+connection.filesContainer = document.getElementById('file-container');
+connection.onopen = function() {
+    document.getElementById('share-file').disabled      = false;
+    document.getElementById('input-text-chat').disabled = false;
+};
+
+
+
 // ......................................................
 // .......................UI Code........................
 // ......................................................
@@ -690,30 +718,3 @@ function appendDIV(event) {
     
     document.getElementById('input-text-chat').focus();
 }
-// ......................................................
-// ..................RTCMultiConnection Code.............
-// ......................................................
-var connection = new RTCMultiConnection();
-//connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
-//connection.socketURL = 'https://192.168.10.156:443/';
-connection.socketURL = 'https://192.168.10.156:8890/';
-//connection.socket=socket;
-connection.enableFileSharing = true; // by default, it is "false".
-connection.session = {
-    audio: true,
-    video: true,
-    data : true
-};
-connection.sdpConstraints.mandatory = {
-    OfferToReceiveAudio: true,
-    OfferToReceiveVideo: true
-};
-connection.onstream = function(event) {
-    document.body.appendChild(event.mediaElement);
-};
-connection.onmessage = appendDIV;
-connection.filesContainer = document.getElementById('file-container');
-connection.onopen = function() {
-    document.getElementById('share-file').disabled      = false;
-    document.getElementById('input-text-chat').disabled = false;
-};

@@ -22,7 +22,7 @@ class WebRtcAsset extends AssetBundle{
         //'src/js/adapter.js', //vendor/webrtc
         //'src/js/common.js',  //vendor/webrtc
         //'src/js/lib/ga.js',  //vendor/webrtc
-        //'dist/RTCMultiConnection.js',
+        'dist/RTCMultiConnection.js',//bower/rtcmulticonnection
         //'dist/RTCMultiConnection.min.js',//bower/rtcmulticonnection
         'v2.2.2/dev/FileBufferReader.js',//bower/rtcmulticonnection        
     ]; 

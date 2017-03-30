@@ -18,17 +18,21 @@
 
 //CETIFICADO CREADO EN EL SERVIDOR 
 //Configuracion para el uso de Certiciado
-var fs = require('fs');
 
-var ssl_options = {
+//#############################################################
+//#############################################################
+//#############################################################
+//var fs = require('fs');
+
+/*var ssl_options = {
   key: fs.readFileSync('/etc/pki/tls/private/vs.server.pem'),//para que no pida Clave
   cert: fs.readFileSync('/etc/pki/tls/certs/vs.server.crt')
 };
 
-/*var ssl_options = {
+var ssl_options = {
   key: fs.readFileSync('/etc/pki/tls/private/prueba.utimpor.pem'),//para que no pida Clave
   cert: fs.readFileSync('/etc/pki/tls/certs/prueba.utimpor.crt')
-};*/
+};
 
 //%%%%%%%%%%%%%%%%%%%%%%
 
@@ -38,22 +42,16 @@ var https = require('https').Server(ssl_options,app);//Configuracion con Certici
 var io = require('socket.io')(https);
 var redis = require('redis');
 
-//var signaling = require('signaling');
+
 
 var Port=8890;//data port cs 
 //var Port=9001;
+//var Port=443;
 //https.listen(Port);
 
 https.listen(Port, function() {  
     console.log('Servidor corriendo en https://localhost:'+Port+' Ruta'+__dirname);
-    //logs.info('Servidor escuancha',port);
 });
-//var signalingServer = signaling(https);
-
-//require('signaling_server')(https);
-require('rtcmulticonnection')(https);
-//require('/rtcmulticonnection/Signaling-Server.js')(https);
-
 
 
 io.on('connection', function (socket) {//coneccion para Uso Socket
@@ -101,4 +99,32 @@ io.on('connection', function (socket) {//coneccion para Uso Socket
     });
     
    
+});*/
+
+//#############################################################
+//#############################################################
+//#############################################################
+
+var fs = require('fs');
+var express = require('express');
+var expressCallback = express();
+
+var options = {
+    key: fs.readFileSync('/etc/pki/tls/private/prueba.utimpor.pem'),//para que no pida Clave
+    cert: fs.readFileSync('/etc/pki/tls/certs/prueba.utimpor.crt')
+};
+
+var app = require('https').createServer(options, expressCallback),
+    io = require('socket.io').listen(app);
+
+io.sockets.on('connection', function (socket) {
+    socket.on('message', function (message) {
+        socket.broadcast.emit('message', message);
+    });
 });
+var Port=8543;
+//app.listen(8543);
+app.listen(Port, function() {  
+    console.log('Servidor corriendo en https://localhost:'+Port+' Ruta'+__dirname);
+});
+
