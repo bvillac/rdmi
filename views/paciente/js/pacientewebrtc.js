@@ -10,8 +10,9 @@
  * yum install npm
  */
 
-/*'use strict';
+'use strict';
 
+/*
 navigator.getUserMedia = navigator.getUserMedia ||
     navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
@@ -643,7 +644,8 @@ connection.onopen = function() {
 FIN  */
 
 
-var socket = io.connect('https://192.168.10.156:8890');
+//var socket = io.connect('https://192.168.10.156:8890');
+//var socket = io.connect('https://192.168.10.100:8890');
 // ......................................................
 // .......................UI Code........................
 // ......................................................
@@ -694,8 +696,8 @@ function appendDIV(event) {
 var connection = new RTCMultiConnection();
 //connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
 //connection.socketURL = 'https://192.168.10.156:443/';
-//connection.socketURL = 'https://192.168.10.156:8890';
-connection.socket=socket;
+connection.socketURL = 'https://192.168.10.156:8890/';
+//connection.socket=socket;
 connection.enableFileSharing = true; // by default, it is "false".
 connection.session = {
     audio: true,

@@ -25,6 +25,8 @@ class NodeJsAsset  extends AssetBundle {
     public $js = [        
         //'//cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js', 
         'node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js',
+        'node_modules/rtcmulticonnection/dist/RTCMultiConnection.min.js',
+        'node_modules/rtcmulticonnection/dist/RTCMultiConnection.min.js',
         'public/main.js', 
     ];
 //    public $depends = [

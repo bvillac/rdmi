@@ -20,15 +20,15 @@
 //Configuracion para el uso de Certiciado
 var fs = require('fs');
 
-/*var ssl_options = {
+var ssl_options = {
   key: fs.readFileSync('/etc/pki/tls/private/vs.server.pem'),//para que no pida Clave
   cert: fs.readFileSync('/etc/pki/tls/certs/vs.server.crt')
-};*/
+};
 
-var ssl_options = {
+/*var ssl_options = {
   key: fs.readFileSync('/etc/pki/tls/private/prueba.utimpor.pem'),//para que no pida Clave
   cert: fs.readFileSync('/etc/pki/tls/certs/prueba.utimpor.crt')
-};
+};*/
 
 //%%%%%%%%%%%%%%%%%%%%%%
 
@@ -40,8 +40,8 @@ var redis = require('redis');
 
 //var signaling = require('signaling');
 
-//var Port=8890;//data port cs 
-var Port=9001;
+var Port=8890;//data port cs 
+//var Port=9001;
 //https.listen(Port);
 
 https.listen(Port, function() {  
@@ -52,6 +52,7 @@ https.listen(Port, function() {
 
 //require('signaling_server')(https);
 require('rtcmulticonnection')(https);
+//require('/rtcmulticonnection/Signaling-Server.js')(https);
 
 
 
