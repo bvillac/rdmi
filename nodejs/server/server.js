@@ -20,15 +20,15 @@
 //Configuracion para el uso de Certiciado
 var fs = require('fs');
 
-var ssl_options = {
+/*var ssl_options = {
   key: fs.readFileSync('/etc/pki/tls/private/vs.server.pem'),//para que no pida Clave
   cert: fs.readFileSync('/etc/pki/tls/certs/vs.server.crt')
-};
+};*/
 
-/*var ssl_options = {
+var ssl_options = {
   key: fs.readFileSync('/etc/pki/tls/private/prueba.utimpor.pem'),//para que no pida Clave
   cert: fs.readFileSync('/etc/pki/tls/certs/prueba.utimpor.crt')
-};*/
+};
 
 //%%%%%%%%%%%%%%%%%%%%%%
 
@@ -38,8 +38,22 @@ var https = require('https').Server(ssl_options,app);//Configuracion con Certici
 var io = require('socket.io')(https);
 var redis = require('redis');
 
-var Port=8890;//data port cs
+//var signaling = require('signaling');
+
+//var Port=8890;//data port cs 
+var Port=9001;
 //https.listen(Port);
+
+https.listen(Port, function() {  
+    console.log('Servidor corriendo en https://localhost:'+Port+' Ruta'+__dirname);
+    //logs.info('Servidor escuancha',port);
+});
+//var signalingServer = signaling(https);
+
+//require('signaling_server')(https);
+require('rtcmulticonnection')(https);
+
+
 
 io.on('connection', function (socket) {//coneccion para Uso Socket
 
@@ -74,10 +88,8 @@ io.on('connection', function (socket) {//coneccion para Uso Socket
         console.log(message);//Como llega al servidor
         //message=JSON.stringify(message)
         //console.log(message.toSource());
-        //message=JSON.parse(message);//Vlido
-        
-        //console.log("Entro  " + message[0]['name']);
-        
+        //message=JSON.parse(message);//Vlido        
+        //console.log("Entro  " + message[0]['name']);        
         //console.log("New message: " + message );
         socket.emit('notiByron', message);
         socket.broadcast.emit('notiByron', message);
@@ -87,13 +99,5 @@ io.on('connection', function (socket) {//coneccion para Uso Socket
         redisClient.quit();
     });
     
-    
-
-});
-
-
-
-https.listen(Port, function() {  
-    console.log('Servidor corriendo en https://localhost:'+Port+' Ruta'+__dirname);
-    //logs.info('Servidor escuancha',port);
+   
 });

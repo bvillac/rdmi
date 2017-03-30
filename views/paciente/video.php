@@ -151,6 +151,24 @@ $this->params['breadcrumbs'][] = $this->title;
                 </section>
             </div>
             
+            <div class="col-md-12">
+                <h1><a>Audio+Video+TextChat+FileSharing</a></h1>
+                <hr>
+                <input type="text" id="room-id" value="abcdef">
+                <button id="open-room">Open Room</button>
+                <button id="join-room">Join Room</button>
+                <button id="open-or-join-room">Auto Open Or Join Room</button>
+                <hr>
+                <div id="chat-container">
+                    <input type="text" id="input-text-chat" placeholder="Enter Text Chat" disabled>
+                    <button id="share-file" disabled>Share File</button>
+                    <br>
+                    <div id="file-container"></div>
+                    <div class="chat-output"></div>
+                </div>
+                
+            </div>
+            
         </div>
         <!-- /.box-body -->
     </div>
