@@ -4,6 +4,8 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
 
+use app\assets\WebRtcAsset;
+
 //namespace app\commands;
 //use consik\yii2websocket\WebSocketServer;
 //use yii\console\Controller;
@@ -158,6 +160,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 <button id="open-room">Open Room</button>
                 <button id="join-room">Join Room</button>
                 <button id="open-or-join-room">Auto Open Or Join Room</button>
+                <br><br>
+                <button id="btn-leave-room" disabled>Leave /or close the room</button>
+
+<!--                <div id="room-urls" style="text-align: center;display: none;background: #F1EDED;margin: 15px -10px;border: 1px solid rgb(189, 189, 189);border-left: 0;border-right: 0;"></div>-->
                 <hr>
                 <div id="chat-container">
                     <input type="text" id="input-text-chat" placeholder="Enter Text Chat" disabled>
