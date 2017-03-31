@@ -12,7 +12,8 @@ use yii\web\AssetBundle;
 class WebRtcAsset extends AssetBundle{
     //public $sourcePath = '@vendor/webrtc';
     //public $sourcePath = '@bower/webrtc-adapter';
-    public $sourcePath = '@bower/rtcmulticonnection';
+    //public $sourcePath = '@bower/rtcmulticonnection';
+    public $sourcePath = '@vendor/bower-asset/rtcmulticonnection';
     public $baseUrl = '@web';
     public $css = [ 
         //'src/css/main.css', //vendor/webrtc

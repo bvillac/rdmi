@@ -36,7 +36,7 @@ class AppAsset extends AssetBundle
         'yii\bootstrap\BootstrapAsset',
         'yii\bootstrap\BootstrapPluginAsset',
         '\app\assets\CalendarRdmiAsset',
-        //'\app\assets\WebRtcAsset',
+        '\app\assets\WebRtcAsset',
         '\app\assets\NodeJsAsset',
     ];
 }

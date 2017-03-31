@@ -24,8 +24,8 @@ class NodeJsAsset  extends AssetBundle {
     ];
     public $js = [        
         //'//cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js', 
-        'node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js',
-        'node_modules/rtcmulticonnection-v3/dist/RTCMultiConnection.js',
+        //'node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js',
+        //'node_modules/rtcmulticonnection-v3/dist/RTCMultiConnection.js',
         //'node_modules/rtcmulticonnection-v3/dist/RTCMultiConnection.min.js',
         //'//cdn.webrtc-experiment.com/RTCMultiConnection.js',
         //'//cdn.webrtc-experiment.com/socket.io.js',
