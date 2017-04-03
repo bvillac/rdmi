@@ -75,20 +75,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
 
 
-<!--<input type="text" id="room-id" value="abcdef">
-<button id="open-room">Open Room</button>
-<button id="join-room">Join Room</button>
-<button id="open-or-join-room">Auto Open Or Join Room</button>
-<hr>
-<div id="chat-container">
-    <input type="text" id="input-text-chat" placeholder="Enter Text Chat" disabled>
-    <button id="share-file" disabled>Share File</button>
-    <br>
-    <div id="file-container"></div>
-    <div class="chat-output"></div>
-</div>-->
-
-
 
             </div>
         </div>
@@ -154,24 +140,29 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
             
             <div class="col-md-12">
-                <h1><a>Audio+Video+TextChat+FileSharing</a></h1>
-                <hr>
-                <input type="text" id="room-id" value="abcdef">
-                <button id="open-room">Open Room</button>
-                <button id="join-room">Join Room</button>
-                <button id="open-or-join-room">Auto Open Or Join Room</button>
-                <br><br>
-                <button id="btn-leave-room" disabled>Leave /or close the room</button>
+                <section class="experiment">
+                    <div class="make-center">
+                        <input type="text" id="room-id" value="abcdef">
+                        <button id="open-room">Open Room</button>
+                        <button id="join-room">Join Room</button>
+                        <button id="open-or-join-room">Auto Open Or Join Room</button>
 
-<!--                <div id="room-urls" style="text-align: center;display: none;background: #F1EDED;margin: 15px -10px;border: 1px solid rgb(189, 189, 189);border-left: 0;border-right: 0;"></div>-->
-                <hr>
-                <div id="chat-container">
-                    <input type="text" id="input-text-chat" placeholder="Enter Text Chat" disabled>
-                    <button id="share-file" disabled>Share File</button>
-                    <br>
-                    <div id="file-container"></div>
-                    <div class="chat-output"></div>
-                </div>
+                        <br><br>
+                        <input type="text" id="input-text-chat" placeholder="Enter Text Chat" disabled>
+                        <button id="share-file" disabled>Share File</button>
+                        <br><br>
+                        <button id="btn-leave-room" disabled>Leave /or close the room</button>
+
+                        <div id="room-urls" style="text-align: center;display: none;background: #F1EDED;margin: 15px -10px;border: 1px solid rgb(189, 189, 189);border-left: 0;border-right: 0;"></div>
+                    </div>
+
+                    <div id="chat-container">
+                        <div id="file-container"></div>
+                        <div class="chat-output"></div>
+                    </div>
+
+                    <div id="videos-container"></div>
+                </section>
                 
             </div>
             
