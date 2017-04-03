@@ -4,7 +4,7 @@
   "description": "ProyectoWebRtc",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon /var/www/rdmi/html/rdmi/nodejs/node_modules/rtcmulticonnection-v3/server.js"
+    "start": "nodemon /var/www/rdmi/html/rdmi/nodejs/server/server.js"
   },
   "author": "Byron Villacreses",
   "license": "GLP",
