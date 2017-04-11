@@ -70,7 +70,7 @@
             var connection = new RTCMultiConnection();
             // by default, socket.io server is assumed to be deployed on your own URL
             //connection.socketURL = '/';
-            connection.socketURL = 'https://192.168.10.156:8890/';
+            connection.socketURL = 'https://192.168.10.156:9001/';
             //connection.socketURL = 'https://192.168.10.100:9001/';
             // comment-out below line if you do not have your own socket.io server
             // connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
