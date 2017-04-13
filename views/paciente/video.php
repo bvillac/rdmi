@@ -34,6 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <div class="col-md-12">
                 <section class="experiment">
+                    <h1>Data ChAT +VIDEO</h1>
                     <div class="make-center">
                         <input type="text" id="room-id" value="abcdef">
                         <button id="open-room">Open Room</button>

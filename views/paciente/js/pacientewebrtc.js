@@ -65,13 +65,8 @@ document.getElementById('input-text-chat').onkeyup = function(e) {
 };*/
 
 var chatContainer = document.querySelector('.chat-output');
-function appendDIV(event) {
-    var div = document.createElement('div');
-    div.innerHTML = event.data || event;
-    chatContainer.insertBefore(div, chatContainer.firstChild);
-    div.tabIndex = 0;
-    div.focus();
-    document.getElementById('input-text-chat').focus();
-}
+
+//document.getElementById('room-id').value = roomid;
+
 
  

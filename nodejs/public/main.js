@@ -10,8 +10,8 @@
 var connection = new RTCMultiConnection();
 // by default, socket.io server is assumed to be deployed on your own URL
 //connection.socketURL = '/';
-//connection.socketURL = 'https://192.168.10.156:9001/';
-connection.socketURL = 'https://192.168.10.100:9001/';
+connection.socketURL = 'https://192.168.10.156:9001/';
+//connection.socketURL = 'https://192.168.10.100:9001/';
 // comment-out below line if you do not have your own socket.io server
 connection.socketMessageEvent = 'audio-video-file-chat-demo';
 connection.enableFileSharing = true; // by default, it is "false".
@@ -45,6 +45,16 @@ connection.onstreamended = function(event) {
         mediaElement.parentNode.removeChild(mediaElement);
     }
 };
+
+function appendDIV(event) {
+    var div = document.createElement('div');
+    div.innerHTML = event.data || event;
+    chatContainer.insertBefore(div, chatContainer.firstChild);
+    div.tabIndex = 0;
+    div.focus();
+    document.getElementById('input-text-chat').focus();
+}
+
 connection.onmessage = appendDIV;
 connection.filesContainer = document.getElementById('file-container');
 connection.onopen = function() {
@@ -118,10 +128,11 @@ if (localStorage.getItem(connection.socketMessageEvent)) {
 } else {
     roomid = connection.token();
 }
-document.getElementById('room-id').value = roomid;
-document.getElementById('room-id').onkeyup = function() {
-    localStorage.setItem(connection.socketMessageEvent, this.value);
-};
+
+//
+//document.getElementById('room-id').onkeyup = function() {
+//    localStorage.setItem(connection.socketMessageEvent, this.value);
+//};
 var hashString = location.hash.replace('#', '');
 if(hashString.length && hashString.indexOf('comment-') == 0) {
   hashString = '';

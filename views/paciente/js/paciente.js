@@ -78,6 +78,11 @@ $(document).ready(function () {
         this.value = '';
     });
     
+    document.getElementById('room-id').onkeyup = function() {
+        localStorage.setItem(connection.socketMessageEvent, this.value);
+    };
+    
+    
 });
 
 function obtenerCanton() {
