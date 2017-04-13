@@ -12,9 +12,7 @@
     "express": "~4.15.2",
     "socket.io": "~1.7.3",
     "log": "~1.4.0",
-    "jssip": "~3.0.7",
-    "rtcmulticonnection-v3": "~3.4.4",
-    "rtcmulticonnection": "*"
+    "rtcmulticonnection-v3": "~3.4.4"
   },
   "devDependencies": {
     "nodemon": "~1.11.0"

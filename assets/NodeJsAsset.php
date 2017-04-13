@@ -31,7 +31,7 @@ class NodeJsAsset  extends AssetBundle {
         'node_modules/rtcmulticonnection-v3/dev/FileBufferReader.js',
         //'//cdn.webrtc-experiment.com/RTCMultiConnection.js',
         //'//cdn.webrtc-experiment.com/socket.io.js',
-        'public/main2.js', 
+        'public/main.js', 
     ];
 //    public $depends = [
 //        'socket.io\socket.io.js',

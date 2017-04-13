@@ -7,6 +7,7 @@
  * SSLCertificateKeyFile /etc/pki/tls/private/vs.server.pem
 
  * USO DE PUERTOS
+ * 9001 SOCKET
  * 8890 SOCKET
  * 6379 REDIS
  */

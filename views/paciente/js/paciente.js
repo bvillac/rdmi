@@ -28,6 +28,56 @@ $(document).ready(function () {
         obtenerMedicoEspecialidad();
     });
     
+    //WEBRTC
+    $('#open-room').click(function () {
+        disableInputButtons();
+        connection.open(document.getElementById('room-id').value, function () {
+            showRoomURL(connection.sessionid);
+        });
+    });
+    $('#join-room').click(function () {
+        disableInputButtons();
+        connection.join(document.getElementById('room-id').value);
+    });
+    $('#open-or-join-room').click(function () {
+        disableInputButtons();
+        connection.openOrJoin(document.getElementById('room-id').value, function (isRoomExists, roomid) {
+            if (!isRoomExists) {
+                showRoomURL(roomid);
+            }
+        });
+    });
+    $('#btn-leave-room').click(function () {
+        this.disabled = true;
+        if (connection.isInitiator) {
+            // use this method if you did NOT set "autoCloseEntireSession===true"
+            // for more info: https://github.com/muaz-khan/RTCMultiConnection#closeentiresession
+            connection.closeEntireSession(function () {
+                document.querySelector('h1').innerHTML = 'Entire session has been closed.';
+            });
+        } else {
+            connection.leave();
+        }
+    });
+    
+    $('#share-file').click(function () {
+        var fileSelector = new FileSelector();
+        fileSelector.selectSingleFile(function (file) {
+            connection.send(file);
+        });
+    });
+    $('#input-text-chat').click(function () {
+        if (e.keyCode != 13)
+            return;
+        // removing trailing/leading whitespace
+        this.value = this.value.replace(/^\s+|\s+$/g, '');
+        if (!this.value.length)
+            return;
+        connection.send(this.value);
+        appendDIV(this.value);
+        this.value = '';
+    });
+    
 });
 
 function obtenerCanton() {
@@ -175,7 +225,7 @@ function mostrarDatos(varPer) {
 
 
 
-function sendMessage() {
+//function sendMessage() {
     //Envia el Mensaje al Controlador
     /*var link = $('#txth_base').val() + "/paciente/sendmessage";
     var arrParams = new Object();
@@ -183,7 +233,7 @@ function sendMessage() {
     arrParams.message = $('#txt_message').val();
     requestHttpAjax(link, arrParams, function (response) {
         
-    }, true);*/
+    }, true);
     
     var datArray = new Array();
     var arrParams = new Object();
@@ -195,4 +245,4 @@ function sendMessage() {
     socket.emit('notiByron', datArray);
     //socket.emit('notiByron', arrParams);
     
-}
+}*/
