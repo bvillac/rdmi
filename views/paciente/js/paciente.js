@@ -31,17 +31,20 @@ $(document).ready(function () {
     //WEBRTC
     $('#open-room').click(function () {
         disableInputButtons();
-        connection.open(document.getElementById('room-id').value, function () {
+        //connection.open(document.getElementById('room-id').value, function () {
+        connection.open($('#txth_userweb').val(), function () {
             showRoomURL(connection.sessionid);
         });
     });
     $('#join-room').click(function () {
         disableInputButtons();
-        connection.join(document.getElementById('room-id').value);
+        //connection.join(document.getElementById('room-id').value);
+        connection.join($('#txth_userweb').val());
     });
     $('#open-or-join-room').click(function () {
         disableInputButtons();
-        connection.openOrJoin(document.getElementById('room-id').value, function (isRoomExists, roomid) {
+        //connection.openOrJoin(document.getElementById('room-id').value, function (isRoomExists, roomid) {
+        connection.openOrJoin($('#txth_userweb').val(), function (isRoomExists, roomid) {
             if (!isRoomExists) {
                 showRoomURL(roomid);
             }
@@ -53,7 +56,7 @@ $(document).ready(function () {
             // use this method if you did NOT set "autoCloseEntireSession===true"
             // for more info: https://github.com/muaz-khan/RTCMultiConnection#closeentiresession
             connection.closeEntireSession(function () {
-                document.querySelector('h1').innerHTML = 'Entire session has been closed.';
+                document.querySelector('h1').innerHTML = 'Toda la sesión ha sido cerrada.';
             });
         } else {
             connection.leave();
@@ -66,7 +69,7 @@ $(document).ready(function () {
             connection.send(file);
         });
     });
-    $('#input-text-chat').click(function () {
+    $('#input-text-chat').keyup(function (e) {
         if (e.keyCode != 13)
             return;
         // removing trailing/leading whitespace
@@ -75,12 +78,12 @@ $(document).ready(function () {
             return;
         connection.send(this.value);
         appendDIV(this.value);
-        this.value = '';
+        this.value = '';//Limpiar la Caja de Texto
     });
     
-    document.getElementById('room-id').onkeyup = function() {
-        localStorage.setItem(connection.socketMessageEvent, this.value);
-    };
+//    document.getElementById('room-id').onkeyup = function() {
+//        localStorage.setItem(connection.socketMessageEvent, this.value);
+//    };
     
     
 });

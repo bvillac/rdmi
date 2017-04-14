@@ -20,7 +20,7 @@ class NodeJsAsset  extends AssetBundle {
     public $sourcePath = '@nodejs';
     public $baseUrl = '@web';
     public $css = [ 
-        //'src/css/main.css', 
+        //'css/mainVideo.css', 
     ];
     public $js = [        
         //'//cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js', 

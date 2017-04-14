@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 // ......................................................
 // ..................RTCMultiConnection Code.............
 // ......................................................
 var connection = new RTCMultiConnection();
 // by default, socket.io server is assumed to be deployed on your own URL
 //connection.socketURL = '/';
-connection.socketURL = 'https://192.168.10.156:9001/';
-//connection.socketURL = 'https://192.168.10.100:9001/';
+//connection.socketURL = 'https://192.168.10.156:9001/';
+connection.socketURL = 'https://192.168.10.100:9001/';
 // comment-out below line if you do not have your own socket.io server
 connection.socketMessageEvent = 'audio-video-file-chat-demo';
 connection.enableFileSharing = true; // by default, it is "false".
@@ -47,6 +46,7 @@ connection.onstreamended = function(event) {
 };
 
 function appendDIV(event) {
+    console.log(event);
     var div = document.createElement('div');
     div.innerHTML = event.data || event;
     chatContainer.insertBefore(div, chatContainer.firstChild);
@@ -57,34 +57,35 @@ function appendDIV(event) {
 
 connection.onmessage = appendDIV;
 connection.filesContainer = document.getElementById('file-container');
+
 connection.onopen = function() {
     document.getElementById('share-file').disabled = false;
     document.getElementById('input-text-chat').disabled = false;
     document.getElementById('btn-leave-room').disabled = false;
-    document.querySelector('h1').innerHTML = 'You are connected with: ' + connection.getAllParticipants().join(', ');
+    document.querySelector('h1').innerHTML = 'Estás conectado con: ' + connection.getAllParticipants().join(', ');
 };
 connection.onclose = function() {
     if(connection.getAllParticipants().length) {
-        document.querySelector('h1').innerHTML = 'You are still connected with: ' + connection.getAllParticipants().join(', ');
+        document.querySelector('h1').innerHTML = 'Todavía estás conectado con: ' + connection.getAllParticipants().join(', ');
     }
     else {
-        document.querySelector('h1').innerHTML = 'Seems session has been closed or all participants left.';
+        document.querySelector('h1').innerHTML = 'Parece que la sesión ha sido cerrada o todos los participantes se han ido.';
     }
 };
 connection.onEntireSessionClosed = function(event) {
     document.getElementById('share-file').disabled = true;
     document.getElementById('input-text-chat').disabled = true;
     document.getElementById('btn-leave-room').disabled = true;
-    document.getElementById('open-or-join-room').disabled = false;
+    //document.getElementById('open-or-join-room').disabled = false;
     document.getElementById('open-room').disabled = false;
     document.getElementById('join-room').disabled = false;
-    document.getElementById('room-id').disabled = false;
+    //document.getElementById('room-id').disabled = false;
     connection.attachStreams.forEach(function(stream) {
         stream.stop();
     });
     // don't display alert for moderator
     if(connection.userid === event.userid) return;
-    document.querySelector('h1').innerHTML = 'Entire session has been closed by the moderator: ' + event.userid;
+    document.querySelector('h1').innerHTML = 'Toda la sesión ha sido cerrada por el moderador: ' + event.userid;
 };
 connection.onUserIdAlreadyTaken = function(useridAlreadyTaken, yourNewUserId) {
     // seems room is already opened
@@ -100,7 +101,7 @@ function disableInputButtons() {
 // ......................Handling Room-ID................
 // ......................................................
 function showRoomURL(roomid) {
-    console.log('ingresa mostrar video');
+    //console.log('ingresa mostrar video');
     var roomHashURL = '#' + roomid;
     var roomQueryStringURL = '?roomid=' + roomid;
     var html = '<h2>Unique URL for your room:</h2><br>';
@@ -129,10 +130,7 @@ if (localStorage.getItem(connection.socketMessageEvent)) {
     roomid = connection.token();
 }
 
-//
-//document.getElementById('room-id').onkeyup = function() {
-//    localStorage.setItem(connection.socketMessageEvent, this.value);
-//};
+
 var hashString = location.hash.replace('#', '');
 if(hashString.length && hashString.indexOf('comment-') == 0) {
   hashString = '';
@@ -142,7 +140,7 @@ if(!roomid && hashString.length) {
     roomid = hashString;
 }
 if(roomid && roomid.length) {
-    document.getElementById('room-id').value = roomid;
+    //document.getElementById('room-id').value = roomid;
     localStorage.setItem(connection.socketMessageEvent, roomid);
     // auto-join-room
     (function reCheckRoomPresence() {

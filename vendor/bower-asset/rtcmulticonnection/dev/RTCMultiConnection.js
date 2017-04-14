@@ -760,6 +760,7 @@ function RTCMultiConnection(roomid, forceOptions) {
     };
 
     connection.send = function(data, remoteUserId) {
+        console.log('Usuario remoto : '+remoteUserId);
         connection.peers.send(data, remoteUserId);
     };
 
