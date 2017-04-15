@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <!--<input type="text" id="room-id" value="abcdef">-->
                         <button id="open-room">Iniciar Video</button>
                         <button id="join-room">Entrar Video</button>
-                        <!--<button id="open-or-join-room">Auto Open Or Join Room</button>-->
+                        <button id="open-or-join-room">Auto Open Or Join Room</button>
 
                         <br><br>
                         <!--<input type="text" id="input-text-chat" placeholder="Escribir Mensaje" disabled>-->
@@ -83,7 +83,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <!-- /.box-header -->
         <div class="box-body">
             <!-- Conversations are loaded here -->
-            <div class="direct-chat-messages">
+            <div id="direct-chat-messages" class="direct-chat-messages">
                 
                 <!-- Message. Default to the left -->
                 <div class="direct-chat-msg">

@@ -71,7 +71,7 @@ class Cache extends \yii\caching\Cache
     /**
      * Initializes the redis Cache component.
      * This method will initialize the [[redis]] property to make sure it refers to a valid redis connection.
-     * @throws InvalidConfigException if [[redis]] is invalid.
+     * @throws \yii\base\InvalidConfigException if [[redis]] is invalid.
      */
     public function init()
     {
@@ -87,7 +87,7 @@ class Cache extends \yii\caching\Cache
      * may return false while exists returns true.
      * @param mixed $key a key identifying the cached value. This can be a simple string or
      * a complex data structure consisting of factors representing the key.
-     * @return boolean true if a value exists in cache, false if the value is not in the cache or expired.
+     * @return bool true if a value exists in cache, false if the value is not in the cache or expired.
      */
     public function exists($key)
     {

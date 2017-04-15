@@ -51,4 +51,6 @@ use yii\helpers\Url;
 <?= Html::hiddenInput('txth_controller', @Yii::$app->controller->id,["id"=>"txth_obmodule"])  ?>
 <?= Html::hiddenInput('txth_accion', @Yii::$app->controller->action->id,["id"=>"txth_accion"])  ?>
 <?= Html::hiddenInput('txth_theme', @Yii::$app->session->get("PB_yii_theme"),["id"=>"txth_theme"])  ?>
-<?= Html::hiddenInput('txth_userweb', @Yii::$app->session->get("PB_isuser"),["id"=>"txth_userweb"])  ?>
+<?= Html::hiddenInput('txth_userweb', @Yii::$app->session->get("PB_iduser"),["id"=>"txth_userweb"])  ?>
+<?= Html::hiddenInput('txth_nombres', @Yii::$app->session->get("PB_nombres"),["id"=>"txth_nombres"])  ?>
+<?= Html::hiddenInput('txth_room', 1,["id"=>"txth_room"])  ?>

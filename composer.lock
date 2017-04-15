@@ -4,7 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "41803cca726be8be7f05b0086ed63e53",
+    "hash": "59e0c011ee410cce20e0c161b189f794",
+    "content-hash": "2577fd3addef5efb925b9527cb57bb45",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -348,52 +349,6 @@
             }
         },
         {
-            "name": "bower-asset/rtcmulticonnection",
-            "version": "3.4.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/muaz-khan/RTCMultiConnection.git",
-                "reference": "30068fda75b728693847bcc1627bd03ae9926fe1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/muaz-khan/RTCMultiConnection/zipball/30068fda75b728693847bcc1627bd03ae9926fe1",
-                "reference": "30068fda75b728693847bcc1627bd03ae9926fe1",
-                "shasum": ""
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": "RTCMultiConnection.js",
-                "bower-asset-ignore": [
-                    "**/.*",
-                    "node_modules",
-                    "test",
-                    "tests"
-                ]
-            },
-            "description": "RTCMultiConnection is a WebRTC JavaScript wrapper library runs top over RTCPeerConnection API to provide multi-session establishment scenarios.",
-            "keywords": [
-                "android",
-                "chrome",
-                "firefox",
-                "ie",
-                "internet-explorer",
-                "javascript",
-                "javascript-library",
-                "library",
-                "muaz",
-                "muaz-khan",
-                "multirtc",
-                "opera",
-                "rtcmulticonnection",
-                "rtcmulticonnection.js",
-                "rtcweb",
-                "webrtc",
-                "webrtc-experiment",
-                "webrtc-library"
-            ]
-        },
-        {
             "name": "bower-asset/toastr",
             "version": "2.1.3",
             "source": {
@@ -419,44 +374,6 @@
             },
             "license": [
                 "MIT"
-            ]
-        },
-        {
-            "name": "bower-asset/webrtc-adapter",
-            "version": "v3.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/webrtc/adapter.git",
-                "reference": "e64c5faac57f9bcb2380a069159c5efe63eb5ef8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/webrtc/adapter/zipball/e64c5faac57f9bcb2380a069159c5efe63eb5ef8",
-                "reference": "e64c5faac57f9bcb2380a069159c5efe63eb5ef8",
-                "shasum": ""
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": "./release/adapter.js",
-                "bower-asset-ignore": [
-                    "test/*"
-                ]
-            },
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "A shim to insulate apps from WebRTC spec changes and browser prefix differences",
-            "keywords": [
-                "Adapter",
-                "Chrome",
-                "Chromium",
-                "Edge",
-                "Firefox",
-                "PeerConnection",
-                "RTCPeerConnection",
-                "Shim",
-                "WebRTC",
-                "getUserMedia"
             ]
         },
         {
@@ -532,7 +449,7 @@
                 "module",
                 "yii2"
             ],
-            "time": "2016-10-27T15:13:14+00:00"
+            "time": "2016-10-27 15:13:14"
         },
         {
             "name": "cebe/markdown",
@@ -592,7 +509,7 @@
                 "markdown",
                 "markdown-extra"
             ],
-            "time": "2016-09-14T20:40:20+00:00"
+            "time": "2016-09-14 20:40:20"
         },
         {
             "name": "cebe/yii2-gravatar",
@@ -635,7 +552,7 @@
                 "gravatar",
                 "yii"
             ],
-            "time": "2013-12-10T17:49:58+00:00"
+            "time": "2013-12-10 17:49:58"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -682,20 +599,20 @@
             "keywords": [
                 "html"
             ],
-            "time": "2017-03-13T06:30:53+00:00"
+            "time": "2017-03-13 06:30:53"
         },
         {
             "name": "kartik-v/bootstrap-fileinput",
-            "version": "v4.3.8",
+            "version": "v4.3.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/bootstrap-fileinput.git",
-                "reference": "219447a8c21b1c82e534dc2e6a73386933fc9c5e"
+                "reference": "4aec9b00de25b4b3cca1f11ffbaa823c67c33590"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/219447a8c21b1c82e534dc2e6a73386933fc9c5e",
-                "reference": "219447a8c21b1c82e534dc2e6a73386933fc9c5e",
+                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/4aec9b00de25b4b3cca1f11ffbaa823c67c33590",
+                "reference": "4aec9b00de25b4b3cca1f11ffbaa823c67c33590",
                 "shasum": ""
             },
             "type": "library",
@@ -735,7 +652,7 @@
                 "progress",
                 "upload"
             ],
-            "time": "2017-02-21T06:45:16+00:00"
+            "time": "2017-04-02 18:38:08"
         },
         {
             "name": "kartik-v/yii2-krajee-base",
@@ -786,7 +703,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2017-02-22T05:58:53+00:00"
+            "time": "2017-02-22 05:58:53"
         },
         {
             "name": "kartik-v/yii2-widget-datepicker",
@@ -794,12 +711,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-datepicker.git",
-                "reference": "92e04c6a9ff90c4290db7566f68af429f2d641d5"
+                "reference": "9110ecce9deb59dc116fe6c3dd6df5d7eb439a3c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-datepicker/zipball/92e04c6a9ff90c4290db7566f68af429f2d641d5",
-                "reference": "92e04c6a9ff90c4290db7566f68af429f2d641d5",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-datepicker/zipball/9110ecce9deb59dc116fe6c3dd6df5d7eb439a3c",
+                "reference": "9110ecce9deb59dc116fe6c3dd6df5d7eb439a3c",
                 "shasum": ""
             },
             "require": {
@@ -840,7 +757,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-11-11T15:42:04+00:00"
+            "time": "2017-04-01 16:03:50"
         },
         {
             "name": "kartik-v/yii2-widget-fileinput",
@@ -895,7 +812,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-10-18T06:35:15+00:00"
+            "time": "2016-10-18 06:35:15"
         },
         {
             "name": "mpdf/mpdf",
@@ -946,7 +863,7 @@
                 "php",
                 "utf-8"
             ],
-            "time": "2016-12-12T10:42:18+00:00"
+            "time": "2016-12-12 10:42:18"
         },
         {
             "name": "odaialali/yii2-toastr",
@@ -989,7 +906,7 @@
                 "toastr",
                 "yii2"
             ],
-            "time": "2015-01-28T05:23:51+00:00"
+            "time": "2015-01-28 05:23:51"
         },
         {
             "name": "phpoffice/phpexcel",
@@ -1046,7 +963,7 @@
                 "xls",
                 "xlsx"
             ],
-            "time": "2015-05-01T07:00:55+00:00"
+            "time": "2015-05-01 07:00:55"
         },
         {
             "name": "setasign/fpdi",
@@ -1095,7 +1012,7 @@
                 "fpdi",
                 "pdf"
             ],
-            "time": "2015-11-30T10:53:14+00:00"
+            "time": "2015-11-30 10:53:14"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -1149,7 +1066,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2017-02-13T07:52:53+00:00"
+            "time": "2017-02-13 07:52:53"
         },
         {
             "name": "yiisoft/yii2",
@@ -1249,7 +1166,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2017-02-08T09:04:32+00:00"
+            "time": "2017-02-08 09:04:32"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -1299,7 +1216,7 @@
                 "bootstrap",
                 "yii2"
             ],
-            "time": "2016-03-17T03:29:28+00:00"
+            "time": "2016-03-17 03:29:28"
         },
         {
             "name": "yiisoft/yii2-composer",
@@ -1349,7 +1266,7 @@
                 "extension installer",
                 "yii2"
             ],
-            "time": "2016-12-20T13:26:02+00:00"
+            "time": "2016-12-20 13:26:02"
         },
         {
             "name": "yiisoft/yii2-jui",
@@ -1399,24 +1316,24 @@
                 "jQuery UI",
                 "yii2"
             ],
-            "time": "2016-07-22T22:26:59+00:00"
+            "time": "2016-07-22 22:26:59"
         },
         {
             "name": "yiisoft/yii2-redis",
-            "version": "2.0.5",
+            "version": "2.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-redis.git",
-                "reference": "7fd93ff3847e765964c8c83b7e3eed0281078916"
+                "reference": "5dc55d5187923219e9db86d149d56acf1f5a6ee8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-redis/zipball/7fd93ff3847e765964c8c83b7e3eed0281078916",
-                "reference": "7fd93ff3847e765964c8c83b7e3eed0281078916",
+                "url": "https://api.github.com/repos/yiisoft/yii2-redis/zipball/5dc55d5187923219e9db86d149d56acf1f5a6ee8",
+                "reference": "5dc55d5187923219e9db86d149d56acf1f5a6ee8",
                 "shasum": ""
             },
             "require": {
-                "yiisoft/yii2": ">=2.0.4"
+                "yiisoft/yii2": "~2.0.11"
             },
             "type": "yii2-extension",
             "extra": {
@@ -1447,7 +1364,7 @@
                 "session",
                 "yii2"
             ],
-            "time": "2016-03-17T04:11:03+00:00"
+            "time": "2017-04-05 13:42:11"
         },
         {
             "name": "yiisoft/yii2-swiftmailer",
@@ -1497,7 +1414,7 @@
                 "swiftmailer",
                 "yii2"
             ],
-            "time": "2016-09-09T11:48:11+00:00"
+            "time": "2016-09-09 11:48:11"
         }
     ],
     "packages-dev": [
@@ -1574,7 +1491,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2016-04-29T12:21:54+00:00"
+            "time": "2016-04-29 12:21:54"
         },
         {
             "name": "phpspec/php-diff",
@@ -1612,7 +1529,7 @@
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
-            "time": "2016-04-07T12:29:16+00:00"
+            "time": "2016-04-07 12:29:16"
         },
         {
             "name": "yiisoft/yii2-codeception",
@@ -1658,7 +1575,7 @@
                 "yii2"
             ],
             "abandoned": "codeception/codeception",
-            "time": "2016-03-17T03:41:26+00:00"
+            "time": "2016-03-17 03:41:26"
         },
         {
             "name": "yiisoft/yii2-debug",
@@ -1705,7 +1622,7 @@
                 "debugger",
                 "yii2"
             ],
-            "time": "2017-02-21T10:30:50+00:00"
+            "time": "2017-02-21 10:30:50"
         },
         {
             "name": "yiisoft/yii2-faker",
@@ -1752,7 +1669,7 @@
                 "faker",
                 "yii2"
             ],
-            "time": "2015-03-01T06:22:44+00:00"
+            "time": "2015-03-01 06:22:44"
         },
         {
             "name": "yiisoft/yii2-gii",
@@ -1805,7 +1722,7 @@
                 "gii",
                 "yii2"
             ],
-            "time": "2016-03-18T14:09:46+00:00"
+            "time": "2016-03-18 14:09:46"
         }
     ],
     "aliases": [],

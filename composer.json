@@ -26,8 +26,6 @@
         "cebe/yii2-gravatar": "1.*",
         "bower-asset/toastr": "*",
         "bower-asset/fullcalendar": "*",
-        "bower-asset/webrtc-adapter": "*",
-        "bower-asset/rtcmulticonnection": "*",
         "bower-asset/font-awesome": "~4.0",
         "odaialali/yii2-toastr": "1.0b",
         "kartik-v/yii2-widget-datepicker": "@dev",

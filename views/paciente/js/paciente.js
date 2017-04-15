@@ -32,19 +32,19 @@ $(document).ready(function () {
     $('#open-room').click(function () {
         disableInputButtons();
         //connection.open(document.getElementById('room-id').value, function () {
-        connection.open($('#txth_userweb').val(), function () {
+        connection.open($('#txth_room').val(), function () {
             showRoomURL(connection.sessionid);
         });
     });
     $('#join-room').click(function () {
         disableInputButtons();
         //connection.join(document.getElementById('room-id').value);
-        connection.join($('#txth_userweb').val());
+        connection.join($('#txth_room').val());
     });
     $('#open-or-join-room').click(function () {
         disableInputButtons();
         //connection.openOrJoin(document.getElementById('room-id').value, function (isRoomExists, roomid) {
-        connection.openOrJoin($('#txth_userweb').val(), function (isRoomExists, roomid) {
+        connection.openOrJoin($('#txth_room').val(), function (isRoomExists, roomid) {
             if (!isRoomExists) {
                 showRoomURL(roomid);
             }
@@ -77,7 +77,7 @@ $(document).ready(function () {
         if (!this.value.length)
             return;
         connection.send(this.value);
-        appendDIV(this.value);
+        appendDIV(this.value,$('#txth_userweb').val(),$('#txth_nombres').val());
         this.value = '';//Limpiar la Caja de Texto
     });
     

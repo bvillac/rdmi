@@ -45,13 +45,67 @@ connection.onstreamended = function(event) {
     }
 };
 
-function appendDIV(event) {
+function showClockChat() {
+    var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+//    if (!document.layers && !document.all && !document.getElementById)
+//        return;
+
+    var Digital = new Date();
+    var hours = Digital.getHours();
+    var minutes = Digital.getMinutes();
+    var seconds = Digital.getSeconds();
+    var month = monthNames[Digital.getMonth()];//objLang[monthNames[Digital.getMonth()]];
+    var day = Digital.getDate();
+    var year = Digital.getFullYear();
+    var dn = "PM";
+    if (hours < 12)
+        dn = "AM";
+    if (hours > 12)
+        hours = hours - 12;
+    if (hours == 0)
+        hours = 12;
+    if (minutes <= 9)
+        minutes = "0" + minutes;
+    if (seconds <= 9)
+        seconds = "0" + seconds;
+    if (day <= 9)
+        day = "0" + day;
+    
+    return day + " " + month + " " + hours + ":" + minutes + " " + dn
+}
+
+
+function appendDIV(event,usrId,nombres) {
+    var bandChat=false;
     console.log(event);
     var div = document.createElement('div');
     div.innerHTML = event.data || event;
     chatContainer.insertBefore(div, chatContainer.firstChild);
     div.tabIndex = 0;
     div.focus();
+    //bandChat=1 >>>> Usuario Local Caso Contrario = >>> 0
+    //bandChat=(event.userid == $('#txth_userweb').val()) ? true:false;
+    bandChat=(event.userid == usrId) ? true:false;
+    var chatMs_arr = '';
+    chatMs_arr += (bandChat)? '<div class="direct-chat-msg">':'<div class="direct-chat-msg right">';
+        chatMs_arr += '<div class="direct-chat-info clearfix">';
+            if(bandChat){
+                chatMs_arr += '<span class="direct-chat-name pull-right">'+ nombres +'</span>';
+                chatMs_arr += '<span class="direct-chat-timestamp pull-left">'+ showClockChat() +'</span>';
+            }else{
+                chatMs_arr += '<span class="direct-chat-name pull-left">'+ nombres +'</span>';
+                chatMs_arr += '<span class="direct-chat-timestamp pull-right">'+ showClockChat() +'</span>';
+            }
+            
+        chatMs_arr += '</div>';
+        chatMs_arr += '<div class="direct-chat-text">';
+            chatMs_arr += event.data || event;
+        chatMs_arr += '</div>';
+    chatMs_arr += '</div>';
+    $("#direct-chat-messages").prepend(chatMs_arr);
+    
     document.getElementById('input-text-chat').focus();
 }
 
@@ -76,7 +130,7 @@ connection.onEntireSessionClosed = function(event) {
     document.getElementById('share-file').disabled = true;
     document.getElementById('input-text-chat').disabled = true;
     document.getElementById('btn-leave-room').disabled = true;
-    //document.getElementById('open-or-join-room').disabled = false;
+    document.getElementById('open-or-join-room').disabled = false;
     document.getElementById('open-room').disabled = false;
     document.getElementById('join-room').disabled = false;
     //document.getElementById('room-id').disabled = false;
