@@ -45,13 +45,39 @@ connection.onstreamended = function(event) {
     }
 };
 
+// ......................................................
+// ..................Custom Messages.....................
+// ......................................................
+// this line must be defined earlier before "getSocket"
+// or before open/join/openOrJoin
+// connection.socketCustomEvent = 'custom-socket-event';
+// to make above line highly secure;
+// so that only users in the same channel can receive/send custom messages!
+connection.socketCustomEvent = connection.channel;
+// above line is optional,
+// however if you define it; make sure that it is on top of below line.
+// because below line will setup an event listener on server based on above value.
+connection.connectSocket(function (socket) {
+    // listen custom messages from server
+    socket.on(connection.socketCustomEvent, function (message) {
+        alert(message.sender + ' shared custom message:\n\n' + message.customMessage);
+    });
+    // send custom messages to server
+    document.getElementById('send-custom-message').disabled = false;
+    document.getElementById('send-custom-message').onclick = function () {
+        var customMessage = prompt('Enter test message.');
+        socket.emit(connection.socketCustomEvent, {
+            sender: connection.userid,
+            customMessage: customMessage
+        });
+    }
+});
+// ......................................................
+
 function showClockChat() {
     var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
     ];
-//    if (!document.layers && !document.all && !document.getElementById)
-//        return;
-
     var Digital = new Date();
     var hours = Digital.getHours();
     var minutes = Digital.getMinutes();
@@ -71,8 +97,7 @@ function showClockChat() {
     if (seconds <= 9)
         seconds = "0" + seconds;
     if (day <= 9)
-        day = "0" + day;
-    
+        day = "0" + day;    
     return day + " " + month + " " + hours + ":" + minutes + " " + dn
 }
 
