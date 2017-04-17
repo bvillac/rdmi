@@ -9,8 +9,8 @@
 var connection = new RTCMultiConnection();
 // by default, socket.io server is assumed to be deployed on your own URL
 //connection.socketURL = '/';
-//connection.socketURL = 'https://192.168.10.156:9001/';
-connection.socketURL = 'https://192.168.10.100:9001/';
+connection.socketURL = 'https://192.168.10.156:9001/';
+//connection.socketURL = 'https://192.168.10.100:9001/';
 // comment-out below line if you do not have your own socket.io server
 connection.socketMessageEvent = 'audio-video-file-chat-demo';
 connection.enableFileSharing = true; // by default, it is "false".
@@ -53,24 +53,23 @@ connection.onstreamended = function(event) {
 // connection.socketCustomEvent = 'custom-socket-event';
 // to make above line highly secure;
 // so that only users in the same channel can receive/send custom messages!
-connection.socketCustomEvent = connection.channel;
+//connection.socketCustomEvent = connection.channel;
 // above line is optional,
 // however if you define it; make sure that it is on top of below line.
 // because below line will setup an event listener on server based on above value.
 connection.connectSocket(function (socket) {
     // listen custom messages from server
-    socket.on(connection.socketCustomEvent, function (message) {
-        alert(message.sender + ' shared custom message:\n\n' + message.customMessage);
-    });
+    //socket.on(connection.socketCustomEvent, function (message) {
+    //    alert(message.sender + ' shared custom message:\n\n' + message.customMessage);
+    //});
     // send custom messages to server
-    document.getElementById('send-custom-message').disabled = false;
-    document.getElementById('send-custom-message').onclick = function () {
-        var customMessage = prompt('Enter test message.');
-        socket.emit(connection.socketCustomEvent, {
-            sender: connection.userid,
-            customMessage: customMessage
-        });
-    }
+
+    //var customMessage ='hola como estas??'+$('#txth_nombres').val();//$('#input-text-chat').val(); //prompt('Enter test message.');
+    //socket.emit(connection.socketCustomEvent, {
+    //    sender: connection.userid,
+    //    customMessage: customMessage
+    //});
+    
 });
 // ......................................................
 
@@ -102,34 +101,37 @@ function showClockChat() {
 }
 
 
-function appendDIV(event,usrId,nombres) {
+function appendDIV(event) {
     var bandChat=false;
-    console.log(event);
-    var div = document.createElement('div');
-    div.innerHTML = event.data || event;
-    chatContainer.insertBefore(div, chatContainer.firstChild);
-    div.tabIndex = 0;
-    div.focus();
+    var message = JSON.parse(event.data || event);
+    console.log(message);
+    //var nombres=message.name;
+    //var div = document.createElement('div');
+    //div.innerHTML = event.data || event;
+    //chatContainer.insertBefore(div, chatContainer.firstChild);
+    //div.tabIndex = 0;
+    //div.focus();
+    
     //bandChat=1 >>>> Usuario Local Caso Contrario = >>> 0
-    //bandChat=(event.userid == $('#txth_userweb').val()) ? true:false;
-    bandChat=(event.userid == usrId) ? true:false;
+    bandChat=(message.Ids == $('#txth_userweb').val()) ? true:false;
     var chatMs_arr = '';
     chatMs_arr += (bandChat)? '<div class="direct-chat-msg">':'<div class="direct-chat-msg right">';
         chatMs_arr += '<div class="direct-chat-info clearfix">';
             if(bandChat){
-                chatMs_arr += '<span class="direct-chat-name pull-right">'+ nombres +'</span>';
+                chatMs_arr += '<span class="direct-chat-name pull-right">'+ message.name +'</span>';
                 chatMs_arr += '<span class="direct-chat-timestamp pull-left">'+ showClockChat() +'</span>';
             }else{
-                chatMs_arr += '<span class="direct-chat-name pull-left">'+ nombres +'</span>';
+                chatMs_arr += '<span class="direct-chat-name pull-left">'+ message.name +'</span>';
                 chatMs_arr += '<span class="direct-chat-timestamp pull-right">'+ showClockChat() +'</span>';
             }
-            
         chatMs_arr += '</div>';
         chatMs_arr += '<div class="direct-chat-text">';
-            chatMs_arr += event.data || event;
+            //chatMs_arr += event.data || event;
+            chatMs_arr += message.message;
         chatMs_arr += '</div>';
     chatMs_arr += '</div>';
-    $("#direct-chat-messages").prepend(chatMs_arr);
+    $("#direct-chat-messages").prepend(chatMs_arr);//Al inicio
+    //$("#direct-chat-messages").append(chatMs_arr);//Al final
     
     document.getElementById('input-text-chat').focus();
 }

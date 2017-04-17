@@ -69,16 +69,31 @@ $(document).ready(function () {
             connection.send(file);
         });
     });
+    
     $('#input-text-chat').keyup(function (e) {
         if (e.keyCode != 13)
             return;
-        // removing trailing/leading whitespace
+
+        // removing trailing/leading whitespace (Elimina Espacios En Blanco)
         this.value = this.value.replace(/^\s+|\s+$/g, '');
+
         if (!this.value.length)
             return;
-        connection.send(this.value);
-        appendDIV(this.value,$('#txth_userweb').val(),$('#txth_nombres').val());
+        
+        var mensaje=JSON.stringify({Ids : $('#txth_userweb').val(),name : $('#txth_nombres').val(), message : this.value})
+        connection.send(mensaje);
+        appendDIV(mensaje);
         this.value = '';//Limpiar la Caja de Texto
+    });
+    
+    $('#send-text').click(function () {
+        if (!this.value.length)
+            return;
+        var mensaje=JSON.stringify({Ids : $('#txth_userweb').val(),name : $('#txth_nombres').val(), message : this.value})
+        connection.send(mensaje);
+        appendDIV(mensaje);
+        $('#input-text-chat').val('');
+        
     });
     
 //    document.getElementById('room-id').onkeyup = function() {
