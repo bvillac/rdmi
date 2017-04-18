@@ -37,4 +37,5 @@ return [
     "Save Form" => "Guardar Formulario",
     "Book Appointment" => "Reservar Cita",
     "Quote address" => "Atender Cita",
+    "Upload and Download Files" => "Subir y Descargar Archivos",
 ];

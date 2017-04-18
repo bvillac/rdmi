@@ -228,9 +228,9 @@ INSERT INTO `consultorio` VALUES
 INSERT INTO `medico_atencion` (`med_id`, `pac_id`, `mate_est_log`) VALUES ('1', '1', '1');
 
 
--- Cambios Byron 
+-- Cambios Byron 18-04-2017
 
-NSERT INTO `rdmi`.`tipo_dicom` (`tdic_id`, `tdic_nomenclatura`, `tdic_detalle`, `tdic_est_log`) VALUES ('', 'CR', 'Radiografía computarizada', '1');
+INSERT INTO `rdmi`.`tipo_dicom` (`tdic_nomenclatura`, `tdic_detalle`, `tdic_est_log`) VALUES ('CR', 'Radiografía computarizada', '1');
 INSERT INTO `rdmi`.`tipo_dicom` (`tdic_nomenclatura`, `tdic_detalle`, `tdic_est_log`) VALUES ('CT', 'Tomografía computarizada', '1');
 INSERT INTO `rdmi`.`tipo_dicom` (`tdic_nomenclatura`, `tdic_detalle`, `tdic_est_log`) VALUES ('MR', 'Resonancia magnetica', '1');
 INSERT INTO `rdmi`.`tipo_dicom` (`tdic_nomenclatura`, `tdic_detalle`, `tdic_est_log`) VALUES ('MN', 'Medicina nuclear', '1');

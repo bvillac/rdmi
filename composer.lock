@@ -4,7 +4,6 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "59e0c011ee410cce20e0c161b189f794",
     "content-hash": "2577fd3addef5efb925b9527cb57bb45",
     "packages": [
         {
@@ -449,7 +448,7 @@
                 "module",
                 "yii2"
             ],
-            "time": "2016-10-27 15:13:14"
+            "time": "2016-10-27T15:13:14+00:00"
         },
         {
             "name": "cebe/markdown",
@@ -509,7 +508,7 @@
                 "markdown",
                 "markdown-extra"
             ],
-            "time": "2016-09-14 20:40:20"
+            "time": "2016-09-14T20:40:20+00:00"
         },
         {
             "name": "cebe/yii2-gravatar",
@@ -552,7 +551,7 @@
                 "gravatar",
                 "yii"
             ],
-            "time": "2013-12-10 17:49:58"
+            "time": "2013-12-10T17:49:58+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -599,7 +598,7 @@
             "keywords": [
                 "html"
             ],
-            "time": "2017-03-13 06:30:53"
+            "time": "2017-03-13T06:30:53+00:00"
         },
         {
             "name": "kartik-v/bootstrap-fileinput",
@@ -652,7 +651,7 @@
                 "progress",
                 "upload"
             ],
-            "time": "2017-04-02 18:38:08"
+            "time": "2017-04-02T18:38:08+00:00"
         },
         {
             "name": "kartik-v/yii2-krajee-base",
@@ -703,7 +702,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2017-02-22 05:58:53"
+            "time": "2017-02-22T05:58:53+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-datepicker",
@@ -757,7 +756,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2017-04-01 16:03:50"
+            "time": "2017-04-01T16:03:50+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-fileinput",
@@ -765,12 +764,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-fileinput.git",
-                "reference": "744e12c1f5be45357ec50eea6f678ecc9ba67dc2"
+                "reference": "6b9c344c41df5d5c305589770893e14628e6eacc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-fileinput/zipball/744e12c1f5be45357ec50eea6f678ecc9ba67dc2",
-                "reference": "744e12c1f5be45357ec50eea6f678ecc9ba67dc2",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-fileinput/zipball/6b9c344c41df5d5c305589770893e14628e6eacc",
+                "reference": "6b9c344c41df5d5c305589770893e14628e6eacc",
                 "shasum": ""
             },
             "require": {
@@ -812,7 +811,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-10-18 06:35:15"
+            "time": "2017-04-15 05:25:51"
         },
         {
             "name": "mpdf/mpdf",
@@ -863,7 +862,7 @@
                 "php",
                 "utf-8"
             ],
-            "time": "2016-12-12 10:42:18"
+            "time": "2016-12-12T10:42:18+00:00"
         },
         {
             "name": "odaialali/yii2-toastr",
@@ -906,7 +905,7 @@
                 "toastr",
                 "yii2"
             ],
-            "time": "2015-01-28 05:23:51"
+            "time": "2015-01-28T05:23:51+00:00"
         },
         {
             "name": "phpoffice/phpexcel",
@@ -963,7 +962,7 @@
                 "xls",
                 "xlsx"
             ],
-            "time": "2015-05-01 07:00:55"
+            "time": "2015-05-01T07:00:55+00:00"
         },
         {
             "name": "setasign/fpdi",
@@ -1012,7 +1011,7 @@
                 "fpdi",
                 "pdf"
             ],
-            "time": "2015-11-30 10:53:14"
+            "time": "2015-11-30T10:53:14+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -1066,7 +1065,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2017-02-13 07:52:53"
+            "time": "2017-02-13T07:52:53+00:00"
         },
         {
             "name": "yiisoft/yii2",
@@ -1166,7 +1165,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2017-02-08 09:04:32"
+            "time": "2017-02-08T09:04:32+00:00"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -1216,7 +1215,7 @@
                 "bootstrap",
                 "yii2"
             ],
-            "time": "2016-03-17 03:29:28"
+            "time": "2016-03-17T03:29:28+00:00"
         },
         {
             "name": "yiisoft/yii2-composer",
@@ -1266,7 +1265,7 @@
                 "extension installer",
                 "yii2"
             ],
-            "time": "2016-12-20 13:26:02"
+            "time": "2016-12-20T13:26:02+00:00"
         },
         {
             "name": "yiisoft/yii2-jui",
@@ -1316,7 +1315,7 @@
                 "jQuery UI",
                 "yii2"
             ],
-            "time": "2016-07-22 22:26:59"
+            "time": "2016-07-22T22:26:59+00:00"
         },
         {
             "name": "yiisoft/yii2-redis",
@@ -1364,7 +1363,7 @@
                 "session",
                 "yii2"
             ],
-            "time": "2017-04-05 13:42:11"
+            "time": "2017-04-05T13:42:11+00:00"
         },
         {
             "name": "yiisoft/yii2-swiftmailer",
@@ -1414,7 +1413,7 @@
                 "swiftmailer",
                 "yii2"
             ],
-            "time": "2016-09-09 11:48:11"
+            "time": "2016-09-09T11:48:11+00:00"
         }
     ],
     "packages-dev": [
@@ -1491,7 +1490,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2016-04-29 12:21:54"
+            "time": "2016-04-29T12:21:54+00:00"
         },
         {
             "name": "phpspec/php-diff",
@@ -1529,7 +1528,7 @@
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
-            "time": "2016-04-07 12:29:16"
+            "time": "2016-04-07T12:29:16+00:00"
         },
         {
             "name": "yiisoft/yii2-codeception",
@@ -1575,7 +1574,7 @@
                 "yii2"
             ],
             "abandoned": "codeception/codeception",
-            "time": "2016-03-17 03:41:26"
+            "time": "2016-03-17T03:41:26+00:00"
         },
         {
             "name": "yiisoft/yii2-debug",
@@ -1622,7 +1621,7 @@
                 "debugger",
                 "yii2"
             ],
-            "time": "2017-02-21 10:30:50"
+            "time": "2017-02-21T10:30:50+00:00"
         },
         {
             "name": "yiisoft/yii2-faker",
@@ -1669,7 +1668,7 @@
                 "faker",
                 "yii2"
             ],
-            "time": "2015-03-01 06:22:44"
+            "time": "2015-03-01T06:22:44+00:00"
         },
         {
             "name": "yiisoft/yii2-gii",
@@ -1722,7 +1721,7 @@
                 "gii",
                 "yii2"
             ],
-            "time": "2016-03-18 14:09:46"
+            "time": "2016-03-18T14:09:46+00:00"
         }
     ],
     "aliases": [],

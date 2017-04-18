@@ -10,9 +10,9 @@ $this->title = 'Administrar Médico '; //. ' ' . $model[0]["med_id"];
 ?>
 <?= Html::hiddenInput('txth_med_id',$model[0]["med_id"],['id' =>'txth_med_id']); ?>
 <?= Html::hiddenInput('txth_per_id',$model[0]["per_id"],['id' =>'txth_per_id']); ?>
-<div class="medico-update">
+<!--<div class="medico-update">
     <h1><?= Html::encode($this->title) ?></h1>
-</div>
+</div>-->
 
 <div class="col-md-12">
     <div class="nav-tabs-custom">

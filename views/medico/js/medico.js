@@ -200,10 +200,15 @@ function InicioFormulario() {
         loadDataUpdate();
     } else if (AccionTipo == "Create") {
         //loadDataCreate();
+    } else if (AccionTipo == "AccFile") {
+        iniciarUpload();
     } else if (AccionTipo == "Admin") {
         //loadDataCreate();
     }
 }
+
+        
+
 function mostrarDatosMedico(varMed,varEsp,varEmp) {
     $('#txt_med_colegiado').val(varMed[0]['med_colegiado']);
     $('#txt_med_registro').val(varMed[0]['med_registro']);

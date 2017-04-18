@@ -18,7 +18,7 @@
             "fzaninotto/faker": "*",
             "yiisoft/yii2": "*"
         },
-        "time": "2015-03-01 06:22:44",
+        "time": "2015-03-01T06:22:44+00:00",
         "type": "yii2-extension",
         "extra": {
             "branch-alias": {
@@ -67,7 +67,7 @@
         "require": {
             "yiisoft/yii2": "*"
         },
-        "time": "2013-12-10 17:49:58",
+        "time": "2013-12-10T17:49:58+00:00",
         "type": "yii2-extension",
         "installation-source": "dist",
         "autoload": {
@@ -112,7 +112,7 @@
             "bower-asset/toastr": "*",
             "yiisoft/yii2": "*"
         },
-        "time": "2015-01-28 05:23:51",
+        "time": "2015-01-28T05:23:51+00:00",
         "type": "yii2-extension",
         "installation-source": "dist",
         "autoload": {
@@ -158,7 +158,7 @@
             "ext-xmlwriter": "*",
             "php": ">=5.2.0"
         },
-        "time": "2015-05-01 07:00:55",
+        "time": "2015-05-01T07:00:55+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -313,7 +313,7 @@
             "bower-asset/jquery-ui": "1.11.*@stable",
             "yiisoft/yii2": ">=2.0.4"
         },
-        "time": "2016-07-22 22:26:59",
+        "time": "2016-07-22T22:26:59+00:00",
         "type": "yii2-extension",
         "extra": {
             "branch-alias": {
@@ -365,7 +365,7 @@
             "swiftmailer/swiftmailer": "~5.0",
             "yiisoft/yii2": "~2.0.4"
         },
-        "time": "2016-09-09 11:48:11",
+        "time": "2016-09-09T11:48:11+00:00",
         "type": "yii2-extension",
         "extra": {
             "branch-alias": {
@@ -418,7 +418,7 @@
             "setasign/fpdi-fpdf": "Use this package to automatically evaluate dependencies to FPDF.",
             "setasign/fpdi-tcpdf": "Use this package to automatically evaluate dependencies to TCPDF."
         },
-        "time": "2015-11-30 10:53:14",
+        "time": "2015-11-30T10:53:14+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -467,7 +467,7 @@
         "require": {
             "yiisoft/yii2": ">=2.0.4"
         },
-        "time": "2016-03-17 03:41:26",
+        "time": "2016-03-17T03:41:26+00:00",
         "type": "yii2-extension",
         "extra": {
             "branch-alias": {
@@ -516,7 +516,7 @@
             "bower-asset/bootstrap": "3.3.* | 3.2.* | 3.1.*",
             "yiisoft/yii2": ">=2.0.6"
         },
-        "time": "2016-03-17 03:29:28",
+        "time": "2016-03-17T03:29:28+00:00",
         "type": "yii2-extension",
         "extra": {
             "branch-alias": {
@@ -564,7 +564,7 @@
             "reference": "0464787bfa7cd13576c5a1e318709768798bec6a",
             "shasum": ""
         },
-        "time": "2016-04-07 12:29:16",
+        "time": "2016-04-07T12:29:16+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -610,7 +610,7 @@
             "yiisoft/yii2": ">=2.0.4",
             "yiisoft/yii2-bootstrap": "~2.0"
         },
-        "time": "2016-03-18 14:09:46",
+        "time": "2016-03-18T14:09:46+00:00",
         "type": "yii2-extension",
         "extra": {
             "branch-alias": {
@@ -667,7 +667,7 @@
             "phpunit/phpunit": "~4.0",
             "squizlabs/php_codesniffer": "~1.5"
         },
-        "time": "2016-04-29 12:21:54",
+        "time": "2016-04-29T12:21:54+00:00",
         "type": "library",
         "extra": {
             "branch-alias": []
@@ -984,7 +984,7 @@
             "facebook/xhprof": "*@dev",
             "phpunit/phpunit": "4.1.*"
         },
-        "time": "2016-09-14 20:40:20",
+        "time": "2016-09-14T20:40:20+00:00",
         "bin": [
             "bin/markdown"
         ],
@@ -1041,7 +1041,7 @@
             "bower-asset/lightbox2": "2.7.1",
             "yiisoft/yii2": "*"
         },
-        "time": "2016-10-27 15:13:14",
+        "time": "2016-10-27T15:13:14+00:00",
         "type": "yii2-extension",
         "installation-source": "dist",
         "autoload": {
@@ -1066,63 +1066,6 @@
         ]
     },
     {
-        "name": "kartik-v/yii2-widget-fileinput",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/kartik-v/yii2-widget-fileinput.git",
-            "reference": "744e12c1f5be45357ec50eea6f678ecc9ba67dc2"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/kartik-v/yii2-widget-fileinput/zipball/744e12c1f5be45357ec50eea6f678ecc9ba67dc2",
-            "reference": "744e12c1f5be45357ec50eea6f678ecc9ba67dc2",
-            "shasum": ""
-        },
-        "require": {
-            "kartik-v/bootstrap-fileinput": "~4.2",
-            "kartik-v/yii2-krajee-base": "~1.7"
-        },
-        "time": "2016-10-18 06:35:15",
-        "type": "yii2-extension",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0.x-dev"
-            }
-        },
-        "installation-source": "source",
-        "autoload": {
-            "psr-4": {
-                "kartik\\file\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Kartik Visweswaran",
-                "email": "kartikv2@gmail.com",
-                "homepage": "http://www.krajee.com/"
-            }
-        ],
-        "description": "An enhanced FileInput widget for Bootstrap 3.x with file preview, multiple selection, and more features (sub repo split from yii2-widgets)",
-        "homepage": "https://github.com/kartik-v/yii2-widget-fileinput",
-        "keywords": [
-            "extension",
-            "file",
-            "form",
-            "input",
-            "jquery",
-            "plugin",
-            "upload",
-            "widget",
-            "yii2"
-        ]
-    },
-    {
         "name": "yiisoft/yii2-composer",
         "version": "2.0.5",
         "version_normalized": "2.0.5.0",
@@ -1143,7 +1086,7 @@
         "require-dev": {
             "composer/composer": "^1.0"
         },
-        "time": "2016-12-20 13:26:02",
+        "time": "2016-12-20T13:26:02+00:00",
         "type": "composer-plugin",
         "extra": {
             "class": "yii\\composer\\Plugin",
@@ -1200,7 +1143,7 @@
         "suggest": {
             "ext-zlib": "Needed for compression of embedded resources, such as fonts"
         },
-        "time": "2016-12-12 10:42:18",
+        "time": "2016-12-12T10:42:18+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1339,7 +1282,7 @@
         "require-dev": {
             "simpletest/simpletest": "^1.1"
         },
-        "time": "2017-03-13 06:30:53",
+        "time": "2017-03-13T06:30:53+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1395,7 +1338,7 @@
             "php": ">=5.4.0",
             "yiisoft/yii2-composer": "~2.0.4"
         },
-        "time": "2017-02-08 09:04:32",
+        "time": "2017-02-08T09:04:32+00:00",
         "bin": [
             "yii"
         ],
@@ -1488,7 +1431,7 @@
             "yiisoft/yii2": "~2.0.11",
             "yiisoft/yii2-bootstrap": "~2.0.0"
         },
-        "time": "2017-02-21 10:30:50",
+        "time": "2017-02-21T10:30:50+00:00",
         "type": "yii2-extension",
         "extra": {
             "branch-alias": {
@@ -1540,7 +1483,7 @@
             "mockery/mockery": "~0.9.1",
             "symfony/phpunit-bridge": "~3.2"
         },
-        "time": "2017-02-13 07:52:53",
+        "time": "2017-02-13T07:52:53+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1592,7 +1535,7 @@
         "require": {
             "yiisoft/yii2-bootstrap": "@dev"
         },
-        "time": "2017-02-22 05:58:53",
+        "time": "2017-02-22T05:58:53+00:00",
         "type": "yii2-extension",
         "extra": {
             "branch-alias": {
@@ -1645,7 +1588,7 @@
         "require": {
             "yiisoft/yii2": "~2.0.11"
         },
-        "time": "2017-04-05 13:42:11",
+        "time": "2017-04-05T13:42:11+00:00",
         "type": "yii2-extension",
         "extra": {
             "branch-alias": {
@@ -1678,6 +1621,119 @@
         ]
     },
     {
+        "name": "kartik-v/yii2-widget-datepicker",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/kartik-v/yii2-widget-datepicker.git",
+            "reference": "9110ecce9deb59dc116fe6c3dd6df5d7eb439a3c"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/kartik-v/yii2-widget-datepicker/zipball/9110ecce9deb59dc116fe6c3dd6df5d7eb439a3c",
+            "reference": "9110ecce9deb59dc116fe6c3dd6df5d7eb439a3c",
+            "shasum": ""
+        },
+        "require": {
+            "kartik-v/yii2-krajee-base": "~1.7"
+        },
+        "time": "2017-04-01T16:03:50+00:00",
+        "type": "yii2-extension",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.4.x-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "kartik\\date\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Kartik Visweswaran",
+                "email": "kartikv2@gmail.com",
+                "homepage": "http://www.krajee.com/"
+            }
+        ],
+        "description": "Enhanced Yii2 wrapper for the bootstrap datepicker plugin (sub repo split from yii2-widgets).",
+        "homepage": "https://github.com/kartik-v/yii2-widget-datepicker",
+        "keywords": [
+            "date",
+            "extension",
+            "form",
+            "jquery",
+            "picker",
+            "plugin",
+            "select2",
+            "widget",
+            "yii2"
+        ]
+    },
+    {
+        "name": "kartik-v/yii2-widget-fileinput",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/kartik-v/yii2-widget-fileinput.git",
+            "reference": "6b9c344c41df5d5c305589770893e14628e6eacc"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/kartik-v/yii2-widget-fileinput/zipball/6b9c344c41df5d5c305589770893e14628e6eacc",
+            "reference": "6b9c344c41df5d5c305589770893e14628e6eacc",
+            "shasum": ""
+        },
+        "require": {
+            "kartik-v/bootstrap-fileinput": "~4.2",
+            "kartik-v/yii2-krajee-base": "~1.7"
+        },
+        "time": "2017-04-15T05:25:51+00:00",
+        "type": "yii2-extension",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "kartik\\file\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Kartik Visweswaran",
+                "email": "kartikv2@gmail.com",
+                "homepage": "http://www.krajee.com/"
+            }
+        ],
+        "description": "An enhanced FileInput widget for Bootstrap 3.x with file preview, multiple selection, and more features (sub repo split from yii2-widgets)",
+        "homepage": "https://github.com/kartik-v/yii2-widget-fileinput",
+        "keywords": [
+            "extension",
+            "file",
+            "form",
+            "input",
+            "jquery",
+            "plugin",
+            "upload",
+            "widget",
+            "yii2"
+        ]
+    },
+    {
         "name": "kartik-v/bootstrap-fileinput",
         "version": "v4.3.9",
         "version_normalized": "4.3.9.0",
@@ -1692,7 +1748,7 @@
             "reference": "4aec9b00de25b4b3cca1f11ffbaa823c67c33590",
             "shasum": ""
         },
-        "time": "2017-04-02 18:38:08",
+        "time": "2017-04-02T18:38:08+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1730,62 +1786,6 @@
             "preview",
             "progress",
             "upload"
-        ]
-    },
-    {
-        "name": "kartik-v/yii2-widget-datepicker",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/kartik-v/yii2-widget-datepicker.git",
-            "reference": "9110ecce9deb59dc116fe6c3dd6df5d7eb439a3c"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/kartik-v/yii2-widget-datepicker/zipball/9110ecce9deb59dc116fe6c3dd6df5d7eb439a3c",
-            "reference": "9110ecce9deb59dc116fe6c3dd6df5d7eb439a3c",
-            "shasum": ""
-        },
-        "require": {
-            "kartik-v/yii2-krajee-base": "~1.7"
-        },
-        "time": "2017-04-01 16:03:50",
-        "type": "yii2-extension",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.4.x-dev"
-            }
-        },
-        "installation-source": "source",
-        "autoload": {
-            "psr-4": {
-                "kartik\\date\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Kartik Visweswaran",
-                "email": "kartikv2@gmail.com",
-                "homepage": "http://www.krajee.com/"
-            }
-        ],
-        "description": "Enhanced Yii2 wrapper for the bootstrap datepicker plugin (sub repo split from yii2-widgets).",
-        "homepage": "https://github.com/kartik-v/yii2-widget-datepicker",
-        "keywords": [
-            "date",
-            "extension",
-            "form",
-            "jquery",
-            "picker",
-            "plugin",
-            "select2",
-            "widget",
-            "yii2"
         ]
     }
 ]

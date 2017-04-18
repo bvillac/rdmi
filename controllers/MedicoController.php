@@ -274,6 +274,18 @@ class MedicoController extends Controller {
             return;
         }
     }
+    public function actionFile() {
+        $data = null;
+        $perADO = new Persona();
+        
+        if (Yii::$app->request->isAjax) {
+            $data =(Yii::$app->request->post())? Yii::$app->request->post():Yii::$app->request->get();
+            
+        }
+        return $this->render('file', [
+
+                    ]);
+    }
     
     public function actionAdminmedico() {
         $data = null;
@@ -422,6 +434,96 @@ class MedicoController extends Controller {
             }*/
             return;
         }
+    }
+    
+    
+    public function actionUploadfile() {
+        if (Yii::$app->request->isPost) {
+            if (empty($_FILES['file'])) {
+                echo json_encode(['error' => 'Ficheiro(s) no encontrado(s).']);
+                //Message = "Error in saving file"
+                return;
+            }
+            //Recibe Paramentros
+            $files = $_FILES['file'];
+            $numero = isset($_POST['numero']) ? $_POST['numero'] : '';
+            $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : 'default';
+
+            $success = null;
+            //$paths = [];
+            $filenames = $files['name']; //Nombre Archivo
+            $ext = explode('.', basename($filenames)); //Extension del Archivo
+            //$folder = md5(uniqid());
+            $folder_path = $_SERVER['DOCUMENT_ROOT'] . Url::base() . Yii::$app->params["documentFolder"] . $numero; //Ruta Segun Opciones
+            Utilities::putMessageLogFile($folder_path);
+            if (!file_exists($folder_path)) {
+                mkdir($folder_path, 0777, true); //Se Crea la carpeta
+                mkdir($folder_path . '/productos', 0777, true); //Se Crea la carpeta
+            }
+            $producto = ($nombre == 'producto') ? '/productos' : ''; //Si Es producto genera carpeta
+            $folder_path = $folder_path . $producto; //Ruta Segun Opciones
+            //$nombre=($nombre=='producto')?$numero.'_'.$filenames:$numero.'_'.$nombre;
+            $nombre = ($nombre == 'producto') ? $filenames : $nombre . "." . array_pop($ext); //Si Es producto Se guarda con el nombre original
+            $target = $folder_path . DIRECTORY_SEPARATOR . $nombre;
+            if (move_uploaded_file($files['tmp_name'], $target)) {
+                $success = true;
+                //$paths[] = $target;
+            } else {
+                $success = false;
+            }
+            return $success;
+        }
+        return true;
+    }
+
+    private function downloadFile($dir, $file, $extensions = []) {
+        //Si el directorio existe
+        //if (is_dir($dir)) {            
+        //Ruta absoluta del archivo
+        $path = $dir . $file;
+        //Si el archivo existe
+        //if (is_file($path)) {
+        //Obtener información del archivo
+        $file_info = pathinfo($path);
+        //Obtener la extensión del archivo
+        $extension = $file_info["extension"];
+
+        if (is_array($extensions)) {
+            //Si el argumento $extensions es un array
+            //Comprobar las extensiones permitidas
+            foreach ($extensions as $e) {
+                //Si la extension es correcta
+                if ($e === $extension) {
+                    //Procedemos a descargar el archivo
+                    // Definir headers
+                    //$size = filesize($path);
+                    header("Content-Type: application/force-download");
+                    header("Content-Disposition: attachment; filename=$file");
+                    header("Content-Transfer-Encoding: binary");
+                    //header("Content-Length: " . $size);
+                    // Descargar archivo
+                    readfile($path);
+                    //Correcto
+                    return true;
+                }
+            }
+        }
+        //}
+        //}
+        //Ha ocurrido un error al descargar el archivo
+        return false;
+    }
+
+    public function actionDownload() {
+        if (Yii::$app->request->get("file")) {
+            //Si el archivo no se ha podido descargar
+            //downloadFile($dir, $file, $extensions=[])
+            if (!$this->downloadFile(Url::base(true) . "/archivos/", Html::encode($_GET["file"]), ["pdf", "txt", "doc"])) {
+                //Mensaje flash para mostrar el error
+                //Yii::$app->session->setFlash("errordownload");
+            }
+        }
+        return $this->render("download");
     }
     
     
