@@ -409,16 +409,16 @@ CREATE  TABLE IF NOT EXISTS `tipo_dicom` (
 -- -----------------------------------------------------
 -- table  `dicom`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `dicom` (
-  `dic_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `tdic_id` bigint(20) NOT NULL,
-  `dic_size` decimal(10,2) DEFAULT NULL,
-  `dic_ruta` varchar(80) DEFAULT NULL,
-  `dic_est_log` varchar(1) DEFAULT NULL,
-  `dic_fec_cre` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `dic_fec_mod` timestamp NULL DEFAULT NULL,
-  FOREIGN KEY (`tdic_id`) REFERENCES `tipo_dicom` (`tdic_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+-- CREATE  TABLE IF NOT EXISTS `dicom` (
+--   `dic_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+--   `tdic_id` bigint(20) NOT NULL,
+--   `dic_size` decimal(10,2) DEFAULT NULL,
+--   `dic_ruta` varchar(80) DEFAULT NULL,
+--   `dic_est_log` varchar(1) DEFAULT NULL,
+--   `dic_fec_cre` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+--   `dic_fec_mod` timestamp NULL DEFAULT NULL,
+--   FOREIGN KEY (`tdic_id`) REFERENCES `tipo_dicom` (`tdic_id`)
+-- ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
 -- table  `session`

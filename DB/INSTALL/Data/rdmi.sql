@@ -226,3 +226,67 @@ INSERT INTO `consultorio` VALUES
 -- Dumping data for table `medico_atencion`
 --
 INSERT INTO `medico_atencion` (`med_id`, `pac_id`, `mate_est_log`) VALUES ('1', '1', '1');
+
+
+-- Cambios Byron 
+
+NSERT INTO `rdmi`.`tipo_dicom` (`tdic_id`, `tdic_nomenclatura`, `tdic_detalle`, `tdic_est_log`) VALUES ('', 'CR', 'Radiografía computarizada', '1');
+INSERT INTO `rdmi`.`tipo_dicom` (`tdic_nomenclatura`, `tdic_detalle`, `tdic_est_log`) VALUES ('CT', 'Tomografía computarizada', '1');
+INSERT INTO `rdmi`.`tipo_dicom` (`tdic_nomenclatura`, `tdic_detalle`, `tdic_est_log`) VALUES ('MR', 'Resonancia magnetica', '1');
+INSERT INTO `rdmi`.`tipo_dicom` (`tdic_nomenclatura`, `tdic_detalle`, `tdic_est_log`) VALUES ('MN', 'Medicina nuclear', '1');
+INSERT INTO `rdmi`.`tipo_dicom` (`tdic_nomenclatura`, `tdic_detalle`, `tdic_est_log`) VALUES ('US', 'Ultrasonido', '1');
+INSERT INTO `rdmi`.`tipo_dicom` (`tdic_nomenclatura`, `tdic_detalle`, `tdic_est_log`) VALUES ('RG', 'Imágenes radiográficas', '1');
+INSERT INTO `rdmi`.`tipo_dicom` (`tdic_nomenclatura`, `tdic_detalle`, `tdic_est_log`) VALUES ('ES', 'Endoscopia', '1');
+INSERT INTO `rdmi`.`tipo_dicom` (`tdic_nomenclatura`, `tdic_detalle`) VALUES ('DX', 'Radiografía Digital');
+INSERT INTO `rdmi`.`tipo_dicom` (`tdic_nomenclatura`, `tdic_detalle`) VALUES ('MG', 'Mamografía');
+INSERT INTO `rdmi`.`tipo_dicom` (`tdic_nomenclatura`, `tdic_detalle`) VALUES ('IO', 'Radiografía intra-oral');
+INSERT INTO `rdmi`.`tipo_dicom` (`tdic_nomenclatura`, `tdic_detalle`) VALUES ('OT', 'Otros');
+
+
+INSERT INTO `rdmi`.`objeto_modulo` (`mod_id`, `omod_padre_id`, `omod_nombre`, `omod_tipo`, `omod_tipo_boton`, `omod_accion`, `omod_entidad`, `omod_orden`, `omod_estado_visible`, `omod_lang_file`, `omod_estado_activo`, `omod_estado_logico`) VALUES ('6', '6', 'Video Chat', 'S', '0', 'Applications', 'medico/video', '1', '0', 'application', '1', '1');
+INSERT INTO `rdmi`.`objeto_modulo` (`mod_id`, `omod_padre_id`, `omod_nombre`, `omod_tipo`, `omod_tipo_boton`, `omod_accion`, `omod_entidad`, `omod_orden`, `omod_estado_visible`, `omod_lang_file`, `omod_estado_activo`, `omod_estado_logico`) VALUES ('6', '6', 'Archivo Imagenes', 'S', '0', 'Applications', 'medico/file', '1', '0', 'application', '1', '1');
+
+INSERT INTO `rdmi`.`omodulo_rol` (`omod_id`, `rol_id`, `omrol_est_log`) VALUES ('32', '3', '1');
+INSERT INTO `rdmi`.`omodulo_rol` (`omod_id`, `rol_id`, `omrol_est_log`) VALUES ('33', '3', '1');
+
+drop table `rdmi`.`dicom`;
+drop table `rdmi`.`imagenes`;
+
+CREATE  TABLE IF NOT EXISTS `rdmi`.`imagenes` (
+  `ima_id` BIGINT(20) NOT NULL AUTO_INCREMENT ,
+  `pac_id` BIGINT(20) NOT NULL ,
+  `tdic_id` BIGINT(20) NOT NULL ,
+  `eve_id` BIGINT(20) NOT NULL ,
+  `ima_titulo` VARCHAR(60) NULL ,
+  `ima_nombre_archivo` VARCHAR(60) NULL DEFAULT NULL ,
+  `ima_extension_archivo` VARCHAR(5) NULL ,
+  `ima_ruta_archivo` VARCHAR(10) NULL ,
+  `ima_tamano` VARCHAR(10) NULL ,
+  `ima_folio` VARCHAR(20) NULL ,
+  `ima_observacion` TEXT NULL ,
+  `ima_fecha_publica` TIMESTAMP NULL ,
+  `ima_fec_cre` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  `ima_fec_mod` TIMESTAMP NULL DEFAULT NULL ,
+  `ima_est_log` VARCHAR(1) NOT NULL ,
+  PRIMARY KEY (`ima_id`) ,
+  INDEX `fk_imagenes_eventos1_idx` (`eve_id` ASC) ,
+  INDEX `fk_imagenes_tipo_dicom1_idx` (`tdic_id` ASC) ,
+  INDEX `fk_imagenes_paciente1_idx` (`pac_id` ASC) ,
+  CONSTRAINT `fk_imagenes_eventos1`
+    FOREIGN KEY (`eve_id` )
+    REFERENCES `rdmi`.`eventos` (`eve_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_imagenes_tipo_dicom1`
+    FOREIGN KEY (`tdic_id` )
+    REFERENCES `rdmi`.`tipo_dicom` (`tdic_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_imagenes_paciente1`
+    FOREIGN KEY (`pac_id` )
+    REFERENCES `rdmi`.`paciente` (`pac_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8
