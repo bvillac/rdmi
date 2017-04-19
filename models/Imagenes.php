@@ -34,6 +34,48 @@ class Imagenes {
         $comando->bindParam(":tdic_id", $ids, \PDO::PARAM_INT);
         return $comando->queryAll();
     }
+    
+    public function insertarImagenes($data) {
+        $arroout = array();
+        $con = \Yii::$app->db;
+        $trans = $con->beginTransaction();
+        
+        try {
+  
+            $sql = "INSERT INTO " . $con->dbname . ".imagenes
+                (pac_id,tdic_id,eve_id,ima_titulo,ima_nombre_archivo,ima_extension_archivo,
+                ima_ruta_archivo,ima_observacion,ima_fecha_publica,ima_est_log)VALUES
+                (:pac_id,:tdic_id,:eve_id,:ima_titulo,:ima_nombre_archivo,:ima_extension_archivo,
+                :ima_ruta_archivo,:ima_observacion,:ima_fecha_publica,:ima_est_log); ";
+
+            $command = $con->createCommand($sql);
+            $command->bindParam(":pac_id", $data[0]['per_id'], \PDO::PARAM_INT);//Id Comparacion
+            $command->bindParam(":per_nombre", $data[0]['per_nombre'], \PDO::PARAM_STR);
+            $command->bindParam(":per_apellido", $data[0]['per_apellido'], \PDO::PARAM_STR);
+            $command->bindParam(":per_ced_ruc", $data[0]['per_ced_ruc'], \PDO::PARAM_STR);
+            $command->bindParam(":per_genero", $data[0]['per_genero'], \PDO::PARAM_STR);
+            $command->bindParam(":per_fecha_nacimiento", $data[0]['per_fecha_nacimiento'], \PDO::PARAM_STR);
+            $command->bindParam(":per_estado_civil", $data[0]['per_estado_civil'], \PDO::PARAM_STR);
+            $command->bindParam(":per_correo", $data[0]['per_correo'], \PDO::PARAM_STR);
+            $command->bindParam(":per_tipo_sangre", $data[0]['per_tipo_sangre'], \PDO::PARAM_STR);
+            $command->bindParam(":per_foto", $data[0]['per_foto'], \PDO::PARAM_STR);
+            $command->execute();
+            
+            //Utilities::insertarLogs($con, $med_id, 'medico', 'Insert -> Med_id');
+            $trans->commit();
+            $con->close();
+            //RETORNA DATOS 
+            //$arroout["ids"]= $ftem_id;
+            $arroout["status"]= true;
+            
+        } catch (Exception $ex) {
+            $trans->rollBack();
+            $con->close();
+            //throw $e;
+            $arroout["status"] = false;
+            return $arroout;
+        }
+    }
 
     
 }
