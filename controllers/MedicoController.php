@@ -17,6 +17,7 @@ use app\models\Empresa;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Url;
 
 /**
  * MedicoController implements the CRUD actions for Medico model.
@@ -448,22 +449,26 @@ class MedicoController extends Controller {
             $files = $_FILES['file'];
             $numero = isset($_POST['numero']) ? $_POST['numero'] : '';
             $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : 'default';
-
+            $idstipo = isset($_POST['idstipo']) ? $_POST['idstipo'] : 11;//Otros por Defecto = 11
+            $tipoData = \app\models\Imagenes::getTipoImagenesIds($idstipo);
+            Utilities::putMessageLogFile($tipoData);
             $success = null;
             //$paths = [];
             $filenames = $files['name']; //Nombre Archivo
+            //Utilities::putMessageLogFile(Url::base());
             $ext = explode('.', basename($filenames)); //Extension del Archivo
             //$folder = md5(uniqid());
-            $folder_path = $_SERVER['DOCUMENT_ROOT'] . Url::base() . Yii::$app->params["documentFolder"] . $numero; //Ruta Segun Opciones
+            //$folder_path = $_SERVER['DOCUMENT_ROOT'] . Url::base() . Yii::$app->params["documentFolder"] . $numero .'/'.date("Y-m-d") .'/'; //Ruta Segun Opciones
+            $folder_path = $_SERVER['DOCUMENT_ROOT'] . Url::base() . Yii::$app->params["documentFolder"] . $numero .DIRECTORY_SEPARATOR. $tipoData[0]["tdic_nomenclatura"] .DIRECTORY_SEPARATOR; //Ruta Segun Opciones
             Utilities::putMessageLogFile($folder_path);
             if (!file_exists($folder_path)) {
                 mkdir($folder_path, 0777, true); //Se Crea la carpeta
-                mkdir($folder_path . '/productos', 0777, true); //Se Crea la carpeta
+                //mkdir($folder_path . '/productos', 0777, true); //Se Crea la carpeta
             }
-            $producto = ($nombre == 'producto') ? '/productos' : ''; //Si Es producto genera carpeta
-            $folder_path = $folder_path . $producto; //Ruta Segun Opciones
+            
             //$nombre=($nombre=='producto')?$numero.'_'.$filenames:$numero.'_'.$nombre;
-            $nombre = ($nombre == 'producto') ? $filenames : $nombre . "." . array_pop($ext); //Si Es producto Se guarda con el nombre original
+            
+            $nombre = $nombre . "." . array_pop($ext); //Si Es producto Se guarda con el nombre original
             $target = $folder_path . DIRECTORY_SEPARATOR . $nombre;
             if (move_uploaded_file($files['tmp_name'], $target)) {
                 $success = true;

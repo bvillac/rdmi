@@ -26,6 +26,14 @@ class Imagenes {
         //$comando->bindParam(":med_id", $ids, \PDO::PARAM_INT);
         return $comando->queryAll();
     }
+    
+    public static function getTipoImagenesIds($ids){
+        $con = \Yii::$app->db;        
+        $sql="SELECT * FROM " . $con->dbname . ".tipo_dicom WHERE tdic_est_log=1 AND tdic_id=:tdic_id ";
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":tdic_id", $ids, \PDO::PARAM_INT);
+        return $comando->queryAll();
+    }
 
     
 }

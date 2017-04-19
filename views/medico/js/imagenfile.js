@@ -31,7 +31,8 @@ function iniciarUpload() {
         //deleteExtraData: function (previewId, index) { return { key: index, pId: previewId, action: 'delete' }; },
         uploadExtraData: function (previewId, index) {
             //return {"numero":(AccionTipo=="Update")?$('#txt_ftem_cedula').val()+'_'+$('#txth_ftem_id').val():$('#txt_ftem_cedula').val(), "nombre": "cedula"};
-            return {"numero":$('#txth_cedula').val(), "nombre": "cedula"};
+            console.log($('#cmb_tipoDicom').val());
+            return {"numero":$('#txth_cedula').val(),"idstipo":$('#cmb_tipoDicom').val(), "nombre": 'imgRX'};
         }
     });
     
