@@ -252,41 +252,107 @@ INSERT INTO `rdmi`.`omodulo_rol` (`omod_id`, `rol_id`, `omrol_est_log`) VALUES (
 drop table `rdmi`.`dicom`;
 drop table `rdmi`.`imagenes`;
 
-CREATE  TABLE IF NOT EXISTS `rdmi`.`imagenes` (
-  `ima_id` BIGINT(20) NOT NULL AUTO_INCREMENT ,
+--crear cita medica - signos vitales -eventos - resultados - imagenes
+-- crear signos vitales y eventos
+drop table `rdmi`.`cita_medica`;
+drop table `rdmi`.`signos_vitales`;
+drop table `rdmi`.`imagenes`;
+drop table `rdmi`.`resultados`;
+drop table `rdmi`.`eventos`;
+
+---AGREGAR
+
+CREATE  TABLE IF NOT EXISTS `cita_medica` (
+  `cmde_id` BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `tur_numero` INT(5) NOT NULL ,
+  `hora_id` BIGINT(20) NOT NULL ,
+  `fecha_cita` DATE NOT NULL ,
+  `cons_id` BIGINT(20) NOT NULL ,
+  `hora_inicio` TIME NOT NULL ,
+  `tcon_id` BIGINT(20) NOT NULL ,
+  `pac_id` BIGINT(20) NOT NULL ,
+  `cprog_id` BIGINT(20) NOT NULL ,
+  `cmde_motivo` BLOB NULL DEFAULT NULL ,
+  `cmde_observacion` BLOB NULL DEFAULT NULL ,
+  `cmde_estado_asistencia` VARCHAR(1) NULL DEFAULT NULL ,
+  `cmde_est_log` VARCHAR(1) NULL DEFAULT NULL ,
+  `cmde_fec_cre` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ,
+  `cmde_fec_mod` TIMESTAMP NULL DEFAULT NULL ,
+  FOREIGN KEY (`tcon_id` ) REFERENCES `tipo_consulta` (`tcon_id` ),
+  FOREIGN KEY (`hora_id`,`fecha_cita` , `cons_id` , `hora_inicio` ) REFERENCES `horario` (`hora_id`,`fecha_cita`,`cons_id`,`hora_inicio`),
+  FOREIGN KEY (`cprog_id` , `pac_id` ) REFERENCES `cita_programada` (`cprog_id` , `pac_id` )
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE  TABLE IF NOT EXISTS `signos_vitales` (
+  `svit_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `cmde_id` bigint(20) NOT NULL,
+  `svit_peso` decimal(5,2) DEFAULT NULL,
+  `svit_talla` decimal(5,2) DEFAULT NULL,
+  `svit_temperatura` decimal(5,2) DEFAULT NULL,
+  `svit_temperatura_axilar` decimal(5,2) DEFAULT NULL,
+  `svit_presion_arteriar` decimal(5,2) DEFAULT NULL,
+  `svit_frecuencia_respiratoria` decimal(5,2) DEFAULT NULL,
+  `svit_frecuencia_cardiaca` decimal(5,2) DEFAULT NULL,
+  `svit_observacion` text,
+  `svit_est_log` varchar(1) DEFAULT NULL,
+  `svit_fec_cre` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `svit_fec_mod` timestamp NULL DEFAULT NULL,
+  FOREIGN KEY (`cmde_id`) REFERENCES `cita_medica` (`cmde_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `eventos` (
+  `eve_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `cmde_id` bigint(20) NOT NULL,
+  `eve_usu_id` bigint(20) NOT NULL,
+  `eve_nombre` varchar(50) DEFAULT NULL,
+  `eve_observacion` text,
+  `eve_fec_cre` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `eve_fec_mod` timestamp NULL DEFAULT NULL,
+  `eve_est_log` varchar(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `imagenes` (
+  `ima_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
   `pac_id` BIGINT(20) NOT NULL ,
   `tdic_id` BIGINT(20) NOT NULL ,
+  `eve_id` bigint(20) NOT NULL,
+  `ima_titulo` varchar(60) DEFAULT NULL,
+  `ima_nombre_archivo` varchar(60) DEFAULT NULL,
+  `ima_extension_archivo` varchar(5) DEFAULT NULL,
+  `ima_ruta_archivo` varchar(100) DEFAULT NULL,
+  `ima_tamano` varchar(10) DEFAULT NULL,
+  `ima_folio` varchar(20) DEFAULT NULL,
+  `ima_observacion` text,
+  `ima_fecha_publica` timestamp NULL DEFAULT NULL,
+  `ima_fec_cre` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ima_fec_mod` timestamp NULL DEFAULT NULL,
+  `ima_est_log` varchar(1) NOT NULL,
+  FOREIGN KEY (`eve_id` )  REFERENCES `eventos` (`eve_id` ),
+  FOREIGN KEY (`tdic_id` )  REFERENCES `tipo_dicom` (`tdic_id` ),
+  FOREIGN KEY (`pac_id` )  REFERENCES `paciente` (`pac_id` )
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+CREATE  TABLE IF NOT EXISTS `resultados` (
+  `resul_id` BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
   `eve_id` BIGINT(20) NOT NULL ,
-  `ima_titulo` VARCHAR(60) NULL ,
-  `ima_nombre_archivo` VARCHAR(60) NULL DEFAULT NULL ,
-  `ima_extension_archivo` VARCHAR(5) NULL ,
-  `ima_ruta_archivo` VARCHAR(10) NULL ,
-  `ima_tamano` VARCHAR(10) NULL ,
-  `ima_folio` VARCHAR(20) NULL ,
-  `ima_observacion` TEXT NULL ,
-  `ima_fecha_publica` TIMESTAMP NULL ,
-  `ima_fec_cre` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
-  `ima_fec_mod` TIMESTAMP NULL DEFAULT NULL ,
-  `ima_est_log` VARCHAR(1) NOT NULL ,
-  PRIMARY KEY (`ima_id`) ,
-  INDEX `fk_imagenes_eventos1_idx` (`eve_id` ASC) ,
-  INDEX `fk_imagenes_tipo_dicom1_idx` (`tdic_id` ASC) ,
-  INDEX `fk_imagenes_paciente1_idx` (`pac_id` ASC) ,
-  CONSTRAINT `fk_imagenes_eventos1`
-    FOREIGN KEY (`eve_id` )
-    REFERENCES `rdmi`.`eventos` (`eve_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_imagenes_tipo_dicom1`
-    FOREIGN KEY (`tdic_id` )
-    REFERENCES `rdmi`.`tipo_dicom` (`tdic_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_imagenes_paciente1`
-    FOREIGN KEY (`pac_id` )
-    REFERENCES `rdmi`.`paciente` (`pac_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-AUTO_INCREMENT = 1
-DEFAULT CHARACTER SET = utf8
+  `med_id` BIGINT(20) NOT NULL ,
+  `usu_id` BIGINT(20) NULL ,
+  `resul_observacion` TEXT NULL ,
+  `resul_fec_cre` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  `resul_fec_mod` TIMESTAMP NULL DEFAULT NULL ,
+  `resul_est_log` VARCHAR(1) NOT NULL ,
+  FOREIGN KEY (`eve_id` )  REFERENCES `eventos` (`eve_id` ),
+  FOREIGN KEY (`med_id` )  REFERENCES `medico` (`med_id` )
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+INSERT INTO `rdmi`.`cita_medica` (`tur_numero`, `hora_id`, `fecha_cita`, `cons_id`, `hora_inicio`, `tcon_id`, `pac_id`, `cprog_id`, `cmde_estado_asistencia`, `cmde_est_log`) VALUES ('1', '1', '2016-08-27', '3', '08:00:00', '2', '1', '1', '1', '1');
+
+INSERT INTO `rdmi`.`eventos` (`cmde_id`, `eve_usu_id`, `eve_nombre`, `eve_est_log`) VALUES ('1', '1', 'Imagenes', '1');
+
+ALTER TABLE `rdmi`.`imagenes` CHANGE COLUMN `ima_ruta_archivo` `ima_ruta_archivo` VARCHAR(100) NULL DEFAULT NULL  ;
+
+
+
+
+

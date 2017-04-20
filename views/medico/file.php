@@ -7,6 +7,7 @@ $this->title = Yii::t('application', 'Upload and Download Files'); //. ' ' . $mo
 ?>
 
 <?= Html::hiddenInput('txth_cedula','',['id' =>'txth_cedula']); ?>
+<?= Html::hiddenInput('txth_ids','',['id' =>'txth_ids']); ?>
 <div class="col-md-12">
     <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">

@@ -28,7 +28,7 @@ use yii\data\ArrayDataProvider;
                         'select' => new JsExpression("function( event, ui ) {
                                 //alert(ui.item.id);
                                 //actualizaBuscarPersona(ui.item.PER_ID); 
-                                //$('#txth_ids').val(ui.item.Cedula);
+                                $('#txth_ids').val(ui.item.id);
                                 $('#txth_cedula').val(ui.item.Cedula);
                                 //actualizarGrid();
                          }")

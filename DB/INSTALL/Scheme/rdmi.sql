@@ -334,21 +334,21 @@ CREATE  TABLE IF NOT EXISTS  `horario` (
 -- -----------------------------------------------------
 -- table  `agendar_cita`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `agendar_cita` (
-  `acit_id` BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-  `cprog_id` BIGINT(20) NOT NULL ,
-  `pac_id` BIGINT(20) NOT NULL ,
-  `hora_id` BIGINT(20) NOT NULL ,
-  `fecha_cita` DATE NULL ,
-  `cons_id` BIGINT(20) NULL ,
-  `hora_inicio` TIME NULL ,
-  `acit_motivo` BLOB NULL DEFAULT NULL ,
-  `acit_est_log` VARCHAR(1) NULL DEFAULT NULL ,
-  `acit_fec_cre` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ,
-  `acit_fec_mod` TIMESTAMP NULL DEFAULT NULL ,
-  FOREIGN KEY (`cprog_id` , `pac_id` ) REFERENCES `cita_programada` (`cprog_id` , `pac_id` ),
-  FOREIGN KEY (`hora_id` , `fecha_cita` , `cons_id` , `hora_inicio` ) REFERENCES `horario` (`hora_id`,`fecha_cita`,`cons_id` , `hora_inicio`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+-- CREATE  TABLE IF NOT EXISTS `agendar_cita` (
+--   `acit_id` BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+--   `cprog_id` BIGINT(20) NOT NULL ,
+--   `pac_id` BIGINT(20) NOT NULL ,
+--   `hora_id` BIGINT(20) NOT NULL ,
+--   `fecha_cita` DATE NULL ,
+--   `cons_id` BIGINT(20) NULL ,
+--   `hora_inicio` TIME NULL ,
+--   `acit_motivo` BLOB NULL DEFAULT NULL ,
+--   `acit_est_log` VARCHAR(1) NULL DEFAULT NULL ,
+--   `acit_fec_cre` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ,
+--   `acit_fec_mod` TIMESTAMP NULL DEFAULT NULL ,
+--   FOREIGN KEY (`cprog_id` , `pac_id` ) REFERENCES `cita_programada` (`cprog_id` , `pac_id` ),
+--   FOREIGN KEY (`hora_id` , `fecha_cita` , `cons_id` , `hora_inicio` ) REFERENCES `horario` (`hora_id`,`fecha_cita`,`cons_id` , `hora_inicio`)
+-- ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
 -- table  `cita_medica`
@@ -361,7 +361,8 @@ CREATE  TABLE IF NOT EXISTS `cita_medica` (
   `cons_id` BIGINT(20) NOT NULL ,
   `hora_inicio` TIME NOT NULL ,
   `tcon_id` BIGINT(20) NOT NULL ,
-  `acit_id` BIGINT(20) NOT NULL ,
+  `pac_id` BIGINT(20) NOT NULL ,
+  `cprog_id` BIGINT(20) NOT NULL ,
   `cmde_motivo` BLOB NULL DEFAULT NULL ,
   `cmde_observacion` BLOB NULL DEFAULT NULL ,
   `cmde_estado_asistencia` VARCHAR(1) NULL DEFAULT NULL ,
@@ -370,9 +371,8 @@ CREATE  TABLE IF NOT EXISTS `cita_medica` (
   `cmde_fec_mod` TIMESTAMP NULL DEFAULT NULL ,
   FOREIGN KEY (`tcon_id` ) REFERENCES `tipo_consulta` (`tcon_id` ),
   FOREIGN KEY (`hora_id`,`fecha_cita` , `cons_id` , `hora_inicio` ) REFERENCES `horario` (`hora_id`,`fecha_cita`,`cons_id`,`hora_inicio`),
-  FOREIGN KEY (`acit_id` ) REFERENCES `agendar_cita` (`acit_id` )
+  FOREIGN KEY (`cprog_id` , `pac_id` ) REFERENCES `cita_programada` (`cprog_id` , `pac_id` )
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
 
 -- -----------------------------------------------------
 -- table  `signos_vitales`
@@ -662,6 +662,8 @@ CREATE TABLE IF NOT EXISTS `eventos` (
 
 CREATE TABLE IF NOT EXISTS `imagenes` (
   `ima_id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+  `pac_id` BIGINT(20) NOT NULL ,
+  `tdic_id` BIGINT(20) NOT NULL ,
   `eve_id` bigint(20) NOT NULL,
   `ima_titulo` varchar(60) DEFAULT NULL,
   `ima_nombre_archivo` varchar(60) DEFAULT NULL,
@@ -673,7 +675,10 @@ CREATE TABLE IF NOT EXISTS `imagenes` (
   `ima_fecha_publica` timestamp NULL DEFAULT NULL,
   `ima_fec_cre` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ima_fec_mod` timestamp NULL DEFAULT NULL,
-  `ima_est_log` varchar(1) NOT NULL
+  `ima_est_log` varchar(1) NOT NULL,
+  FOREIGN KEY (`eve_id` )  REFERENCES `eventos` (`eve_id` ),
+  FOREIGN KEY (`tdic_id` )  REFERENCES `tipo_dicom` (`tdic_id` ),
+  FOREIGN KEY (`pac_id` )  REFERENCES `paciente` (`pac_id` )
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --

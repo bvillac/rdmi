@@ -448,6 +448,7 @@ class MedicoController extends Controller {
             //Recibe Paramentros
             $files = $_FILES['file'];
             $numero = isset($_POST['numero']) ? $_POST['numero'] : '';
+            $idsPac = isset($_POST['idsPac']) ? $_POST['idsPac'] : '';
             $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : 'default';
             $idstipo = isset($_POST['idstipo']) ? $_POST['idstipo'] : 11;//Otros por Defecto = 11
             $tipoData = \app\models\Imagenes::getTipoImagenesIds($idstipo);
@@ -463,16 +464,25 @@ class MedicoController extends Controller {
             Utilities::putMessageLogFile($folder_path);
             if (!file_exists($folder_path)) {
                 mkdir($folder_path, 0777, true); //Se Crea la carpeta
-                //mkdir($folder_path . '/productos', 0777, true); //Se Crea la carpeta
             }
-            
-            //$nombre=($nombre=='producto')?$numero.'_'.$filenames:$numero.'_'.$nombre;
             
             $nombre = $nombre . "." . array_pop($ext); //Si Es producto Se guarda con el nombre original
             $target = $folder_path . DIRECTORY_SEPARATOR . $nombre;
             if (move_uploaded_file($files['tmp_name'], $target)) {
-                $success = true;
+                //$success = true;
                 //$paths[] = $target;
+                //Ingresa Informacion de Imagenes
+                $data = array();
+                $data["pac_id"]  = $idsPac;
+                $data["tdic_id"]  = $idstipo;
+                $data["eve_id"]  = 1;
+                $data["ima_titulo"]  = $tipoData[0]["tdic_detalle"];
+                $data["ima_nombre_archivo"]  = $nombre;
+                $data["ima_extension_archivo"]  = array_pop($ext);
+                $data["ima_ruta_archivo"]  = $folder_path;
+                $data["ima_observacion"]  = '';
+                $success=\app\models\Imagenes::insertarImagenes($data);
+                
             } else {
                 $success = false;
             }
