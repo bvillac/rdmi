@@ -8,6 +8,7 @@ $this->title = Yii::t('application', 'Upload and Download Files'); //. ' ' . $mo
 
 <?= Html::hiddenInput('txth_cedula','',['id' =>'txth_cedula']); ?>
 <?= Html::hiddenInput('txth_ids','',['id' =>'txth_ids']); ?>
+<?= Html::hiddenInput('txth_errorFile', Yii::t("formulario", "The file extension is not valid or exceeds the maximum size in MB recommending him try again") ,['id' =>'txth_errorFile']); ?>
 <div class="col-md-12">
     <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">

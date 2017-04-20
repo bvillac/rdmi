@@ -452,7 +452,7 @@ class MedicoController extends Controller {
             $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : 'default';
             $idstipo = isset($_POST['idstipo']) ? $_POST['idstipo'] : 11;//Otros por Defecto = 11
             $tipoData = \app\models\Imagenes::getTipoImagenesIds($idstipo);
-            Utilities::putMessageLogFile($tipoData);
+            //Utilities::putMessageLogFile($tipoData);
             $success = null;
             //$paths = [];
             $filenames = $files['name']; //Nombre Archivo
@@ -461,7 +461,7 @@ class MedicoController extends Controller {
             //$folder = md5(uniqid());
             //$folder_path = $_SERVER['DOCUMENT_ROOT'] . Url::base() . Yii::$app->params["documentFolder"] . $numero .'/'.date("Y-m-d") .'/'; //Ruta Segun Opciones
             $folder_path = $_SERVER['DOCUMENT_ROOT'] . Url::base() . Yii::$app->params["documentFolder"] . $numero .DIRECTORY_SEPARATOR. $tipoData[0]["tdic_nomenclatura"] .DIRECTORY_SEPARATOR; //Ruta Segun Opciones
-            Utilities::putMessageLogFile($folder_path);
+            //Utilities::putMessageLogFile($folder_path);
             if (!file_exists($folder_path)) {
                 mkdir($folder_path, 0777, true); //Se Crea la carpeta
             }

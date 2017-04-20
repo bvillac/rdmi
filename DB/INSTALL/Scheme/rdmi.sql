@@ -668,7 +668,7 @@ CREATE TABLE IF NOT EXISTS `imagenes` (
   `ima_titulo` varchar(60) DEFAULT NULL,
   `ima_nombre_archivo` varchar(60) DEFAULT NULL,
   `ima_extension_archivo` varchar(5) DEFAULT NULL,
-  `ima_ruta_archivo` varchar(10) DEFAULT NULL,
+  `ima_ruta_archivo` varchar(100) DEFAULT NULL,
   `ima_tamano` varchar(10) DEFAULT NULL,
   `ima_folio` varchar(20) DEFAULT NULL,
   `ima_observacion` text,
