@@ -36,7 +36,7 @@ class Imagenes {
     }
     
     public static function insertarImagenes($data) {
-        Utilities::putMessageLogFile($data);
+        //Utilities::putMessageLogFile($data);
         $arroout = array();
         $con = \Yii::$app->db;
         $trans = $con->beginTransaction();        

@@ -16,6 +16,7 @@ function iniciarUpload() {
         showPreview: false,
         showUpload: false, // hide upload button
         showRemove: true, // hide remove button
+        removeLabel:'Eliminar',
         uploadUrl: $('#txth_base').val() + "/medico/uploadfile",
         //deleteUrl: "/Message/AsyncRemoveAction",
         maxFileSize: FileSize,
@@ -27,39 +28,38 @@ function iniciarUpload() {
         msgFilesTooMany: "Number of Files selected for upload ({n}) exceeds maximum allowed limit of {m}",
         msgInvalidFileType: 'Invalid type for file "{name}". Only {types} files are supported.',
         msgUploadEnd:'Archivo Agregado',
+        msgValidationError:'File Upload Error',
         //msgInvalidFileExtension: 'Invalid extension for file {name}. Only "{extensions} files are supported.',
         uploadAsync: true,
         //deleteExtraData: function (previewId, index) { return { key: index, pId: previewId, action: 'delete' }; },
         msgFileNotFound:function (previewId, index) {
             showAlert('NO_OK', 'error', {"wtmessage": $('#txth_errorFile').val(), "title":'Información 1'});
         },
-        msgAjaxError:function (previewId, index) {
-            showAlert('NO_OK', 'error', {"wtmessage": $('#txth_errorFile').val(), "title":'Información xxx'});
-        },
         uploadExtraData: function (previewId, index) {
             //return {"numero":(AccionTipo=="Update")?$('#txt_ftem_cedula').val()+'_'+$('#txth_ftem_id').val():$('#txt_ftem_cedula').val(), "nombre": "cedula"};
-            //console.log($('#cmb_tipoDicom').val());
-            if(subirDocumentos()){
-                return {"numero":$('#txth_cedula').val(),"idsPac":$('#txth_ids').val(),"idstipo":$('#cmb_tipoDicom').val(), "nombre": 'imgRX'};
-            }else{
-                return false;
-            }
-            
+              return {"numero":$('#txth_cedula').val(),"idsPac":$('#txth_ids').val(),"idstipo":$('#cmb_tipoDicom').val(), "nombre": 'imgRX'};           
         }
     });
     
-    $('#txt_dicom_file').on('filebrowse', function (event) {
-        showAlert('NO_OK', 'error', {"wtmessage": 'no puedo', "title":'Información'});
-        return false
-    });
-    
+    //Este evento se activa cuando se hace clic en el botón de exploración de archivos para abrir el 
+    //cuadro de diálogo de selección de archivos. Ejemplo:
+//    $('#txt_dicom_file').on('filebrowse', function (event) {
+//        if(subirDocumentos()){
+//            $('#txt_dicom_file').fileinput('upload');//Evento Cargar
+//            //$('#txt_dicom_file').fileinput('refresh');
+//        }
+//    });
+    //Este evento se activa después de seleccionar un lote de archivos y mostrarlos en la vista previa
     $('#txt_dicom_file').on('filebatchselected ', function (event) {
-        $('#txth_dicom_file').val($('#txt_dicom_file').val())
-        $('#txt_dicom_file').fileinput('upload');
+        if(subirDocumentos()){//Verofica que las opciones de subida se cumplan
+            $('#txth_dicom_file').val($('#txt_dicom_file').val())
+            $('#txt_dicom_file').fileinput('upload');
+        }
     });
     $('#txt_dicom_file').on('fileuploaderror', function (event, data, previewId, index) { 
         $('#txth_dicom_file').val('');
-        showAlert('NO_OK', 'error', {"wtmessage": $('#txth_errorFile').val(), "title":'Información  22'});
+        showAlert('NO_OK', 'error', {"wtmessage": $('#txth_errorFile').val(), "title":'Información'});
+        $('#txt_dicom_file').fileinput('clear');
     });
     
     
@@ -69,7 +69,7 @@ function subirDocumentos() {
     var estado = true;
     //Valores Obligatorios
     var mensaje = '';
-    if ($('#txt_dicom_file').val() == '') {//Verifico si tiene Datos
+    if ($('#txt_buscarData').val() == '') {//Verifico si tiene Datos
         mensaje += 'Ingresar datos del Paciente, <br>';
         estado = false;//Retorna Error
     }

@@ -449,7 +449,7 @@ class MedicoController extends Controller {
             $files = $_FILES['file'];
             $numero = isset($_POST['numero']) ? $_POST['numero'] : '';
             $idsPac = isset($_POST['idsPac']) ? $_POST['idsPac'] : '';
-            $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : 'default';
+            //$nombre = isset($_POST['nombre']) ? $_POST['nombre'] : 'default';
             $idstipo = isset($_POST['idstipo']) ? $_POST['idstipo'] : 11;//Otros por Defecto = 11
             $tipoData = \app\models\Imagenes::getTipoImagenesIds($idstipo);
             //Utilities::putMessageLogFile($tipoData);
@@ -458,6 +458,7 @@ class MedicoController extends Controller {
             $filenames = $files['name']; //Nombre Archivo
             //Utilities::putMessageLogFile(Url::base());
             $ext = explode('.', basename($filenames)); //Extension del Archivo
+            Utilities::putMessageLogFile($ext);
             //$folder = md5(uniqid());
             //$folder_path = $_SERVER['DOCUMENT_ROOT'] . Url::base() . Yii::$app->params["documentFolder"] . $numero .'/'.date("Y-m-d") .'/'; //Ruta Segun Opciones
             $folder_path = $_SERVER['DOCUMENT_ROOT'] . Url::base() . Yii::$app->params["documentFolder"] . $numero .DIRECTORY_SEPARATOR. $tipoData[0]["tdic_nomenclatura"] .DIRECTORY_SEPARATOR; //Ruta Segun Opciones
@@ -466,7 +467,8 @@ class MedicoController extends Controller {
                 mkdir($folder_path, 0777, true); //Se Crea la carpeta
             }
             
-            $nombre = $nombre . "." . array_pop($ext); //Si Es producto Se guarda con el nombre original
+            //$nombre = $nombre . "." . array_pop($ext); //Si Es producto Se guarda con el nombre original
+            $nombre = uniqid() . "." . array_pop($ext); //Si Es producto Se guarda con el nombre original
             $target = $folder_path . DIRECTORY_SEPARATOR . $nombre;
             if (move_uploaded_file($files['tmp_name'], $target)) {
                 //$success = true;
@@ -478,7 +480,7 @@ class MedicoController extends Controller {
                 $data["eve_id"]  = 1;
                 $data["ima_titulo"]  = $tipoData[0]["tdic_detalle"];
                 $data["ima_nombre_archivo"]  = $nombre;
-                $data["ima_extension_archivo"]  = array_pop($ext);
+                $data["ima_extension_archivo"]=array_pop($ext);
                 $data["ima_ruta_archivo"]  = $folder_path;
                 $data["ima_observacion"]  = '';
                 $success=\app\models\Imagenes::insertarImagenes($data);
