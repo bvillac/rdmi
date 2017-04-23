@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use yii\helpers\Html;
 use app\models\Medico;
 use app\models\MedicoSearch;
 use app\models\Pais;
@@ -284,7 +285,7 @@ class MedicoController extends Controller {
             
         }
         return $this->render('file', [
-
+                       "modelfile" => \app\models\Imagenes::consultarFileall($data),
                     ]);
     }
     
@@ -458,7 +459,7 @@ class MedicoController extends Controller {
             $filenames = $files['name']; //Nombre Archivo
             //Utilities::putMessageLogFile(Url::base());
             $ext = explode('.', basename($filenames)); //Extension del Archivo
-            Utilities::putMessageLogFile($ext);
+            //Utilities::putMessageLogFile($ext);
             //$folder = md5(uniqid());
             //$folder_path = $_SERVER['DOCUMENT_ROOT'] . Url::base() . Yii::$app->params["documentFolder"] . $numero .'/'.date("Y-m-d") .'/'; //Ruta Segun Opciones
             $folder_path = $_SERVER['DOCUMENT_ROOT'] . Url::base() . Yii::$app->params["documentFolder"] . $numero .DIRECTORY_SEPARATOR. $tipoData[0]["tdic_nomenclatura"] .DIRECTORY_SEPARATOR; //Ruta Segun Opciones
@@ -505,6 +506,7 @@ class MedicoController extends Controller {
         //Obtener la extensión del archivo
         $extension = $file_info["extension"];
 
+        
         if (is_array($extensions)) {
             //Si el argumento $extensions es un array
             //Comprobar las extensiones permitidas
@@ -519,6 +521,7 @@ class MedicoController extends Controller {
                     header("Content-Transfer-Encoding: binary");
                     //header("Content-Length: " . $size);
                     // Descargar archivo
+                    Utilities::putMessageLogFile($path);
                     readfile($path);
                     //Correcto
                     return true;
@@ -535,7 +538,8 @@ class MedicoController extends Controller {
         if (Yii::$app->request->get("file")) {
             //Si el archivo no se ha podido descargar
             //downloadFile($dir, $file, $extensions=[])
-            if (!$this->downloadFile(Url::base(true) . "/archivos/", Html::encode($_GET["file"]), ["pdf", "txt", "doc"])) {
+            //if (!$this->downloadFile(Url::base(true) . "/archivos/", Html::encode($_GET["file"]), [ "jpg", "png","pdf", "mp3", "mp4"])) {
+            if (!$this->downloadFile(Url::base(true) . "/archivos/", Html::encode($_GET["file"]), [ "jpg", "png","pdf", "mp3", "mp4"])) {
                 //Mensaje flash para mostrar el error
                 //Yii::$app->session->setFlash("errordownload");
             }
@@ -543,8 +547,44 @@ class MedicoController extends Controller {
         return $this->render("download");
     }
     
+    public function actionDeletefile() {
+        $mensaje = array();
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
+            //$ids = isset($data['ids']) ? $data['ids'] : NULL;
+            $ids = isset($data['ids']) ? base64_decode($data['ids']) : NULL;
+            //Utilities::putMessageLogFile($ids);
+            $resul = \app\models\Imagenes::eliminarFile($ids);  
+            if ($resul) {
+                $message = ["info" => Yii::t('exception', '<strong>Well done!</strong> your information was successfully delete.'),
+                        "dataComentario" =>$mensaje
+                    ];
+                echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message);
+            }else{
+                $message = ["info" => Yii::t('exception', 'The above error occurred while the Web server was processing your request.'),
+                        "dataComentario" =>$mensaje
+                    ];
+                echo Utilities::ajaxResponse('NO_OK', 'alert', Yii::t('jslang', 'Error'), 'false', $message);
+            }
+            return;
+        }
+    }
     
     
-    
+    public function actionDownloadfile($ids) {        
+        $ids = isset($_GET['ids']) ? base64_decode($_GET['ids']) : NULL;
+         
+        $data=  \app\models\Imagenes::getImagenesIds($ids);
+        
+        
+        //if (!$this->downloadFile(Url::base(true) . "/archivos/", Html::encode($_GET["file"]), [])) {
+        if (!$this->downloadFile($data[0]["ima_ruta_archivo"], Html::encode($data[0]["ima_nombre_archivo"]), [ "jpg", "png","pdf", "mp3", "mp4"])) {
+            //Mensaje flash para mostrar el error
+            //Yii::$app->session->setFlash("errordownload");
+        }
+        return $this->render("download");
+
+    }
+
 
 }

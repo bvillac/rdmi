@@ -18,7 +18,10 @@ $this->title = Yii::t('application', 'Upload and Download Files'); //. ' ' . $mo
             <div class="tab-pane active" id="paso1">
                 <form class="form-horizontal">
                     <?= $this->render('_file_header', 
-                        ['especialidades' => 0,
+                        ['modelfile' => 0,
+                        'empresas' => 0]) ?>
+                    <?= $this->render('_file_body', 
+                        ['modelfile' => $modelfile,
                         'empresas' => 0]) ?>
                 </form>
             </div><!-- /.tab-pane -->
