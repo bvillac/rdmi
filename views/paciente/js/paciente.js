@@ -31,8 +31,8 @@ $(document).ready(function () {
     //WEBRTC
     $('#open-room').click(function () {
         disableInputButtons();
-        //connection.open(document.getElementById('room-id').value, function () {
         connection.open($('#txth_room').val(), function () {
+            document.getElementById('infoVideo').innerHTML = 'Video Chat Iniciado... ';
             showRoomURL(connection.sessionid);
         });
     });
@@ -56,7 +56,8 @@ $(document).ready(function () {
             // use this method if you did NOT set "autoCloseEntireSession===true"
             // for more info: https://github.com/muaz-khan/RTCMultiConnection#closeentiresession
             connection.closeEntireSession(function () {
-                document.querySelector('h1').innerHTML = 'Toda la sesión ha sido cerrada.';
+                //document.querySelector('h3').innerHTML = 'Toda la sesión ha sido cerrada.';
+                document.getElementById('infoVideo').innerHTML = 'Toda la sesión ha sido cerrada.';
             });
         } else {
             connection.leave();

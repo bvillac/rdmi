@@ -14,7 +14,8 @@ video {
     object-fit: fill;
     width: 30%;
 }
-button,
+
+/*button,
 input,
 select {
     font-weight: normal;
@@ -29,5 +30,5 @@ select {
 .make-center {
     text-align: center;
     padding: 5px 10px;
-}
+}*/
 

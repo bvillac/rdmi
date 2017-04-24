@@ -43,6 +43,80 @@ $(document).ready(function () {
         clearTab2();
     });
     
+    
+    //WEBRTC
+    $('#open-room').click(function () {
+        disableInputButtons();
+        connection.open($('#txth_room').val(), function () {
+            document.getElementById('infoVideo').innerHTML = 'Video Chat Iniciado... ';
+            showRoomURL(connection.sessionid);
+        });
+    });
+    $('#join-room').click(function () {
+        disableInputButtons();
+        //connection.join(document.getElementById('room-id').value);
+        connection.join($('#txth_room').val());
+    });
+    $('#open-or-join-room').click(function () {
+        disableInputButtons();
+        //connection.openOrJoin(document.getElementById('room-id').value, function (isRoomExists, roomid) {
+        connection.openOrJoin($('#txth_room').val(), function (isRoomExists, roomid) {
+            if (!isRoomExists) {
+                showRoomURL(roomid);
+            }
+        });
+    });
+    $('#btn-leave-room').click(function () {
+        this.disabled = true;
+        if (connection.isInitiator) {
+            // use this method if you did NOT set "autoCloseEntireSession===true"
+            // for more info: https://github.com/muaz-khan/RTCMultiConnection#closeentiresession
+            connection.closeEntireSession(function () {
+                //document.querySelector('h3').innerHTML = 'Toda la sesión ha sido cerrada.';
+                document.getElementById('infoVideo').innerHTML = 'Toda la sesión ha sido cerrada.';
+            });
+        } else {
+            connection.leave();
+        }
+    });
+    
+    $('#share-file').click(function () {
+        var fileSelector = new FileSelector();
+        fileSelector.selectSingleFile(function (file) {
+            connection.send(file);
+        });
+    });
+    
+    $('#input-text-chat').keyup(function (e) {
+        if (e.keyCode != 13)
+            return;
+
+        // removing trailing/leading whitespace (Elimina Espacios En Blanco)
+        this.value = this.value.replace(/^\s+|\s+$/g, '');
+
+        if (!this.value.length)
+            return;
+        
+        var mensaje=JSON.stringify({Ids : $('#txth_userweb').val(),name : $('#txth_nombres').val(), message : this.value})
+        connection.send(mensaje);
+        appendDIV(mensaje);
+        this.value = '';//Limpiar la Caja de Texto
+    });
+    
+    $('#send-text').click(function () {
+        if (!this.value.length)
+            return;
+        var mensaje=JSON.stringify({Ids : $('#txth_userweb').val(),name : $('#txth_nombres').val(), message : this.value})
+        connection.send(mensaje);
+        appendDIV(mensaje);
+        $('#input-text-chat').val('');
+        
+    });
+    
+
+    
+    
+    
 });
 
 function obtenerCanton() {

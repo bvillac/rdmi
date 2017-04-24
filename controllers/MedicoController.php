@@ -574,6 +574,15 @@ class MedicoController extends Controller {
         return $this->render("download");
 
     }
+    
+    public function actionVideo()
+    {
+        //$data = null;
+        //$dataProvider = Paciente::consultarPacientes($data);
+        return $this->render('video', [
+                    //'model' => $dataProvider,
+        ]);
+    }
 
 
 }

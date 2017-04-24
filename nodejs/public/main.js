@@ -9,8 +9,8 @@
 var connection = new RTCMultiConnection();
 // by default, socket.io server is assumed to be deployed on your own URL
 //connection.socketURL = '/';
-//connection.socketURL = 'https://192.168.10.156:9001/';
-connection.socketURL = 'https://192.168.10.100:9001/';
+connection.socketURL = 'https://192.168.10.156:9001/';
+//connection.socketURL = 'https://192.168.10.100:9001/';
 // comment-out below line if you do not have your own socket.io server
 connection.socketMessageEvent = 'audio-video-file-chat-demo';
 connection.enableFileSharing = true; // by default, it is "false".
@@ -23,6 +23,8 @@ connection.sdpConstraints.mandatory = {
     OfferToReceiveAudio: true,
     OfferToReceiveVideo: true
 };
+
+
 connection.videosContainer = document.getElementById('videos-container');
 connection.onstream = function(event) {
     var width = parseInt(connection.videosContainer.clientWidth / 2) - 20;
@@ -102,9 +104,10 @@ function showClockChat() {
 
 
 function appendDIV(event) {
+    //var chatContainer = document.querySelector('.chat-output');
     var bandChat=false;
     var message = JSON.parse(event.data || event);
-    console.log(message);
+    //console.log(message);
     //var nombres=message.name;
     //var div = document.createElement('div');
     //div.innerHTML = event.data || event;
@@ -140,21 +143,24 @@ connection.onmessage = appendDIV;
 connection.filesContainer = document.getElementById('file-container');
 
 connection.onopen = function() {
-    document.getElementById('share-file').disabled = false;
+    //document.getElementById('share-file').disabled = false;
     document.getElementById('input-text-chat').disabled = false;
-    document.getElementById('btn-leave-room').disabled = false;
-    document.querySelector('h1').innerHTML = 'Estás conectado con: ' + connection.getAllParticipants().join(', ');
+    document.getElementById('btn-leave-room').disabled = false;    
+    //document.querySelector('h3').innerHTML = 'Estás conectado con: ' + connection.getAllParticipants().join(', ');
+    document.getElementById('infoVideo').innerHTML = 'Estás conectado con: ' + connection.getAllParticipants().join(', ');
 };
 connection.onclose = function() {
     if(connection.getAllParticipants().length) {
-        document.querySelector('h1').innerHTML = 'Todavía estás conectado con: ' + connection.getAllParticipants().join(', ');
+        //document.querySelector('h3').innerHTML = 'Todavía estás conectado con: ' + connection.getAllParticipants().join(', ');
+        document.getElementById('infoVideo').innerHTML = 'Todavía estás conectado con: ' + connection.getAllParticipants().join(', ');
     }
     else {
-        document.querySelector('h1').innerHTML = 'Parece que la sesión ha sido cerrada o todos los participantes se han ido.';
+        document.getElementById('infoVideo').innerHTML = 'Parece que la sesión ha sido cerrada o todos los participantes se han ido.';
+        //document.querySelector('h3').innerHTML = 'Parece que la sesión ha sido cerrada o todos los participantes se han ido.';
     }
 };
 connection.onEntireSessionClosed = function(event) {
-    document.getElementById('share-file').disabled = true;
+    //document.getElementById('share-file').disabled = true;
     document.getElementById('input-text-chat').disabled = true;
     document.getElementById('btn-leave-room').disabled = true;
     document.getElementById('open-or-join-room').disabled = false;
@@ -166,7 +172,8 @@ connection.onEntireSessionClosed = function(event) {
     });
     // don't display alert for moderator
     if(connection.userid === event.userid) return;
-    document.querySelector('h1').innerHTML = 'Toda la sesión ha sido cerrada por el moderador: ' + event.userid;
+    //document.querySelector('h3').innerHTML = 'Toda la sesión ha sido cerrada por el moderador: ' + event.userid;
+    document.getElementById('infoVideo').innerHTML = 'Toda la sesión ha sido cerrada por el moderador: ' + event.userid;
 };
 connection.onUserIdAlreadyTaken = function(useridAlreadyTaken, yourNewUserId) {
     // seems room is already opened
