@@ -534,18 +534,7 @@ class MedicoController extends Controller {
         return false;
     }
 
-    public function actionDownload() {
-        if (Yii::$app->request->get("file")) {
-            //Si el archivo no se ha podido descargar
-            //downloadFile($dir, $file, $extensions=[])
-            //if (!$this->downloadFile(Url::base(true) . "/archivos/", Html::encode($_GET["file"]), [ "jpg", "png","pdf", "mp3", "mp4"])) {
-            if (!$this->downloadFile(Url::base(true) . "/archivos/", Html::encode($_GET["file"]), [ "jpg", "png","pdf", "mp3", "mp4"])) {
-                //Mensaje flash para mostrar el error
-                //Yii::$app->session->setFlash("errordownload");
-            }
-        }
-        return $this->render("download");
-    }
+   
     
     public function actionDeletefile() {
         $mensaje = array();
