@@ -29,11 +29,20 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="box-tools pull-right">
 
             </div>
-<!--            <h3 class="box-title pull-right">
-                <?= Html::a('<span class="fa fa-fw fa-paper-plane"></span> ' . Yii::t("accion", "Enviar Solicitud"), 'javascript:', ['id' => 'btn_send', 'class' => 'btn btn-primary btn-block']); ?>
-            </h3>    -->
         </div>
         <div class="box-body">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="cmb_listaContacto" class="col-sm-3 control-label"><?= Yii::t("formulario", "Pacientes") ?></label>
+                    <div class="col-sm-9">
+                        <?=
+                        Html::dropDownList(
+                                "cmb_listaContacto", 0, ['0' => Yii::t('formulario', '-Select-')] + ArrayHelper::map(\app\models\Imagenes::getTipoImagenesAll(), 'Ids', 'Nombre'), ["class" => "form-control", "id" => "cmb_listaContacto"]
+                        )
+                        ?>
+                    </div>
+                </div>
+            </div>
 
             <div class="col-md-12">
                 <!--<div class="alert alert-success alert-dismissible">
@@ -98,18 +107,18 @@ $this->params['breadcrumbs'][] = $this->title;
             <div id="direct-chat-messages" class="direct-chat-messages">
                 
                 <!-- Message. Default to the left -->
-                <div class="direct-chat-msg right">
+<!--                <div class="direct-chat-msg right">
                     <div class="direct-chat-info clearfix">
                         <span class="direct-chat-name pull-right">Admin</span>
-                        <!--<span class="direct-chat-timestamp pull-left">23 Jan 5:37 pm</span>-->
+                        <span class="direct-chat-timestamp pull-left">23 Jan 5:37 pm</span>
                     </div>
-                    <!-- /.direct-chat-info -->
+                     /.direct-chat-info 
                     
                     <div class="direct-chat-text">
                         Hola Usuario
                     </div>
-                    <!-- /.direct-chat-text -->
-                </div>
+                     /.direct-chat-text 
+                </div>-->
                 <!-- /.direct-chat-msg -->
 
                 

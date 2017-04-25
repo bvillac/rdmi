@@ -577,8 +577,17 @@ class MedicoController extends Controller {
     
     public function actionVideo()
     {
-        //$data = null;
-        //$dataProvider = Paciente::consultarPacientes($data);
+        $data = null;
+        if (Yii::$app->request->isAjax) {
+            $data =(Yii::$app->request->post())? Yii::$app->request->post():Yii::$app->request->get();
+            if (isset($data["getlista"])) {
+                $message = ["centroatencion" => Paciente::getListaPaciente($data['mate_id'])]; //Empresa::getCentroMedicoEmp($data['mate_id'])];
+                echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message);
+                return;
+            }
+            
+        }
+            
         return $this->render('video', [
                     //'model' => $dataProvider,
         ]);

@@ -36,6 +36,11 @@ $(document).ready(function () {
     $('#cmd_saveHora').click(function () {
         guardarDatosHoras('Create');
     });
+    $('#cmb_listaContacto').change(function () {
+        
+        //obtenerListContacto();
+    });
+    
     /*
      * TAB2
      */
@@ -155,6 +160,19 @@ function obtenerAdmConsultorio() {
         if (response.status == "OK") {
             var data = response.message;
             setComboData(data.consultorio, "cmb_consultorio");
+        }
+    }, true);
+}
+
+function obtenerListContacto() {
+    var link = $('#txth_base').val() + "/medico/video";
+    var arrParams = new Object();
+    arrParams.mate_id = $('#cmb_listaContacto').val();
+    arrParams.getlista = true;
+    requestHttpAjax(link, arrParams, function (response) {
+        if (response.status == "OK") {
+            var data = response.message;
+            setComboData(data.centroatencion, "cmb_listaContacto");
         }
     }, true);
 }

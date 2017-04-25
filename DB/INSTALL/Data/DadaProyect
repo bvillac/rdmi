@@ -1,6 +1,9 @@
 
 https://developer.mozilla.org/es/docs/Web/API/WebRTC_API/Connectivity
 
+Plantilla
+https://almsaeedstudio.com/preview
+
 Conceptos Basicos
 STUN :- para obtener la dirección IP de su ordenador,  para funcionar como servidores de retransmisión en caso de peer-to-peer falla la comunicación. debido a problema de NAT
 

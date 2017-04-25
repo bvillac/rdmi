@@ -98,18 +98,18 @@ $this->params['breadcrumbs'][] = $this->title;
             <div id="direct-chat-messages" class="direct-chat-messages">
                 
                 <!-- Message. Default to the left -->
-                <div class="direct-chat-msg right">
+<!--                <div class="direct-chat-msg right">
                     <div class="direct-chat-info clearfix">
                         <span class="direct-chat-name pull-right">Admin</span>
-                        <!--<span class="direct-chat-timestamp pull-left">23 Jan 5:37 pm</span>-->
+                        <span class="direct-chat-timestamp pull-left">23 Jan 5:37 pm</span>
                     </div>
-                    <!-- /.direct-chat-info -->
+                     /.direct-chat-info 
                     
                     <div class="direct-chat-text">
                         Hola Usuario
                     </div>
-                    <!-- /.direct-chat-text -->
-                </div>
+                     /.direct-chat-text 
+                </div>-->
                 <!-- /.direct-chat-msg -->
 
                 

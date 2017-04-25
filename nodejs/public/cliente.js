@@ -13,13 +13,3 @@ socket.on('notiByron', function (data) {
     $("#notifications").prepend("<p><strong>" + message[0]['name'] + "</strong>: " + message[0]['message'] + "</p>");
 });
 
-
-// ......................................................
-// .......................UI Code........................
-// ......................................................
-document.getElementById('open-room').onclick = function () {
-    //disableInputButtons();
-    connection.open(document.getElementById('room-id').value, function () {
-        showRoomURL(connection.sessionid);
-    });
-};
