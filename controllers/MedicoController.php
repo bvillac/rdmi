@@ -577,7 +577,7 @@ class MedicoController extends Controller {
     
     public function actionVideo()
     {
-        $data = null;
+        /*$data = null;
         if (Yii::$app->request->isAjax) {
             $data =(Yii::$app->request->post())? Yii::$app->request->post():Yii::$app->request->get();
             if (isset($data["getlista"])) {
@@ -586,10 +586,10 @@ class MedicoController extends Controller {
                 return;
             }
             
-        }
+        }*/
             
         return $this->render('video', [
-                    //'model' => $dataProvider,
+            //'model' => $dataProvider,
         ]);
     }
 

@@ -20,6 +20,12 @@ $(document).ready(function () {
     $('#cmb_estado').change(function () {
         actualizarGridTab2();
     });
+    $('#cmb_listaContacto').change(function () {
+        //actualizarGridTab2();
+         //var estado=$('#cmb_estado option:selected').val();
+         //$('#txth_room').val($('#cmb_estado option:selected').val());
+    });
+    
     
     $('#btn_saveCreate').click(function () {
         guardarDatos('Create');
@@ -36,11 +42,7 @@ $(document).ready(function () {
     $('#cmd_saveHora').click(function () {
         guardarDatosHoras('Create');
     });
-    $('#cmb_listaContacto').change(function () {
-        
-        //obtenerListContacto();
-    });
-    
+  
     /*
      * TAB2
      */
@@ -51,18 +53,27 @@ $(document).ready(function () {
     
     //WEBRTC
     $('#open-room').click(function () {
-        disableInputButtons();
-        connection.open($('#txth_room').val(), function () {
-            document.getElementById('infoVideo').innerHTML = 'Video Chat Iniciado... ';
-            showRoomURL(connection.sessionid);
-        });
+         if ($('#cmb_listaContacto').val() !=0) {
+            disableInputButtons();
+            //connection.open($('#txth_room').val(), function () {
+            connection.open($('#cmb_listaContacto option:selected').val(), function () {
+                document.getElementById('infoVideo').innerHTML = 'Video Chat Iniciado... ';
+                //showRoomURL(connection.sessionid);
+            });
+         }
+        
     });
-    $('#join-room').click(function () {
-        disableInputButtons();
-        //connection.join(document.getElementById('room-id').value);
-        connection.join($('#txth_room').val());
-    });
-    $('#open-or-join-room').click(function () {
+    /*$('#join-room').click(function () {
+        if ($('#cmb_listaContacto').val() !=0) {
+            disableInputButtons();
+            //connection.join(document.getElementById('room-id').value);
+            connection.join($('#cmb_listaContacto option:selected').val());
+            
+        }
+        
+    });*/
+    
+    /*$('#open-or-join-room').click(function () {
         disableInputButtons();
         //connection.openOrJoin(document.getElementById('room-id').value, function (isRoomExists, roomid) {
         connection.openOrJoin($('#txth_room').val(), function (isRoomExists, roomid) {
@@ -70,7 +81,8 @@ $(document).ready(function () {
                 showRoomURL(roomid);
             }
         });
-    });
+    });*/
+    
     $('#btn-leave-room').click(function () {
         this.disabled = true;
         if (connection.isInitiator) {
@@ -164,18 +176,6 @@ function obtenerAdmConsultorio() {
     }, true);
 }
 
-function obtenerListContacto() {
-    var link = $('#txth_base').val() + "/medico/video";
-    var arrParams = new Object();
-    arrParams.mate_id = $('#cmb_listaContacto').val();
-    arrParams.getlista = true;
-    requestHttpAjax(link, arrParams, function (response) {
-        if (response.status == "OK") {
-            var data = response.message;
-            setComboData(data.centroatencion, "cmb_listaContacto");
-        }
-    }, true);
-}
 
 
 function dataPersona(medID,perID) {

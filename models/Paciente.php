@@ -367,20 +367,23 @@ class Paciente extends \yii\db\ActiveRecord
         return $dataProvider;
     }
     
-    public static function getListaPaciente($ids){
+    public static function getListaMedicoPaciente(){
         $con = \Yii::$app->db;
-        //$sql="SELECT cate_id Ids,cate_nombre Nombre FROM " . $con->dbname . ".centro_atencion WHERE emp_id=:emp_id ";
-        $sql="SELECT A.mate_id,B.per_id,CONCAT(C.per_nombre,' ',C.per_apellido) Nombres
+        $PacId=Yii::$app->session->get('PacId', FALSE);
+        $sql="SELECT A.mate_id Ids,B.per_id,CONCAT(C.per_nombre,' ',C.per_apellido,' DNI:',C.per_ced_ruc) Nombre
                     FROM " . $con->dbname . ".medico_atencion A
-                            INNER JOIN (" . $con->dbname . ".paciente B
+                            INNER JOIN (" . $con->dbname . ".medico B
                                             INNER JOIN " . $con->dbname . ".persona C
                                                     ON B.per_id=C.per_id)
-                                    ON A.pac_id=B.pac_id
-            WHERE A.mate_est_log=1 AND A.med_id=:med_id ;";
+                                    ON A.med_id=B.med_id
+            WHERE A.mate_est_log=1 AND A.pac_id=:pac_id ;";
+        //Utilities::putMessageLogFile($sql);
         $comando = $con->createCommand($sql);
-        $comando->bindParam(":med_id", $ids, \PDO::PARAM_INT);
+        $comando->bindParam(":pac_id", $PacId, \PDO::PARAM_INT);
         return $comando->queryAll();
     }
+    
+    
     
     
     

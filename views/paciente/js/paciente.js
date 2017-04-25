@@ -29,19 +29,26 @@ $(document).ready(function () {
     });
     
     //WEBRTC
-    $('#open-room').click(function () {
-        disableInputButtons();
-        connection.open($('#txth_room').val(), function () {
-            document.getElementById('infoVideo').innerHTML = 'Video Chat Iniciado... ';
-            showRoomURL(connection.sessionid);
-        });
-    });
+    /*$('#open-room').click(function () {
+        if ($('#cmb_listaContacto').val() !=0) {
+            disableInputButtons();
+            //connection.open($('#txth_room').val(), function () {
+            connection.open($('#cmb_listaContacto option:selected').val(), function () {
+                document.getElementById('infoVideo').innerHTML = 'Video Chat Iniciado... ';
+                showRoomURL(connection.sessionid);
+            });
+        }
+        
+    });*/
     $('#join-room').click(function () {
-        disableInputButtons();
-        //connection.join(document.getElementById('room-id').value);
-        connection.join($('#txth_room').val());
+        if ($('#cmb_listaContacto').val() !=0) {
+            disableInputButtons();
+            //connection.join(document.getElementById('room-id').value);
+            //connection.join($('#txth_room').val());
+            connection.join($('#cmb_listaContacto option:selected').val());
+        }
     });
-    $('#open-or-join-room').click(function () {
+    /*$('#open-or-join-room').click(function () {
         disableInputButtons();
         //connection.openOrJoin(document.getElementById('room-id').value, function (isRoomExists, roomid) {
         connection.openOrJoin($('#txth_room').val(), function (isRoomExists, roomid) {
@@ -49,7 +56,7 @@ $(document).ready(function () {
                 showRoomURL(roomid);
             }
         });
-    });
+    });*/
     $('#btn-leave-room').click(function () {
         this.disabled = true;
         if (connection.isInitiator) {

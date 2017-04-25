@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\helpers\ArrayHelper;
 use yii\grid\GridView;
 use app\assets\WebRtcAsset;
 
@@ -29,12 +30,21 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="box-tools pull-right">
 
             </div>
-<!--            <h3 class="box-title pull-right">
-                <?= Html::a('<span class="fa fa-fw fa-paper-plane"></span> ' . Yii::t("accion", "Enviar Solicitud"), 'javascript:', ['id' => 'btn_send', 'class' => 'btn btn-primary btn-block']); ?>
-            </h3>    -->
         </div>
         <div class="box-body">
-
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="cmb_listaContacto" class="col-sm-3 control-label"><?= Yii::t("formulario", "Médico Conectado") ?></label>
+                    <div class="col-sm-9">
+                        <?=
+                        Html::dropDownList(
+                                "cmb_listaContacto", 0, ['0' => Yii::t('formulario', '-Select-')] + ArrayHelper::map(\app\models\Paciente::getListaMedicoPaciente(), 'Ids', 'Nombre'), ["class" => "form-control", "id" => "cmb_listaContacto"]
+                        )
+                        ?>
+                    </div>
+                </div>
+            </div>
+            <br><br>
             <div class="col-md-12">
                 <!--<div class="alert alert-success alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -47,19 +57,19 @@ $this->params['breadcrumbs'][] = $this->title;
                     <br>
                     <div class="make-center">
                         <!--<input type="text" id="room-id" value="abcdef">-->
-                        <!--<button id="open-room">Iniciar Video</button>-->
-                        <button id="open-room" class="btn btn-app" type="button"><i class="fa fa-video-camera"></i>Video</button>
-                        <!--<button id="join-room">Entrar Video</button>-->
+
+                        <!--<button id="open-room" class="btn btn-app" type="button"><i class="fa fa-video-camera"></i>Video</button>-->
+
                         <button id="join-room" class="btn btn-app" type="button"><i class="fa fa-user"></i>Iniciar</button>
-                        <!--<button id="open-or-join-room">Auto Open Or Join Room</button>-->
-                        <button id="open-or-join-room" class="btn btn-app" type="button"><i class="fa fa-users"></i>Entrar</button>
-                        <!--<button id="btn-leave-room" disabled>Dejar/o Cerrar la Sala</button>-->
+
+                        <!--<button id="open-or-join-room" class="btn btn-app" type="button"><i class="fa fa-users"></i>Entrar</button>-->
+
                         <button id="btn-leave-room" class="btn btn-app" type="button"><i class="fa fa-stop"></i>Cerrar Video</button>
 
-<!--<br><br>-->
+                        <!--<br><br>-->
                         <!--<input type="text" id="input-text-chat" placeholder="Escribir Mensaje" disabled>-->
                         <!--<button id="share-file" disabled>Compartir Archivo</button>-->
-<!--<br><br>-->
+                        <!--<br><br>-->
                         
 
                         <div id="room-urls" style="text-align: center;display: none;background: #F1EDED;margin: 15px -10px;border: 1px solid rgb(189, 189, 189);border-left: 0;border-right: 0;"></div>

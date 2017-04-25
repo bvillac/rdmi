@@ -9,8 +9,8 @@
 var connection = new RTCMultiConnection();
 // by default, socket.io server is assumed to be deployed on your own URL
 //connection.socketURL = '/';
-//connection.socketURL = 'https://192.168.10.156:9001/';
-connection.socketURL = 'https://192.168.10.100:9001/';
+connection.socketURL = 'https://192.168.10.156:9001/';
+//connection.socketURL = 'https://192.168.10.100:9001/';
 // comment-out below line if you do not have your own socket.io server
 connection.socketMessageEvent = 'audio-video-file-chat-demo';
 connection.enableFileSharing = true; // by default, it is "false".
@@ -147,12 +147,13 @@ connection.onopen = function() {
     document.getElementById('input-text-chat').disabled = false;
     document.getElementById('btn-leave-room').disabled = false;    
     //document.querySelector('h3').innerHTML = 'Estás conectado con: ' + connection.getAllParticipants().join(', ');
-    document.getElementById('infoVideo').innerHTML = 'Estás conectado con: ' + connection.getAllParticipants().join(', ');
+    document.getElementById('infoVideo').innerHTML = 'Estás conectado ... ';
 };
 connection.onclose = function() {
     if(connection.getAllParticipants().length) {
         //document.querySelector('h3').innerHTML = 'Todavía estás conectado con: ' + connection.getAllParticipants().join(', ');
-        document.getElementById('infoVideo').innerHTML = 'Todavía estás conectado con: ' + connection.getAllParticipants().join(', ');
+        document.getElementById('infoVideo').innerHTML = 'Todavía estás conectado ...';
+        
     }
     else {
         document.getElementById('infoVideo').innerHTML = 'Parece que la sesión ha sido cerrada o todos los participantes se han ido.';
@@ -163,9 +164,9 @@ connection.onEntireSessionClosed = function(event) {
     //document.getElementById('share-file').disabled = true;
     document.getElementById('input-text-chat').disabled = true;
     document.getElementById('btn-leave-room').disabled = true;
-    document.getElementById('open-or-join-room').disabled = false;
-    document.getElementById('open-room').disabled = false;
-    document.getElementById('join-room').disabled = false;
+    //document.getElementById('open-or-join-room').disabled = false;
+    //document.getElementById('open-room').disabled = false;
+    //document.getElementById('join-room').disabled = false;
     //document.getElementById('room-id').disabled = false;
     connection.attachStreams.forEach(function(stream) {
         stream.stop();
@@ -173,7 +174,7 @@ connection.onEntireSessionClosed = function(event) {
     // don't display alert for moderator
     if(connection.userid === event.userid) return;
     //document.querySelector('h3').innerHTML = 'Toda la sesión ha sido cerrada por el moderador: ' + event.userid;
-    document.getElementById('infoVideo').innerHTML = 'Toda la sesión ha sido cerrada por el moderador: ' + event.userid;
+    document.getElementById('infoVideo').innerHTML = 'Toda la sesión ha sido cerrada por el moderador: ';
 };
 connection.onUserIdAlreadyTaken = function(useridAlreadyTaken, yourNewUserId) {
     // seems room is already opened
@@ -186,7 +187,7 @@ function disableInputButtons() {
     //document.getElementById('room-id').disabled = true;
 }
 // ......................................................
-// ......................Handling Room-ID................
+// ....(Manejo Id Habitacion)Handling Room-ID............
 // ......................................................
 function showRoomURL(roomid) {
     //console.log('ingresa mostrar video');
@@ -200,6 +201,7 @@ function showRoomURL(roomid) {
     roomURLsDiv.innerHTML = html;
     roomURLsDiv.style.display = 'block';
 }
+
 (function() {
     var params = {},
         r = /([^&=]+)=?([^&]*)/g;
@@ -211,6 +213,7 @@ function showRoomURL(roomid) {
         params[d(match[1])] = d(match[2]);
     window.params = params;
 })();
+
 var roomid = '';
 if (localStorage.getItem(connection.socketMessageEvent)) {
     roomid = localStorage.getItem(connection.socketMessageEvent);

@@ -460,5 +460,21 @@ class Medico extends \yii\db\ActiveRecord
         $comando->bindParam(":GrpIds", $data, \PDO::PARAM_STR);
         return $comando->queryAll();
     }
+    
+    public static function getListaPacienteMedico(){
+        $con = \Yii::$app->db;
+        $MedId=Yii::$app->session->get('MedId', FALSE);
+        $sql="SELECT A.mate_id Ids,B.per_id,CONCAT(C.per_nombre,' ',C.per_apellido,' DNI:',C.per_ced_ruc) Nombre
+                    FROM " . $con->dbname . ".medico_atencion A
+                            INNER JOIN (" . $con->dbname . ".paciente B
+                                            INNER JOIN " . $con->dbname . ".persona C
+                                                    ON B.per_id=C.per_id)
+                                    ON A.pac_id=B.pac_id
+            WHERE A.mate_est_log=1 AND A.med_id=:med_id ;";
+        //Utilities::putMessageLogFile($sql);
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":med_id", $MedId, \PDO::PARAM_INT);
+        return $comando->queryAll();
+    }
 
 }
