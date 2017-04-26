@@ -5,7 +5,7 @@
  */
 /* variable globales Upload */
 var FileIdioma="es";
-var FileExtensions=['jpg','png','pdf','mp3','mp4'];
+var FileExtensions=['jpg','png','pdf','mp3','mp4','gz','rar','zip'];
 var browseLabel=" Examinar..";
 var FileSize=358400;//1024x350=350MB  php.ini=>upload_max_filesize = 350M
 var nsegundos=3000;//3000ms = 3s

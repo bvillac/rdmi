@@ -278,15 +278,13 @@ class MedicoController extends Controller {
     }
     public function actionFile() {
         $data = null;
-        $perADO = new Persona();
-        
+        $perADO = new Persona();        
         if (Yii::$app->request->isAjax) {
-            $data =(Yii::$app->request->post())? Yii::$app->request->post():Yii::$app->request->get();
-            
+            //$data =(Yii::$app->request->post())? Yii::$app->request->post():Yii::$app->request->get();            
         }
         return $this->render('file', [
-                       "modelfile" => \app\models\Imagenes::consultarFileall($data),
-                    ]);
+                    "modelfile" => \app\models\Imagenes::consultarFileall($data),
+                ]);
     }
     
     public function actionAdminmedico() {
@@ -567,7 +565,9 @@ class MedicoController extends Controller {
         
         
         //if (!$this->downloadFile(Url::base(true) . "/archivos/", Html::encode($_GET["file"]), [])) {
-        if (!$this->downloadFile($data[0]["ima_ruta_archivo"], Html::encode($data[0]["ima_nombre_archivo"]), [ "jpg", "png","pdf", "mp3", "mp4"])) {
+        if (!$this->downloadFile($data[0]["ima_ruta_archivo"], 
+                Html::encode($data[0]["ima_nombre_archivo"]), 
+                [ "jpg", "png","pdf", "mp3", "mp4","gz", "rar", "zip"])) {
             //Mensaje flash para mostrar el error
             //Yii::$app->session->setFlash("errordownload");
         }

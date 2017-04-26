@@ -31,10 +31,15 @@ use app\widgets\PbGridView\PbGridView;
                     'value' => 'Titulo',
                 ],
                 [
+                    'header' => Yii::t("formulario", "Nombres"),
+                    //'options' => ['width' => '200'],
+                    'value' => 'Nombres',
+                ],
+                [
                     'header' => Yii::t("formulario", "Fecha"),
-                    'format' => ['date', 'php:' . Yii::$app->params["dateTimeByDefault"]],
+                    //'format' => ['date', 'php:' . Yii::$app->params["dateTimeByDefault"]],
                     'value' => 'Fecha',
-                //'options' => ['width' => '180'],
+                    //'options' => ['width' => '180'],
                 ],
                 [
                     'class' => 'yii\grid\ActionColumn',

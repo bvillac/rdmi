@@ -86,14 +86,22 @@ class Imagenes {
 //            $sqlMedico="INNER JOIN " . $con->dbname . ".medico_atencion F
 //                            ON F.pac_id=B.pac_id AND F.mate_est_log=1 AND F.med_id=$MedId ";
 //        }
-        $pac_id=1;
-        $sql = "SELECT ima_id Ids,tdic_id Tipo,ima_titulo Titulo,ima_nombre_archivo File,ima_ruta_archivo Ruta,ima_fec_cre Fecha
-                    FROM " . $con->dbname . ".imagenes WHERE ima_est_log=1  ";
-        if($pac_id<>''){ $sql .= "AND pac_id=:pac_id ";}
-        $sql .= "ORDER BY ima_id DESC ";
+//        
+        //$pac_id='';
+        
+        $sql = "SELECT A.ima_id Ids,A.tdic_id Tipo,A.ima_titulo Titulo,A.ima_nombre_archivo File,A.ima_ruta_archivo Ruta,
+                A.ima_fec_cre Fecha,CONCAT(C.per_nombre,' ',C.per_apellido) Nombres
+                  FROM " . $con->dbname . ".imagenes A
+                        INNER JOIN (" . $con->dbname . ".paciente B
+                                        INNER JOIN " . $con->dbname . ".persona C
+                                                ON B.per_id=C.per_id)
+                                ON A.pac_id=B.pac_id
+                WHERE A.ima_est_log=1  ";
+        //if($pac_id<>''){ $sql .= " AND A.pac_id=:pac_id ";}
+        $sql .= " ORDER BY ima_id DESC ";
         
         $comando = $con->createCommand($sql);
-        if($pac_id<>''){$comando->bindParam(":pac_id",$pac_id, \PDO::PARAM_STR); }
+        //if($pac_id<>''){$comando->bindParam(":pac_id",$pac_id, \PDO::PARAM_STR); }
         
         //Utilities::putMessageLogFile($sql);
         

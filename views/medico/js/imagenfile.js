@@ -33,7 +33,7 @@ function iniciarUpload() {
         uploadAsync: true,
         //deleteExtraData: function (previewId, index) { return { key: index, pId: previewId, action: 'delete' }; },
         msgFileNotFound:function (previewId, index) {
-            showAlert('NO_OK', 'error', {"wtmessage": $('#txth_errorFile').val(), "title":'Información 1'});
+            showAlert('NO_OK', 'error', {"wtmessage": $('#txth_errorFile').val(), "title":'Información'});
         },
         uploadExtraData: function (previewId, index) {
             //return {"numero":(AccionTipo=="Update")?$('#txt_ftem_cedula').val()+'_'+$('#txth_ftem_id').val():$('#txt_ftem_cedula').val(), "nombre": "cedula"};
@@ -53,7 +53,11 @@ function iniciarUpload() {
     $('#txt_dicom_file').on('filebatchselected ', function (event) {
         if(subirDocumentos()){//Verofica que las opciones de subida se cumplan
             $('#txth_dicom_file').val($('#txt_dicom_file').val())
-            $('#txt_dicom_file').fileinput('upload');
+            showLoadingPopup();
+            $('#txt_dicom_file').fileinput('upload');            
+            setTimeout(hideLoadingPopup,2000);
+            $('#TbG_DATOS').PbGridView('updatePAjax');
+            console.log('correcto');
         }
     });
     $('#txt_dicom_file').on('fileuploaderror', function (event, data, previewId, index) { 
