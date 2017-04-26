@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+//https://www.nicklauschildrens.org/patients-and-families/planning-your-visit/appointments-and-medical-procedures-requests?lang=es-CO
+//https://www.veris.com.ec/citas/
 
 $(document).ready(function () {
 

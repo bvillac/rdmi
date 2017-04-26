@@ -15,6 +15,11 @@ use yii\data\ArrayDataProvider;
 <div class="col-md-12">
     <h3><?= Yii::t("perfil", "Citas Pacientes") ?></h3>
 </div>
-<div id='calendar'></div>
 
-<div class="row"></div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div id='calendar'></div>
+    </div>
+    
+</div>

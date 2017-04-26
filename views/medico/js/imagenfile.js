@@ -53,12 +53,17 @@ function iniciarUpload() {
     $('#txt_dicom_file').on('filebatchselected ', function (event) {
         if(subirDocumentos()){//Verofica que las opciones de subida se cumplan
             $('#txth_dicom_file').val($('#txt_dicom_file').val())
-            showLoadingPopup();
+            //showLoadingPopup();
             $('#txt_dicom_file').fileinput('upload');            
-            setTimeout(hideLoadingPopup,2000);
-            $('#TbG_DATOS').PbGridView('updatePAjax');
-            console.log('correcto');
+            //setTimeout(hideLoadingPopup,2000);
+            
+            
         }
+    });
+    $('#txt_dicom_file').on('fileuploaded', function(event, data, previewId, index) {
+        //var form = data.form, files = data.files, extra = data.extra,
+        //    response = data.response, reader = data.reader;
+        $('#TbG_DATOS').PbGridView('updatePAjax');
     });
     $('#txt_dicom_file').on('fileuploaderror', function (event, data, previewId, index) { 
         $('#txth_dicom_file').val('');

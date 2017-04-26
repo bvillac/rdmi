@@ -6,10 +6,6 @@ use yii\helpers\ArrayHelper;
 use app\widgets\PbGridView\PbGridView;
 use yii\data\ArrayDataProvider;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\PacienteSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
 $this->title = 'Atención Médica';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
