@@ -6,7 +6,7 @@
 //https://www.nicklauschildrens.org/patients-and-families/planning-your-visit/appointments-and-medical-procedures-requests?lang=es-CO
 //https://www.veris.com.ec/citas/
 
-$(document).ready(function () {
+/*$(document).ready(function () {
 
     $('#cmb_estado').change(function () {
         actualizarGridCP();
@@ -84,7 +84,8 @@ $(document).ready(function () {
         ]
     });
 
-});
+});*/
+
 
 function actualizarGridCP(){
     var estado=$('#cmb_estado option:selected').val();

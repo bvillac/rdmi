@@ -38,8 +38,6 @@ function eliminarAtencionMed(ids) {
 }
 
 
-
-
 function EnviarSolicitudAte(accion) {    
     if (validarFormSol()) {
         var link = $('#txth_base').val() + "/paciente/solicitudatencion";
