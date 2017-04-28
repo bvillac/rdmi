@@ -43,6 +43,21 @@ use yii\data\ArrayDataProvider;
             <!-- /.box-body -->
         </div>
         
+        <select class="selectpicker form-control">
+        <option>Mustard</option>
+        <option>Ketchup</option>
+        <option>Relish</option>
+      </select>
+        
+        <div class="form-group">
+<!--            <label for="cmb_provincia_uso" class="col-sm-3 control-label"><?= Yii::t("formulario", "Level National") ?></label>-->
+            <div class="col-sm-12">
+                <?= Html::dropDownList("cmb_provincia_uso", 25, ArrayHelper::map(app\models\Especialidad::getEspecialidadALL(), 'Ids', 'Nombre'), ["class" => "form-control multiselect", 'multiple' => 'multiple', "id" => "cmb_provincia_uso"])
+                ?>
+                <p style="margin-top:5px"><?= Yii::t("formulario", "You can select more than one option by pressing") ?></p>
+            </div>
+        </div>
+        
     </div>
     
 </div>

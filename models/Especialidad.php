@@ -127,13 +127,13 @@ class Especialidad extends \yii\db\ActiveRecord
         return $Espec;
     }
     
-    public static function getEspecialidadALL($Ids){
+    public static function getEspecialidadALL(){
         $con = \Yii::$app->db;
         $Espec="";
         $sql = "SELECT esp_id Ids,esp_nombre Nombre FROM " . $con->dbname . ".especialidad WHERE esp_est_log=1 ";
         //Utilities::putMessageLogFile($sql.$Ids);
         $comando = $con->createCommand($sql);
-        $comando->bindParam(":med_id", $Ids, \PDO::PARAM_INT);
+        //$comando->bindParam(":med_id", $Ids, \PDO::PARAM_INT);
         return $comando->queryAll();
         
     }
