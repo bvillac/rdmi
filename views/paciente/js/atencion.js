@@ -86,6 +86,49 @@ function obtenerMedicos(elemento) {
 }
 
 
+function obtenerCentrosAtencion() {
+    var link = $('#txth_base').val() + "/paciente/adminpaciente";
+    var arrParams = new Object();
+    arrParams.esp_id = $('#lstb_especialidad_cita').val();
+    arrParams.centros = true;
+    requestHttpAjax(link, arrParams, function (response) {
+        if (response.status == "OK") {
+            var data = response.message;
+            //console.log('entro');
+            if (data.centros.length > 0) {
+                //console.log(data.centros);            
+                setComboData(data.centros, "lstb_centro_ate");
+            }else{
+                $("#lstb_centro_ate").html("<option value='0'>No Existen Datos</option>");
+            }
+        }else{            
+            $("#lstb_centro_ate").html("<option value='0'>No Existen Datos</option>");
+        }
+    }, false);
+}
+
+function obtenerHorariosAtencion() {
+    var link = $('#txth_base').val() + "/paciente/adminpaciente";
+    var arrParams = new Object();
+    arrParams.cons_id = $('#lstb_centro_ate').val();
+    arrParams.fecha_cita = $('#dtp_fec_cita').val();
+    arrParams.horas = true;
+    requestHttpAjax(link, arrParams, function (response) {
+        if (response.status == "OK") {
+            var data = response.message;
+            if (data.horarios.length > 0) {
+                //console.log(data.centros);            
+                setComboData(data.horarios, "lstb_horas_ate");
+            }else{
+                $("#lstb_horas_ate").html("<option value='0'>No Existen Datos</option>");
+            }
+        }else{            
+            $("#lstb_horas_ate").html("<option value='0'>No Existen Datos</option>");
+        }
+    }, false);
+}
+
+
 
 
 

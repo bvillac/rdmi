@@ -23,41 +23,71 @@ use yii\data\ArrayDataProvider;
     </div>
     
     <div class="col-md-3">
-        <div class="box box-solid">
-            <div class="box-header with-border bg-teal-active">
-              <h3 class="box-title">Labels</h3>
-
-              <div class="box-tools">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-              </div>
-            </div>
-            <div class="box-body no-padding" style="display: block;">
-              <ul class="nav nav-pills nav-stacked">
-                <li><a href="#"><i class="fa fa-circle-o text-red"></i> Important</a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> Promotions</a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-light-blue"></i> Social</a></li>
-              </ul>
-            </div>
-           
-            <!-- /.box-body -->
-        </div>
-        
-        <select class="selectpicker form-control">
-        <option>Mustard</option>
-        <option>Ketchup</option>
-        <option>Relish</option>
-      </select>
-        
         <div class="form-group">
-<!--            <label for="cmb_provincia_uso" class="col-sm-3 control-label"><?= Yii::t("formulario", "Level National") ?></label>-->
-            <div class="col-sm-12">
-                <?= Html::dropDownList("cmb_provincia_uso", 25, ArrayHelper::map(app\models\Especialidad::getEspecialidadALL(), 'Ids', 'Nombre'), ["class" => "form-control multiselect", 'multiple' => 'multiple', "id" => "cmb_provincia_uso"])
+            <label for="lstb_especialidad_cita" class="col-sm-3 control-label"><?= Yii::t("formulario", "Especialidad") ?></label>
+            <div class="col-sm-12">               
+                <?= Html::listBox("lstb_especialidad_cita", 0, 
+                        ArrayHelper::map(app\models\Especialidad::getEspecialidadALL(), 'Ids', 'Nombre'), 
+                        ["class" => "form-control", 
+                            //'multiple' => 'multiple', 
+                            "size" => 20,
+                            "id" => "lstb_especialidad_cita"])
                 ?>
+                <p style="margin-top:5px"><?= Yii::t("formulario", "You can select more than one option by pressing") ?></p>
+            </div>
+        </div>        
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="dtp_fec_cita" class="col-sm-3 control-label"><?= Yii::t("formulario", "Fecha/Cita") ?></label>
+            <div class="col-sm-12">
+                <?=
+                    DatePicker::widget([
+                        'id' => 'dtp_fec_cita',
+                        'name' => 'dtp_fec_cita',
+                        'type' => DatePicker::TYPE_COMPONENT_APPEND,
+                        //'value' => '23-Feb-1982',
+                        'pluginOptions' => [
+                            'autoclose' => true,
+                            'format' => Yii::$app->params["datePickerDefault"]
+                        ],
+                        'options' => [
+                            'class' => 'form-control',
+                            //'Onchange' => 'actualizarGrid()',
+                            'readonly' => 'readonly',
+                            'placeholder' => Yii::t("perfil", "Fecha/Cita")//'Enter birth date ...'
+                        ]
+                    ]);
+                ?>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="lstb_centro_ate" class="col-sm-3 control-label"><?= Yii::t("formulario", "Centro/Atención") ?></label>
+            <div class="col-sm-12">
+                <?= Html::listBox("lstb_centro_ate", 0, ['0' => Yii::t('formulario', '-Select-')], 
+                        ["class" => "form-control", 
+                            //'multiple' => 'multiple', 
+                            "id" => "lstb_centro_ate"]) ?>
+                <p style="margin-top:5px"><?= Yii::t("formulario", "You can select more than one option by pressing") ?></p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="lstb_horas_ate" class="col-sm-3 control-label"><?= Yii::t("formulario", "Horario/Atención") ?></label>
+            <div class="col-sm-12">
+                <?= Html::listBox("lstb_horas_ate", 0, ['0' => Yii::t('formulario', '-Select-')], 
+                        ["class" => "form-control", 
+                            //'multiple' => 'multiple', 
+                            "id" => "lstb_horas_ate"]) ?>
                 <p style="margin-top:5px"><?= Yii::t("formulario", "You can select more than one option by pressing") ?></p>
             </div>
         </div>
         
+        
     </div>
+    
+    <div class="col-md-3"></div>
+
     
 </div>

@@ -354,5 +354,9 @@ ALTER TABLE `rdmi`.`imagenes` CHANGE COLUMN `ima_ruta_archivo` `ima_ruta_archivo
 
 
 
+ALTER TABLE `rdmi`.`centro_atencion` ADD COLUMN `can_id` BIGINT(20) NULL  AFTER `emp_id` ;
+UPDATE `rdmi`.`centro_atencion` SET `can_id`='87' WHERE `cate_id`='1';
+UPDATE `rdmi`.`centro_atencion` SET `can_id`='87' WHERE `cate_id`='2';
+UPDATE `rdmi`.`centro_atencion` SET `can_id`='189' WHERE `cate_id`='3';
 
 

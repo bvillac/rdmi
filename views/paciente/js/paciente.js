@@ -28,6 +28,14 @@ $(document).ready(function () {
         obtenerMedicoEspecialidad();
     });
     
+    $('#lstb_especialidad_cita').change(function () {
+        obtenerCentrosAtencion();
+    });
+    
+    $('#lstb_centro_ate').change(function () {
+        obtenerHorariosAtencion();
+    });
+    
     //WEBRTC
     /*$('#open-room').click(function () {
         if ($('#cmb_listaContacto').val() !=0) {

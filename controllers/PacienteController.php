@@ -230,6 +230,22 @@ class PacienteController extends Controller
         
         if (Yii::$app->request->isAjax) {//Yii::$app->request->isPjax
             $data =(Yii::$app->request->post())? Yii::$app->request->post():Yii::$app->request->get();
+            if (isset($data["centros"])) {
+                $centros=CitaMedica::getCentoAtencionEspecialidad($data["esp_id"]);
+                $message = [
+                    "centros" => $centros,
+                ];
+                echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message);
+                return;
+            }
+            if (isset($data["horas"])) {
+                $horarios=CitaMedica::getHorarioAtencion($data["cons_id"], $data["fecha_cita"]);
+                $message = [
+                    "horarios" => $horarios,
+                ];
+                echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message);
+                return;
+            }
 
             if (isset($data["op"]) && $data["op"]=='1' ) {                
                 $datADO->consultarCitasProgPac($data);

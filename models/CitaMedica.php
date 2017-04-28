@@ -250,4 +250,40 @@ class CitaMedica extends \yii\db\ActiveRecord
     }
     
     
+    public static function getCentoAtencionEspecialidad($Ids){
+        $con = \Yii::$app->db;
+        $sql = "SELECT A.cons_id Ids, CONCAT(C.can_nombre,'-',B.cate_nombre) Nombre
+                FROM " . $con->dbname . ".consultorio A
+                        INNER JOIN (" . $con->dbname . ".centro_atencion B
+                                        INNER JOIN " . $con->dbname . ".canton C
+                                                ON C.can_id=B.can_id)
+                                ON A.cate_id=B.cate_id
+        WHERE A.cons_est_log=1 AND A.esp_id=:esp_id;";
+        
+        //Utilities::putMessageLogFile($sql.$Ids);
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":esp_id", $Ids, \PDO::PARAM_INT);
+        return $comando->queryAll();
+        
+    }
+    
+    public static function getHorarioAtencion($Ids,$Fecha){
+        $con = \Yii::$app->db;               
+        $sql = "SELECT A.hora_id Ids,CONCAT(A.hora_inicio,'- Dr(a) ',C.per_nombre,' ',C.per_apellido) Nombre
+                FROM " . $con->dbname . ".horario A
+                        INNER JOIN (" . $con->dbname . ".medico B
+                                INNER JOIN " . $con->dbname . ".persona C
+                                        ON B.per_id=C.per_id)
+                        ON A.med_id=B.med_id
+        WHERE A.hora_est_log=1 AND A.cons_id=:cons_id AND DATE(A.fecha_cita)=:fecha_cita ";
+        
+        //Utilities::putMessageLogFile($sql.$Ids);
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":cons_id", $Ids, \PDO::PARAM_INT);
+        $comando->bindParam(":fecha_cita", date("Y-m-d", strtotime($Fecha)) , \PDO::PARAM_STR);
+        return $comando->queryAll();
+        
+    }
+    
+    
 }
