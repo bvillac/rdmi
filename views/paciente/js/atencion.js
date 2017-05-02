@@ -129,6 +129,51 @@ function obtenerHorariosAtencion() {
 }
 
 
+function guardarDatosCita(accion) {
+    //var pacID = (accion == "Update") ? $('#txth_pac_id').val() : 0;
+    //var perID = (accion == "Update") ? $('#txth_per_id').val() : 0;
+    var link = $('#txth_base').val() + "/paciente/savecita";
+    var arrParams = new Object();
+    arrParams.DATA = dataCita();
+    arrParams.ACCION = accion;
+    //var validation = validateForm();
+    //if (!validation) {
+        requestHttpAjax(link, arrParams, function (response) {
+            var message = response.message;
+            if (response.status == "OK") {
+                showAlert(response.status, response.type, {"wtmessage": message.info, "title": response.label});
+                //limpiarDatos();
+                //var renderurl = $('#txth_base').val() + "/mceformulariotemp/index";
+                //window.location = renderurl;
+            } else {
+                showAlert(response.status, response.type, {"wtmessage": message.info, "title": response.label});
+            }
+        }, true);
+    //}
+    //showAlert('NO_OK', 'error', {"wtmessage": 'Debe Aceptar los términos de la Declaración Jurada', "title":'Información'});
+}
+
+function dataCita() {
+    var datArray = new Array();
+    var objDat = new Object();
+    objDat.pac_id = 0;//Genero Automatico
+    objDat.tur_numero = 0;
+    objDat.hora_id = $('#lstb_horas_ate option:selected').val();
+    objDat.fecha_cita = $('#dtp_fec_cita').val();
+    objDat.cons_id = $('#lstb_centro_ate').val();
+    objDat.hora_inicio =$('#lstb_horas_ate option:selected').text().substring(0,8);//str.substring(1, 4);  $('#txt_per_apellido').val();    
+    objDat.tcon_id = $('#cmb_tipConsulta option:selected').val();
+    objDat.cprog_id = 0;    
+    objDat.cmde_motivo = $('#txt_motivo').val();
+    objDat.cmde_estado_asistencia = 1;
+    objDat.cmde_est_log = 1;
+
+    datArray[0] = objDat;
+    sessionStorage.dataCita = JSON.stringify(datArray);
+    return datArray;
+}
+
+
 
 
 

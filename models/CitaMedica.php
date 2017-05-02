@@ -286,4 +286,57 @@ class CitaMedica extends \yii\db\ActiveRecord
     }
     
     
+    public static function insertarPacientesCita($data) {
+        $arroout = array();
+        $con = \Yii::$app->db;
+        $PacId=Yii::$app->session->get('PacId', FALSE);
+        $trans = $con->beginTransaction();
+        try {
+            $data = isset($data['DATA']) ? $data['DATA'] : array(); 
+            
+            $sql = "INSERT INTO " . $con->dbname . ".cita_medica
+                (tur_numero,hora_id,fecha_cita,cons_id,hora_inicio,tcon_id,pac_id,cprog_id,cmde_motivo,
+                 cmde_estado_asistencia,cmde_est_log)VALUES
+                (:tur_numero,:hora_id,:fecha_cita,:cons_id,:hora_inicio,:tcon_id,:pac_id,:cprog_id,:cmde_motivo,
+                 1,1) ";            
+            $command = $con->createCommand($sql);
+            $command->bindParam(":pac_id", $PacId, \PDO::PARAM_INT);//Ids 
+            $command->bindParam(":tur_numero", $data[0]['tur_numero'], \PDO::PARAM_STR);
+            $command->bindParam(":hora_id", $data[0]['hora_id'], \PDO::PARAM_INT);
+            $command->bindParam(":cons_id", $data[0]['cons_id'], \PDO::PARAM_INT);
+            $command->bindParam(":fecha_cita", date("Y-m-d", strtotime($data[0]['fecha_cita'])), \PDO::PARAM_STR); 
+            $command->bindParam(":hora_inicio", $data[0]['hora_inicio'], \PDO::PARAM_STR);            
+            $command->bindParam(":tcon_id", $data[0]['tcon_id'], \PDO::PARAM_INT);            
+            $command->bindParam(":cprog_id", $data[0]['cprog_id'], \PDO::PARAM_INT);            
+            $command->bindParam(":cmde_motivo", $data[0]['cmde_motivo'], \PDO::PARAM_STR);
+            $command->execute();            
+            $cita_id=$con->getLastInsertID();
+ 
+            ####LOGS DATA
+            Utilities::insertarLogs($con, $cita_id, 'cita_medica', 'Insert -> cmde_id->'.$cita_id);
+            $trans->commit();
+            $con->close();
+            //RETORNA DATOS 
+            $arroout["status"]= true;
+            
+            //Enviar correo electronico para activacion de cuenta
+                //$nombres = $data[0]['per_nombre'];
+                //$tituloMensaje = Yii::t("register","Successful Registration");
+                //$asunto = Yii::t("register", "User Register") . " " . Yii::$app->params["siteName"];
+                //$body = Utilities::getMailMessage("registerPaciente", array("[[user]]" => $nombres, "[[username]]" => $data[0]['per_correo'],"[[clave]]" => $password, "[[link_verification]]" => $linkActiva), Yii::$app->language);
+                //Utilities::sendEmail($tituloMensaje, Yii::$app->params["adminEmail"], [$data[0]['per_correo'] => $data[0]['per_nombre'] . " " . $data[0]['per_apellido']], $asunto, $body);
+            //Find Datos Mail
+            
+            return $arroout;
+        } catch (\Exception $e) {
+            $trans->rollBack();
+            $con->close();
+            throw $e;
+            $arroout["status"]= false;
+            return $arroout;
+        }
+    }
+
+    
+    
 }

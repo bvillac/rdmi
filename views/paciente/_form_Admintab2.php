@@ -21,22 +21,6 @@ use yii\data\ArrayDataProvider;
     <div class="col-md-12">
         <div id='calendar'></div>
     </div>
-    
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="lstb_especialidad_cita" class="col-sm-3 control-label"><?= Yii::t("formulario", "Especialidad") ?></label>
-            <div class="col-sm-12">               
-                <?= Html::listBox("lstb_especialidad_cita", 0, 
-                        ArrayHelper::map(app\models\Especialidad::getEspecialidadALL(), 'Ids', 'Nombre'), 
-                        ["class" => "form-control", 
-                            //'multiple' => 'multiple', 
-                            "size" => 20,
-                            "id" => "lstb_especialidad_cita"])
-                ?>
-            <!--<p style="margin-top:5px"><?= Yii::t("formulario", "You can select more than one option by pressing") ?></p>-->
-            </div>
-        </div>        
-    </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="cmb_tipConsulta" class="col-sm-3 control-label"><?= Yii::t("formulario", "Tipo") ?></label>
@@ -74,6 +58,33 @@ use yii\data\ArrayDataProvider;
 
             </div>
         </div>
+        
+         <div class="form-group">
+            <label for="txt_motivo" class="col-sm-3 control-label"><?= Yii::t("formulario", "Motivo") ?></label>
+            <div class="col-sm-12">
+                <textarea class="form-control" rows="6"  id="txt_motivo" data-type="all" data-keydown="true" placeholder="<?= Yii::t("formulario", "Motivo") ?>"></textarea>
+            </div>
+        </div>
+
+    </div>
+    
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="lstb_especialidad_cita" class="col-sm-3 control-label"><?= Yii::t("formulario", "Especialidad") ?></label>
+            <div class="col-sm-12">               
+                <?= Html::listBox("lstb_especialidad_cita", 0, 
+                        ArrayHelper::map(app\models\Especialidad::getEspecialidadALL(), 'Ids', 'Nombre'), 
+                        ["class" => "form-control", 
+                            //'multiple' => 'multiple', 
+                            "size" => 15,
+                            "id" => "lstb_especialidad_cita"])
+                ?>
+            <!--<p style="margin-top:5px"><?= Yii::t("formulario", "You can select more than one option by pressing") ?></p>-->
+            </div>
+        </div>        
+    </div>
+    <div class="col-md-4">
+        
 
         <div class="form-group">
             <label for="lstb_centro_ate" class="col-sm-3 control-label"><?= Yii::t("formulario", "Centro/Atención") ?></label>
@@ -99,14 +110,9 @@ use yii\data\ArrayDataProvider;
             <div class="col-sm-12">
                 <?= Html::a('<span class="glyphicon glyphicon-floppy-disk"></span> ' . Yii::t("accion", "Save"), 'javascript:', ['id' => 'cmd_saveCita','class' => 'btn btn-primary btn-block']); ?>   
             </div>
-            
         </div>
-        
-        
     </div>
-    <div class="col-md-4">
-        
-    </div>
+
         
         
     

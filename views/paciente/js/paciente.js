@@ -35,6 +35,10 @@ $(document).ready(function () {
     $('#lstb_centro_ate').change(function () {
         obtenerHorariosAtencion();
     });
+    //RESERVAR CITA
+    $('#cmd_saveCita').click(function () {
+        guardarDatosCita('Create');
+    });
     
     //WEBRTC
     /*$('#open-room').click(function () {

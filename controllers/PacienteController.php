@@ -385,5 +385,30 @@ class PacienteController extends Controller
          return $this->render('video');
     }
     
+    public function actionSavecita() {
+        if (Yii::$app->request->isAjax) {
+            $model = new Paciente();
+            $data = Yii::$app->request->post();
+            $accion = isset($data['ACCION']) ? $data['ACCION'] : "";
+            if ($accion == "Create") {
+                //Nuevo Registro
+                $resul = CitaMedica::insertarPacientesCita($data);// $model->insertarPacientes($data);
+            }else if($accion == "Update"){
+                //Modificar Registro
+                //$resul = $model->actualizarPacientes($data);                
+            }
+            
+            
+            if ($resul['status']) {
+                $message = ["info" => Yii::t('exception', '<strong>Well done!</strong> your information was successfully saved.')];
+                echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message,$resul);
+            }else{
+                $message = ["info" => Yii::t('exception', 'The above error occurred while the Web server was processing your request.')];
+                echo Utilities::ajaxResponse('NO_OK', 'alert', Yii::t('jslang', 'Error'), 'false', $message);
+            }
+            return;
+        }   
+    }
+    
 
 }

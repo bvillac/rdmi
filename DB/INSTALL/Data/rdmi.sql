@@ -381,4 +381,15 @@ INSERT INTO `rdmi`.`especialidad` (`esp_nombre`, `esp_est_log`) VALUES ('RADIOLO
 INSERT INTO `rdmi`.`especialidad` (`esp_nombre`, `esp_est_log`) VALUES ('RADIONCOLOGÍA', '1');
 
 
+ALTER TABLE `rdmi`.`cita_medica` DROP FOREIGN KEY `cita_medica_ibfk_3` ;
+ALTER TABLE `rdmi`.`cita_medica` CHANGE COLUMN `cprog_id` `cprog_id` BIGINT(20) NULL  , 
+  ADD CONSTRAINT `cita_medica_ibfk_3`
+  FOREIGN KEY (`cprog_id` , `pac_id` )
+  REFERENCES `rdmi`.`cita_programada` (`cprog_id` , `pac_id` );
+
+ALTER TABLE `rdmi`.`cita_medica` DROP FOREIGN KEY `cita_medica_ibfk_3` ;
+ALTER TABLE `rdmi`.`cita_medica` 
+DROP INDEX `cita_medica_ibfk_3` ;
+
+
 
