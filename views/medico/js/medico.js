@@ -14,6 +14,10 @@ $(document).ready(function () {
         obtenerAdmCentro();
     });
     
+    $('#cmb_centro').change(function () {
+        obtenerAdmConsultorio();
+    });
+    
     $('#cmb_especialidad').change(function () {
         obtenerAdmConsultorio();
     });
@@ -340,7 +344,7 @@ function obtenerHoraiosMedico() {
         arrParams.cate_id = $('#cmb_centro').val();
         arrParams.esp_id = $('#cmb_especialidad').val();
         arrParams.med_id = $('#txth_med_id').val();
-        arrParams.gethorio = true;
+        arrParams.gethorario = true;
         requestHttpAjax(link, arrParams, function (response) {
             if (response.status == "OK") {
                 $("#info-Horarios").empty();

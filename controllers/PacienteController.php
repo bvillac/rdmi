@@ -259,6 +259,7 @@ class PacienteController extends Controller
 
         return $this->render('adminpaciente', [
                     "modelCita" => $datADO->consultarCitasProgPac($data),
+                    "modelReserv" => Paciente::consultarCitas($data),
                     //"medico" => json_encode($medData),
                     "EspPac" => $EspPac,
                     ]);

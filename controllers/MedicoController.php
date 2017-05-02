@@ -307,7 +307,7 @@ class MedicoController extends Controller {
                 echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message);
                 return;
             }
-            if (isset($data["gethorio"])) {
+            if (isset($data["gethorario"])) {
                 $message = ["horarioMedico" => Medico::mostraHorarioMedico($data),
                             "horarioCentro" => Medico::mostraHorarioCentro($data)];
                 echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message);

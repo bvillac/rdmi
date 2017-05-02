@@ -252,6 +252,12 @@ INSERT INTO `rdmi`.`omodulo_rol` (`omod_id`, `rol_id`, `omrol_est_log`) VALUES (
 drop table `rdmi`.`dicom`;
 drop table `rdmi`.`imagenes`;
 
+
+
+--######################################################################
+--######################################################################
+--######################################################################
+
 --crear cita medica - signos vitales -eventos - resultados - imagenes
 -- crear signos vitales y eventos
 drop table `rdmi`.`cita_medica`;
@@ -358,5 +364,21 @@ ALTER TABLE `rdmi`.`centro_atencion` ADD COLUMN `can_id` BIGINT(20) NULL  AFTER 
 UPDATE `rdmi`.`centro_atencion` SET `can_id`='87' WHERE `cate_id`='1';
 UPDATE `rdmi`.`centro_atencion` SET `can_id`='87' WHERE `cate_id`='2';
 UPDATE `rdmi`.`centro_atencion` SET `can_id`='189' WHERE `cate_id`='3';
+
+
+INSERT INTO `rdmi`.`especialidad` (`esp_nombre`, `esp_est_log`) VALUES ('IMÁGENES SENOS', '1');
+INSERT INTO `rdmi`.`especialidad` (`esp_nombre`, `esp_est_log`) VALUES ('RADIOLOGÍA CARDIOVASCULAR', '1');
+INSERT INTO `rdmi`.`especialidad` (`esp_nombre`, `esp_est_log`) VALUES ('RADIOLOGÍA DE TORAX', '1');
+INSERT INTO `rdmi`.`especialidad` (`esp_nombre`, `esp_est_log`) VALUES ('EMERGENCIAS RADIOLÓGICAS', '1');
+INSERT INTO `rdmi`.`especialidad` (`esp_nombre`, `esp_est_log`) VALUES ('RADIOLOGÍA GASTROINTESTINAL', '1');
+INSERT INTO `rdmi`.`especialidad` (`esp_nombre`, `esp_est_log`) VALUES ('RADIOLOGÍA GENITOURINARIA', '1');
+INSERT INTO `rdmi`.`especialidad` (`esp_nombre`, `esp_est_log`) VALUES ('RADIOLOGÍA DE CABEZA Y CUELLO', '1');
+INSERT INTO `rdmi`.`especialidad` (`esp_nombre`, `esp_est_log`) VALUES ('RADIOLOGÍA MUSCULOESQUELÉTICA', '1');
+INSERT INTO `rdmi`.`especialidad` (`esp_nombre`, `esp_est_log`) VALUES ('NURORADIOLOGÍA', '1');
+INSERT INTO `rdmi`.`especialidad` (`esp_nombre`, `esp_est_log`) VALUES ('RADIOLOGÍA PEDIÁTRICA', '1');
+INSERT INTO `rdmi`.`especialidad` (`esp_nombre`, `esp_est_log`) VALUES ('RADIOLOGÍA DE INTERVENCIÓN ', '1');
+INSERT INTO `rdmi`.`especialidad` (`esp_nombre`, `esp_est_log`) VALUES ('RADIOLOGÍA NUCLEAR', '1');
+INSERT INTO `rdmi`.`especialidad` (`esp_nombre`, `esp_est_log`) VALUES ('RADIONCOLOGÍA', '1');
+
 
 

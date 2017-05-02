@@ -138,6 +138,16 @@ class Especialidad extends \yii\db\ActiveRecord
         
     }
     
+    public static function getTipoConsulta(){
+        $con = \Yii::$app->db;
+        $Espec="";
+        $sql = "SELECT tcon_id Ids,tcon_nombre Nombre FROM " . $con->dbname . ".tipo_consulta WHERE tcon_est_log=1 ";
+        //Utilities::putMessageLogFile($sql.$Ids);
+        $comando = $con->createCommand($sql);
+        return $comando->queryAll();
+        
+    }
+    
     
     
 

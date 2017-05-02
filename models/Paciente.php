@@ -384,6 +384,69 @@ class Paciente extends \yii\db\ActiveRecord
     }
     
     
+    public static function consultarCitas($data){
+        $PacId=Yii::$app->session->get('PacId', FALSE);
+        $con = \Yii::$app->db;        
+        /*$sql = "SELECT A.cprog_id Ids,C.per_ced_ruc Cedula,CONCAT(C.per_nombre,' ',C.per_apellido) Nombres,
+                        A.cprog_observacion Observacion,E.esp_nombre Especialidad,A.cprog_est_log Estado
+                    FROM " . $con->dbname . ".cita_programada A
+                            INNER JOIN (" . $con->dbname . ".paciente B 
+                                            INNER JOIN " . $con->dbname . ".persona C
+                                                    ON B.per_id=C.per_id)
+                                    ON B.pac_id=A.pac_id
+                            INNER JOIN (" . $con->dbname . ".especialidad_medico D
+                                            INNER JOIN " . $con->dbname . ".especialidad E
+                                                    ON D.esp_id=E.esp_id)
+                                    ON A.emed_id=D.emed_id
+                    WHERE A.pac_id=:pac_id  ";
+                    $sql .= ($data['estado'] > -1) ? " AND A.cprog_est_log = :cprog_est_log  " : " AND A.cprog_est_log>0 ";
+                    $sql .= ($data['especi'] > 0) ? " AND D.esp_id=:esp_id  " : " ";
+                    $sql .= "ORDER BY A.cprog_id DESC ";*/
+                    
+                    
+        $sql = "SELECT A.cmde_id Ids,A.tur_numero Turno,A.hora_inicio Hora,A.fecha_cita Fecha,A.cmde_observacion Observacion,
+                A.cmde_estado_asistencia Estado,B.cons_nombre Consultorio,CONCAT('Dr(a) ',E.per_nombre,' ',E.per_apellido) Nombres,
+                F.esp_nombre Especialidad
+                FROM " . $con->dbname . ".cita_medica A
+                        INNER JOIN (" . $con->dbname . ".consultorio B
+                                        INNER JOIN " . $con->dbname . ".especialidad F
+                                                ON B.esp_id=F.esp_id)
+                                ON A.cons_id=B.cons_id
+                        INNER JOIN (" . $con->dbname . ".horario C
+                                        INNER JOIN (" . $con->dbname . ".medico D
+                                                        INNER JOIN " . $con->dbname . ".persona E
+                                                                ON D.per_id=E.per_id)
+                                                ON C.med_id=D.med_id)
+                    ON A.hora_id=C.hora_id
+        WHERE A.cmde_est_log=1 AND A.pac_id=:pac_id
+                ORDER BY A.cmde_id DESC ; ";
+        
+        
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":pac_id", $PacId, \PDO::PARAM_INT);
+//        if($data['estado'] > -1){
+//            $comando->bindParam(":cprog_est_log", $data['estado'], \PDO::PARAM_STR);
+//        }
+//        if($data['especi'] > 0){
+//            $comando->bindParam(":esp_id", $data['especi'], \PDO::PARAM_STR);
+//        }
+
+        $resultData=$comando->queryAll();
+        $dataProvider = new ArrayDataProvider([
+            'key' => 'Ids',
+            'allModels' => $resultData,
+            'pagination' => [
+                'pageSize' => Yii::$app->params["pageSize"],
+            ],
+            'sort' => [              
+                'attributes' => ['Ids','Turno','Hora','Fecha','Observacion','Especialidad','Nombres','Consultorio','Estado'],
+            ],
+        ]);
+        return $dataProvider;
+    }
+
+    
+    
     
     
     

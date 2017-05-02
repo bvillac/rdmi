@@ -22,7 +22,7 @@ use yii\data\ArrayDataProvider;
         <div id='calendar'></div>
     </div>
     
-    <div class="col-md-3">
+    <div class="col-md-4">
         <div class="form-group">
             <label for="lstb_especialidad_cita" class="col-sm-3 control-label"><?= Yii::t("formulario", "Especialidad") ?></label>
             <div class="col-sm-12">               
@@ -33,11 +33,23 @@ use yii\data\ArrayDataProvider;
                             "size" => 20,
                             "id" => "lstb_especialidad_cita"])
                 ?>
-                <p style="margin-top:5px"><?= Yii::t("formulario", "You can select more than one option by pressing") ?></p>
+            <!--<p style="margin-top:5px"><?= Yii::t("formulario", "You can select more than one option by pressing") ?></p>-->
             </div>
         </div>        
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="cmb_tipConsulta" class="col-sm-3 control-label"><?= Yii::t("formulario", "Tipo") ?></label>
+            <div class="col-sm-12">
+                <?=
+                Html::dropDownList(
+                        "cmb_tipConsulta", 0, 
+                        ArrayHelper::map(\app\models\Especialidad::getTipoConsulta(), 'Ids', 'Nombre'), 
+                        ["class" => "form-control", "id" => "cmb_tipConsulta"]
+                )
+                ?>
+            </div>
+        </div>
         <div class="form-group">
             <label for="dtp_fec_cita" class="col-sm-3 control-label"><?= Yii::t("formulario", "Fecha/Cita") ?></label>
             <div class="col-sm-12">
@@ -70,7 +82,7 @@ use yii\data\ArrayDataProvider;
                         ["class" => "form-control", 
                             //'multiple' => 'multiple', 
                             "id" => "lstb_centro_ate"]) ?>
-                <p style="margin-top:5px"><?= Yii::t("formulario", "You can select more than one option by pressing") ?></p>
+                <!--<p style="margin-top:5px"><?= Yii::t("formulario", "You can select more than one option by pressing") ?></p>-->
             </div>
         </div>
         <div class="form-group">
@@ -80,14 +92,99 @@ use yii\data\ArrayDataProvider;
                         ["class" => "form-control", 
                             //'multiple' => 'multiple', 
                             "id" => "lstb_horas_ate"]) ?>
-                <p style="margin-top:5px"><?= Yii::t("formulario", "You can select more than one option by pressing") ?></p>
+                <!--<p style="margin-top:5px"><?= Yii::t("formulario", "You can select more than one option by pressing") ?></p>-->
             </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <?= Html::a('<span class="glyphicon glyphicon-floppy-disk"></span> ' . Yii::t("accion", "Save"), 'javascript:', ['id' => 'cmd_saveCita','class' => 'btn btn-primary btn-block']); ?>   
+            </div>
+            
         </div>
         
         
     </div>
+    <div class="col-md-4">
+        
+    </div>
+        
+        
     
-    <div class="col-md-3"></div>
+
+    <div class="col-md-12"> 
+        <?=
+        PbGridView::widget([
+            'id' => 'TbG_CITA',
+            'dataProvider' => $modelReserv,
+            //'summary' => false,
+            'columns' => [
+                //['class' => 'yii\grid\SerialColumn', 'options' => ['width' => '10']],
+                // format one
+                //[
+                //'attribute' => 'Ids',
+                //'label' => 'Idst',
+                //],
+                // format two
+                [
+                    'class' => 'yii\grid\ActionColumn',
+                    //'header' => 'Action',
+                    'headerOptions' => ['width' => '40'],
+                    'template' => '{delete}',
+                    'buttons' => [
+                        'delete' => function ($url, $modelReserv) {
+                            return Html::a('<span class="glyphicon glyphicon-remove"></span>', null, ['href' => 'javascript:rechazarCitaProgramada(\'' . base64_encode($modelReserv['Ids']) . '\');', "data-toggle" => "tooltip", "title" => "Cancelar Cita"]);
+                        },
+                    ],
+                ],
+                [
+                    'header' => Yii::t("formulario", "Turno"),
+                    //'options' => ['width' => '200'],
+                    'value' => 'Turno',
+                ],
+                [
+                    'header' => Yii::t("formulario", "Fecha"),
+                    //'options' => ['width' => '200'],
+                    'value' => 'Fecha',
+                ],
+                [
+                    'header' => Yii::t("formulario", "Consultorio"),
+                    //'options' => ['width' => '200'],
+                    'value' => 'Consultorio',
+                ],
+                [
+                    'header' => Yii::t("formulario", "Especialidad"),
+                    //'options' => ['width' => '200'],
+                    'value' => 'Especialidad',
+                ],
+                [
+                    'header' => Yii::t("formulario", "Nombres"),
+                    //'options' => ['width' => '200'],
+                    'value' => 'Nombres',
+                ],
+                [
+                    //'attribute' => 'Observacion',
+                    'label' => 'Observación',
+                    //'contentOptions' => ['class' => 'table_class', 'style' => 'display:block;'],
+                    'options' => ['width' => '400'],
+                    'format' => 'raw',
+                    'value' => function ($modelReserv) {
+                        $urlReporte = Html::a((strlen($modelReserv['Observacion']) < 30) ? $modelReserv['Observacion'] : substr($modelReserv['Observacion'], 0, 30) . ' (Ver Mas..)', null, ['href' => 'javascript:divComentario(\'' . $modelReserv['Observacion'] . '\')', "data-toggle" => "tooltip", "title" => "Ver Observación"]);
+                        return ($modelReserv['Observacion'] != '') ? Html::decode($urlReporte) : Yii::t("formulario", "Without comments");
+                    },
+                ],
+                [
+                    //'attribute' => 'Estado',
+                    'label' => 'Estado',
+                    'options' => ['width' => '130'],
+                    'value' => function ($modelReserv) {
+                        return \app\models\Utilities::getEstadoLogico($modelReserv['Estado']);
+                    },
+                ],
+            ],
+        ])?>
+        
+    </div>
+
 
     
 </div>

@@ -149,6 +149,7 @@ DROP TABLE IF EXISTS `centro_atencion`;
 CREATE TABLE `centro_atencion` (
   `cate_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `emp_id` bigint(20) NOT NULL,
+  `can_id` bigint(20) DEFAULT NULL,
   `cate_nombre` varchar(50) DEFAULT NULL,
   `cate_direccion` varchar(100) DEFAULT NULL,
   `cate_telefono` varchar(20) DEFAULT NULL,

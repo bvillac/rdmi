@@ -32,7 +32,7 @@ $this->title = 'Administrar Paciente '; //. ' ' . $model[0]["med_id"];
                     <form class="form-horizontal">
                         <?= $this->render('_form_Admintab2', 
                             ['EspPac' => $EspPac,
-                            'modelCita' => $modelCita]) ?>
+                            'modelReserv' => $modelReserv]) ?>
                     </form>
 
                 </div><!-- /.tab-pane -->
