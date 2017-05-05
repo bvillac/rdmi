@@ -285,6 +285,23 @@ class CitaMedica extends \yii\db\ActiveRecord
         
     }
     
+    public static function getNumeroTurno($cons,$Fecha){
+        $con = \Yii::$app->db;          
+        $sql = "SELECT max(tur_numero)+1 Numero FROM " . $con->dbname . ".cita_medica 
+                    WHERE cmde_estado_asistencia=1 AND cmde_est_log=1 
+                         AND cons_id=:cons_id AND DATE(fecha_cita)=:fecha_cita; ";
+        
+        //Utilities::putMessageLogFile($sql.$Ids);
+        $comando = $con->createCommand($sql);
+        $comando->bindParam(":cons_id", $cons, \PDO::PARAM_INT);
+        $comando->bindParam(":fecha_cita", date("Y-m-d", strtotime($Fecha)) , \PDO::PARAM_STR);
+        //return $comando->queryAll();
+        $rawData=$comando->queryScalar();
+        if ($rawData === false)
+            return 1; //en caso de que existe problema o no retorne nada tiene 1 por defecto 
+        return $rawData;
+    }
+    
     
     public static function insertarPacientesCita($data) {
         $arroout = array();
@@ -292,7 +309,8 @@ class CitaMedica extends \yii\db\ActiveRecord
         $PacId=Yii::$app->session->get('PacId', FALSE);
         $trans = $con->beginTransaction();
         try {
-            $data = isset($data['DATA']) ? $data['DATA'] : array(); 
+            $data = isset($data['DATA']) ? $data['DATA'] : array();
+            $tur_numero=0;//CitaMedica::getNumeroTurno($data[0]['cons_id'], $data[0]['fecha_cita']);
             
             $sql = "INSERT INTO " . $con->dbname . ".cita_medica
                 (tur_numero,hora_id,fecha_cita,cons_id,hora_inicio,tcon_id,pac_id,cprog_id,cmde_motivo,
@@ -301,7 +319,7 @@ class CitaMedica extends \yii\db\ActiveRecord
                  1,1) ";            
             $command = $con->createCommand($sql);
             $command->bindParam(":pac_id", $PacId, \PDO::PARAM_INT);//Ids 
-            $command->bindParam(":tur_numero", $data[0]['tur_numero'], \PDO::PARAM_STR);
+            $command->bindParam(":tur_numero", $tur_numero, \PDO::PARAM_STR);
             $command->bindParam(":hora_id", $data[0]['hora_id'], \PDO::PARAM_INT);
             $command->bindParam(":cons_id", $data[0]['cons_id'], \PDO::PARAM_INT);
             $command->bindParam(":fecha_cita", date("Y-m-d", strtotime($data[0]['fecha_cita'])), \PDO::PARAM_STR); 
@@ -311,6 +329,10 @@ class CitaMedica extends \yii\db\ActiveRecord
             $command->bindParam(":cmde_motivo", $data[0]['cmde_motivo'], \PDO::PARAM_STR);
             $command->execute();            
             $cita_id=$con->getLastInsertID();
+            
+            //Actualiza Estado de Reservacion
+            // 1:Estado Generado , 2=Reservado, 0=Anulado
+            CitaMedica::updateEstHora($con,$data[0]['hora_id'],'2');
  
             ####LOGS DATA
             Utilities::insertarLogs($con, $cita_id, 'cita_medica', 'Insert -> cmde_id->'.$cita_id);
@@ -336,6 +358,18 @@ class CitaMedica extends \yii\db\ActiveRecord
             return $arroout;
         }
     }
+    
+    private static function updateEstHora($con, $Ids,$Estado) {
+        //Datos Adicionales        
+        $sql = "UPDATE " . $con->dbname . ".horario SET hora_est_log=:Estado,hora_fec_mod=CURRENT_TIMESTAMP() "
+                . " WHERE hora_id=:hora_id ";
+        $command = $con->createCommand($sql);
+        $command->bindParam(":hora_id", $Ids, \PDO::PARAM_INT); //Id Comparacion
+        $command->bindParam(":Estado", $Estado, \PDO::PARAM_STR);
+        $command->execute();
+    }
+    
+    
 
     
     

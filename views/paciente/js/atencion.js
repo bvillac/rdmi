@@ -141,6 +141,8 @@ function guardarDatosCita(accion) {
         requestHttpAjax(link, arrParams, function (response) {
             var message = response.message;
             if (response.status == "OK") {
+                obtenerHorariosAtencion();                
+                $('#TbG_CITA').PbGridView('updatePAjax');
                 showAlert(response.status, response.type, {"wtmessage": message.info, "title": response.label});
                 //limpiarDatos();
                 //var renderurl = $('#txth_base').val() + "/mceformulariotemp/index";
