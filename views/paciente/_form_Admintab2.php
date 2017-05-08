@@ -138,19 +138,16 @@ use yii\data\ArrayDataProvider;
                     'template' => '{delete}',
                     'buttons' => [
                         'delete' => function ($url, $modelReserv) {
-                            return Html::a('<span class="glyphicon glyphicon-remove"></span>', null, ['href' => 'javascript:rechazarCitaProgramada(\'' . base64_encode($modelReserv['Ids']) . '\');', "data-toggle" => "tooltip", "title" => "Cancelar Cita"]);
+                            return Html::a('<span class="glyphicon glyphicon-remove"></span>', null, ['href' => 'javascript:anularCita(\'' . base64_encode($modelReserv['Ids']) . '\');', "data-toggle" => "tooltip", "title" => "Cancelar Cita"]);
                         },
                     ],
-                ],
-//                [
-//                    'header' => Yii::t("formulario", "Turno"),
-//                    'options' => ['width' => '200'],
-//                    'value' => 'Turno',
-//                ],
+                ],                
                 [
                     'header' => Yii::t("formulario", "Fecha"),
                     //'options' => ['width' => '200'],
-                    'value' => 'Fecha',
+                    'value' => function ($modelReserv) {
+                        return $modelReserv['Fecha'].' '.$modelReserv['Hora']; 
+                    },
                 ],
                 [
                     'header' => Yii::t("formulario", "Consultorio"),

@@ -177,5 +177,26 @@ function dataCita() {
 
 
 
+function anularCita(ids) {
+    //$('#TbG_SOLICITUD').PbGridView('applyFilterData',{'ids':ids,'op':'Delete'});
+    if (confirm("Está seguro de que desea continuar?") == true) {
+        var link = $('#txth_base').val() + "/paciente/anularcita";
+        var arrParams = new Object();
+        arrParams.ids = ids;
+        //arrParams.ACCION = "Rechazar";
+        requestHttpAjax(link, arrParams, function (response) {
+            var data = response.message;
+            if (response.status == "OK") {
+                $('#TbG_CITA').PbGridView('updatePAjax');
+                //actualizarGridTab2();
+            }
+            showAlert(response.status, response.type, {"wtmessage": data.info, "title": response.label});
+        },true);
+    }
+}
+
+
+
+
 
 

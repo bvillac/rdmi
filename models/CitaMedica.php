@@ -369,6 +369,30 @@ class CitaMedica extends \yii\db\ActiveRecord
         $command->execute();
     }
     
+    public static function anularCitaMedica($data) {
+        $arroout = array();
+        $con = \Yii::$app->db;
+        $trans = $con->beginTransaction();
+        try {
+            $ids = isset($data['ids']) ? base64_decode($data['ids']) :NULL;
+            $sql = "UPDATE " . $con->dbname . ".cita_medica SET cmde_estado_asistencia=0 WHERE cmde_id=:cmde_id";
+            $command = $con->createCommand($sql);
+            $command->bindParam(":cmde_id", $ids, \PDO::PARAM_INT);
+            $command->execute();
+            $trans->commit();
+            $con->close();
+            //RETORNA DATOS 
+            $arroout["status"]= true;
+            return $arroout;
+        } catch (\Exception $e) {
+            $trans->rollBack();
+            $con->close();
+            //throw $e;
+            $arroout["status"]= false;
+            return $arroout;
+        }
+    }
+    
     
 
     
