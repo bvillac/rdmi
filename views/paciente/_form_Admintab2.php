@@ -142,11 +142,11 @@ use yii\data\ArrayDataProvider;
                         },
                     ],
                 ],
-                [
-                    'header' => Yii::t("formulario", "Turno"),
-                    //'options' => ['width' => '200'],
-                    'value' => 'Turno',
-                ],
+//                [
+//                    'header' => Yii::t("formulario", "Turno"),
+//                    'options' => ['width' => '200'],
+//                    'value' => 'Turno',
+//                ],
                 [
                     'header' => Yii::t("formulario", "Fecha"),
                     //'options' => ['width' => '200'],
