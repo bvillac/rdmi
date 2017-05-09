@@ -245,9 +245,11 @@ INSERT INTO `rdmi`.`tipo_dicom` (`tdic_nomenclatura`, `tdic_detalle`) VALUES ('O
 
 INSERT INTO `rdmi`.`objeto_modulo` (`mod_id`, `omod_padre_id`, `omod_nombre`, `omod_tipo`, `omod_tipo_boton`, `omod_accion`, `omod_entidad`, `omod_orden`, `omod_estado_visible`, `omod_lang_file`, `omod_estado_activo`, `omod_estado_logico`) VALUES ('6', '6', 'Video Chat', 'S', '0', 'Applications', 'medico/video', '1', '0', 'application', '1', '1');
 INSERT INTO `rdmi`.`objeto_modulo` (`mod_id`, `omod_padre_id`, `omod_nombre`, `omod_tipo`, `omod_tipo_boton`, `omod_accion`, `omod_entidad`, `omod_orden`, `omod_estado_visible`, `omod_lang_file`, `omod_estado_activo`, `omod_estado_logico`) VALUES ('6', '6', 'Archivo Imagenes', 'S', '0', 'Applications', 'medico/file', '1', '0', 'application', '1', '1');
+INSERT INTO `rdmi`.`objeto_modulo` (`mod_id`, `omod_padre_id`, `omod_nombre`, `omod_tipo`, `omod_tipo_boton`, `omod_accion`, `omod_entidad`, `omod_orden`, `omod_estado_visible`, `omod_lang_file`, `omod_estado_activo`, `omod_estado_logico`) VALUES ('6', '6', 'Cita', 'S', '0', 'Applications', 'medico/cita', '1', '0', 'application', '1', '1');
 
 INSERT INTO `rdmi`.`omodulo_rol` (`omod_id`, `rol_id`, `omrol_est_log`) VALUES ('32', '3', '1');
 INSERT INTO `rdmi`.`omodulo_rol` (`omod_id`, `rol_id`, `omrol_est_log`) VALUES ('33', '3', '1');
+INSERT INTO `rdmi`.`omodulo_rol` (`omod_id`, `rol_id`, `omrol_est_log`) VALUES ('34', '3', '1');
 
 drop table `rdmi`.`dicom`;
 drop table `rdmi`.`imagenes`;

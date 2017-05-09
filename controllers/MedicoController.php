@@ -592,6 +592,15 @@ class MedicoController extends Controller {
             //'model' => $dataProvider,
         ]);
     }
+    
+     public function actionCita() {
+        //$data = null;
+        //$Model = new Medico();
+        //$dataProvider = $Model->consultarMedicos($data);
+        return $this->render('cita', [
+                    //'model' => $dataProvider,
+        ]);
+    }
 
 
 }
