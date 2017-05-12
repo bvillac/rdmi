@@ -93,15 +93,12 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
         <div class="box-body">
-            <div class="col-md-12">
-                
-            </div>
-            <br><br><br>
-            <div class="col-md-12">
-
-               
-            </div>
-
+            <?=$this->render('_form_cita1', [
+                //'cantones' => $cantones,
+                //'provincias' => $provincias
+                ]);
+            ?>
+            
         </div>
         <!-- /.box-body -->
     </div>
