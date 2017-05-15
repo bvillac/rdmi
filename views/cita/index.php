@@ -20,61 +20,61 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="box-body">
             <div class="col-md-12">
                 <?=
-        PbGridView::widget([
-            'id' => 'TbG_CITA',
-            'dataProvider' => $model,
-            //'summary' => false,
-            'columns' => [
-                //['class' => 'yii\grid\SerialColumn', 'options' => ['width' => '10']],
-                // format one
-                //[
-                //'attribute' => 'Ids',
-                //'label' => 'Idst',
-                //],
-                // format two
-                [
-                    'class' => 'yii\grid\ActionColumn',
-                    //'header' => 'Action',
-                    'headerOptions' => ['width' => '40'],
-                    'template' => '{delete}',
-                    'buttons' => [
-                        'delete' => function ($url, $model) {
-                            return Html::a('<span class="glyphicon glyphicon-remove"></span>', null, ['href' => 'javascript:anularCita(\'' . base64_encode($model['Ids']) . '\');', "data-toggle" => "tooltip", "title" => "Cancelar Cita"]);
-                        },
-                    ],
-                ],                
-                [
-                    'header' => Yii::t("formulario", "Fecha"),
-                    //'options' => ['width' => '200'],
-                    'value' => function ($model) {
-                        return $model['Fecha'].' '.$model['Hora']; 
-                    },
-                ],
-                [
-                    'header' => Yii::t("formulario", "Consultorio"),
-                    //'options' => ['width' => '200'],
-                    'value' => 'Consultorio',
-                ],
-                [
-                    'header' => Yii::t("formulario", "Especialidad"),
-                    //'options' => ['width' => '200'],
-                    'value' => 'Especialidad',
-                ],
-                [
-                    'header' => Yii::t("formulario", "Nombres"),
-                    //'options' => ['width' => '200'],
-                    'value' => 'Nombres',
-                ],
-                [
-                    //'attribute' => 'Estado',
-                    'label' => 'Estado',
-                    'options' => ['width' => '130'],
-                    'value' => function ($model) {
-                        return \app\models\Utilities::getEstadoLogico($model['Estado']);
-                    },
-                ],
-            ],
-        ])?>
+                    PbGridView::widget([
+                        'id' => 'TbG_CITA',
+                        'dataProvider' => $model,
+                        //'summary' => false,
+                        'columns' => [
+                            //['class' => 'yii\grid\SerialColumn', 'options' => ['width' => '10']],
+                            // format one
+                            //[
+                            //'attribute' => 'Ids',
+                            //'label' => 'Idst',
+                            //],
+                            // format two
+                            [
+                                'class' => 'yii\grid\ActionColumn',
+                                //'header' => 'Action',
+                                'headerOptions' => ['width' => '40'],
+                                'template' => '{delete}',
+                                'buttons' => [
+                                    'delete' => function ($url, $model) {
+                                        return Html::a('<span class="glyphicon glyphicon-remove"></span>', null, ['href' => 'javascript:anularCita(\'' . base64_encode($model['Ids']) . '\');', "data-toggle" => "tooltip", "title" => "Cancelar Cita"]);
+                                    },
+                                ],
+                            ],                
+                            [
+                                'header' => Yii::t("formulario", "Fecha"),
+                                //'options' => ['width' => '200'],
+                                'value' => function ($model) {
+                                    return $model['Fecha'].' '.$model['Hora']; 
+                                },
+                            ],
+                            [
+                                'header' => Yii::t("formulario", "Consultorio"),
+                                //'options' => ['width' => '200'],
+                                'value' => 'Consultorio',
+                            ],
+                            [
+                                'header' => Yii::t("formulario", "Especialidad"),
+                                //'options' => ['width' => '200'],
+                                'value' => 'Especialidad',
+                            ],
+                            [
+                                'header' => Yii::t("formulario", "Nombres"),
+                                //'options' => ['width' => '200'],
+                                'value' => 'Nombres',
+                            ],
+                            [
+                                //'attribute' => 'Estado',
+                                'label' => 'Estado',
+                                'options' => ['width' => '130'],
+                                'value' => function ($model) {
+                                    return \app\models\Utilities::getEstadoLogico($model['Estado']);
+                                },
+                            ],
+                        ],
+                    ])?>
             </div>
             
 
@@ -102,6 +102,4 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <!-- /.box-body -->
     </div>
-
-    
 </div>
