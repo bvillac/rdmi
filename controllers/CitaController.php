@@ -25,11 +25,31 @@ class CitaController extends Controller {
 
     
      public function actionIndex() {
-        $data = null;
-
+        $data=null;
+        if (Yii::$app->request->isAjax) {//
+            $data = Yii::$app->request->get();//&& $data["op"]=='1'
+            if (isset($data["op"]) && $data["op"]=='1' ) {                
+                CitaMedica::consultarCitasGeneral($data);
+            }
+        }
         return $this->render('index', [
-              "model" => Paciente::consultarCitas($data),
+              "model" => CitaMedica::consultarCitasGeneral($data),
         ]);
+    }
+    
+    public function actionAnularcita() {
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
+            $resul = CitaMedica::anularCitaMedica($data);
+            if ($resul['status']) {
+                $message = ["info" => Yii::t('exception', '<strong>Well done!</strong> your information was successfully saved.')];
+                echo Utilities::ajaxResponse('OK', 'alert', Yii::t('jslang', 'Success'), 'false', $message,$resul);
+            }else{
+                $message = ["info" => Yii::t('exception', 'The above error occurred while the Web server was processing your request.')];
+                echo Utilities::ajaxResponse('NO_OK', 'alert', Yii::t('jslang', 'Error'), 'false', $message);
+            }
+            return;
+        }
     }
 
 

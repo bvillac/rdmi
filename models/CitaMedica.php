@@ -394,6 +394,73 @@ class CitaMedica extends \yii\db\ActiveRecord
     }
     
     
+    public static function consultarCitasGeneral($data){
+        //$PacId=Yii::$app->session->get('PacId', FALSE);
+        $con = \Yii::$app->db;        
+         
+        $sql = "SELECT A.cmde_id Ids,A.tur_numero Turno,A.hora_inicio Hora,A.fecha_cita Fecha,A.cmde_observacion Observacion,
+                A.cmde_estado_asistencia Estado,B.cons_nombre Consultorio,CONCAT(E.per_nombre,' ',E.per_apellido) NombreMed,
+                F.esp_nombre Especialidad,CONCAT(I.per_nombre,' ',I.per_apellido) NombrePac
+                FROM " . $con->dbname . ".cita_medica A
+                        INNER JOIN (" . $con->dbname . ".consultorio B
+                                INNER JOIN " . $con->dbname . ".especialidad F
+                                    ON B.esp_id=F.esp_id)
+                            ON A.cons_id=B.cons_id
+                        INNER JOIN (" . $con->dbname . ".paciente H
+                                INNER JOIN " . $con->dbname . ".persona I
+                                    ON H.per_id=I.per_id)
+                                ON A.pac_id=H.pac_id
+                        INNER JOIN (" . $con->dbname . ".horario C
+                                INNER JOIN (" . $con->dbname . ".medico D
+                                    INNER JOIN " . $con->dbname . ".persona E
+                                        ON D.per_id=E.per_id)
+                                    ON C.med_id=D.med_id)
+                            ON A.hora_id=C.hora_id
+                WHERE A.cmde_est_log=1 ";
+                   
+        $sql .= ($data['estado'] > -1) ? " AND A.cmde_estado_asistencia = :cmde_estado  " : "  ";//AND A.cmde_estado_asistencia>0
+        $sql .= ($data['IdCons'] > 0) ? " AND A.cons_id=:cons_id  " : " ";
+        $sql .= ($data['IdEsp'] > 0) ? " AND F.esp_id=:esp_id  " : " ";
+        //$sql .= ($data['f_ini'] <> '' && $data['f_fin'] <> '' ) ? "AND DATE(A.ftem_fecha_creacion) BETWEEN :f_ini AND :f_fin " : " ";
+        $sql .= ($data['f_cita'] <> '' ) ? "AND DATE(A.fecha_cita) = :f_cita  " : " ";
+        
+        $sql .= " ORDER BY A.cmde_id DESC  ";
+        
+        $comando = $con->createCommand($sql);
+        //$comando->bindParam(":pac_id", $PacId, \PDO::PARAM_INT);
+        
+        
+        if($data['estado'] > -1){
+            $comando->bindParam(":cmde_estado", $data['estado'], \PDO::PARAM_STR);
+        }
+        if($data['IdCons'] > 0){
+            $comando->bindParam(":cons_id", $data['IdCons'], \PDO::PARAM_STR);
+        }
+        if($data['IdEsp'] > 0){
+            $comando->bindParam(":esp_id", $data['IdEsp'], \PDO::PARAM_STR);
+        }
+        //if ($data['f_cita'] <> '' && $data['f_fin'] <> '') {
+        if ($data['f_cita'] <> '') {
+            $comando->bindParam(":f_cita", date("Y-m-d", strtotime($data['f_cita'])), \PDO::PARAM_STR);
+            //$comando->bindParam(":f_fin", date("Y-m-d", strtotime($data['f_fin'])), \PDO::PARAM_STR);
+        }
+
+        $resultData=$comando->queryAll();
+        $dataProvider = new ArrayDataProvider([
+            'key' => 'Ids',
+            'allModels' => $resultData,
+            'pagination' => [
+                'pageSize' => Yii::$app->params["pageSize"],
+            ],
+            'sort' => [              
+                'attributes' => ['Ids','Turno','Hora','Fecha','Observacion','Especialidad',
+                    'NombreMed','Consultorio','Estado','NombrePac'],
+            ],
+        ]);
+        return $dataProvider;
+    }
+    
+    
 
     
     

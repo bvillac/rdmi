@@ -17,8 +17,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
             </div>
         </div>
+
+        <div class="col-md-12">
+            <?=
+                $this->render('_frm_BuscarGrid', [
+                    //'usomarca' => $usomarca,
+                    //'estSol' => $estSol
+                ]);
+            ?>            
+        </div>
+        
         <div class="box-body">
             <div class="col-md-12">
+                
                 <?=
                     PbGridView::widget([
                         'id' => 'TbG_CITA',
@@ -32,17 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             //'label' => 'Idst',
                             //],
                             // format two
-                            [
-                                'class' => 'yii\grid\ActionColumn',
-                                //'header' => 'Action',
-                                'headerOptions' => ['width' => '40'],
-                                'template' => '{delete}',
-                                'buttons' => [
-                                    'delete' => function ($url, $model) {
-                                        return Html::a('<span class="glyphicon glyphicon-remove"></span>', null, ['href' => 'javascript:anularCita(\'' . base64_encode($model['Ids']) . '\');', "data-toggle" => "tooltip", "title" => "Cancelar Cita"]);
-                                    },
-                                ],
-                            ],                
+                                           
                             [
                                 'header' => Yii::t("formulario", "Fecha"),
                                 //'options' => ['width' => '200'],
@@ -61,9 +62,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'value' => 'Especialidad',
                             ],
                             [
-                                'header' => Yii::t("formulario", "Nombres"),
+                                'header' => Yii::t("formulario", "Paciente"),
                                 //'options' => ['width' => '200'],
-                                'value' => 'Nombres',
+                                'value' => 'NombrePac',
+                            ],
+                            [
+                                'header' => Yii::t("formulario", "Doctor(a)"),
+                                //'options' => ['width' => '200'],
+                                'value' => 'NombreMed',
                             ],
                             [
                                 //'attribute' => 'Estado',
@@ -73,6 +79,21 @@ $this->params['breadcrumbs'][] = $this->title;
                                     return \app\models\Utilities::getEstadoLogico($model['Estado']);
                                 },
                             ],
+                                        
+                            [
+                                'class' => 'yii\grid\ActionColumn',
+                                //'header' => 'Action',
+                                'headerOptions' => ['width' => '40'],
+                                'template' => '{ok}{delete}',
+                                'buttons' => [
+                                    'ok' => function ($url, $model) {
+                                        return Html::a('<span class="glyphicon glyphicon-ok"></span>', null, ['href' => 'javascript:anularCita(\'' . base64_encode($model['Ids']) . '\');', "data-toggle" => "tooltip", "title" => "Ingreso a Cita"]);
+                                    },
+                                    'delete' => function ($url, $model) {
+                                        return Html::a('<span class="glyphicon glyphicon-remove"></span>', null, ['href' => 'javascript:anularCita(\'' . base64_encode($model['Ids']) . '\');', "data-toggle" => "tooltip", "title" => "Cancelar Cita"]);
+                                    },
+                                ],
+                            ],             
                         ],
                     ])?>
             </div>

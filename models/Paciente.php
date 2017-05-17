@@ -421,7 +421,6 @@ class Paciente extends \yii\db\ActiveRecord
         WHERE A.cmde_est_log=1 AND A.pac_id=:pac_id
                 ORDER BY A.cmde_id DESC ; ";
         
-        
         $comando = $con->createCommand($sql);
         $comando->bindParam(":pac_id", $PacId, \PDO::PARAM_INT);
 //        if($data['estado'] > -1){

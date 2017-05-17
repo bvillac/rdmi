@@ -6,7 +6,13 @@ use kartik\date\DatePicker;
 ?>
 
 
-
+<div class="col-md-12invoice-col">
+    <b>Consulta #: </b><span id="lbl_consulta">4F3S8J</span> <br>
+    <b>Nombre: </b><span id="lbl_nombre">4F3S8J</span> <br>
+    <b>Fecha Hora: </b><span id="lbl_fecha">2/22/2014</span> <br>
+    <b>Consultorio: </b><span id="lbl_consultorio">968-34567</span> <br>
+  <br>
+</div>
 
 <div class="col-md-12">
     <div class="form-group">

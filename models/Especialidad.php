@@ -148,6 +148,16 @@ class Especialidad extends \yii\db\ActiveRecord
         
     }
     
+     public static function getConsultorioALL(){
+        $con = \Yii::$app->db;
+        //Especificar por Centro de Atencion segun lo filtrado.
+        $sql = "SELECT cons_id Ids,cons_nombre Nombre FROM " . $con->dbname . ".consultorio WHERE cons_est_log=1 ";
+        $comando = $con->createCommand($sql);
+        //$comando->bindParam(":med_id", $Ids, \PDO::PARAM_INT);
+        return $comando->queryAll();
+        
+    }
+    
     
     
 
