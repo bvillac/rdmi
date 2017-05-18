@@ -94,3 +94,6 @@ function anularCita(ids) {
         },true);
     }
 }
+
+///Datos de configuracion
+
