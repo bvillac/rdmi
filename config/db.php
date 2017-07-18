@@ -6,7 +6,7 @@ return [
     //'dsn'   => 'mysql:host=192.168.10.100;dbname=rdmi',
     'dsn'   => 'mysql:host=localhost;dbname=rdmi',
     'username' => 'rdmiuser',
-    'password' => 'rdmiuser2016',
+    'password' => 'Rdmiu$er2016',
     'charset'  => 'utf8',
     'dbname'   => 'rdmi',
     'dbserver' => 'localhost'
