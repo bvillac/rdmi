@@ -61,7 +61,10 @@ class ForgotpassForm extends Model
                     $tituloMensaje = Yii::t("passreset","Change Password");
                     $asunto = Yii::t("passreset", "Change Password") . " " . Yii::$app->params["siteName"];
                     $body = Utilities::getMailMessage("userpass", array("[[user]]" => $nombres[1], "[[username]]" => $this->email, "[[link_verification]]" => $link), Yii::$app->language);
-                    Utilities::sendEmail($tituloMensaje, Yii::$app->params["adminEmail"], [$this->email => $persona->per_nombre . " " . $persona->per_apellido], $asunto, $body);
+                    Utilities::sendEmail($tituloMensaje, Yii::$app->params["adminEmail"], 
+                                        [$this->email => $persona->per_nombre . " " . $persona->per_apellido],
+                                        [],//Bcc
+                                        $asunto, $body);
                     // 3. mostrat mensaje de exito
                     Yii::$app->session->setFlash('success',Yii::t("passreset","<h4>Success</h4>To change your password you must access your email and follow the instructions in the mail"));
                     return true;
@@ -82,7 +85,10 @@ class ForgotpassForm extends Model
                     $tituloMensaje = Yii::t("register","User Activation");
                     $asunto = Yii::t("register", "User Activation") . " " . Yii::$app->params["siteName"];
                     $body = Utilities::getMailMessage("register", array("[[user]]" => $nombres[1], "[[username]]" => $this->email, "[[link_verification]]" => $link), Yii::$app->language);
-                    Utilities::sendEmail($tituloMensaje, Yii::$app->params["adminEmail"], [$this->email => $persona->per_nombre . " " . $persona->per_apellido], $asunto, $body);
+                    Utilities::sendEmail($tituloMensaje, Yii::$app->params["adminEmail"], 
+                                        [$this->email => $persona->per_nombre . " " . $persona->per_apellido],
+                                        [],//Bcc
+                                        $asunto, $body);
                     // se debe mostrar mensaje de alerta que indique que se ha enviado el correo
                     Yii::$app->session->setFlash('success',Yii::t("register","<h4>Success</h4>To activate your account you must access your email and follow the instructions in the mail"));
                     return true;

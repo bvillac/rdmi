@@ -138,7 +138,11 @@ class RegisterForm extends Model
                 $tituloMensaje = Yii::t("register","Successful Registration");
                 $asunto = Yii::t("register", "User Register") . " " . Yii::$app->params["siteName"];
                 $body = Utilities::getMailMessage("register", array("[[user]]" => $nombres[1], "[[username]]" => $this->email, "[[link_verification]]" => $link), Yii::$app->language);
-                Utilities::sendEmail($tituloMensaje, Yii::$app->params["adminEmail"], [$this->email => $this->lastName . " " . $this->firstName], $asunto, $body);
+                Utilities::sendEmail($tituloMensaje,
+                                    Yii::$app->params["adminEmail"], 
+                                    [$this->email => $this->lastName . " " . $this->firstName],
+                                    [],//Bcc
+                                    $asunto, $body);
                 // se debe mostrar mensaje de alerta que indique que se ha enviado el correo
                 Yii::$app->session->setFlash('success',Yii::t("register","<h4>Success</h4>To activate your account you must access your email and follow the instructions in the mail"));
                 return true;

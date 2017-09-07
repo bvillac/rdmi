@@ -72,7 +72,10 @@ class ChangepassForm extends Model
                     $tituloMensaje = Yii::t("passreset","Change Password Successfull");
                     $asunto = Yii::t("passreset", "Change Password Successfull") . " " . Yii::$app->params["siteName"];
                     $body = Utilities::getMailMessage("changepassword", array("[[user]]" => $nombres[1], "[[username]]" => $usuario->usu_username, "[[webmail]]" => Yii::$app->params["adminEmail"]), Yii::$app->language);
-                    Utilities::sendEmail($tituloMensaje, Yii::$app->params["adminEmail"], [$usuario->usu_username => $persona->per_nombres . " " . $persona->per_apellidos], $asunto, $body);
+                    Utilities::sendEmail($tituloMensaje, Yii::$app->params["adminEmail"], 
+                                        [$usuario->usu_username => $persona->per_nombres . " " . $persona->per_apellidos],
+                                        [],//Bcc
+                                        $asunto, $body);
                     Yii::$app->session->setFlash('success',Yii::t("passreset","<h4>Success</h4>Password has been updated successfully"));
                     return true;
                 }else{

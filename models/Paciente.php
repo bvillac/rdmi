@@ -157,7 +157,10 @@ class Paciente extends \yii\db\ActiveRecord
                 $tituloMensaje = Yii::t("register","Successful Registration");
                 $asunto = Yii::t("register", "User Register") . " " . Yii::$app->params["siteName"];
                 $body = Utilities::getMailMessage("registerPaciente", array("[[user]]" => $nombres, "[[username]]" => $data[0]['per_correo'],"[[clave]]" => $password, "[[link_verification]]" => $linkActiva), Yii::$app->language);
-                Utilities::sendEmail($tituloMensaje, Yii::$app->params["adminEmail"], [$data[0]['per_correo'] => $data[0]['per_nombre'] . " " . $data[0]['per_apellido']], $asunto, $body);
+                Utilities::sendEmail($tituloMensaje, Yii::$app->params["adminEmail"], 
+                                    [$data[0]['per_correo'] => $data[0]['per_nombre'] . " " . $data[0]['per_apellido']],
+                                    [],//Bcc
+                                    $asunto, $body);
             //Find Datos Mail
             
             return $arroout;
