@@ -91,6 +91,6 @@ use kartik\date\DatePicker;
 <div class="col-md-12">
     <div class="col-sm-12">                
 <!--        <a id="cmd_save" href="javascript:" class="btn btn-primary btn-block"> <?= Yii::t("formulario", "Guardar") ?> <span class="glyphicon "></span></a>-->
-        <?= Html::a('<span class="glyphicon glyphicon-floppy-disk"></span> ' . Yii::t("accion", "Save"), 'javascript:', ['id' => 'btn_save','class' => 'btn btn-primary btn-block']); ?>
+
     </div>
 </div>

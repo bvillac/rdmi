@@ -9,7 +9,7 @@ $this->title = 'Cita Médica';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="col-md-8">
+<div class="col-md-12">
     <div class="box box-success">
         <div class="box-header with-border">
             <h3 id="infoVideo" class="box-title">Ver Citas</h3>
@@ -105,7 +105,7 @@ $this->params['breadcrumbs'][] = $this->title;
     
 </div>
 
-<div class="col-md-4">
+<!--<div class="col-md-4">
     <div class="box box-success">
         <div class="box-header with-border">
             <h3 id="infoVideo" class="box-title">Signos Vitales</h3>
@@ -121,6 +121,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ?>
             
         </div>
-        <!-- /.box-body -->
+         /.box-body 
     </div>
-</div>
+</div>-->

@@ -107,7 +107,6 @@ use yii\web\JsExpression;
             </div>
         </div>
 </div>
-
 <div class="col-md-4">
     <div class="col-sm-12">                
         <a id="cmd_buscarData" href="javascript:" class="btn btn-primary btn-block"> <span class="glyphicon glyphicon-search"></span> <?= Yii::t("formulario", "Search") ?> </a>
